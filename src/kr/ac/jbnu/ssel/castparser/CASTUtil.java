@@ -8,7 +8,11 @@ import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTypeId;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTConstructorInitializer;
 import org.eclipse.cdt.internal.core.model.ASTStringUtil;
-
+/**
+ * 
+ * @author STKim2
+ *
+ */
 public class CASTUtil {
 	public static String getNodeSignature(IASTNode node) {
 		if (node instanceof IASTDeclarator)
