@@ -1,8 +1,10 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
+
 /**
+ * Okay!
  * 
- * @author STKim2
+ * @author Suntae Kim
  *
  */
 public class R {
