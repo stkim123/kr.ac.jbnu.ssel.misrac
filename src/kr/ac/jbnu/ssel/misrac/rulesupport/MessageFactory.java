@@ -87,6 +87,10 @@ public class MessageFactory {
 			break;
 		case 0771:
 			msg = "More than one 'break' statement has been used to terminate this iteration statement.";
+			break;
+		case 0770:
+			msg = "A 'continue' statement has been used.";
+			break;
 		}
 
 		return msg;
