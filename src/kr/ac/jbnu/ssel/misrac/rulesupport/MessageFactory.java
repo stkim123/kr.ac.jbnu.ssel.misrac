@@ -85,6 +85,8 @@ public class MessageFactory {
 		case 3665:
 			msg = " Unnamed bit-field consisting of a single bit declared with a signed type.";
 			break;
+		case 0771:
+			msg = "More than one 'break' statement has been used to terminate this iteration statement.";
 		}
 
 		return msg;

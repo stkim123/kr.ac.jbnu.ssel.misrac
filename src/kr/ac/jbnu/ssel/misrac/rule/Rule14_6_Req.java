@@ -31,12 +31,10 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  */
 public class Rule14_6_Req extends AbstractMisraCRule {
-	private static HashSet<String> declarations = new HashSet<String>();
 
 	public Rule14_6_Req(IASTTranslationUnit ast) {
 		super("Rule14_6_Req", false, ast);
 		shouldVisitStatements = true;
-		declarations.clear();
 	}
 
 	/**
@@ -46,40 +44,30 @@ public class Rule14_6_Req extends AbstractMisraCRule {
 	protected int visit(IASTCompoundStatement statement) {
 		IASTNode[] internalStatements = statement.getChildren();
 		
+		boolean breakStmtUsed = false;
+		boolean violated = false;
+		
 		for (IASTNode iastNode : internalStatements) {
 			if( iastNode instanceof IASTBreakStatement)
 			{
-				
+				if( ! breakStmtUsed)		// if the breakstatement is used first, then save it first.
+				{
+					breakStmtUsed = true; 	
+				}
+				else						// if the breakstatement is used before. 	
+				{
+					violated = true;
+				}
 			}
+		}
+		
+		if( violated )
+		{
+			String msg = MessageFactory.getInstance().getMessage(0771);
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg, statement));
 		}
 		
 		return super.visit(statement);
 	}
 	
-
-	@Override
-	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
-		for (IASTNode node : simpleDeclaration.getDeclarators()) {
-			String temp = node.getRawSignature();
-
-			if (declarations.contains(temp)) {
-				String message1 = MessageFactory.getInstance().getMessage(1506);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + temp, node));
-
-				String message2 = MessageFactory.getInstance().getMessage(1507);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + temp, node));
-
-				String message3 = MessageFactory.getInstance().getMessage(1508);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + temp, node));
-
-				String message4 = MessageFactory.getInstance().getMessage(3448);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message4 + "--" + temp, node));
-
-				isViolated = true;
-			} else {
-				declarations.add(temp);
-			}
-		}
-		return super.visit(simpleDeclaration);
-	}
 }

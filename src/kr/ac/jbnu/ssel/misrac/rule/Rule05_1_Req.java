@@ -30,34 +30,36 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  */
 public class Rule05_1_Req extends AbstractMisraCRule {
 
-    private static final int ID_RECOGNIZATION_LIMIT = 31;
-    private HashSet<String> idSet = new HashSet<String>();
+	private static final int ID_RECOGNIZATION_LIMIT = 31;
+	private HashSet<String> idSet = new HashSet<String>();
 
-    public Rule05_1_Req(IASTTranslationUnit ast) {
-	super("Rule05_1_Req", false, ast);
-	shouldVisitPreprocessor = true;
-	shouldVisitExpressions = true;
-    }
-
-    @Override
-    protected int visit(IASTSimpleDeclaration simpleDeclaration) {
-	String identifier = simpleDeclaration.getDeclarators()[0].getName().toString();
-
-	if (identifier.length() > ID_RECOGNIZATION_LIMIT) {
-	    String frontPart = identifier.substring(0, ID_RECOGNIZATION_LIMIT);
-	    if (idSet.contains(frontPart)) {
-		String message1 = MessageFactory.getInstance().getMessage(777);
-		violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + identifier, simpleDeclaration));
-
-		String message2 = MessageFactory.getInstance().getMessage(779);
-		violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + identifier, simpleDeclaration));
-
-		isViolated = true;
-	    } else {
-		idSet.add(frontPart);
-	    }
+	public Rule05_1_Req(IASTTranslationUnit ast) {
+		super("Rule05_1_Req", false, ast);
+		shouldVisitPreprocessor = true;
+		shouldVisitExpressions = true;
 	}
-	return super.visit(simpleDeclaration);
-    }
+
+	@Override
+	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
+		String identifier = simpleDeclaration.getDeclarators()[0].getName().toString();
+
+		if (identifier.length() > ID_RECOGNIZATION_LIMIT) {
+			String frontPart = identifier.substring(0, ID_RECOGNIZATION_LIMIT);
+			if (idSet.contains(frontPart)) {
+				String message1 = MessageFactory.getInstance().getMessage(777);
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + identifier,
+						simpleDeclaration));
+
+				String message2 = MessageFactory.getInstance().getMessage(779);
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + identifier,
+						simpleDeclaration));
+
+				isViolated = true;
+			} else {
+				idSet.add(frontPart);
+			}
+		}
+		return super.visit(simpleDeclaration);
+	}
 
 }
