@@ -93,7 +93,6 @@ public class Rule06_3_Adv extends AbstractMisraCRule {
 						}
 					}
 				}
-				
 			}
 		}
 		return super.visit(simpleDeclaration);
