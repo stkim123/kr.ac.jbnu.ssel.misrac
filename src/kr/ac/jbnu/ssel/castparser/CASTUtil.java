@@ -44,4 +44,25 @@ public class CASTUtil {
 		}
 		return "";
 	}
+	
+	public static boolean containsASTNode(IASTNode parent, Class<?> cls)
+	{
+		IASTNode[] children = parent.getChildren();
+		if( children == null || children.length == 0)
+		{
+			return false;
+		}
+		
+		for (IASTNode iastNode : children) {
+			if( iastNode.getClass() == cls)
+			{
+				return true;
+			}
+			else
+			{
+				containsASTNode(iastNode, cls);
+			}
+		}
+		return false;
+	}
 }
