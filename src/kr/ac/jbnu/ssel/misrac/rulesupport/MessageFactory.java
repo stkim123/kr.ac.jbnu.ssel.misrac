@@ -99,6 +99,10 @@ public class MessageFactory {
 		case 2214:
 			msg = "Body of control statement is on the same line and is not enclosed within braces.";
 			break;
+			
+		case 5013:
+			msg = "Use of basic type ''{0}''.";
+			break;
 		}
 
 		return msg;
