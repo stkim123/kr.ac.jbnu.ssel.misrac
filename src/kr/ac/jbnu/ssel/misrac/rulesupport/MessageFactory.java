@@ -113,9 +113,26 @@ public class MessageFactory {
 		case 3450:
 			msg = "Function '%s', with internal linkage, is being defined without a previous declaration.";
 			break;				
-			
+		case 0624:
+			msg = "Function '%s' is declared using typedefs which are different to those in a previous declaration.";
+			break;				
+		case 1331:
+			msg = "Type or number of arguments doesn't match previous use of the function.";
+			break;				
+		case 1332:
+			msg = "Type or number of arguments doesn't match prototype found later.";
+			break;				
+		case 1333:
+			msg = "Type or number of arguments doesn't match function definition found later.";
+			break;				
+		case 3320:
+			msg = "Type of argument no. %s differs from its type in definition of function.";
+			break;				
+		case 3675:
+			msg = "Function parameter declared with type qualification which differs from previous declaration.";
+			break;					
 		}
-
+		
 		return msg;
 	}
 
