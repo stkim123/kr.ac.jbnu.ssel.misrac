@@ -103,6 +103,16 @@ public class MessageFactory {
 		case 5013:
 			msg = "Use of basic type ''{0}''.";
 			break;
+
+		case 3002:
+			msg = "Defining '%s()' with an identifier list and separate parameter declarations is an obsolescent feature.";
+			break;
+		case 3335:
+			msg = "No function declaration. Implicit declaration inserted: 'extern int %s();'.";
+			break;
+		case 3450:
+			msg = "Function '%s', with internal linkage, is being defined without a previous declaration.";
+			break;				
 		}
 
 		return msg;
