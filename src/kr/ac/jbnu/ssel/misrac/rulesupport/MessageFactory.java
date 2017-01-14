@@ -113,6 +113,7 @@ public class MessageFactory {
 		case 3450:
 			msg = "Function '%s', with internal linkage, is being defined without a previous declaration.";
 			break;				
+			
 		}
 
 		return msg;

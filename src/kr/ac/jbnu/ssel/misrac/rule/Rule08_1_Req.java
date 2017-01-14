@@ -1,19 +1,17 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
-import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
-import org.eclipse.cdt.core.dom.ast.IASTDoStatement;
-import org.eclipse.cdt.core.dom.ast.IASTForStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
@@ -36,7 +34,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * The provision of a prototype for a function with internal linkage is a good programming practice.
  * 
- * TODO: functionDeclarations에 '#include'안에 있는 함수 정의도 가져와서 이 내용을 담아야함.  
+ * TODO-1: functionDeclarations에 '#include'안에 있는 함수 정의도 가져와서 이 내용을 담아야함.  
+ * TODO-2: CallFunction할때, 함수만 가지고 어떤 함수를 호출하는지 알아내야함. 이게 가능한가?
  * 
  * @author stkim
  *
@@ -46,6 +45,7 @@ public class Rule08_1_Req extends AbstractMisraCRule {
 	
 	public Rule08_1_Req(IASTTranslationUnit ast) {
 		super("Rule08_1_Req", false, ast);
+		shouldVisitDeclarations = true;
 		shouldVisitPreprocessor = true;
 		shouldVisitExpressions = true;
 		shouldVisitStatements = true;
@@ -54,18 +54,17 @@ public class Rule08_1_Req extends AbstractMisraCRule {
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
 		
-		IASTDeclSpecifier specifier = simpleDeclaration.getDeclSpecifier();
-		IASTNode[] children = specifier.getChildren();
+		IASTDeclarator[] declarators = simpleDeclaration.getDeclarators();
 		
-		boolean isFunctionDeclaration = false;
-		for (IASTNode iastNode : children) {
-			if( iastNode instanceof IASTFunctionDeclarator)
+		boolean isProtoFuncDeclaration = false;
+		for (IASTDeclarator declarator: declarators) {
+			if( declarator instanceof IASTFunctionDeclarator)
 			{
-				isFunctionDeclaration = true;
+				isProtoFuncDeclaration = true;
 			}
 		}
 		
-		if(isFunctionDeclaration)
+		if(isProtoFuncDeclaration)
 		{
 			prototypes.add(simpleDeclaration);
 		}
@@ -84,12 +83,25 @@ public class Rule08_1_Req extends AbstractMisraCRule {
 		IASTDeclSpecifier specifier = functionDefinition.getDeclSpecifier();
 		IASTFunctionDeclarator funcDeclarator = functionDefinition.getDeclarator();
 		
-		if( checkConformanceOfPrototype(functionDefinition))
+		if( !checkConformanceOfPrototype(functionDefinition))
 		{
-			String msg = MessageFactory.getInstance().getMessage(002);
+			String functionName = funcDeclarator.getName().toString();
 			
+			// "Defining '%s()' with an identifier list and separate parameter declarations is an obsolescent feature."
+			String msg = MessageFactory.getInstance().getMessage(3002);
+			String msgWithFuncName = String.format(msg, functionName);
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msgWithFuncName, functionDefinition));
+
+			if( specifier.getRawSignature().startsWith("extern"))
+			{
+				// "No function declaration. Implicit declaration inserted: 'extern int %s();'.";
+				String msg2 = MessageFactory.getInstance().getMessage(3335);
+				String msgWithFuncName2 = String.format(msg2, functionName);
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msgWithFuncName2, functionDefinition));
+			}
+
+			isViolated = true;
 		}
-		
 		
 		return super.visit(functionDefinition);
 	}
@@ -101,16 +113,131 @@ public class Rule08_1_Req extends AbstractMisraCRule {
 	 * @return
 	 */
 	private boolean checkConformanceOfPrototype(IASTFunctionDefinition functionDefinition) {
+		
+		for (IASTSimpleDeclaration prototypeFunc : prototypes) 
+		{
+			// return true(consider 'conform'), if the function conform with one of the prototype functions. 
+			if( checkConformanceOfPrototypeFunction(functionDefinition, prototypeFunc))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
+	private boolean checkConformanceOfPrototypeFunction(IASTFunctionDefinition functionDefinition,
+			IASTSimpleDeclaration prototypeFunc) {
+		
+		// get return type, parameters and function name of the given function.
+		IASTDeclSpecifier specifier = functionDefinition.getDeclSpecifier();
+		IASTFunctionDeclarator funcDeclarator = functionDefinition.getDeclarator();
+		ArrayList<IASTParameterDeclaration> params = new ArrayList<IASTParameterDeclaration>();
+		
+		IASTNode[] children = funcDeclarator.getChildren();
+		for (IASTNode iastNode : children) {
+			if( iastNode instanceof IASTParameterDeclaration)
+			{
+				params.add((IASTParameterDeclaration)iastNode);
+			}
+		}
+		
+		String functionName = funcDeclarator.getName().toString();
+		
+		///////////////////////////////
+		boolean isConform = false;
+		IASTDeclSpecifier protoSpecifier = prototypeFunc.getDeclSpecifier();
+		IASTDeclarator[] prototypeDeclarators = prototypeFunc.getDeclarators();
+		for (IASTDeclarator iastDeclarator : prototypeDeclarators) 
+		{
+			if( iastDeclarator instanceof IASTFunctionDeclarator)
+			{
+				boolean sameFuncName = false, notSameParamType = false, sameReturnType = false;
+				
+				// 1. check if the function name is same.
+				IASTFunctionDeclarator protoFunctionDecl = (IASTFunctionDeclarator)iastDeclarator;
+				if( functionName.equals(protoFunctionDecl.getName().toString()))	 
+				{
+					sameFuncName = true;
+				}
+				
+				// 2. check if the parameter type is same. 
+				ArrayList<IASTParameterDeclaration> protoParams = getParams( protoFunctionDecl.getChildren());
+				if( protoParams.size() == params.size())
+				{
+					for(int i = 0; i < protoParams.size(); i++)
+					{
+						IASTParameterDeclaration param = protoParams.get(i);
+						String prototypeParamType = param.getDeclSpecifier().getRawSignature();
+						
+						IASTParameterDeclaration protoParam = params.get(i);
+						String paramType = protoParam.getDeclSpecifier().getRawSignature();
+							
+						if(!prototypeParamType.equals(paramType))
+						{
+							notSameParamType = true;	// if one of the param type is different, notSameParamType is false.
+							break;
+						}
+					}	
+				}
+
+				// 3. check if the return type is the same.
+				String[] protoReturns = protoSpecifier.getRawSignature().split(" ");
+				String[] returns = specifier.getRawSignature().split(" ");
+				if( compareTwoStringArrays(protoReturns, returns))
+				{
+					sameReturnType = true;
+				}
+				
+				// if aforementioned three are the same, we consider it conforms. 
+				if( sameFuncName && !notSameParamType && sameReturnType)
+				{
+					isConform = true;
+				}
+			}
+		}
+		return isConform;
+	}
+
+	/**
+	 * extract only parameters
+	 * 
+	 * @param children
+	 * @return
+	 */
+	private ArrayList<IASTParameterDeclaration> getParams(IASTNode[] children) {
+		ArrayList<IASTParameterDeclaration> params = new ArrayList<IASTParameterDeclaration>();
+		for (IASTNode iastNode: children) {
+			if( iastNode instanceof IASTParameterDeclaration)
+			{
+				params.add((IASTParameterDeclaration)iastNode);
+			}
+		}
+		return params;
+	}
+
+	private boolean compareTwoStringArrays(String[] protoReturns, String[] returns) {
+		if( protoReturns.length != returns.length)
+		{
+			return false;
+		}
+		
+		for(int i= 0; i < protoReturns.length ; i++)
+		{
+			if( !protoReturns[i].equals(returns[i]))
+			{
+				return false;
+			}
+		}
 		return true;
 	}
 
 	/**
 	 * Rule: function호출부분이 prototype으로 선언되어 있어야함.
+	 * TODO: 이것 이슈임
 	 */
 	@Override
 	protected int visit(IASTFunctionCallExpression expression) {
-		// TODO Auto-generated method stub
+		String msg = MessageFactory.getInstance().getMessage(3450);
 		return super.visit(expression);
 	}
 
