@@ -1,16 +1,20 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
 import kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
-import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
+/**
+ * Sample Implementation for testing misra-c rule that has been implemented without executing Eclipse CDT.
+ * 
+ * @author stkim
+ *
+ */
 public class TestRule08_1 extends AbstractTestRule
 {
 	public TestRule08_1()
