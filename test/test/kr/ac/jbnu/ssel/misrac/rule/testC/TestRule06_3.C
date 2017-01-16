@@ -29,4 +29,3 @@ typedef long     double float128_t;
 
 typedef String 	String128_t;	// violation
 typedef String 	String_t;	// not-violation
-

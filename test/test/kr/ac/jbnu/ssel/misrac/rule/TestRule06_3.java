@@ -10,6 +10,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
 
 /**
+<<<<<<< HEAD
  * Sample Implementation for testing misra-c rule that has been implemented without executing Eclipse CDT.
  * 
  * @author stkim
@@ -34,6 +35,30 @@ public class TestRule06_3 extends AbstractTestRule
 			assertTrue(violationMsgs.size() == 1);
 		} catch (Exception e)
 		{
+=======
+ * Sample Implementation for testing misra-c rule that has been implemented
+ * without executing Eclipse CDT.
+ * 
+ * DONE!!
+ * 
+ * @author stkim
+ *
+ */
+public class TestRule06_3 extends AbstractTestRule {
+	public TestRule06_3() {
+		super("Rule06_3_Adv", "TestRule06_3.C");
+	}
+
+	@Test
+	public void test() {
+		try {
+			ArrayList<ViolationMessage> violationMsgs = checkRule();
+			System.out.println(violationMsgs);
+			System.out.println("size:" + violationMsgs.size());
+
+			assertTrue(violationMsgs.size() == 1);
+		} catch (Exception e) {
+>>>>>>> refs/remotes/origin/master
 			e.printStackTrace();
 		}
 	}

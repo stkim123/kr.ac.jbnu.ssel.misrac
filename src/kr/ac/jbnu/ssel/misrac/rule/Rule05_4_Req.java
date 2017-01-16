@@ -10,6 +10,18 @@ import org.eclipse.cdt.internal.core.dom.parser.c.CASTName;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 
+/**
+ * A tag name shall be a unique identifier.
+ *
+ * No tag name shall be reused either to define a different tag or for any other purpose within the program. 
+ * ISO/IEC 9899:1990 [2] does not define the behaviour when an aggregate declaration uses a tag in different forms of type specifier (struct or union). 
+ * Either all uses of the tag should be in structure type specifiers, or all uses should be in union type specifiers, For example:
+ * 
+ * TODO
+ * 
+ * @author sangjin
+ *
+ */
 public class Rule05_4_Req extends AbstractMisraCRule {
 
 	private static HashSet<String> declarations = new HashSet<String>();
