@@ -140,6 +140,9 @@ public class MessageFactory {
 		case 2004:
 			msg = "	No concluding 'else' exists in this 'if'-'else'-'if' statement.";
 			break;
+		case 3402:
+			msg = " Braces are needed to clarify the structure of this 'if'-'if'-'else' statement.";
+			break;
 		}
 		
 		return msg;
