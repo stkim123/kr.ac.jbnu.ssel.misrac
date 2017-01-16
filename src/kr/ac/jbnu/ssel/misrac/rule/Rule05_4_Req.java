@@ -1,11 +1,15 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.HashSet;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.c.ICASTCompositeTypeSpecifier;
+import org.eclipse.cdt.core.dom.ast.c.ICASTElaboratedTypeSpecifier;
 import org.eclipse.cdt.internal.core.dom.parser.c.CASTName;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
@@ -13,11 +17,15 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 /**
  * A tag name shall be a unique identifier.
  *
- * No tag name shall be reused either to define a different tag or for any other purpose within the program. 
- * ISO/IEC 9899:1990 [2] does not define the behaviour when an aggregate declaration uses a tag in different forms of type specifier (struct or union). 
- * Either all uses of the tag should be in structure type specifiers, or all uses should be in union type specifiers, For example:
+ * No tag name shall be reused either to define a different tag or for any other
+ * purpose within the program. ISO/IEC 9899:1990 [2] does not define the
+ * behaviour when an aggregate declaration uses a tag in different forms of type
+ * specifier (struct or union). Either all uses of the tag should be in
+ * structure type specifiers, or all uses should be in union type specifiers,
+ * For example:
  * 
- * TODO
+ * TODO : parameta를 구분할 수 있는가 ex) 0은 int 인가 double인가
+ * TODO : 생각보다 복잡해서 미뤄둠.
  * 
  * @author sangjin
  *
@@ -29,23 +37,24 @@ public class Rule05_4_Req extends AbstractMisraCRule {
 	public Rule05_4_Req(IASTTranslationUnit ast) {
 		super("Rule05_4_Req", false, ast);
 		shouldVisitDeclarations = true;
+		declarations.clear();
 	}
 
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
-		IASTDeclSpecifier specifier = simpleDeclaration.getDeclSpecifier();
-//		String test = simpleDeclaration.getDeclarators()[0].getRawSignature();
-//		System.out.println(simpleDeclaration.getRawSignature().toString());
-//		System.out.println("test :: "+test);
-		if (specifier != null)
-			for (IASTNode node : specifier.getChildren()) {
-				if (node instanceof CASTName) {
-					CASTName tagName = (CASTName) node;
-//					System.out.println(node.toString());
+		for(IASTNode node : simpleDeclaration.getChildren()){
+			if(node instanceof ICASTCompositeTypeSpecifier ){
+				String specifier = node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1];
+				System.out.println("test :: "+specifier);
+				if(declarations.contains(node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1])){
+					isViolated = true;
 				}
-
-			 }
-			return super.visit(simpleDeclaration);
+				else{
+					declarations.add(node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1]);
+				}
+			}
+		}
+		return super.visit(simpleDeclaration);
 	}
 
 }
