@@ -18,7 +18,7 @@ public class Rule12_10_Req extends AbstractMisraCRule {
 	private final static char COMMA = ',';
 
 	public Rule12_10_Req(IASTTranslationUnit ast) {
-		super("Rule05_3_Req", false, ast);
+		super("Rule12_10_Req", false, ast);
 		shouldVisitDeclarations = true;
 	}
 
