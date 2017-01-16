@@ -131,6 +131,9 @@ public class MessageFactory {
 		case 3675:
 			msg = "Function parameter declared with type qualification which differs from previous declaration.";
 			break;					
+		case 3601:
+			msg = "Trigraphs (??x) are an ISO feature.";
+			break;
 		}
 		
 		return msg;
