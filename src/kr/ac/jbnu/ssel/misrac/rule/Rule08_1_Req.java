@@ -51,6 +51,9 @@ public class Rule08_1_Req extends AbstractMisraCRule {
 		shouldVisitStatements = true;
 	}
 
+	/**
+	 * extract prototype and store them into 'prototypes' hash set.
+	 */
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
 		
