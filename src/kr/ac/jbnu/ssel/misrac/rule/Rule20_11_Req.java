@@ -22,6 +22,18 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
+/**
+ * The library functions abort, exit, getenv and system from library <stdlib.h> shall not be used.
+ *
+ * These functions will not normally be required in an embedded system, 
+ * which does not normally need to communicate with an environment. 
+ * If the functions are found necessary in an application, 
+ * then it is essential to check on the implementation-defined behaviour of the function in the environment in question.
+ * 
+ * DONE!!
+ * @author stkim
+ *
+ */
 public class Rule20_11_Req extends AbstractMisraCRule {
 
     private static final String STDLIB_H_ = "stdlib.h";
@@ -57,6 +69,8 @@ public class Rule20_11_Req extends AbstractMisraCRule {
 	System.out.println("function name:" + functionNameExp.getName().toString());
 	if (isSTDLIB_H_included == true && violationFunctions.contains(functionNameExp.getName().toString())) {
 	    isViolated = true;
+	    
+//	    The library functions abort, exit, getenv and system from library <stdlib.h> shall not be used.
 	    String message = MessageFactory.getInstance().getMessage(5126);
 	    violationMsgs.add(
 		    new ViolationMessage(this, message + "-- " + functionNameExp.getName().toString(), expression));
