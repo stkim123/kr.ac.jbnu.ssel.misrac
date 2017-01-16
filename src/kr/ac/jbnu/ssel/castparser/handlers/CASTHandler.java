@@ -148,6 +148,7 @@ public class CASTHandler extends AbstractHandler {
 			throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException,
 			ClassNotFoundException, MiaraCRuleException {
 
+		System.out.println("ruleClass:"+ ruleClass);
 		String ruleClassWithPackage = R.class.getPackage().getName() + "."
 				+ ruleClass.substring(0, ruleClass.indexOf("."));
 

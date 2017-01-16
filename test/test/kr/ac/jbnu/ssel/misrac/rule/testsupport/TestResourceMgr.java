@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.misrac.rule.testsupport;
+package test.kr.ac.jbnu.ssel.misrac.rule.testsupport;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ import org.eclipse.cdt.core.parser.ScannerInfo;
 import org.eclipse.core.runtime.FileLocator;
 
 import kr.ac.jbnu.ssel.misrac.rule.Rule08_1_Req;
-import kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
+import test.kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
 
 public class TestResourceMgr
 {

@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.misrac.rule.testsupport;
+package test.kr.ac.jbnu.ssel.misrac.rule.testsupport;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
