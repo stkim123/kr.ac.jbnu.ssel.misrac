@@ -12,6 +12,15 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
+/**
+ * A function shall have a single point of exit at the end of the function.
+ *
+ * This is required by IEC 61508, under good programming style.
+ * 
+ * DONE!!
+ * @author sangjin
+ *
+ */
 public class Rule14_7_Req extends AbstractMisraCRule {
 
 	private static int count = 0;
@@ -35,6 +44,8 @@ public class Rule14_7_Req extends AbstractMisraCRule {
 								if (temp.getChildren()[0] instanceof IASTReturnStatement) {
 									count++;
 									if (count > 1) {
+										
+//										This function has more than one 'return' path.
 										String message1 = MessageFactory.getInstance().getMessage(2889);
 										violationMsgs.add(new ViolationMessage(this,
 												getRuleID() + ":" + message1 + "--" + temp.getChildren()[0].getRawSignature(), temp.getChildren()[0]));
