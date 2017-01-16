@@ -9,6 +9,15 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
+/**
+ * The character sequence /* shall not be used within a comment.
+ * C does not support the nesting of comments even though some compilers support this as a language extension. 
+ * 
+ * TODO
+ * 
+ * @author kang
+ *
+ */
 public class Rule02_3_Req extends AbstractMisraCRule{
 	
 	  private static final String COMMENT_Start = "/*";
@@ -25,6 +34,7 @@ public class Rule02_3_Req extends AbstractMisraCRule{
 
 		if (comment.toString().startsWith(COMMENT_Start)&&!(comment.toString().endsWith(COMMENT_End))) {
 		    
+//			Nested comments are not recognized in the ISO standard.
 		    String msg = MessageFactory.getInstance().getMessage(3108);
 
 		    if (violationMsgs == null) {
