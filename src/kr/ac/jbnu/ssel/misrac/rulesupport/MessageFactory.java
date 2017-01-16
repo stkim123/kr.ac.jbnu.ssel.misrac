@@ -137,6 +137,9 @@ public class MessageFactory {
 		case 2547:
 			msg = "	This declaration of tag '%s' hides a more global declaration.";
 			break;
+		case 2004:
+			msg = "	No concluding 'else' exists in this 'if'-'else'-'if' statement.";
+			break;
 		}
 		
 		return msg;
