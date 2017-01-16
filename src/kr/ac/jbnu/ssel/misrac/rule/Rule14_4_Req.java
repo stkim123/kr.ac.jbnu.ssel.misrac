@@ -10,6 +10,13 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
+/**
+ * The goto statement shall not be used.
+ *
+ * DONE!!
+ * @author User
+ *
+ */
 public class Rule14_4_Req extends AbstractMisraCRule {
 
 	public Rule14_4_Req(IASTTranslationUnit ast) {
@@ -26,6 +33,8 @@ public class Rule14_4_Req extends AbstractMisraCRule {
 			if (child instanceof IASTCompoundStatement) {
 				for (IASTNode grandChild : child.getChildren()) {
 					if (grandChild instanceof IASTGotoStatement) {
+						
+//						A 'goto' statement has been used.
 						String message1 = MessageFactory.getInstance().getMessage(2001);
 						violationMsgs.add(new ViolationMessage(this,
 								getRuleID() + ":" + message1 + "--" + grandChild.getRawSignature(), grandChild));
