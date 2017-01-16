@@ -130,7 +130,8 @@ public class MessageFactory {
 			break;				
 		case 3675:
 			msg = "Function parameter declared with type qualification which differs from previous declaration.";
-			break;					
+			break;		
+			
 		}
 		
 		return msg;
