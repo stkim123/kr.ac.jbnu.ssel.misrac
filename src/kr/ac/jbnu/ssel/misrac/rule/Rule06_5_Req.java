@@ -13,7 +13,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * A signed bit field of 1 bit length is not useful.
  * 
  * DONE!!
- * @author User
+ * @author sangjin
  *
  */
 public class Rule06_5_Req extends AbstractMisraCRule {

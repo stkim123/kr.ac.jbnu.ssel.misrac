@@ -143,6 +143,15 @@ public class MessageFactory {
 		case 3402:
 			msg = " Braces are needed to clarify the structure of this 'if'-'if'-'else' statement.";
 			break;
+		case 3601:
+			msg = "Trigraphs (??x) are an ISO feature.";
+			break;
+		case 5127:
+			msg = "The time handling functions of library <time.h> shall not be used.";
+			break;
+		case 5122:
+			msg = "The setjmp macro and the longjmp function shall not be used.";
+			break;
 		}
 		
 		return msg;

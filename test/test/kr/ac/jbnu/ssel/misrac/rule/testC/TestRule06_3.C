@@ -1,3 +1,19 @@
+/*
+ * Rule6_3.C
+ *
+ *  Created on: 2017. 1. 13.
+ *      Author: stkim
+ */
+
+
+/*
+ * Rule6_3.C
+ *
+ *  Created on: 2017. 1. 13.
+ *      Author: stkim
+ */
+
+
 typedef          char   char_t;
 typedef signed   char   int8_t;
 typedef signed   short  int16_t;
@@ -12,3 +28,4 @@ typedef          double float64_t;
 typedef long     double float128_t;
 
 typedef String 	String128_t;	// violation
+typedef String 	String_t;	// not-violation
