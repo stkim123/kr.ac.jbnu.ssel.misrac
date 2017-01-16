@@ -34,9 +34,24 @@ public class AbstractTestRule
 			violationMessages.addAll(Arrays.asList(violationMsgs));
 		}
 
-		return violationMessages;
+		return filterViolations(violationMessages,ruleClsName) ;
 	}
 	
+	
+	private ArrayList<ViolationMessage> filterViolations(ArrayList<ViolationMessage> violationMessages,
+			String ruleClsName2)
+	{
+		ArrayList<ViolationMessage> filteredViolationMessages = new ArrayList<ViolationMessage>();
+		for (ViolationMessage violationMessage : violationMessages)
+		{
+			if(violationMessage.getRule().getRuleID().equals(ruleClsName2))
+			{
+				filteredViolationMessages.add(violationMessage);
+			}
+		}
+		return filteredViolationMessages;
+	}
+
 	private AbstractMisraCRule createMisraCRule(String ruleClsName, IASTTranslationUnit astT)
 	{
 		String ruleClassWithPackage = R.class.getPackage().getName() + "." + ruleClsName;

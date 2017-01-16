@@ -15,12 +15,12 @@ import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
  * 
  * DONE!!
  * 
- * @author sangjin
+ * @author stkim
  *
  */
-public class TestRule14_7 extends AbstractTestRule {
-	public TestRule14_7() {
-		super("Rule14_7_Req", "TestRule14_7.C");
+public class TestRule14_6 extends AbstractTestRule {
+	public TestRule14_6() {
+		super("Rule14_6_Req", "TestRule14_6.C");
 	}
 
 	@Test

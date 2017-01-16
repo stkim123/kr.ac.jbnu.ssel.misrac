@@ -18,9 +18,10 @@ import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
  * @author sangjin
  *
  */
-public class TestRule14_7 extends AbstractTestRule {
-	public TestRule14_7() {
-		super("Rule14_7_Req", "TestRule14_7.C");
+
+public class TestRule05_2 extends AbstractTestRule {
+	public TestRule05_2() {
+		super("Rule05_2_Req", "TestRule05_2.C");
 	}
 
 	@Test
@@ -30,7 +31,7 @@ public class TestRule14_7 extends AbstractTestRule {
 			System.out.println(violationMsgs);
 			System.out.println("size:" + violationMsgs.size());
 
-			assertTrue(violationMsgs.size() == 1);
+			assertTrue(violationMsgs.size() == 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

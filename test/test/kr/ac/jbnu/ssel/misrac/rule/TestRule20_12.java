@@ -15,12 +15,12 @@ import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
  * 
  * DONE!!
  * 
- * @author sangjin
+ * @author stkim
  *
  */
-public class TestRule14_7 extends AbstractTestRule {
-	public TestRule14_7() {
-		super("Rule14_7_Req", "TestRule14_7.C");
+public class TestRule20_12 extends AbstractTestRule {
+	public TestRule20_12() {
+		super("Rule20_12_Req", "TestRule20_12.C");
 	}
 
 	@Test
@@ -30,7 +30,7 @@ public class TestRule14_7 extends AbstractTestRule {
 			System.out.println(violationMsgs);
 			System.out.println("size:" + violationMsgs.size());
 
-			assertTrue(violationMsgs.size() == 1);
+			assertTrue(violationMsgs.size() == 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -107,6 +107,9 @@ public class MessageFactory {
 		case 3002:
 			msg = "Defining '%s()' with an identifier list and separate parameter declarations is an obsolescent feature.";
 			break;
+		case 3334:
+			msg = "	This declaration of '%s' hides a more global declaration.";
+			break;
 		case 3335:
 			msg = "No function declaration. Implicit declaration inserted: 'extern int %s();'.";
 			break;
@@ -131,7 +134,24 @@ public class MessageFactory {
 		case 3675:
 			msg = "Function parameter declared with type qualification which differs from previous declaration.";
 			break;		
-			
+		case 2547:
+			msg = "	This declaration of tag '%s' hides a more global declaration.";
+			break;
+		case 2004:
+			msg = "	No concluding 'else' exists in this 'if'-'else'-'if' statement.";
+			break;
+		case 3402:
+			msg = " Braces are needed to clarify the structure of this 'if'-'if'-'else' statement.";
+			break;
+		case 3601:
+			msg = "Trigraphs (??x) are an ISO feature.";
+			break;
+		case 5127:
+			msg = "The time handling functions of library <time.h> shall not be used.";
+			break;
+		case 5122:
+			msg = "The setjmp macro and the longjmp function shall not be used.";
+			break;
 		}
 		
 		return msg;

@@ -12,7 +12,7 @@ import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
 /**
  * Sample Implementation for testing misra-c rule that has been implemented without executing Eclipse CDT.
  * 
- * @author stkim
+ * @author sangjin
  *
  */
 public class TestRule14_8 extends AbstractTestRule
