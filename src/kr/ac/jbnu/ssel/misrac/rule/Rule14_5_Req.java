@@ -11,6 +11,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 /**
  * The continue statement shall not be used.
  * 
+ * DONE!!
  * @author stkim
  *
  */
@@ -25,6 +26,7 @@ public class Rule14_5_Req extends AbstractMisraCRule {
 	@Override
 	protected int visit(IASTContinueStatement statment) {
 		
+//		A 'continue' statement has been used.
 		String msg = MessageFactory.getInstance().getMessage(0770);
 		violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg, statment));
 		isViolated = true;

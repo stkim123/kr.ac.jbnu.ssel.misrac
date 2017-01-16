@@ -13,6 +13,15 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
+/**
+ * The comma operator shall not be used.
+ *
+ * Use of the comma operator is generally detrimental to the readability of code, and the same effect can be achieved by other means.
+ *
+ * DONE!!
+ * @author sangjin
+ *
+ */
 public class Rule12_10_Req extends AbstractMisraCRule {
 	private static HashSet<String> charList = new HashSet<String>();
 	private final static char COMMA = ',';
@@ -25,14 +34,16 @@ public class Rule12_10_Req extends AbstractMisraCRule {
 	@Override
 	protected int visit(IASTFunctionDefinition functionDefinition) {
 
-//		System.out.println(" :: "+functionDefinition.getBody().getChildren()[3].getRawSignature());
 		for(IASTNode node: functionDefinition.getBody().getChildren()){
 			char[] charArray = node.getRawSignature().toCharArray();
 			for(int i=0; i<charArray.length; i++){
 				if(charArray[i]==COMMA){
+					
+//					The comma operator has been used outside a 'for' statement.
 					String message1 = MessageFactory.getInstance().getMessage(3417);
 					violationMsgs.add(
 							new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + node.getRawSignature(), node));
+//					The comma operator has been used in a 'for' statement.
 					String message2 = MessageFactory.getInstance().getMessage(3418);
 					violationMsgs.add(
 							new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + node.getRawSignature(), node));
