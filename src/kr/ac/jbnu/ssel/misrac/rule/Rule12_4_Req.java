@@ -25,6 +25,7 @@ import org.eclipse.cdt.core.dom.ast.IASTExpression;
  * The ?: operator is specifically provided to choose between two sub-expressions, 
  * and is therefore less likely to lead to mistakes.
  * 
+ * [DONE!]
  * @author stkim
  */
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
