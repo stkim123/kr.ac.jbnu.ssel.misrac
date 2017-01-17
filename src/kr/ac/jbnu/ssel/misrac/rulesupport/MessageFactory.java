@@ -173,6 +173,12 @@ public class MessageFactory {
 		case 3415:
 			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
 			break;
+		case 341:
+			msg = "Using the stringify operator '#'.";
+			break;
+		case 342:
+			msg = "Using the glue operator '##'.";
+			break;
 		}
 		
 		return msg;
