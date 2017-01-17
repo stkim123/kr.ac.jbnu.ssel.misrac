@@ -158,6 +158,15 @@ public class MessageFactory {
 		case 842:
 			msg = "	Using #define or #undef inside a function.";
 			break;
+		case 813:
+			msg = "	[U] Using any of the characters ' \" or /* in '#include <%s>' gives undefined behaviour.";
+			break;
+		case 814:
+			msg = "	[U] Using the characters ' or /* in '#include \"%s\"' gives undefined behaviour.";
+			break;
+		case 831:
+			msg = "	[E] Use of '\\' in this '#include' line is a PC extension - this usage is non-portable.";
+			break;
 		}
 		
 		return msg;

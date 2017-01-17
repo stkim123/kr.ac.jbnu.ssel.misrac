@@ -36,8 +36,6 @@ public class Rule19_5_Req extends AbstractMisraCRule {
 		String[] parseString = functionDefinition.getRawSignature().split("#");
 
 		for (int i = 0; i < parseString.length; i++) {
-			
-			System.out.println("asdawd :: "+parseString[i]);
 			if (parseString[i].startsWith("undef")) {
 				//	Using #define or #undef inside a function.
 				String message1 = MessageFactory.getInstance().getMessage(842);
