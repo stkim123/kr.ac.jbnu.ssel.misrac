@@ -10,17 +10,13 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
 /**
+ * MISRA-C:2004 Rule 20.06: (Required) The macro offsetof, in library <stddef.h>, shall not be used.
  * 
- * The macro offsetof, in library <stddef.h>, shall not be used.
- *
- * Use of this macro can lead to undefined behaviour when the types of the
- * operands are incompatible or when bit fields are used.
- *
- *
- * TODO..
+ * Use of this macro can lead to undefined behaviour when the types of the operands are incompatible or when bit fields are used.
+ * 
+ * DONE!!
  * 
  * @author kang
- *
  */
 
 public class Rule20_6_Req extends AbstractMisraCRule {
@@ -33,8 +29,7 @@ public class Rule20_6_Req extends AbstractMisraCRule {
 		super("Rule20_6_Req", false, ast);
 		shouldVisitPreprocessor = true;
 		shouldVisitExpressions = true;
-
-	}
+		}
 
 	public Rule20_6_Req(String ruleID, boolean visitNodes, IASTTranslationUnit ast) {
 		super(ruleID, visitNodes, ast);
@@ -50,14 +45,17 @@ public class Rule20_6_Req extends AbstractMisraCRule {
 
 	@Override
 	protected int visit(IASTFunctionCallExpression expression) {
+		if (!isSTDDEF_H_included)
+			return super.visit(expression);
+		
 		IASTIdExpression functionNameExp = (IASTIdExpression) expression.getFunctionNameExpression();
-
 		System.out.println("function name:" + functionNameExp.getName().toString());
-		if (isSTDDEF_H_included == true && OFFSETOF.contains(functionNameExp.getName().toString())) {
+		
+		if (isSTDDEF_H_included == true && OFFSETOF.equals(functionNameExp.getName().toString())) {
 			isViolated = true;
 			String message = MessageFactory.getInstance().getMessage(5120);
-			violationMsgs.add(
-					new ViolationMessage(this, message + "-- " + functionNameExp.getName().toString(), expression));
+			violationMsgs.add(new ViolationMessage(this,
+					getRuleID() + ":" + message + "-" + functionNameExp.getName().toString(), expression));
 		}
 		return super.visit(expression);
 	}
