@@ -41,9 +41,7 @@ public class Rule19_2_Adv extends AbstractMisraCRule {
 		
 		String[] parseString = includeStatement.getRawSignature().split(" ");
 		String target = parseString[1];
-		
-		System.out.println("target :: "+target);
-		
+				
 		for(int i=0; i<Non_Standard.length; i++){
 			if(target.contains(Non_Standard[i])){
 				
