@@ -152,6 +152,9 @@ public class MessageFactory {
 		case 5122:
 			msg = "The setjmp macro and the longjmp function shall not be used.";
 			break;
+		case 841:
+			msg = "Using '#undef'.";
+			break;
 		}
 		
 		return msg;
