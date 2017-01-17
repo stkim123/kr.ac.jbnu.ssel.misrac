@@ -1,8 +1,5 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIncludeStatement;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorUndefStatement;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
@@ -25,7 +22,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  *
  * 
- * 
+ * DONE!!
  * 
  * @author sangjin
  *
@@ -34,25 +31,25 @@ public class Rule19_6_Req extends AbstractMisraCRule {
 
 	public Rule19_6_Req(IASTTranslationUnit ast) {
 		super("Rule19_6_Req", false, ast);
-		shouldVisitStatements = true;
+		shouldVisitTranslationUnit = true;
 	}
 
 	@Override
-	protected int visit(IASTPreprocessorIncludeStatement includeStatement) {
-		
-		System.out.println("asdfaef :: :: "+includeStatement.getParent());
+	public int visit(IASTTranslationUnit translationUnit) {
 
-		for (IASTNode node : includeStatement.getParent().getChildren()) {
-			System.out.println("ch is :: "+node);
-			if (node instanceof IASTPreprocessorUndefStatement) {
+		String[] parseString = translationUnit.getRawSignature().split("#");
+
+		for (int i = 0; i < parseString.length; i++) {
+			if (parseString[i].startsWith("undef")) {
 				// Using '#undef'.
 				String message1 = MessageFactory.getInstance().getMessage(841);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + node, node));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + parseString[i],
+						translationUnit));
 				isViolated = true;
 			}
 		}
 
-		return super.visit(includeStatement);
+		return super.visit(translationUnit);
 	}
 
 }
