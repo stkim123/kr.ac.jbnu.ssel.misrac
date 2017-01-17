@@ -152,6 +152,9 @@ public class MessageFactory {
 		case 5122:
 			msg = "The setjmp macro and the longjmp function shall not be used.";
 			break;
+		case 3415:
+			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
+			break;
 		}
 		
 		return msg;
