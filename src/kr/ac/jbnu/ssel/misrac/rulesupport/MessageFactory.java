@@ -146,6 +146,9 @@ public class MessageFactory {
 		case 3601:
 			msg = "Trigraphs (??x) are an ISO feature.";
 			break;
+		case 5118:
+			msg = "Dynamic heap memory allocation shall not be used.";
+			break;
 		case 5127:
 			msg = "The time handling functions of library <time.h> shall not be used.";
 			break;
