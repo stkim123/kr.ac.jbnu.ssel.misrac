@@ -158,6 +158,12 @@ public class MessageFactory {
 		case 3415:
 			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
 			break;
+		case 3398:
+			msg = "Extra parentheses recommended. A function call, array subscript, or member operation is the operand of a logical && or ||.";
+			break;
+		case 3399:
+			msg = "Extra parentheses recommended. A unary operation is the operand of a logical && or ||.";
+			break;
 		}
 		
 		return msg;
