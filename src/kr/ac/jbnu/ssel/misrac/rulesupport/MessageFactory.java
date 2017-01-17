@@ -155,6 +155,21 @@ public class MessageFactory {
 		case 5122:
 			msg = "The setjmp macro and the longjmp function shall not be used.";
 			break;
+		case 841:
+			msg = "Using '#undef'.";
+			break;
+		case 842:
+			msg = "	Using #define or #undef inside a function.";
+			break;
+		case 813:
+			msg = "	[U] Using any of the characters ' \" or /* in '#include <%s>' gives undefined behaviour.";
+			break;
+		case 814:
+			msg = "	[U] Using the characters ' or /* in '#include \"%s\"' gives undefined behaviour.";
+			break;
+		case 831:
+			msg = "	[E] Use of '\\' in this '#include' line is a PC extension - this usage is non-portable.";
+			break;
 		case 3415:
 			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
 			break;
