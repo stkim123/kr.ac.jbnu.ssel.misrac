@@ -155,6 +155,9 @@ public class MessageFactory {
 		case 841:
 			msg = "Using '#undef'.";
 			break;
+		case 842:
+			msg = "	Using #define or #undef inside a function.";
+			break;
 		}
 		
 		return msg;
