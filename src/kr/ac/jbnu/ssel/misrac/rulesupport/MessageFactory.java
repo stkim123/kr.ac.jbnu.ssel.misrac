@@ -146,6 +146,9 @@ public class MessageFactory {
 		case 3601:
 			msg = "Trigraphs (??x) are an ISO feature.";
 			break;
+		case 5118:
+			msg = "Dynamic heap memory allocation shall not be used.";
+			break;
 		case 5127:
 			msg = "The time handling functions of library <time.h> shall not be used.";
 			break;
@@ -166,6 +169,9 @@ public class MessageFactory {
 			break;
 		case 831:
 			msg = "	[E] Use of '\\' in this '#include' line is a PC extension - this usage is non-portable.";
+			break;
+		case 3415:
+			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
 			break;
 		}
 		
