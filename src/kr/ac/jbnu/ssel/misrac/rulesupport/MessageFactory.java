@@ -25,6 +25,12 @@ public class MessageFactory {
 		case 5126:
 			msg = "The library functions abort, exit, getenv and system from library <stdlib.h> shall not be used.";
 			break;
+		case 750:
+			msg = "A union type specifier has been defined.";
+			break;
+		case 759:
+			msg = "An object of union type has been defined.";
+			break;
 		case 777:
 			msg = "[U] External identifier does not differ from other identifier(s) (e.g. '%s') within the specified number of significant characters.";
 			break;
