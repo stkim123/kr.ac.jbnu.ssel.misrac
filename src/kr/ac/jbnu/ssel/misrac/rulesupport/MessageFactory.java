@@ -191,6 +191,9 @@ public class MessageFactory {
 		case 809:
 			msg = "	[U] The '#include' preprocessing directive has not been followed by <h-char-sequence> or \"s-char-sequence\".";
 			break;
+		case 3322:
+			msg = "Logical operators should not be confused with bitwise operators.";
+			break;
 		}
 		
 		return msg;
