@@ -182,6 +182,9 @@ public class MessageFactory {
 		case 5087:
 			msg = "#include statements in a file should only be preceded by other preprocessor directives or comments.";
 			break;
+		case 809:
+			msg = "	[U] The '#include' preprocessing directive has not been followed by <h-char-sequence> or \"s-char-sequence\".";
+			break;
 		}
 		
 		return msg;
