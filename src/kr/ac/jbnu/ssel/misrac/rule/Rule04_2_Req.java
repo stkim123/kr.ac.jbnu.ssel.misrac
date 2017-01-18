@@ -51,7 +51,6 @@ public class Rule04_2_Req extends AbstractMisraCRule{
 		char[] trigraphClueChar = trigraphPostfix.toCharArray();
 		
 		String literalExpression = expression.toString();
-		System.out.println("literalExpression:"+ literalExpression);
 		
 		for (char c : trigraphClueChar)
 		{

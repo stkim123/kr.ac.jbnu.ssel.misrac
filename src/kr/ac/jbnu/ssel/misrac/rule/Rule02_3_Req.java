@@ -30,7 +30,6 @@ public class Rule02_3_Req extends AbstractMisraCRule{
 
 	 @Override
 	    protected int visit(IASTComment comment) {
-		 System.out.println(comment.getComment());
 
 		if (comment.toString().startsWith(COMMENT_Start)&&!(comment.toString().endsWith(COMMENT_End))) {
 		    
