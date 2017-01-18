@@ -179,6 +179,18 @@ public class MessageFactory {
 		case 3399:
 			msg = "Extra parentheses recommended. A unary operation is the operand of a logical && or ||.";
 			break;
+		case 341:
+			msg = "Using the stringify operator '#'.";
+			break;
+		case 342:
+			msg = "Using the glue operator '##'.";
+			break;
+		case 5087:
+			msg = "#include statements in a file should only be preceded by other preprocessor directives or comments.";
+			break;
+		case 809:
+			msg = "	[U] The '#include' preprocessing directive has not been followed by <h-char-sequence> or \"s-char-sequence\".";
+			break;
 		}
 		
 		return msg;
