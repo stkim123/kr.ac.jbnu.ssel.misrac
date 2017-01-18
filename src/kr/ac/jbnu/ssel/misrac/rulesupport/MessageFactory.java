@@ -179,6 +179,9 @@ public class MessageFactory {
 		case 342:
 			msg = "Using the glue operator '##'.";
 			break;
+		case 5087:
+			msg = "#include statements in a file should only be preceded by other preprocessor directives or comments.";
+			break;
 		}
 		
 		return msg;
