@@ -185,6 +185,12 @@ public class MessageFactory {
 		case 809:
 			msg = "	[U] The '#include' preprocessing directive has not been followed by <h-char-sequence> or \"s-char-sequence\".";
 			break;
+		case 3317:
+			msg ="	'#if...' not matched by '#endif' in included file. This is probably an error.";
+			break;
+		case 3318:
+			msg ="	'#else'/'#elif'/'#endif' in included file matched '#if...' in parent file. This is probably an error.";
+			break;
 		}
 		
 		return msg;
