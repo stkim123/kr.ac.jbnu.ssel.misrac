@@ -66,6 +66,11 @@ public class MessageFactory {
 			break;
 		case 2001:
 			msg = "	A 'goto' statement has been used.";
+		case 2462:
+			msg = " The variable initialized in the first expression of this 'for' statement is not the variable identified as the 'loop control variable' (%s).";
+			break;
+		case 2463:
+			msg = " The variable incremented in the third expression of this 'for' statement is not the variable identified as the 'loop control variable' (%s).";
 			break;
 		case 2889:
 			msg = "	This function has more than one 'return' path.";
@@ -105,7 +110,7 @@ public class MessageFactory {
 		case 2214:
 			msg = "Body of control statement is on the same line and is not enclosed within braces.";
 			break;
-			
+
 		case 5013:
 			msg = "Use of basic type ''{0}''.";
 			break;
@@ -121,25 +126,25 @@ public class MessageFactory {
 			break;
 		case 3450:
 			msg = "Function '%s', with internal linkage, is being defined without a previous declaration.";
-			break;				
+			break;
 		case 0624:
 			msg = "Function '%s' is declared using typedefs which are different to those in a previous declaration.";
-			break;				
+			break;
 		case 1331:
 			msg = "Type or number of arguments doesn't match previous use of the function.";
-			break;				
+			break;
 		case 1332:
 			msg = "Type or number of arguments doesn't match prototype found later.";
-			break;				
+			break;
 		case 1333:
 			msg = "Type or number of arguments doesn't match function definition found later.";
-			break;				
+			break;
 		case 3320:
 			msg = "Type of argument no. %s differs from its type in definition of function.";
-			break;				
+			break;
 		case 3675:
 			msg = "Function parameter declared with type qualification which differs from previous declaration.";
-			break;		
+			break;
 		case 2547:
 			msg = "	This declaration of tag '%s' hides a more global declaration.";
 			break;
@@ -201,7 +206,7 @@ public class MessageFactory {
 			msg = "Logical operators should not be confused with bitwise operators.";
 			break;
 		}
-		
+
 		return msg;
 	}
 
