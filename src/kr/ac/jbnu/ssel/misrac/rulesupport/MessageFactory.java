@@ -221,6 +221,9 @@ public class MessageFactory {
 		case 317:
 			msg ="	[I] Implicit conversion from a pointer to void to a pointer to object type.";
 			break;
+		case 3315:
+			msg = "This 'switch' statement contains only a single path - it is redundant.";
+			break;
 		}
 
 		return msg;
