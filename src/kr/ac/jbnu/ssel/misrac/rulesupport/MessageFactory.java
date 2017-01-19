@@ -212,6 +212,15 @@ public class MessageFactory {
 		case 3322:
 			msg = "Logical operators should not be confused with bitwise operators.";
 			break;
+		case 310:
+			msg ="	Casting to different object pointer type.";
+			break;
+		case 316:
+			msg ="	[I] Cast from a pointer to void to a pointer to object type.";
+			break;
+		case 317:
+			msg ="	[I] Implicit conversion from a pointer to void to a pointer to object type.";
+			break;
 		}
 
 		return msg;
