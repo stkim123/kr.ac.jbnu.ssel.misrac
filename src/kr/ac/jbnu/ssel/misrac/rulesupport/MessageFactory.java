@@ -173,6 +173,12 @@ public class MessageFactory {
 		case 3415:
 			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
 			break;
+		case 3398:
+			msg = "Extra parentheses recommended. A function call, array subscript, or member operation is the operand of a logical && or ||.";
+			break;
+		case 3399:
+			msg = "Extra parentheses recommended. A unary operation is the operand of a logical && or ||.";
+			break;
 		case 341:
 			msg = "Using the stringify operator '#'.";
 			break;
@@ -202,6 +208,9 @@ public class MessageFactory {
 			break;
 		case 636:
 			msg = "	[U] There are no named members in this 'struct' or 'union'.";
+			break;
+		case 3322:
+			msg = "Logical operators should not be confused with bitwise operators.";
 			break;
 		}
 
