@@ -179,11 +179,26 @@ public class MessageFactory {
 		case 3415:
 			msg = "Right hand operand of '&&' or '||' is an expression with possible side effects.";
 			break;
+		case 3398:
+			msg = "Extra parentheses recommended. A function call, array subscript, or member operation is the operand of a logical && or ||.";
+			break;
+		case 3399:
+			msg = "Extra parentheses recommended. A unary operation is the operand of a logical && or ||.";
+			break;
 		case 341:
 			msg = "Using the stringify operator '#'.";
 			break;
 		case 342:
 			msg = "Using the glue operator '##'.";
+			break;
+		case 5087:
+			msg = "#include statements in a file should only be preceded by other preprocessor directives or comments.";
+			break;
+		case 809:
+			msg = "	[U] The '#include' preprocessing directive has not been followed by <h-char-sequence> or \"s-char-sequence\".";
+			break;
+		case 3322:
+			msg = "Logical operators should not be confused with bitwise operators.";
 			break;
 		}
 		
