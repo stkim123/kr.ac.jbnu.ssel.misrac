@@ -235,6 +235,9 @@ public class MessageFactory {
 		case 3315:
 			msg = "This 'switch' statement contains only a single path - it is redundant.";
 			break;
+		case 735:
+			msg = "Using relational or logical operators in a 'switch' expression is usually a programming error.";
+			break;
 		}
 
 		return msg;

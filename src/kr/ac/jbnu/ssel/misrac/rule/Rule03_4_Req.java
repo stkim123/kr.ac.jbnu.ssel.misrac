@@ -51,23 +51,23 @@ public class Rule03_4_Req extends AbstractMisraCRule {
 	}
 
 	
-	
-	
-	@Override
-	protected int visit(IASTPreprocessorPragmaStatement pragmaStatement) {
-		// Parser Preprocessor
-		String rawSignature = pragmaStatement.getRawSignature();
-		String[] proPragSt = rawSignature.split(" ");
-
-		if (rawSignature.contains(_PRAGMA)) {
-			isViolated = true;
-			
-			String message = MessageFactory.getInstance().getMessage(5123);
-			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message + "--" + _PRAGMA, pragmaStatement));
-
-			
-		}
-		return super.visit(pragmaStatement);
-	}
-
+//	
+//	
+//	@Override
+//	protected int visit(IASTPreprocessorPragmaStatement pragmaStatement) {
+//		// Parser Preprocessor
+//		String rawSignature = pragmaStatement.getRawSignature();
+//		String[] proPragSt = rawSignature.split(" ");
+//
+//		if (rawSignature.contains(_PRAGMA)) {
+//			isViolated = true;
+//			
+//			String message = MessageFactory.getInstance().getMessage(5123);
+//			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message + "--" + _PRAGMA, pragmaStatement));
+//
+//			
+//		}
+//		return super.visit(pragmaStatement);
+//	}
+//
 }
