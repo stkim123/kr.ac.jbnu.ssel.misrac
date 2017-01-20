@@ -67,8 +67,8 @@ public class Rule13_5_Req extends AbstractMisraCRule {
 				isViolated = true;
 
 				String msg = MessageFactory.getInstance().getMessage(2462);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + "--" + forChild[0].toString(),
-						forStatement));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + forChild[0].getRawSignature(),
+						forChild[0]));
 			}
 		}
 
@@ -78,8 +78,8 @@ public class Rule13_5_Req extends AbstractMisraCRule {
 				isViolated = true;
 
 				String msg = MessageFactory.getInstance().getMessage(2463);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + "--" + forChild[1].toString(),
-						forStatement));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + forChild[1].getRawSignature(),
+						forChild[1]));
 			}
 		}
 
