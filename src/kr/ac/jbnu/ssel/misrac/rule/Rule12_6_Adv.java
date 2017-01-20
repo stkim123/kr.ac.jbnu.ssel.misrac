@@ -18,6 +18,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * The logical operators &&, || and ! can be easily confused with the bitwise 
  * operators &, | and ~. See 'Boolean expressions' in the glossary.
  * 
+ * [Done!]
  * @author stkim
  */
 

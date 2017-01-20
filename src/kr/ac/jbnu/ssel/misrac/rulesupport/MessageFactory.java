@@ -202,8 +202,47 @@ public class MessageFactory {
 		case 809:
 			msg = "	[U] The '#include' preprocessing directive has not been followed by <h-char-sequence> or \"s-char-sequence\".";
 			break;
+		case 3317:
+			msg = "	'#if...' not matched by '#endif' in included file. This is probably an error.";
+			break;
+		case 3318:
+			msg = "	'#else'/'#elif'/'#endif' in included file matched '#if...' in parent file. This is probably an error.";
+			break;
+		case 544:
+			msg = "	[U] The value of an incomplete 'union' may not be used.";
+			break;
+		case 545:
+			msg = "	[U] The value of an incomplete 'struct' may not be used.";
+			break;
+		case 623:
+			msg = "	[U] '%s' has incomplete type and no linkage - this is undefined.";
+			break;
+		case 636:
+			msg = "	[U] There are no named members in this 'struct' or 'union'.";
+			break;
 		case 3322:
 			msg = "Logical operators should not be confused with bitwise operators.";
+			break;
+		case 310:
+			msg ="	Casting to different object pointer type.";
+			break;
+		case 316:
+			msg ="	[I] Cast from a pointer to void to a pointer to object type.";
+			break;
+		case 317:
+			msg ="	[I] Implicit conversion from a pointer to void to a pointer to object type.";
+			break;
+		case 3315:
+			msg = "This 'switch' statement contains only a single path - it is redundant.";
+			break;
+		case 735:
+			msg = "Using relational or logical operators in a 'switch' expression is usually a programming error.";
+			break;
+		case 2019:
+			msg = "'Switch' label is located within a nested code block.";
+			break;
+		case 3440:
+			msg = "Using the value resulting from a ++ or -- operation.";
 			break;
 		}
 

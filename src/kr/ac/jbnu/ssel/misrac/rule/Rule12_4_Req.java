@@ -5,6 +5,13 @@ import java.util.HashSet;
 
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
+
+import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
+import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
+
 /**
  * MISRA-C:2004  Rule  12.4:  (Required)
  * 
@@ -28,13 +35,6 @@ import org.eclipse.cdt.core.dom.ast.IASTExpression;
  * [DONE!]
  * @author stkim
  */
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
-
-import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
-import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
-import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
-
 public class Rule12_4_Req extends AbstractMisraCRule
 {
 	private static final String[] SIDE_EFFECT_OPS = {"++"};
