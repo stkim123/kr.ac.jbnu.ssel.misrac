@@ -239,7 +239,10 @@ public class MessageFactory {
 			msg = "Using relational or logical operators in a 'switch' expression is usually a programming error.";
 			break;
 		case 2019:
-			msg = "	'Switch' label is located within a nested code block.";
+			msg = "'Switch' label is located within a nested code block.";
+			break;
+		case 3440:
+			msg = "Using the value resulting from a ++ or -- operation.";
 			break;
 		}
 
