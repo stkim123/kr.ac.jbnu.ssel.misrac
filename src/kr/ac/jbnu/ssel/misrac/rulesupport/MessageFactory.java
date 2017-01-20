@@ -241,6 +241,9 @@ public class MessageFactory {
 		case 2019:
 			msg = "	'Switch' label is located within a nested code block.";
 			break;
+		case 3234:
+			msg = "	Declarations precede the first label in this 'switch' construct.";
+			break;
 		}
 
 		return msg;
