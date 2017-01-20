@@ -25,6 +25,12 @@ public class MessageFactory {
 		case 5126:
 			msg = "The library functions abort, exit, getenv and system from library <stdlib.h> shall not be used.";
 			break;
+		case 750:
+			msg = "A union type specifier has been defined.";
+			break;
+		case 759:
+			msg = "An object of union type has been defined.";
+			break;
 		case 777:
 			msg = "[U] External identifier does not differ from other identifier(s) (e.g. '%s') within the specified number of significant characters.";
 			break;
@@ -60,6 +66,11 @@ public class MessageFactory {
 			break;
 		case 2001:
 			msg = "	A 'goto' statement has been used.";
+		case 2462:
+			msg = " The variable initialized in the first expression of this 'for' statement is not the variable identified as the 'loop control variable' (%s).";
+			break;
+		case 2463:
+			msg = " The variable incremented in the third expression of this 'for' statement is not the variable identified as the 'loop control variable' (%s).";
 			break;
 		case 2889:
 			msg = "	This function has more than one 'return' path.";
