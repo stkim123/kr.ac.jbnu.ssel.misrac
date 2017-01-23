@@ -253,6 +253,12 @@ public class MessageFactory {
 		case 2469:
 			msg = "	Loop control variable in this 'for' statement, %s, is modified in the body of the loop.";
 			break;
+		case 1520:
+			msg = "	Functions are indirectly recursive.";
+			break;
+		case 3670:
+			msg = "	Recursive call to function containing this call.";
+			break;
 		}
 
 		return msg;
