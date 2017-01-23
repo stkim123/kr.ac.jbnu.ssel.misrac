@@ -244,6 +244,9 @@ public class MessageFactory {
 		case 3234:
 			msg = "	Declarations precede the first label in this 'switch' construct.";
 			break;
+		case 2469:
+			msg = "	Loop control variable in this 'for' statement, %s, is modified in the body of the loop.";
+			break;
 		}
 
 		return msg;
