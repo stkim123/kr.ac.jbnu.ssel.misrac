@@ -31,7 +31,7 @@ public class TestRule18_1 extends AbstractTestRule {
 				System.out.println(violationMessage);
 			}
 
-			assertTrue(violationMsgs.size() == 12);
+			assertTrue(violationMsgs.size() == 16);
 
 		} catch (Exception e) {
 			e.printStackTrace();
