@@ -13,26 +13,24 @@ import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
  * Sample Implementation for testing misra-c rule that has been implemented
  * without executing Eclipse CDT.
  * 
- * @author sangjin
+ * DONE!!
+ * 
+ * @author stkim
  *
  */
-public class TestRule18_1 extends AbstractTestRule {
-	public TestRule18_1() {
-		super("Rule18_1_Req", "TestRule18_1.C");
+public class TestRule02_2 extends AbstractTestRule {
+	public TestRule02_2() {
+		super("Rule02_2_Req", "TestRule02_2.C");
 	}
 
 	@Test
 	public void test() {
 		try {
 			ArrayList<ViolationMessage> violationMsgs = checkRule();
-
+			System.out.println(violationMsgs);
 			System.out.println("size:" + violationMsgs.size());
-			for (ViolationMessage violationMessage : violationMsgs) {
-				System.out.println(violationMessage);
-			}
 
-			assertTrue(violationMsgs.size() == 16);
-
+			assertTrue(violationMsgs.size() == 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -46,6 +46,9 @@ public class MessageFactory {
 		case 1508:
 			msg = "The typedef '%1s' is declared in more than one location.";
 			break;
+		case 3116:
+			msg = "Unrecognized #pragma arguments '%s' This #pragma directive has been ignored.";
+			break;
 		case 3448:
 			msg = "	Declaration of typedef '%s' is not in a header file although it is used in a definition or declaration with external linkage.";
 			break;
@@ -239,7 +242,10 @@ public class MessageFactory {
 			msg = "Using relational or logical operators in a 'switch' expression is usually a programming error.";
 			break;
 		case 2019:
-			msg = "	'Switch' label is located within a nested code block.";
+			msg = "'Switch' label is located within a nested code block.";
+			break;
+		case 3440:
+			msg = "Using the value resulting from a ++ or -- operation.";
 			break;
 		case 3234:
 			msg = "	Declarations precede the first label in this 'switch' construct.";

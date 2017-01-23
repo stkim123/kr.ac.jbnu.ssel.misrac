@@ -1,5 +1,6 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -8,6 +9,7 @@ import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIncludeStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
@@ -35,103 +37,53 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * shall be present with prior initialisation of the loop counter; All three
  * expressions shall be empty for a deliberate infinite loop.
  * 
- * TODO
+ * TODO - The variable incremented in the third expression of this 'for'
+ * statement is not the variable identified as the 'loop control variable' (%s).
+ * 룰이해부족으로 두번째 메세지 violation잡는부분 수정필요
  * 
+ *  
  * @author kang
  */
 
 public class Rule13_5_Req extends AbstractMisraCRule {
 
-    private static final String FOR_ = "for";
-//    private static final String[] VIOLATIONOP = { "++", "--"};
+	public Rule13_5_Req(IASTTranslationUnit ast) {
+		super("Rule13_5_Req", false, ast);
 
-    private boolean isFOR_included = false;
-
-    //OPERATOR Array
-    private HashSet<String> violationOps = new HashSet<String>();
-
-    public Rule13_5_Req(IASTTranslationUnit ast) {
-	super("Rule13_5_Req", false, ast);
-	shouldVisitPreprocessor = true;
-	shouldVisitExpressions = true;
-//	violationOps.addAll(Arrays.asList(VIOLATIONOP));
-    }
-
-    public Rule13_5_Req(String ruleID, boolean visitNodes, IASTTranslationUnit ast) {
-	super(ruleID, visitNodes, ast);
-    }
-
-    @Override
-    protected int visit(IASTForStatement statement) {
-	if (statement.toString().contains(FOR_)) {
-	    isFOR_included = true;
+		shouldVisitStatements = true;
+		shouldVisitExpressions = true;
 	}
-	return super.visit(statement);
-    }
 
-    @Override
-    protected int visit(IASTExpressionStatement statement) {
-	IASTUnaryExpression unaryExp1 = (IASTUnaryExpression) statement.getExpression();
+	public Rule13_5_Req(String ruleID, boolean visitNodes, IASTTranslationUnit ast) {
+		super(ruleID, visitNodes, ast);
+	}
 
-	System.out.println("function name:" + unaryExp1.getOperator());
-	if (isFOR_included == true && violationOps.contains(unaryExp1.getOperator())) {
-	    isViolated = true;
-	    
-	    String message = MessageFactory.getInstance().getMessage(2462);
-	    violationMsgs.add(
-		    new ViolationMessage(this, message + "-- " + unaryExp1.getOperator(), statement));
-	    }
-	
-	return super.visit(statement);
-    }
-    
-    @Override
-    protected int visit(IASTBinaryExpression binaryExp) {
-	 IASTUnaryExpression unaryExp2 = (IASTUnaryExpression) binaryExp.getOperand1();
+	@Override
+	protected int visit(IASTForStatement forStatement) {
+		IASTNode[] forChild = forStatement.getChildren();
 
-		System.out.println("function name:" + unaryExp2.getOperator());
-		if (isFOR_included == true && violationOps.contains(unaryExp2.getOperator())) {
-		    isViolated = true;
-		    
-		    String message = MessageFactory.getInstance().getMessage(2462);
-		    violationMsgs.add(
-			    new ViolationMessage(this, message + "-- " + unaryExp2.getOperator(), binaryExp));
+		for (IASTNode node : forChild[0].getChildren()) {
+			if (node instanceof IASTUnaryExpression) {
+				isViolated = true;
+
+				String msg = MessageFactory.getInstance().getMessage(2462);
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + forChild[0].getRawSignature(),
+						forChild[0]));
+			}
 		}
-		return super.visit(binaryExp);
-    }
-}
 
-//public class Rule13_5_Req extends AbstractMisraCRule {
-//
-//	private static final String FOR = "for";
-//	private static final String[] VIOLATION_OPERATOR = { "++", "--" };
-//
-//    private boolean isFor_included = false;
-//
-//    private HashSet<String> violationOP = new HashSet<String>();
-//
-//
-//	public Rule13_5_Req(IASTTranslationUnit ast) {
-//		super("Rule13_5_Req", false, ast);
-//		shouldVisitDeclarations = true;
-//		shouldVisitStatements = true;
-//	}
-//
-//	protected int visit(IASTSimpleDeclaration declaration) {
-//
-//		String[] splitArray = declaration.getRawSignature().split(";");
-//
-//				
-//		if(UNION.equals(splitArray[0])){
-//			isViolated = true;
-//		
-//			String message1 = MessageFactory.getInstance().getMessage(2462);
-//			violationMsgs.add(new ViolationMessage(this,getRuleID() + ":" + message1 + "-- " +declaration, declaration));
-//			System.out.println("IASTSimpleDeclaration : " + splitArray[0]);	
-//			
-//			String message2 = MessageFactory.getInstance().getMessage(2463);
-//			violationMsgs.add(new ViolationMessage(this,getRuleID() + ":" + message2 + "-- " +declaration, declaration));
-//			System.out.println("IASTSimpleDeclaration : " + splitArray[0]);	
-//			}		
-//		return super.visit(declaration);
-//	}
+		//Third Expression
+		for (IASTNode node : forChild[1].getChildren()) {
+			if (node instanceof IASTUnaryExpression) {
+				isViolated = true;
+
+				String msg = MessageFactory.getInstance().getMessage(2463);
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + forChild[1].getRawSignature(),
+						forChild[1]));
+			}
+		}
+
+		return super.visit(forStatement);
+	}
+
+}
