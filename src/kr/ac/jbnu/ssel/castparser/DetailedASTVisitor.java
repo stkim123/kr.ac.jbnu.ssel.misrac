@@ -62,6 +62,7 @@ import org.eclipse.cdt.core.dom.ast.IASTProblemStatement;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSwitchStatement;
 import org.eclipse.cdt.core.dom.ast.IASTToken;
@@ -213,6 +214,8 @@ public class DetailedASTVisitor extends ASTVisitor {
 			return visit((IASTFieldDeclarator) declarator);
 		} else if (declarator instanceof IASTFunctionDeclarator) {
 			return visit((IASTFunctionDeclarator) declarator);
+		} else if (declarator instanceof IASTStandardFunctionDeclarator) {
+			return visit((IASTStandardFunctionDeclarator) declarator);
 		}
 
 		return super.visit(declarator);
@@ -367,6 +370,10 @@ public class DetailedASTVisitor extends ASTVisitor {
 	}
 
 	protected int visit(IASTFunctionDeclarator declarator) {
+		return ASTVisitor.PROCESS_CONTINUE;
+	}
+	
+	protected int visit(IASTStandardFunctionDeclarator declarator) {
 		return ASTVisitor.PROCESS_CONTINUE;
 	}
 

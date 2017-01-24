@@ -56,6 +56,7 @@ import org.eclipse.cdt.core.dom.ast.IASTProblemStatement;
 import org.eclipse.cdt.core.dom.ast.IASTReturnStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTSwitchStatement;
 import org.eclipse.cdt.core.dom.ast.IASTToken;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
@@ -211,6 +212,11 @@ public class MyDetailedCodeVisitor extends DetailedASTVisitor {
 
 	protected int visit(IASTFunctionDeclarator declarator) {
 		System.out.println("IASTFunctionDeclarator:" + declarator);
+		return ASTVisitor.PROCESS_CONTINUE;
+	}
+	
+	protected int visit(IASTStandardFunctionDeclarator declarator) {
+		System.out.println("IASTStandardFunctionDeclarator:" + declarator);
 		return ASTVisitor.PROCESS_CONTINUE;
 	}
 

@@ -50,7 +50,6 @@ public class Rule20_4_Req extends AbstractMisraCRule
 	{
 		IASTIdExpression functionNameExp = (IASTIdExpression) expression.getFunctionNameExpression();
 
-		System.out.println("function name:" + functionNameExp.getName().toString());
 		if (violationFunctions.contains(functionNameExp.getName().toString()))
 		{
 			isViolated = true;
