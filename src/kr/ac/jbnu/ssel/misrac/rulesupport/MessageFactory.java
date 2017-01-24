@@ -259,6 +259,15 @@ public class MessageFactory {
 		case 3670:
 			msg = "	Recursive call to function containing this call.";
 			break;
+		case 1330:
+			msg ="	The parameter identifiers in this function declaration differ from those in a previous declaration.";
+			break;
+		case 3001:
+			msg = "	Function has been declared with an empty parameter list.";
+			break;
+		case 3007:
+			msg = "	void has been omitted when defining a function with no parameters.";
+			break;
 		}
 
 		return msg;
