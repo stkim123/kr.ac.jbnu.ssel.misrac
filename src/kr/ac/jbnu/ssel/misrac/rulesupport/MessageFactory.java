@@ -268,6 +268,12 @@ public class MessageFactory {
 		case 3007:
 			msg = "	void has been omitted when defining a function with no parameters.";
 			break;
+		case 1335:
+			msg = " Parameter identifiers missing in function prototype declaration.";
+			break;
+		case 1336:
+			msg = "	Parameter identifiers missing in declaration of a function type.";
+			break;
 		}
 
 		return msg;
