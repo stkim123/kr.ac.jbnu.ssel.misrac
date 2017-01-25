@@ -277,6 +277,9 @@ public class MessageFactory {
 		case 1336:
 			msg = "	Parameter identifiers missing in declaration of a function type.";
 			break;
+		case 3307:
+			msg = "The operand of 'sizeof' is an expression with implied side effects, but they will not be evaluated.";
+			break;
 		}
 
 		return msg;
