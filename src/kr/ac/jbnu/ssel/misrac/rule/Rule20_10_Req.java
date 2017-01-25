@@ -57,7 +57,6 @@ public class Rule20_10_Req extends AbstractMisraCRule {
 	protected int visit(IASTFunctionCallExpression expression) {
 		IASTIdExpression functionNameExp = (IASTIdExpression) expression.getFunctionNameExpression();
 
-		System.out.println("function name:" + functionNameExp.getName().toString());
 		if (isSTDLIB_H_included == true && violationFunctions.contains(functionNameExp.getName().toString())) {
 			isViolated = true;
 

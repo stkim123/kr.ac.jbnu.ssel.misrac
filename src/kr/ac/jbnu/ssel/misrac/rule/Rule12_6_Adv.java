@@ -35,7 +35,6 @@ public class Rule12_6_Adv extends AbstractMisraCRule
 	protected int visit(IASTBinaryExpression expression)
 	{
 		int operator = expression.getOperator();
-		System.out.println("operator:"+ operator);
 		if (operator == IASTBinaryExpression.op_binaryAnd 
 				|| operator == IASTBinaryExpression.op_binaryOr
 				|| operator == IASTBinaryExpression.op_binaryAndAssign
@@ -55,7 +54,6 @@ public class Rule12_6_Adv extends AbstractMisraCRule
 	protected int visit(IASTUnaryExpression expression)
 	{
 		int operator = expression.getOperator();
-		System.out.println("operator:"+ operator);
 		if (operator == IASTUnaryExpression.op_not)
 		{
 			isViolated = true;

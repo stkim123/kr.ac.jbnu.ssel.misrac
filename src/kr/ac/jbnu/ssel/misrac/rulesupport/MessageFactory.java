@@ -250,6 +250,33 @@ public class MessageFactory {
 		case 3108:
 			msg = "Nested comments are not recognized in the ISO standard.";
 			break;
+		case 3234:
+			msg = "	Declarations precede the first label in this 'switch' construct.";
+			break;
+		case 2469:
+			msg = "	Loop control variable in this 'for' statement, %s, is modified in the body of the loop.";
+			break;
+		case 1520:
+			msg = "	Functions are indirectly recursive.";
+			break;
+		case 3670:
+			msg = "	Recursive call to function containing this call.";
+			break;
+		case 1330:
+			msg ="	The parameter identifiers in this function declaration differ from those in a previous declaration.";
+			break;
+		case 3001:
+			msg = "	Function has been declared with an empty parameter list.";
+			break;
+		case 3007:
+			msg = "	void has been omitted when defining a function with no parameters.";
+			break;
+		case 1335:
+			msg = " Parameter identifiers missing in function prototype declaration.";
+			break;
+		case 1336:
+			msg = "	Parameter identifiers missing in declaration of a function type.";
+			break;
 		}
 
 		return msg;

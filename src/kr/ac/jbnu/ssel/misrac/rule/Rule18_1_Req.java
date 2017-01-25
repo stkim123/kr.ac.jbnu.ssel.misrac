@@ -34,29 +34,40 @@ public class Rule18_1_Req extends AbstractMisraCRule {
 
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
-		
+
 		boolean isContainTranslation = false;
-		
-		for(IASTNode Decl : simpleDeclaration.getChildren()){
-			if(Decl instanceof ICASTCompositeTypeSpecifier){
+
+		for (IASTNode Decl : simpleDeclaration.getChildren()) {
+			if (Decl instanceof ICASTCompositeTypeSpecifier) {
 				isContainTranslation = true;
 			}
 		}
-		
-		if(!isContainTranslation&&(simpleDeclaration.getRawSignature().startsWith("struct")||simpleDeclaration.getRawSignature().startsWith("union"))){
-			//	[U] The value of an incomplete 'union' may not be used.
-			String message1 = MessageFactory.getInstance().getMessage(544);
-			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + simpleDeclaration,
-					simpleDeclaration));
-			//	[U] The value of an incomplete 'struct' may not be used.
+
+		if (!isContainTranslation && simpleDeclaration.getRawSignature().startsWith("struct")) {
+			// [U] The value of an incomplete 'struct' may not be used.
 			String message2 = MessageFactory.getInstance().getMessage(545);
 			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + simpleDeclaration,
 					simpleDeclaration));
-			//	[U] '%s' has incomplete type and no linkage - this is undefined.
+			// [U] '%s' has incomplete type and no linkage - this is undefined.
 			String message3 = MessageFactory.getInstance().getMessage(623);
 			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + simpleDeclaration,
 					simpleDeclaration));
-			//	[U] There are no named members in this 'struct' or 'union'.
+			// [U] There are no named members in this 'struct' or 'union'.
+			String message4 = MessageFactory.getInstance().getMessage(636);
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message4 + "--" + simpleDeclaration,
+					simpleDeclaration));
+			isViolated = true;
+		}
+		if (!isContainTranslation && simpleDeclaration.getRawSignature().startsWith("union")) {
+			// [U] The value of an incomplete 'union' may not be used.
+			String message1 = MessageFactory.getInstance().getMessage(544);
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + simpleDeclaration,
+					simpleDeclaration));
+			// [U] '%s' has incomplete type and no linkage - this is undefined.
+			String message3 = MessageFactory.getInstance().getMessage(623);
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + simpleDeclaration,
+					simpleDeclaration));
+			// [U] There are no named members in this 'struct' or 'union'.
 			String message4 = MessageFactory.getInstance().getMessage(636);
 			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message4 + "--" + simpleDeclaration,
 					simpleDeclaration));

@@ -1,4 +1,4 @@
-struct tnode * pt;        /* tnode is incomplete at this point */
+estruct tnode * pt;        /* tnode is incomplete at this point */
 
 struct tnode
 {
