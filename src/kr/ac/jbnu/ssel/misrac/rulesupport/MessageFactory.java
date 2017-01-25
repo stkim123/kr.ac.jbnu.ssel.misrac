@@ -247,6 +247,9 @@ public class MessageFactory {
 		case 3440:
 			msg = "Using the value resulting from a ++ or -- operation.";
 			break;
+		case 3108:
+			msg = "Nested comments are not recognized in the ISO standard.";
+			break;
 		}
 
 		return msg;
