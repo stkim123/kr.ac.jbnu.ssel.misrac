@@ -31,17 +31,25 @@ public class Rule02_3_Req extends AbstractMisraCRule{
 	 @Override
 	    protected int visit(IASTComment comment) {
 
-		if (comment.toString().startsWith(COMMENT_Start)&&!(comment.toString().endsWith(COMMENT_End))) {
-		    
-//			Nested comments are not recognized in the ISO standard.
-		    String msg = MessageFactory.getInstance().getMessage(3108);
+		 String commentString =comment.toString(); 
+		if (commentString.startsWith(COMMENT_Start)&&(commentString.endsWith(COMMENT_End))) 
+		{
+			
+			String commentContent = commentString.substring(commentString.indexOf(COMMENT_Start)+ 2, commentString.length()-2); 
+			
+			if( commentContent.indexOf(COMMENT_Start) != -1 || commentContent.indexOf(COMMENT_End) != -1)
+			{
+//				Nested comments are not recognized in the ISO standard.
+			    String msg = MessageFactory.getInstance().getMessage(3108);
 
-		    if (violationMsgs == null) {
-			violationMsgs = new ArrayList<ViolationMessage>();
-		    }
+			    if (violationMsgs == null) {
+				violationMsgs = new ArrayList<ViolationMessage>();
+			    }
 
-		    violationMsgs.add(new ViolationMessage(this, getRuleID() + ":"+ msg + "--" + comment.toString(), comment));
-		    isViolated = true;
+			    violationMsgs.add(new ViolationMessage(this, getRuleID() + ":"+ msg + "--" + comment.toString(), comment));
+			    isViolated = true;
+			}
+		
 		}
 		return super.visit(comment);
 	    }
