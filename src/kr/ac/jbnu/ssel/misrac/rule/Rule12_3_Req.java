@@ -22,7 +22,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.VisitorUtil;
  * as the side effects will not occur. sizeof() shall only be applied to an operand which 
  * is a type or an object. This may include volatile objects. For example:
  * 
- * TODO
+ * [DONE]
+ * 
  * @author stkim
  */
 
