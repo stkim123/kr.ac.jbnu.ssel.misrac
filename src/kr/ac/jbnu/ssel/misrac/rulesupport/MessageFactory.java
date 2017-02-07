@@ -227,13 +227,13 @@ public class MessageFactory {
 			msg = "Logical operators should not be confused with bitwise operators.";
 			break;
 		case 310:
-			msg ="	Casting to different object pointer type.";
+			msg = "	Casting to different object pointer type.";
 			break;
 		case 316:
-			msg ="	[I] Cast from a pointer to void to a pointer to object type.";
+			msg = "	[I] Cast from a pointer to void to a pointer to object type.";
 			break;
 		case 317:
-			msg ="	[I] Implicit conversion from a pointer to void to a pointer to object type.";
+			msg = "	[I] Implicit conversion from a pointer to void to a pointer to object type.";
 			break;
 		case 3315:
 			msg = "This 'switch' statement contains only a single path - it is redundant.";
@@ -263,7 +263,7 @@ public class MessageFactory {
 			msg = "	Recursive call to function containing this call.";
 			break;
 		case 1330:
-			msg ="	The parameter identifiers in this function declaration differ from those in a previous declaration.";
+			msg = "	The parameter identifiers in this function declaration differ from those in a previous declaration.";
 			break;
 		case 3001:
 			msg = "	Function has been declared with an empty parameter list.";
@@ -278,7 +278,10 @@ public class MessageFactory {
 			msg = "	Parameter identifiers missing in declaration of a function type.";
 			break;
 		case 3307:
-			msg = "The operand of 'sizeof' is an expression with implied side effects, but they will not be evaluated.";
+			msg = " The operand of 'sizeof' is an expression with implied side effects, but they will not be evaluated.";
+			break;
+		case 883:
+			msg = "	Include file code is not protected against repeated inclusion";
 			break;
 		}
 
