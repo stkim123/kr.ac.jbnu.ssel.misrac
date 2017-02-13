@@ -92,7 +92,9 @@ public class CASTHandler extends AbstractHandler {
 				File ruleDicFile = new File(fileURL.toURI());
 
 				String[] ruleFiles = ruleDicFile.list();
-
+///////////////////////////
+				
+///////////////////////////
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
 					callRule(ast, ruleClass, violationMessages);
