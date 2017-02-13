@@ -283,6 +283,9 @@ public class MessageFactory {
 		case 883:
 			msg = "	Include file code is not protected against repeated inclusion";
 			break;
+		case 3221:
+			msg = "	Function with external linkage declared at block scope.";
+			break;
 		}
 
 		return msg;
