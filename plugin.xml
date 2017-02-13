@@ -71,6 +71,13 @@
             id="kr.ac.jbnu.ssel.castparser.view.ViolationMessageView"
             name="MISRA-C Rule Check View">
       </view>
+       <view
+            name="Misra-C Table View"
+            icon="icons/Ggobok.gif"
+            category="CASTParser"
+            class="kr.ac.jbnu.ssel.castparser.view.MisraTableView"
+            id="kr.ac.jbnu.ssel.castparser.view.MisraTableView">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -89,6 +96,12 @@
       <contexts
             file="contexts.xml">
       </contexts>
+   </extension>
+     <extension
+         id="kr.ac.jbnu.ssel.castparser.view.MisraPreferencePage"
+         point="org.eclipse.ui.preferencePages">
+         <page name="Misra-C" class = "kr.ac.jbnu.ssel.castparser.view.MisraPreferencePage"
+         id="kr.ac.jbnu.ssel.castparser.view.Preference.Page"/>
    </extension>
 
 </plugin>
