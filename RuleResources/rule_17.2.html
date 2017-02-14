@@ -1,0 +1,139 @@
+<!-- rule_17.2.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 17.2</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_17.1.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;17.2:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_17.3.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Pointer subtraction shall only be applied to pointers that address elements of the same array.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Subtraction of pointers only gives well-defined results if the two pointers point (or at least behave as if they point) into the same array object.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2982, 2984 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+
+<code class="keyword">extern</code> S16 test_1702<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   PC arr[] <code class="operator">&#x3D;</code><code class="string"> "text"</code>;
+   PC <code class="operator">&#x2A;</code>ch   <code class="operator">&#x3D;</code> arr;
+   PC <code class="operator">&#x2A;</code>last <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>arr[ <code class="number">3</code> ];
+
+   S32 a     <code class="operator">&#x3D;</code> <code class="number">1</code>;
+   S32 <code class="operator">&#x2A;</code>p_a1 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>a;
+   S32 <code class="operator">&#x2A;</code>p_a2 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>a;
+
+   <code class="keyword">struct</code>
+   <code class="operator">&#x7B;</code>
+      S32 xx;
+      S32 yy;
+   <code class="operator">&#x7D;</code> b1, b2;
+
+   S32 <code class="operator">&#x2A;</code>p_b1;
+   S32 <code class="operator">&#x2A;</code>p_b2;
+   S16 nch;
+
+   nch <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> last <code class="operator">&#x2D;</code> ch <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> <code class="number">1</code>;
+
+   nch <code class="operator">&#x3D;</code> p_a2 <code class="operator">&#x2D;</code> p_a1;
+
+   p_b1 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>b1.xx;
+   p_b2 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>b1.yy;
+   nch <code class="operator">&#x3D;</code> p_b2 <code class="operator">&#x2D;</code> p_b1;<code class="comment">             &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   p_b1 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>b1.xx;
+   p_b2 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>b2.yy;
+   nch <code class="operator">&#x3D;</code> p_b2 <code class="operator">&#x2D;</code> p_b1;<code class="comment">             &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   <code class="keyword">return</code> nch;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2771.html">2771</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Definite: These pointers address different objects. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2772.html">2772</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Apparent: These pointers address different objects. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_17.3.html">Rule&nbsp;&nbsp;17.3</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> &gt;, &gt;=, &lt;, &lt;= shall not be applied to pointer types except where they point to the same array.</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

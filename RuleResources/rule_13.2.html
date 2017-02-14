@@ -1,0 +1,125 @@
+<!-- rule_13.2.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 13.2</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_13.1.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;13.2:&nbsp;&nbsp;(Advisory)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_13.3.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Tests of a value against zero should be made explicit, unless the operand is effectively Boolean.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Where a data value is to be tested against zero then the test should be made explicit.  The exception to this rule is when data represents a Boolean value, even though in C this will in practice be an integer.  This rule is in the interests of clarity, and makes clear the distinction between integers and logical values.
+<P>
+For example, if x is an integer, then:
+<p><pre class="example">
+<code class="keyword">if</code> <code class="operator">&#x28;</code> x <code class="operator">&#x21;</code><code class="operator">&#x3D;</code> <code class="number">0</code> <code class="operator">&#x29;</code><code class="comment">    &#x2F;&#x2A; Correct way of testing x is non&#x2D;zero &#x2A;&#x2F;</code>
+<code class="keyword">if</code> <code class="operator">&#x28;</code> y <code class="operator">&#x29;</code><code class="comment">         &#x2F;&#x2A; Not compliant, unless y is effectively 
+                    Boolean data &#x28;e.g. a flag&#x29; &#x2A;&#x2F;</code>
+
+</pre><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="3344.html">3344</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Controlling expression is not an 'essentially Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4528.html">4528</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being used as the %2s operand of this logical operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4529.html">4529</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being used as the first operand of this conditional operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4538.html">4538</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially signed' type (%1s) is being used as the %2s operand of this logical operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4539.html">4539</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially signed' type (%1s) is being used as the first operand of this conditional operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4548.html">4548</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-negative constant expression of 'essentially signed' type (%1s) is being used as the %2s operand of this logical operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4549.html">4549</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-negative constant expression of 'essentially signed' type (%1s) is being used as the first operand of this conditional operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4558.html">4558</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being used as the %2s operand of this logical operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4559.html">4559</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being used as the first operand of this conditional operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4568.html">4568</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being used as the %2s operand of this logical operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4569.html">4569</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being used as the first operand of this conditional operator (%2s). </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

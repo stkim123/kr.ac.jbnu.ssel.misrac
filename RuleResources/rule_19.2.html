@@ -1,0 +1,134 @@
+<!-- rule_19.2.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 19.2</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_19.1.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;19.2:&nbsp;&nbsp;(Advisory)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_19.3.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Non-standard characters should not occur in header file names in #include directives.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+If the ', \, ", or /* characters are used between < and > delimiters or the  ', \, or /* characters are used between the " delimiters in a header name preprocessing token, then the behaviour is undefined.  Use of the \ character is permitted in filename paths without the need for a deviation if required by the host operating system of the development environment.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; Permit nested C&#x2D;style comments&#x3A; &#x2A;&#x2F;</code>
+<code class="comment">&#x2F;&#x2A; PRQA S 3108 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="comment">&#x2F;&#x2A; PRQA S 0883 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+<code class="preprocessor">#if 0</code>
+<code class="comment">&#x2F;&#x2A; No header files exist which correspond to
+   the following #include directives.
+   QAC will generate Hard Errors &#x28;Level 9&#x29;
+   if this code block is not excluded      &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> ".\abc.h"</code><code class="comment">                      &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+<code class="preprocessor">#include</code><code class="string"> "John's.h"</code><code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+<code class="preprocessor">#include</code><code class="string"> "Fred.h&#x2F;&#x2A;temporary&#x2A;&#x2F;"</code><code class="comment">          &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+<code class="preprocessor">#include</code><code class="string"> "Money&#x24;.h"</code><code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+<code class="preprocessor">#endif</code>
+
+<code class="keyword">extern</code> S16 test_1902<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   <code class="keyword">return</code> <code class="number">1</code>;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0813.html">0813</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] Using any of the characters ' " or /* in '#include &lt;%s&gt;' gives undefined behaviour. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0814.html">0814</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] Using the characters ' or /* in '#include "%s"' gives undefined behaviour. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0831.html">0831</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [E] Use of '\\' in this '#include' line is a PC extension - this usage is non-portable. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_1.1.html">Rule&nbsp;&nbsp;1.1</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> All code shall conform to ISO/IEC 9899:1990 C programming
+language, ISO 9899, amended and corrected by ISO/IEC 9899/COR1:1995,
+ISO/IEC 9899/AMD1:1995, and ISO/IEC 9899/COR2: 1996192</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_1.2.html">Rule&nbsp;&nbsp;1.2</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> No reliance shall be placed on undefined or unspecified behaviour.</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

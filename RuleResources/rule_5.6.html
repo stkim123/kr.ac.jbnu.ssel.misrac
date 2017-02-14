@@ -1,0 +1,110 @@
+<!-- rule_5.6.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 5.6</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_5.5.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;5.6:&nbsp;&nbsp;(Advisory)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_5.7.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">No identifier in one name space should have the same spelling as an identifier in another name space, with the exception of structure member and union member names.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Name space and scope are different.  This rule is not concerned with scope.  For example, ISO C allows the same identifier (vector) for both a tag and a typedef at the same scope.
+<p><pre class="example">
+<code class="keyword">typedef</code> <code class="keyword">struct</code> vector <code class="operator">&#x7B;</code> uint16_t x ; uint16_t y; uint16_t z; <code class="operator">&#x7D;</code> vector;
+<code class="comment">&#x2F;&#x2A; Rule violation &#x5E;&#x5E;                                             &#x5E;&#x5E; &#x2A;&#x2F;</code>
+
+</pre>
+<P>
+ISO C defines a number of different name spaces (see ISO/IEC 9899:1990 6.1.2.3 [2]).  It is technically possible to use the same name in separate name spaces to represent completely different items.  However this practice is deprecated because of the confusion it can cause, and so names should not be reused, even in separate name spaces.
+<P>
+The example below illustrates a violation of this rule in which value is inadvertently used instead of record.value:
+<p><pre class="example">
+<code class="keyword">struct</code> <code class="operator">&#x7B;</code> int16_t key; int16_t value; <code class="operator">&#x7D;</code> record;
+
+int16_t value;<code class="comment">                &#x2F;&#x2A; Rule violation &#x2D; 2nd use of value &#x2A;&#x2F;</code>
+
+record.key <code class="operator">&#x3D;</code> <code class="number">1</code>;
+value <code class="operator">&#x3D;</code> <code class="number">0</code>;<code class="comment">                    &#x2F;&#x2A; should have been record.value &#x2A;&#x2F;</code>
+
+</pre>
+<P>
+By contrast, the example below does not violate the rule because two member names are less likely to be confused:
+<p><pre class="example">
+<code class="keyword">struct</code> device_q <code class="operator">&#x7B;</code> <code class="keyword">struct</code> device_q <code class="operator">&#x2A;</code>next;<code class="comment">  &#x2F;&#x2A; ... &#x2A;&#x2F;</code> <code class="operator">&#x7D;</code> devices[N_DEVICES];
+<code class="keyword">struct</code> task_q <code class="operator">&#x7B;</code> <code class="keyword">struct</code> task_q <code class="operator">&#x2A;</code>next;<code class="comment">  &#x2F;&#x2A; ... &#x2A;&#x2F;</code> <code class="operator">&#x7D;</code>
+tasks[N_TASKS];
+
+devices[<code class="number">0</code>].next <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>devices[<code class="number">1</code>];
+tasks[<code class="number">0</code>].next   <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>tasks[<code class="number">1</code>];
+
+</pre><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0780.html">0780</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Another identifier '%s' is already in scope in a different namespace. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0781.html">0781</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> '%s' is being used as a structure/union member as well as being a label, tag or ordinary identifier. </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

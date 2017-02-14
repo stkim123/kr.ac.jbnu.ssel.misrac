@@ -1,0 +1,142 @@
+<!-- rule_6.2.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 6.2</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_6.1.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;6.2:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_6.3.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Signed and unsigned char type shall be used only for the storage and use of numeric values.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+There are three distinct char types, (plain) char, signed char and unsigned char. Signed char and unsigned char shall be used for numeric data and plain char shall be used for character data. The signedness of the plain char type is implementation-defined and should not be relied upon.
+<BR>Character values/data are character constants or string literals such as 'A', '5', '\n', "a".
+<BR>Numeric values/data are numbers such as 0, 5, 23, \x10, -3.
+<BR>Character sets map text characters onto numeric values. Character values are the "text".
+<BR>The permissible operators on plain char types are the simple assignment operator (=), equality operators (==, !=) and explicit casts to integral types. Additionally, the second and third operands of the ternary conditional operator may both be of plain char type.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2982,2984,3205 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+<code class="keyword">static</code> S8 test_0602a<code class="operator">&#x28;</code><code class="type">void</code><code class="operator">&#x29;</code>;
+<code class="keyword">static</code> U8 test_0602b<code class="operator">&#x28;</code><code class="type">void</code><code class="operator">&#x29;</code>;
+
+
+<code class="keyword">extern</code> S16 test_0602<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   u8a  <code class="operator">&#x3D;</code> <code class="number">1u</code>;<code class="comment">                  &#x2F;&#x2A; Correct usage of unsigned char for numeric   data &#x2A;&#x2F;</code>
+   s8a  <code class="operator">&#x3D;</code> <code class="number">0</code>;<code class="comment">                   &#x2F;&#x2A; Correct usage of signed   char for numeric   data &#x2A;&#x2F;</code>
+   pca  <code class="operator">&#x3D;</code><code class="string"> 'u'</code>;<code class="comment">                 &#x2F;&#x2A; Correct usage of plain    char for character data &#x2A;&#x2F;</code>
+
+   s8a <code class="operator">&#x3D;</code> pca;<code class="comment">                  &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   u8a <code class="operator">&#x3D;</code> pca;<code class="comment">                  &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   s8a <code class="operator">&#x3D;</code> pca <code class="operator">&#x2B;</code> <code class="number">1</code>;<code class="comment">              &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   u8a <code class="operator">&#x3D;</code> pca <code class="operator">&#x2B;</code> <code class="number">1</code>;<code class="comment">              &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   s8a <code class="operator">&#x3D;</code> test_0602a<code class="operator">&#x28;</code><code class="operator">&#x29;</code>;
+   u8a <code class="operator">&#x3D;</code> test_0602b<code class="operator">&#x28;</code><code class="operator">&#x29;</code>;
+
+   <code class="keyword">return</code> <code class="number">0</code>;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> S8 test_0602a<code class="operator">&#x28;</code><code class="type">void</code><code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    <code class="keyword">return</code> pca;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> U8 test_0602b<code class="operator">&#x28;</code><code class="type">void</code><code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    <code class="keyword">return</code> pca;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4413.html">4413</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4414.html">4414</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_10.1.html">Rule&nbsp;&nbsp;10.1</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> The value of an expression of integer type shall not be implicitly converted to a different underlying type if:
+a)    it is not a conversion to a wider integer type of the same signedness, or
+b)    the expression is complex, or
+c)    the expression is not constant and is a function argument, or
+d)    the expression is not constant and is a return expression</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

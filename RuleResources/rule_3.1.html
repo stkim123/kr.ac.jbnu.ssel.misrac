@@ -1,0 +1,243 @@
+<!-- rule_3.1.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 3.1</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_2.4.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;3.1:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_3.2.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">All usage of implementation-defined behaviour shall be documented.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+This rule requires that any reliance on implementation-defined behaviour, which is not specifically addressed by other rules, shall be documented, for example by reference to compiler documentation.  Where a specific behaviour is explicitly covered in another rule, only that specific rule needs to be deviated if required.  See ISO/IEC 9899:1990 Appendix G [2] for a complete list of these issues.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2983,3203,3205 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+<code class="preprocessor">#include</code><code class="string"> &lt;stdlib.h&gt;</code>
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+<code class="preprocessor">#define MSTR</code><code class="string"> "ABC&#x24;"</code><code class="comment">                             &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+
+<code class="keyword">extern</code> S16 test_0301<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+<code class="comment">   &#x2F;&#x2A; Non portable comment &#x2D; &#x24;&#x24;&#x24; &#x2A;&#x2F;</code><code class="comment">             &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+   <code class="type">wchar_t</code>  wch <code class="operator">&#x3D;</code> L<code class="string">'ab'</code>;<code class="comment">                        &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+   PC bufc[] <code class="operator">&#x3D;</code><code class="string"> "abc&#x24;"</code>;<code class="comment">                          &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+   S16 sra;
+   S16 srb;
+   S16 sia;
+   <code class="keyword">struct</code> x;
+   <code class="keyword">struct</code> x <code class="operator">&#x2A;</code> ptr;
+
+
+   ptr <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code><code class="keyword">struct</code> x<code class="operator">&#x2A;</code><code class="operator">&#x29;</code><code class="operator">&amp;</code>sra;<code class="comment">                       &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+
+
+   <code class="keyword">if</code> <code class="operator">&#x28;</code>s16a <code class="operator">&gt;</code> <code class="number">0x6000</code><code class="operator">&#x29;</code>
+   <code class="operator">&#x7B;</code>
+       s16r <code class="operator">&#x3D;</code> s16a <code class="operator">&lt;</code><code class="operator">&lt;</code> <code class="number">3</code>;<code class="comment">                        &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+   <code class="operator">&#x7D;</code>
+
+   s16b <code class="operator">&#x3D;</code> s16a <code class="operator">&lt;</code><code class="operator">&lt;</code> <code class="number">3</code>;<code class="comment">                            &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+
+   s16c <code class="operator">&#x3D;</code> <code class="number">0x7654</code> <code class="operator">&lt;</code><code class="operator">&lt;</code> <code class="number">3</code>;<code class="comment">                          &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+
+   sia <code class="operator">&#x3D;</code><code class="string"> 'ab'</code>;<code class="comment">                                  &#x2F;&#x2A; Implementation Defined &#x2A;&#x2F;</code>
+
+   <code class="keyword">return</code> <code class="number">0</code>;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0202.html">0202</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] '-' character in '[]' conversion specification is implementation defined. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0284.html">0284</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Multiple character constants have implementation defined values. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0285.html">0285</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Character constant contains character which is not a member of the basic source character set. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0286.html">0286</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] String literal contains character which is not a member of the basic source character set. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0287.html">0287</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Header name contains character which is not a member of the basic source character set. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0288.html">0288</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Source file '%s' has comments containing characters which are not members of the basic source character set. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0289.html">0289</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Source file '%s' has preprocessing tokens containing characters which are not members of the basic source character set. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0292.html">0292</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Source file '%s' has comments containing one of the characters '$', '@' or '`'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0299.html">0299</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Source file '%s' includes #pragma directives containing characters which are not members of the basic source character set. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0303.html">0303</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Cast between a pointer to volatile object and an integral type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0305.html">0305</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Cast between a pointer to function and an integral type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0306.html">0306</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Cast between a pointer to object and an integral type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0308.html">0308</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Non-portable cast involving pointer to an incomplete type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0581.html">0581</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Floating-point constant may be too small to be representable. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0634.html">0634</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [I] Bit-fields in this struct/union have not been declared explicitly as unsigned or signed. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0878.html">0878</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Using wide character or string literals. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2850.html">2850</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Constant: Implicit conversion to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2851.html">2851</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Definite: Implicit conversion to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2852.html">2852</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Apparent: Implicit conversion to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2853.html">2853</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Suspicious: Implicit conversion to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2855.html">2855</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Constant: Casting to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2856.html">2856</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Definite: Casting to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2857.html">2857</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Apparent: Casting to a signed integer type of insufficient size. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2860.html">2860</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Constant: Implementation-defined value resulting from left shift operation on expression of signed type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2861.html">2861</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Definite: Implementation-defined value resulting from left shift operation on expression of signed type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2862.html">2862</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Apparent: Implementation-defined value resulting from left shift operation on expression of signed type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2890.html">2890</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Constant: Negative value implicitly converted to an unsigned type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2895.html">2895</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Constant: Negative value cast to an unsigned type. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_6.4.html">Rule&nbsp;&nbsp;6.4</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> Bit fields shall only be defined to be of type unsigned int or signed int.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_11.3.html">Rule&nbsp;&nbsp;11.3</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> A cast should not be performed between a pointer type and an integral type.</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

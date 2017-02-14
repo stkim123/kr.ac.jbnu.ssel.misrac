@@ -1,0 +1,96 @@
+<!-- rule_3.5.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 3.5</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_3.4.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;3.5:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_3.6.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">If it is being relied upon, the implementation-defined behaviour and packing of bitfields shall be documented.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+This is a particular problem where bit fields are used because of the poorly defined aspects of bit fields described under Rules <!--RNAME[6.4]--> and <!--RNAME[6.5]-->.  The 'bit field' facility in C is one of the most poorly defined parts of the language.  There are two main uses to which bit fields could be put:
+<P>
+1.  To access the individual bits, or groups of bits, in larger data types (in conjunction with unions).  This use is not permitted (see Rule <!--RNAME[18.4]-->).
+<P>
+2.  To allow flags or other short-length data to be packed to save storage space.
+<P>
+The packing together of short-length data to economise on storage is the only acceptable use of bit fields envisaged in this standard.  Provided the elements of the structure are only ever accessed by their name, the programmer needs to make no assumptions about the way that the bit fields are stored within the structure.
+<P>
+It is recommended that structures be declared specifically to hold the sets of bit fields, and do not include any other data within the same structure.  Note that Guideline <!--RNAME[6.3]--> need not be followed in defining bit-fields, since their lengths are specified in the structure.
+<P>
+If the compiler has a switch to force bit fields to follow a particular layout then this could assist in such a justification.
+<P>
+For example the following is acceptable:
+<p><pre class="example">
+<code class="keyword">struct</code> message<code class="comment">                &#x2F;&#x2A; Struct is for bit&#x2D;fields only &#x2A;&#x2F;</code>
+<code class="operator">&#x7B;</code>
+    <code class="type">signed</code>   <code class="type">int</code>  little<code class="operator">&#x3A;</code> <code class="number">4</code>;<code class="comment">  &#x2F;&#x2A; Note&#x3A; use of basic types is required &#x2A;&#x2F;</code>
+    <code class="type">unsigned</code> <code class="type">int</code>  x_set<code class="operator">&#x3A;</code>  <code class="number">1</code>;
+    <code class="type">unsigned</code> <code class="type">int</code>  y_set<code class="operator">&#x3A;</code>  <code class="number">1</code>;
+<code class="operator">&#x7D;</code> message_chunk;
+
+</pre>
+If using bit fields, be aware of the potential pitfalls and areas of implementation-defined (i.e. non-portable) behaviour.  In particular the programmer should be aware of the following:
+<P>
+* The alignment of the bit fields in the storage unit is implementation-defined, that is whether they are allocated from the high end or low end of the storage unit (usually a byte).
+<P>
+* Whether or not a bit field can overlap a storage unit boundary is also implementation-defined (e.g. if a 6-bit field and a 4-bit field are declared in that order, whether the 4 bit field will start a new byte or whether it will be 2 bits in one byte and 2 bits in the next).<P><HR><P><B>No QAC messages cover this rule.
+</B><P>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>
