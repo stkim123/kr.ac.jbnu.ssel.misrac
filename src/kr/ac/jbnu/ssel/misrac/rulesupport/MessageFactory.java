@@ -297,6 +297,12 @@ public class MessageFactory {
 		case 3218:
 			msg = "File scope static, '%s', is only accessed in one function.";
 			break;
+		case 2003:
+			msg = "	The preceding 'switch' clause is not empty and does not end with a 'jump' statement. Execution will fall through.";
+			break;
+		case 2020:
+			msg = "	Final 'switch' clause does not end with an explicit 'jump' statement.";
+			break;
 		}
 
 		return msg;
