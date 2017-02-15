@@ -18,7 +18,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             commandId="CASTParser.commands.sampleCommand"
-            class="kr.ac.jbnu.ssel.misrac.handlers.CASTHandler">
+            class="kr.ac.jbnu.ssel.misrac.ui.handlers.CASTHandler">
       </handler>
    </extension>
    <extension
@@ -98,10 +98,10 @@
       </contexts>
    </extension>
      <extension
-         id="kr.ac.jbnu.ssel.castparser.view.MisraPreferencePage"
+         id="kr.ac.jbnu.ssel.misrac.ui.MisraPreferencePage"
          point="org.eclipse.ui.preferencePages">
-         <page name="Misra-C" class = "kr.ac.jbnu.ssel.castparser.view.MisraPreferencePage"
-         id="kr.ac.jbnu.ssel.castparser.view.Preference.Page"/>
+         <page name="Misra-C" class = "kr.ac.jbnu.ssel.misrac.ui.MisraPreferencePage"
+         id="kr.ac.jbnu.ssel.misrac.ui.MisraPreferencePage"/>
    </extension>
 
 </plugin>
