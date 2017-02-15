@@ -18,7 +18,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             commandId="CASTParser.commands.sampleCommand"
-            class="kr.ac.jbnu.ssel.castparser.handlers.CASTHandler">
+            class="kr.ac.jbnu.ssel.misrac.handlers.CASTHandler">
       </handler>
    </extension>
    <extension
