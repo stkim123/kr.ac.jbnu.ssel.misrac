@@ -286,6 +286,12 @@ public class MessageFactory {
 		case 3221:
 			msg = "	Function with external linkage declared at block scope.";
 			break;
+		case 1514:
+			msg = "The object '%1s' is only referenced by function '%2s', in the translation unit where it is defined";
+			break;
+		case 3218:
+			msg = "File scope static, '%s', is only accessed in one function.";
+			break;
 		}
 
 		return msg;
