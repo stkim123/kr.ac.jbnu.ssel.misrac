@@ -105,7 +105,12 @@ public class MessageFactory {
 		case 0770:
 			msg = "A 'continue' statement has been used.";
 			break;
-
+		case 2002:
+			msg = "No 'default' label found in this 'switch' statement.";
+			break;
+		case 2009:
+			msg = "This 'default' label is not the final 'case' label within the 'switch' block.";
+			break;
 		case 2212:
 			msg = "Body of control statement is not enclosed within braces.";
 			break;
