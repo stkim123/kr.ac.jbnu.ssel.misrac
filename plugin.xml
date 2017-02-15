@@ -98,10 +98,10 @@
       </contexts>
    </extension>
      <extension
-         id="kr.ac.jbnu.ssel.misrac.ui.MisraPreferencePage"
+         id="kr.ac.jbnu.ssel.misrac.ui.preference.MisraPreferencePage"
          point="org.eclipse.ui.preferencePages">
-         <page name="Misra-C" class = "kr.ac.jbnu.ssel.misrac.ui.MisraPreferencePage"
-         id="kr.ac.jbnu.ssel.misrac.ui.MisraPreferencePage"/>
+         <page name="Misra-C" class = "kr.ac.jbnu.ssel.misrac.ui.perference.MisraPreferencePage"
+         id="kr.ac.jbnu.ssel.misrac.ui.perference.MisraPreferencePage"/>
    </extension>
 
 </plugin>

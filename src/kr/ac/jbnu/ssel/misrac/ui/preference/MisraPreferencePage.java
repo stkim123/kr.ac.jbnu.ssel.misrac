@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.misrac.ui;
+package kr.ac.jbnu.ssel.misrac.ui.preference;
 
 import java.awt.Button;
 import java.io.File;
@@ -11,11 +11,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.w3c.dom.Element;
-
-import kr.ac.jbnu.ssel.castparser.preference.Rule;
-import kr.ac.jbnu.ssel.castparser.preference.Rules;
-import kr.ac.jbnu.ssel.castparser.viewHandler.MisraUIdataHandler;
-
 import org.eclipse.cdt.core.templateengine.TemplateEngineHelper;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
