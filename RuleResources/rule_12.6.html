@@ -1,0 +1,179 @@
+<!-- rule_12.6.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 12.6</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_12.5.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;12.6:&nbsp;&nbsp;(Advisory)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_12.7.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">The operands of logical operators (&&, || and !) should be effectively Boolean.  Expressions that are effectively Boolean should not be used as operands to operators other than (&&, ||, !, =, ==, != and ?:).</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+The logical operators &&, || and ! can be easily confused with the bitwise operators &, | and ~. See 'Boolean expressions' in the glossary.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2982 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+<code class="keyword">extern</code> S16 test_1206<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   s16r <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&lt;</code> s16b <code class="operator">&#x29;</code> <code class="operator">&amp;</code>  <code class="operator">&#x28;</code> s16c <code class="operator">&gt;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   s16r <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&lt;</code> s16b <code class="operator">&#x29;</code> <code class="operator">&#x7C;</code>  <code class="operator">&#x28;</code> s16c <code class="operator">&gt;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   s16r <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&gt;</code> s16d<code class="operator">&#x29;</code> <code class="operator">&#x2A;</code> <code class="operator">&#x28;</code>s16a <code class="operator">&lt;</code> s16b<code class="operator">&#x29;</code>;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   s16r <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&gt;</code> s16d<code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> s16b;<code class="comment">                             &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   s16r <code class="operator">&#x3D;</code> s16r <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code>s16c <code class="operator">&gt;</code> s16d<code class="operator">&#x29;</code>;<code class="comment">                              &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&#x2B;</code> s16b <code class="operator">&#x29;</code> <code class="operator">&amp;</code><code class="operator">&amp;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&#x2B;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&#x2B;</code> s16b <code class="operator">&#x29;</code> <code class="operator">&#x7C;</code><code class="operator">&#x7C;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&#x2B;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&#x2B;</code> s16b <code class="operator">&#x29;</code> <code class="operator">&amp;</code><code class="operator">&amp;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&gt;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&gt;</code> s16b <code class="operator">&#x29;</code> <code class="operator">&amp;</code><code class="operator">&amp;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&#x2B;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x21;</code> <code class="operator">&#x28;</code> s16a <code class="operator">&#x2B;</code> s16b <code class="operator">&#x29;</code>;<code class="comment">                                 &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>s16a <code class="operator">&#x2B;</code> s16b<code class="operator">&#x29;</code> <code class="operator">&gt;</code> <code class="operator">&#x28;</code>s16c <code class="operator">&gt;</code> s16d<code class="operator">&#x29;</code>;<code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>s16a <code class="operator">&gt;</code> s16b<code class="operator">&#x29;</code> <code class="operator">&gt;</code> <code class="operator">&#x28;</code>s16c <code class="operator">&#x2B;</code> s16d<code class="operator">&#x29;</code>;<code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>s16a <code class="operator">&gt;</code> s16b<code class="operator">&#x29;</code> <code class="operator">&gt;</code> <code class="operator">&#x28;</code>s16c <code class="operator">&gt;</code> s16d<code class="operator">&#x29;</code>;<code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   s16r <code class="operator">&#x3D;</code> ~<code class="operator">&#x28;</code>s16a <code class="operator">&gt;</code> s16b<code class="operator">&#x29;</code>;<code class="comment">                                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> s16a <code class="operator">&amp;</code><code class="operator">&amp;</code> <code class="operator">&#x28;</code> s16c <code class="operator">&lt;</code> s16d <code class="operator">&#x29;</code>;<code class="comment">                           &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   bla  <code class="operator">&#x3D;</code> <code class="operator">&#x21;</code>s16a;<code class="comment">                                             &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   <code class="keyword">return</code> s16r;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="3322.html">3322</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Operand of a logical ! operator is a constant expression which is not a 'Boolean' value. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="3377.html">3377</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Operand of a logical && or || operator is a constant expression which is not a 'Boolean' value. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4101.html">4101</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Both operands of & operator are 'Boolean' expressions. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4102.html">4102</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Both operands of | operator are 'Boolean' expressions. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4103.html">4103</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Both operands of arithmetic or bitwise operator are 'Boolean' expressions. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4104.html">4104</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Left hand operand of arithmetic or bitwise operator is a 'Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4105.html">4105</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Right hand operand of arithmetic or bitwise operator is a 'Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4106.html">4106</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Both operands of && operator are arithmetic or bitwise expressions. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4107.html">4107</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Both operands of || operator are arithmetic or bitwise expressions. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4108.html">4108</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Left hand operand of logical operator is an arithmetic or bitwise expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4109.html">4109</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Right hand operand of logical operator is an arithmetic or bitwise expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4110.html">4110</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Operand of ! operator is an arithmetic or bitwise expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4111.html">4111</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Right hand operand of relational operator is a 'Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4112.html">4112</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Left hand operand of relational operator is a 'Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4113.html">4113</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Both operands of relational operator are 'Boolean' expressions. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4114.html">4114</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Operand of ~ operator is a 'Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4115.html">4115</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Operand of logical && or || operator is not an 'essentially Boolean' expression. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4116.html">4116</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Operand of logical ! operator is not an 'essentially Boolean' expression. </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

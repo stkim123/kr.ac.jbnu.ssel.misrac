@@ -1,0 +1,133 @@
+<!-- rule_5.1.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 5.1</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_4.2.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;5.1:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_5.2.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Identifiers (internal and external) shall not rely on the significance of more than 31 characters.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+The ISO standard requires internal identifiers to be distinct in the first 31 characters to guarantee code portability.  This limitation shall not be exceeded, even if the compiler supports it.  This rule shall apply across all name spaces.  Macro names are also included and the 31 character limit applies before and after substitution.
+<P>
+The ISO standard requires external identifiers to be distinct in the first 6 characters, regardless of case, to guarantee optimal portability.  However this limitation is particularly severe and is considered unnecessary.  The intent of this rule is to sanction a relaxation of the ISO requirement to a degree commensurate with modern environments and it shall be confirmed that 31 character/case significance is supported by the implementation.
+<P>
+Note that there is a related issue with using identifier names that differ by only one or a few characters, especially if the identifier names are long.  The problem is heightened if the differences are in easily mis-read characters like 1 (one) and l (lower case L), 0 and O, 2 and Z, 5 and S, or n and h.  It is recommended to ensure that identifier names are always easily visually distinguishable.  Specific guidelines on this issue could be placed in the style guidelines.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2985,3210, 3408, 3447 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+<code class="keyword">extern</code> <code class="type">void</code> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>;<code class="comment"> &#x2F;&#x2A; 31 a's  &#x2A;&#x2F;</code>
+<code class="keyword">extern</code> <code class="type">void</code> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa2<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>;<code class="comment"> &#x2F;&#x2A; also 31 a's &#x2D; MISRA Violation &#x2A;&#x2F;</code>
+
+<code class="keyword">extern</code> S16 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb1;<code class="comment">          &#x2F;&#x2A; 31 b's &#x2A;&#x2F;</code>
+<code class="keyword">extern</code> S16 bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb2;<code class="comment">          &#x2F;&#x2A; also 31 b's &#x2D; MISRA Violation &#x2A;&#x2F;</code>
+
+<code class="keyword">extern</code> S16 cccccccccccccccccccccccccccccc1;<code class="comment">           &#x2F;&#x2A; 30 c's &#x2A;&#x2F;</code>
+<code class="keyword">extern</code> S16 cccccccccccccccccccccccccccccc2;<code class="comment">           &#x2F;&#x2A; also 30 c's &#x2D; OK &#x2A;&#x2F;</code>
+
+<code class="keyword">extern</code> S16 test_0501<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   S16 r;
+
+   S16 ddddddddddddddddddddddddddddddd1 <code class="operator">&#x3D;</code> <code class="number">1</code>;<code class="comment">          &#x2F;&#x2A; 31 d's &#x2A;&#x2F;</code>
+   S16 ddddddddddddddddddddddddddddddd2 <code class="operator">&#x3D;</code> <code class="number">1</code>;<code class="comment">          &#x2F;&#x2A; also 31 d's &#x2D; MISRA Violation &#x2A;&#x2F;</code>
+
+   r <code class="operator">&#x3D;</code> bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb1 <code class="operator">&#x2B;</code>
+       bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb2 <code class="operator">&#x2B;</code>
+       cccccccccccccccccccccccccccccc1  <code class="operator">&#x2B;</code>
+       cccccccccccccccccccccccccccccc2  <code class="operator">&#x2B;</code>
+       ddddddddddddddddddddddddddddddd1 <code class="operator">&#x2B;</code>
+       ddddddddddddddddddddddddddddddd2;
+
+   <code class="keyword">return</code> r;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0777.html">0777</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] External identifier does not differ from other identifier(s) (e.g. '%s') within the specified number of significant characters. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0779.html">0779</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] Identifier does not differ from other identifier(s) (e.g. '%s') within the specified number of significant characters. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_1.2.html">Rule&nbsp;&nbsp;1.2</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> No reliance shall be placed on undefined or unspecified behaviour.</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

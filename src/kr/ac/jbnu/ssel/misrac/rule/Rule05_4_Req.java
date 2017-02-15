@@ -1,7 +1,5 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.HashSet;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
@@ -24,8 +22,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
  * structure type specifiers, or all uses should be in union type specifiers,
  * For example:
  * 
- * TODO : parameta¸¦ ±¸ºÐÇÒ ¼ö ÀÖ´Â°¡ ex) 0Àº int ÀÎ°¡ doubleÀÎ°¡
- * TODO : »ý°¢º¸´Ù º¹ÀâÇØ¼­ ¹Ì·ïµÒ.
+ * TODO : parametaï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â°ï¿½ ex) 0ï¿½ï¿½ int ï¿½Î°ï¿½ doubleï¿½Î°ï¿½
+ * TODO : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ì·ï¿½ï¿½.
  * 
  * @author sangjin
  *

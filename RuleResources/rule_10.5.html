@@ -1,0 +1,129 @@
+<!-- rule_10.5.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 10.5</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_10.4.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;10.5:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_10.6.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">If the bitwise operators ~ and &lt;&lt; are applied to an operand of underlying type unsigned char or unsigned short, the result shall be immediately cast to the underlying type of the operand.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+When these operators (~ and <<) are applied to small integer types (unsigned char or unsigned short), the operations are preceded by integral promotion, and the result may contain high order bits which have not been anticipated.  For example:
+<p><pre class="example">
+uint8_t port <code class="operator">&#x3D;</code> <code class="number">0x5</code>aU;
+uint8_t result_8;
+uint16_t result_16;
+uint16_t mode;
+
+result_8 <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> ~port <code class="operator">&#x29;</code> <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">4</code>;<code class="comment">                           &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+
+</pre>
+<P>
+~port is 0xffa5 on a 16-bit machine but 0xffffffa5 on a 32-bit machine.  In either case the value of result is 0xfa, but 0x0a may have been expected.  This danger is avoided by inclusion of the cast as shown below:
+<p><pre class="example">
+result_8 <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> <code class="operator">&#x28;</code> uint8_t <code class="operator">&#x29;</code><code class="operator">&#x28;</code> ~port <code class="operator">&#x29;</code> <code class="operator">&#x29;</code> <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">4</code>;<code class="comment">                &#x2F;&#x2A; compliant &#x2A;&#x2F;</code>
+result_16 <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> <code class="operator">&#x28;</code> uint16_t <code class="operator">&#x29;</code><code class="operator">&#x28;</code> ~<code class="operator">&#x28;</code> uint16_t <code class="operator">&#x29;</code>port <code class="operator">&#x29;</code> <code class="operator">&#x29;</code> <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">4</code>;<code class="comment">  &#x2F;&#x2A; compliant &#x2A;&#x2F;</code>
+
+</pre>
+<P>
+A similar problem exists when the << operator is used on small integer types and high order bits are retained.  For example:
+<p><pre class="example">
+result_16 <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> <code class="operator">&#x28;</code> port <code class="operator">&lt;</code><code class="operator">&lt;</code> <code class="number">4</code> <code class="operator">&#x29;</code> <code class="operator">&amp;</code> mode <code class="operator">&#x29;</code> <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">6</code>;<code class="comment">           &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+
+</pre>
+<P>
+The value in result_16 will depend on the implemented size of an int.  Addition of a cast avoids any ambiguity.
+<p><pre class="example">
+result_16 <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> <code class="operator">&#x28;</code> uint16_t <code class="operator">&#x29;</code><code class="operator">&#x28;</code> <code class="operator">&#x28;</code> uint16_t <code class="operator">&#x29;</code>port <code class="operator">&lt;</code><code class="operator">&lt;</code> <code class="number">4</code> <code class="operator">&#x29;</code> <code class="operator">&amp;</code> mode <code class="operator">&#x29;</code> <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">6</code>;
+<code class="comment">                                                     &#x2F;&#x2A; compliant &#x2A;&#x2F;</code>
+
+</pre>
+<P>
+No cast is required if the result of the bitwise operation is:
+<OL TYPE="a">
+<LI>immediately assigned to an object of the same underlying type as the operand;</LI>
+<LI>used as a function argument of the same underlying type as the operand;</LI>
+<LI>used as a return expression of a function whose return type is of the same underlying type as the operand.</LI>
+</OL><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4397.html">4397</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression which is the result of a ~ or &lt;&lt; operation has not been cast to its essential type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4398.html">4398</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression which is the result of a ~ or &lt;&lt; operation has been cast to a different essential type category. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4399.html">4399</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression which is the result of a ~ or &lt;&lt; operation has been cast to a wider type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4498.html">4498</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression which is the result of a ~ or &lt;&lt; operation has been converted to a different essential type category on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4499.html">4499</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression which is the result of a ~ or &lt;&lt; operation has been converted to a wider essential type on assignment. </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

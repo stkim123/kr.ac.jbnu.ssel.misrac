@@ -1,0 +1,269 @@
+<!-- rule_6.1.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 6.1</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_5.7.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;6.1:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_6.2.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">The plain char type shall be used only for the storage and use of character values.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+There are three distinct char types, (plain) char, signed char and unsigned char. signed char and unsigned char shall be used for numeric data and plain char shall be used for character data. The signedness of the plain char type is implementation-defined and should not be relied upon.
+<P>
+The only permissible operators on plain char types are assignment and equality operators ( =, ==, != ).<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2982,3112,3197,3203,3205,3206 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+<code class="keyword">static</code> <code class="type">void</code> test_0601a<code class="operator">&#x28;</code>PC <code class="operator">&#x2A;</code>p<code class="operator">&#x29;</code>;
+<code class="keyword">static</code> PC test_0601b<code class="operator">&#x28;</code><code class="type">void</code><code class="operator">&#x29;</code>;
+
+<code class="keyword">enum</code> E <code class="operator">&#x7B;</code>ONE, TWO<code class="operator">&#x7D;</code>;
+
+<code class="keyword">extern</code> S16 test_0601<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   PC  c[] <code class="operator">&#x3D;</code><code class="string"> "string"</code>;<code class="comment">            &#x2F;&#x2A; Correct usage of char for character &#x2A;&#x2F;</code>
+
+   pcr <code class="operator">&#x3D;</code> test_0601b<code class="operator">&#x28;</code><code class="operator">&#x29;</code>;
+
+   pcr <code class="operator">&#x3D;</code> u8a;<code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> s8a;<code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> s16a;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> u16a;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> s32a;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> u32a;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   pcr <code class="operator">&#x3D;</code> pca <code class="operator">&#x2B;</code> pcb;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> s8a <code class="operator">&#x2D;</code> pca;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> u8a <code class="operator">&#x2D;</code> pca;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   f32r <code class="operator">&#x3D;</code> f32a <code class="operator">&#x2D;</code> pca;<code class="comment">             &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   f32r <code class="operator">&#x3D;</code> f32a <code class="operator">&#x2B;</code> pca;<code class="comment">             &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   pcr <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>s8a <code class="operator">&#x21;</code><code class="operator">&#x3D;</code> <code class="number">0</code><code class="operator">&#x29;</code>;<code class="comment">              &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>s8a <code class="operator">&lt;</code> <code class="number">0</code><code class="operator">&#x29;</code>;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   <code class="operator">&#x7B;</code>
+      <code class="keyword">enum</code> E e <code class="operator">&#x3D;</code> ONE;
+      pcr <code class="operator">&#x3D;</code> e;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      pcr <code class="operator">&#x3D;</code> TWO;<code class="comment">                  &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   <code class="operator">&#x7D;</code>
+
+   pcr <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>f32a <code class="operator">&#x21;</code><code class="operator">&#x3D;</code> <code class="number">0.f</code><code class="operator">&#x29;</code>;<code class="comment">           &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code>f32a <code class="operator">&lt;</code> <code class="number">0.f</code><code class="operator">&#x29;</code>;<code class="comment">            &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   pcr <code class="operator">&#x3D;</code> f32a;<code class="comment">                    &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pca <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code><code class="number">1.0f</code> <code class="operator">&#x2F;</code> <code class="number">3.0f</code><code class="operator">&#x29;</code>;<code class="comment">           &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   <code class="operator">&#x7B;</code>
+      S16 asi[<code class="number">10</code>];
+      asi[pca] <code class="operator">&#x3D;</code> <code class="number">0</code>;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      pca[asi] <code class="operator">&#x3D;</code> <code class="number">0</code>;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   <code class="operator">&#x7D;</code>
+
+   <code class="operator">&#x7B;</code>
+      pca <code class="operator">&#x2B;</code> pcb;<code class="comment">   &#x2F;&#x2A; OK&#x3A; essential type of result is char &#x2A;&#x2F;</code>
+      pca <code class="operator">&#x2D;</code> pcb;<code class="comment">   &#x2F;&#x2A; OK&#x3A; essential type of result is char &#x2A;&#x2F;</code>
+      pca <code class="operator">&#x2D;</code><code class="string"> '0'</code>;<code class="comment">   &#x2F;&#x2A; OK&#x3A; essential type of result is int &#x2A;&#x2F;</code>
+      
+      pca <code class="operator">&#x2A;</code> pcb;<code class="comment">                  &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      <code class="operator">&#x2B;</code>pca;<code class="comment">                       &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      <code class="operator">&#x2B;</code><code class="operator">&#x2B;</code>pca;<code class="comment">                      &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   <code class="operator">&#x7D;</code>
+
+   <code class="operator">&#x7B;</code>
+      pca <code class="operator">&amp;</code> <code class="number">1u</code>;<code class="comment">                   &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      pca <code class="operator">&#x7C;</code> <code class="number">1u</code>;<code class="comment">                   &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      ~pca;<code class="comment">                       &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      pca <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">1u</code>;<code class="comment">                  &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      <code class="number">1u</code> <code class="operator">&lt;</code><code class="operator">&lt;</code> pca;<code class="comment">                  &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   <code class="operator">&#x7D;</code>
+
+   <code class="operator">&#x7B;</code>
+      pca <code class="operator">&amp;</code><code class="operator">&amp;</code> pcb;<code class="comment">                 &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+      pca <code class="operator">&#x7C;</code><code class="operator">&#x7C;</code> <code class="operator">&#x21;</code> pca;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   <code class="operator">&#x7D;</code>
+
+   s16r <code class="operator">&#x3D;</code> pca <code class="operator">&#x3F;</code> <code class="number">0</code> <code class="operator">&#x3A;</code> <code class="number">1</code>;<code class="comment">            &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   pcr <code class="operator">&#x3D;</code> u8a <code class="operator">&#x2B;</code> u8b;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> s8a <code class="operator">&#x2B;</code> s8b;<code class="comment">               &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+   pcr <code class="operator">&#x3D;</code> <code class="number">65</code>;<code class="comment">                      &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> <code class="number">65U</code>;<code class="comment">                     &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+   pcr <code class="operator">&#x3D;</code> <code class="number">3.14</code>F;<code class="comment">                   &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+
+
+   test_0601a<code class="operator">&#x28;</code>c<code class="operator">&#x29;</code>;
+
+   <code class="keyword">return</code> <code class="number">0</code>;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> <code class="type">void</code> test_0601a<code class="operator">&#x28;</code>PC <code class="operator">&#x2A;</code>p<code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> PC test_0601b<code class="operator">&#x28;</code><code class="type">void</code><code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    <code class="keyword">switch</code> <code class="operator">&#x28;</code>s8a<code class="operator">&#x29;</code>
+    <code class="operator">&#x7B;</code>
+    <code class="keyword">case</code> <code class="number">1</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code>u8a<code class="operator">&#x29;</code>;<code class="comment">          &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+    <code class="keyword">case</code> <code class="number">2</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code>s8a<code class="operator">&#x29;</code>;<code class="comment">          &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+    <code class="keyword">case</code> <code class="number">3</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code>s16a<code class="operator">&#x29;</code>;<code class="comment">         &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+    <code class="keyword">case</code> <code class="number">4</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code>u16a<code class="operator">&#x29;</code>;<code class="comment">         &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+    <code class="keyword">case</code> <code class="number">5</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code>s32a<code class="operator">&#x29;</code>;<code class="comment">         &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+    <code class="keyword">case</code> <code class="number">6</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code>u32a<code class="operator">&#x29;</code>;<code class="comment">         &#x2F;&#x2A; MISRA Violation &#x2A;&#x2F;</code>
+    <code class="keyword">default</code><code class="operator">&#x3A;</code> <code class="keyword">return</code><code class="operator">&#x28;</code><code class="string">'\0'</code><code class="operator">&#x29;</code>;
+    <code class="operator">&#x7D;</code>
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1810.html">1810</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being added to another operand of 'essentially character' type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1811.html">1811</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being subtracted from an operand of 'essentially signed' type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1812.html">1812</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being subtracted from an operand of 'essentially unsigned' type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1813.html">1813</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being balanced with an operand of 'essentially floating' type in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4401.html">4401</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4421.html">4421</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4431.html">4431</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially signed' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4441.html">4441</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4451.html">4451</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4510.html">4510</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as an array subscript. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4511.html">4511</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the %2s operand of this arithmetic operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4512.html">4512</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the %2s operand of this bitwise operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4513.html">4513</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the left-hand operand of this shift operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4514.html">4514</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the right-hand operand of this shift operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4517.html">4517</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the operand of this increment/decrement operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4518.html">4518</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the %2s operand of this logical operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4519.html">4519</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being used as the first operand of this conditional operator (%2s). </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_10.1.html">Rule&nbsp;&nbsp;10.1</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> The value of an expression of integer type shall not be implicitly converted to a different underlying type if:
+a)    it is not a conversion to a wider integer type of the same signedness, or
+b)    the expression is complex, or
+c)    the expression is not constant and is a function argument, or
+d)    the expression is not constant and is a return expression</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

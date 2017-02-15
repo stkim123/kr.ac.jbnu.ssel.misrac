@@ -1,0 +1,98 @@
+<!-- rule_6.3.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 6.3</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_6.2.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;6.3:&nbsp;&nbsp;(Advisory)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_6.4.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Typedefs that indicate size and signedness should be used in place of the basic numerical types.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+The basic numerical types of signed and unsigned variants of char, int, short, long, and float, double should not be used, but specific-length typedefs should be used. Rule <!--RNAME[6.3]--> helps to clarify the size of the storage, but does not guarantee portability because of the asymmetric behaviour of integral promotion. See discussion of integral promotion - section 6.10. It is still important to understand the integer size of the implementation.
+<P>
+Programmers should be aware of the actual implementation of the typedefs under these definitions.
+<P>
+For example, the ISO (POSIX) typedefs as shown below are recommended and are used for all basic numerical and character types in this standard.  For a 32-bit integer machine, these are as follows:
+<p><pre class="example">
+<code class="keyword">typedef</code>          <code class="type">char</code>   char_t;
+<code class="keyword">typedef</code> <code class="type">signed</code>   <code class="type">char</code>   int8_t;
+<code class="keyword">typedef</code> <code class="type">signed</code>   <code class="type">short</code>  int16_t;
+<code class="keyword">typedef</code> <code class="type">signed</code>   <code class="type">int</code>    int32_t;
+<code class="keyword">typedef</code> <code class="type">signed</code>   <code class="type">long</code>   int64_t;
+<code class="keyword">typedef</code> <code class="type">unsigned</code> <code class="type">char</code>   uint8_t;
+<code class="keyword">typedef</code> <code class="type">unsigned</code> <code class="type">short</code>  uint16_t;
+<code class="keyword">typedef</code> <code class="type">unsigned</code> <code class="type">int</code>    uint32_t;
+<code class="keyword">typedef</code> <code class="type">unsigned</code> <code class="type">long</code>   uint64_t;
+<code class="keyword">typedef</code>          <code class="type">float</code>  float32_t;
+<code class="keyword">typedef</code>          <code class="type">double</code> float64_t;
+<code class="keyword">typedef</code> <code class="type">long</code>     <code class="type">double</code> float128_t;
+
+</pre>
+<P>
+typedefs are not considered necessary in the specification of bit-field types.<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="5013.html">5013</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Use of basic type '%s'. </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

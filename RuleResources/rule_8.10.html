@@ -1,0 +1,117 @@
+<!-- rule_8.10.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 8.10</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_8.9.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;8.10:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_8.11.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">All declarations and definitions of objects or functions at file scope shall have internal linkage unless external linkage is required.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+If a variable is only to be used by functions within the same file then use static.  Similarly if a function is only called from elsewhere within the same file, use static.  Use of the static storage-class specifier will ensure that the identifier is only visible in the file in which it is declared and avoids any possibility of confusion with an identical identifier in another file or a library.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 3408 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+S16 obj_0810a;
+S16 obj_0810b;
+
+<code class="keyword">static</code> S16 test_0810b<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>;
+
+<code class="keyword">extern</code> S16 test_0810<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   S16 r;
+
+   r <code class="operator">&#x3D;</code> test_0810a<code class="operator">&#x28;</code><code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> test_0810b<code class="operator">&#x28;</code><code class="operator">&#x29;</code>;
+
+   <code class="keyword">return</code> r;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">extern</code> S16 test_0810a<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   <code class="keyword">return</code> obj_0810a;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> S16 test_0810b<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    <code class="keyword">return</code> obj_0810b;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1504.html">1504</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The object '%1s' is only referenced in the translation unit where it is defined. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1505.html">1505</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The function '%1s' is only referenced in the translation unit where it is defined. </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

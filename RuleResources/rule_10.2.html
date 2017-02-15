@@ -1,0 +1,210 @@
+<!-- rule_10.2.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 10.2</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_10.1.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;10.2:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_10.3.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">The value of an expression of floating type shall not be implicitly converted to a different type if:
+a)    it is not a conversion to a wider floating type, or
+b)    the expression is complex, or
+c)    the expression is a function argument, or
+d)    the expression is a return expression</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Rule <!--RNAME[10.2]--> broadly encapsulates the following principles:
+<P>
+* No implicit conversions between integer and floating types
+<P>
+* No implicit conversions from wider to narrower types
+<P>
+* No implicit conversions of function arguments
+<P>
+* No implicit conversions of function return expressions
+<P>
+* No implicit conversions of complex expressions
+<P>
+<P>
+The intention when restricting implicit conversion of complex expressions is to require that in a sequence of arithmetic operations within an expression, all operations should be conducted in exactly the same arithmetic type.  Notice that this does not imply that all operands in an expression are of the same type.
+<p><pre class="example">
+<code class="keyword">extern</code> <code class="type">void</code> foo1<code class="operator">&#x28;</code> uint8_t x <code class="operator">&#x29;</code>;
+
+int16_t t1<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    ...
+    f32a <code class="operator">&#x3D;</code> f64a;<code class="comment">                          &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    f32a <code class="operator">&#x3D;</code> <code class="number">2.5</code>;<code class="comment">                           &#x2F;&#x2A; not compliant &#x2D;
+                                             unsuffixed floating
+                                             constants are of type
+                                             double &#x2A;&#x2F;</code>
+    s32a <code class="operator">&#x3D;</code> u8b <code class="operator">&#x2B;</code> u8c;<code class="comment">                     &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    f32a <code class="operator">&#x3D;</code> <code class="number">2.5</code>F;<code class="comment">                          &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    u8a  <code class="operator">&#x3D;</code> f32a;<code class="comment">                          &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    f32a <code class="operator">&#x3D;</code> <code class="number">1</code>;<code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    f32a <code class="operator">&#x3D;</code> s16a;<code class="comment">                          &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... f32a <code class="operator">&#x2B;</code> <code class="number">1</code><code class="comment">                          &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... f64a <code class="operator">&#x2A;</code> s32a<code class="comment">                       &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+<code class="operator">&#x7D;</code>
+
+int16_t foo2<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    ...
+    f64a <code class="operator">&#x3D;</code> f32a <code class="operator">&#x2B;</code> f32b;<code class="comment">                   &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    f64a <code class="operator">&#x3D;</code> f64b <code class="operator">&#x2B;</code> f32a;<code class="comment">                   &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    f64a <code class="operator">&#x3D;</code> s32a <code class="operator">&#x2F;</code> s32b;<code class="comment">                   &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ...
+<code class="operator">&#x7D;</code>
+
+</pre><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1264.html">1264</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A suffixed floating constant is being converted to a different floating type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1265.html">1265</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An unsuffixed floating constant is being converted to a different floating type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1266.html">1266</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A floating constant is being converted to integral type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1880.html">1880</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this relational operator are expressions of different 'essential type' categories (%1s and %2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1881.html">1881</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this equality operator are expressions of different 'essential type' categories (%1s and %2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1882.html">1882</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The 2nd and 3rd operands of this conditional operator are expressions of different 'essential type' categories (%1s and %2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1892.html">1892</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A composite expression of 'essentially floating' type (%1s) is being implicitly converted to a wider floating type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1893.html">1893</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The 2nd and 3rd operands of this conditional operator are both 'essentially signed' ('%1s' and '%2s') but one is a composite expression of a narrower type than the other. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1894.html">1894</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The 2nd and 3rd operands of this conditional operator are both 'essentially unsigned' ('%1s' and '%2s') but one is a composite expression of a narrower type than the other. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1895.html">1895</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The 2nd and 3rd operands of this conditional operator are both 'essentially floating' ('%1s' and '%2s') but one is a composite expression of a narrower type than the other. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4450.html">4450</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being converted to Boolean type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4452.html">4452</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being converted to enum type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4453.html">4453</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4454.html">4454</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4462.html">4462</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially floating' type (%1s) is being converted to narrower floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4465.html">4465</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A constant expression of 'essentially floating' type (%1s) is being converted to narrower floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4472.html">4472</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially floating' type (%1s) is being passed to a function parameter of wider floating type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4482.html">4482</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially floating' type (%1s) is being returned from a function defined with a wider floating return type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4492.html">4492</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A composite expression of 'essentially floating' type (%1s) is being converted to wider floating type, '%2s' on assignment. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_10.1.html">Rule&nbsp;&nbsp;10.1</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> The value of an expression of integer type shall not be implicitly converted to a different underlying type if:
+a)    it is not a conversion to a wider integer type of the same signedness, or
+b)    the expression is complex, or
+c)    the expression is not constant and is a function argument, or
+d)    the expression is not constant and is a return expression</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

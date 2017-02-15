@@ -1,0 +1,95 @@
+<!-- rule_13.3.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 13.3</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_13.2.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;13.3:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_13.4.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Floating-point expressions shall not be tested for equality or inequality.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+The inherent nature of floating-point types is such that comparisons of equality will often not evaluate to true even when they are expected to.  In addition the behaviour of such a comparison cannot be predicted before execution, and may well vary from one implementation to another.  For example the result of the test in the following code is unpredictable:
+<p><pre class="example">
+float32_t x, y;
+<code class="comment">&#x2F;&#x2A; some calculations here          &#x2A;&#x2F;</code>
+<code class="keyword">if</code> <code class="operator">&#x28;</code> x <code class="operator">&#x3D;</code><code class="operator">&#x3D;</code> y <code class="operator">&#x29;</code><code class="comment">     &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+<code class="operator">&#x7B;</code><code class="comment"> &#x2F;&#x2A; ... &#x2A;&#x2F;</code> <code class="operator">&#x7D;</code>
+<code class="keyword">if</code> <code class="operator">&#x28;</code> x <code class="operator">&#x3D;</code><code class="operator">&#x3D;</code> <code class="number">0.0f</code> <code class="operator">&#x29;</code><code class="comment">  &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+<code class="operator">&#x7B;</code><code class="comment"> &#x2F;&#x2A; ... &#x2A;&#x2F;</code> <code class="operator">&#x7D;</code>
+
+</pre>
+<P>
+An indirect test is equally problematic and is also forbidden by this rule, for example:
+<p><pre class="example">
+<code class="keyword">if</code> <code class="operator">&#x28;</code> <code class="operator">&#x28;</code> x <code class="operator">&lt;</code><code class="operator">&#x3D;</code> y <code class="operator">&#x29;</code> <code class="operator">&amp;</code><code class="operator">&amp;</code> <code class="operator">&#x28;</code> x <code class="operator">&gt;</code><code class="operator">&#x3D;</code> y <code class="operator">&#x29;</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code><code class="comment"> &#x2F;&#x2A; ... &#x2A;&#x2F;</code> <code class="operator">&#x7D;</code>
+
+</pre>
+<P>
+The recommended method for achieving deterministic floating-point comparisons is to write a library that implements the comparison operations.  The library should take into account the floating-point granularity (FLT_EPSILON) and the magnitude of the numbers being compared.<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="3341.html">3341</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Comparing floating point expressions for equality (with '==' or '!='). </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

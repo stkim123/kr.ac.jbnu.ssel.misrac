@@ -1,0 +1,112 @@
+<!-- rule_8.4.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 8.4</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_8.3.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;8.4:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_8.5.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">If objects or functions are declared more than once their types shall be compatible.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+The definition of compatible types is lengthy and complex (ISO/IEC 9899:1990 [2], sections 6.1.2.6, 6.5.2, 6.5.3 and 6.5.4 give full details).  Two identical types are compatible but two compatible types need not be identical.  For example, the following pairs of types are compatible:
+<p><pre class="example">
+<code class="type">signed</code> <code class="type">int</code>             <code class="type">int</code>
+<code class="type">char</code> [<code class="number">5</code>]               <code class="type">char</code> []
+<code class="type">unsigned</code> <code class="type">short</code> <code class="type">int</code>     <code class="type">unsigned</code> <code class="type">short</code>
+
+</pre><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0626.html">0626</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] '%s' has different type to previous declaration (which is no longer in scope). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0627.html">0627</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [C] '%s' has different type to previous declaration in the same scope. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0628.html">0628</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [C] '%s' has different type to previous declaration at wider scope. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1510.html">1510</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> '%1s' has external linkage and has incompatible declarations. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_1.1.html">Rule&nbsp;&nbsp;1.1</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> All code shall conform to ISO/IEC 9899:1990 C programming
+language, ISO 9899, amended and corrected by ISO/IEC 9899/COR1:1995,
+ISO/IEC 9899/AMD1:1995, and ISO/IEC 9899/COR2: 1996192</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_1.2.html">Rule&nbsp;&nbsp;1.2</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> No reliance shall be placed on undefined or unspecified behaviour.</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

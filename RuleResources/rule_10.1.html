@@ -1,0 +1,611 @@
+<!-- rule_10.1.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 10.1</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_9.3.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;10.1:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_10.2.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">The value of an expression of integer type shall not be implicitly converted to a different underlying type if:
+a)    it is not a conversion to a wider integer type of the same signedness, or
+b)    the expression is complex, or
+c)    the expression is not constant and is a function argument, or
+d)    the expression is not constant and is a return expression</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Notice also that in describing integer conversions, the concern is always with underlying type rather than actual type.
+<P>
+Rule 10.1 broadly encapsulates the following principles:
+<P>
+* No implicit conversions between signed and unsigned types
+<P>
+* No implicit conversions between integer and floating types
+<P>
+* No implicit conversions from wider to narrower types
+<P>
+* No implicit conversions of function arguments
+<P>
+* No implicit conversions of function return expressions
+<P>
+* No implicit conversions of complex expressions
+<P>
+<P>
+The intention when restricting implicit conversion of complex expressions is to require that in a sequence of arithmetic operations within an expression, all operations should be conducted in exactly the same arithmetic type.  Notice that this does not imply that all operands in an expression are of the same type.
+<P>
+The expression u32a + u16b + u16c is compliant - both additions will notionally be performed in type U32.
+<P>
+The expression u16a + u16b + u32c is not compliant - the first addition is notionally performed in type U16 and the second in type U32.
+<P>
+The word "notionally" is used because, in practice, the type in which arithmetic will be conducted will depend on the implemented size of an int.  By observing the principle whereby all operations are performed in a consistent (underlying) type, it is possible to avoid programmer confusion and some of the dangers associated with integral promotion.
+<p><pre class="example">
+<code class="keyword">extern</code> <code class="type">void</code> foo1<code class="operator">&#x28;</code> uint8_t x <code class="operator">&#x29;</code>;
+
+int16_t t1<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    ...
+    foo1<code class="operator">&#x28;</code> u8a <code class="operator">&#x29;</code>;<code class="comment">                            &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> u8a <code class="operator">&#x2B;</code> u8b <code class="operator">&#x29;</code>;<code class="comment">                      &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> s8a <code class="operator">&#x29;</code>;<code class="comment">                            &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> u16a <code class="operator">&#x29;</code>;<code class="comment">                           &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> <code class="number">2</code> <code class="operator">&#x29;</code>;<code class="comment">                              &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> <code class="number">2U</code> <code class="operator">&#x29;</code>;<code class="comment">                             &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> <code class="operator">&#x28;</code> uint8_t <code class="operator">&#x29;</code><code class="number">2</code> <code class="operator">&#x29;</code>;<code class="comment">                   &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... s8a <code class="operator">&#x2B;</code> u8a<code class="comment">                           &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... s8a <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> int8_t <code class="operator">&#x29;</code>u8a<code class="comment">                 &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    s8b <code class="operator">&#x3D;</code> u8a;<code class="comment">                              &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&#x2B;</code> <code class="number">5</code><code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&#x2B;</code> <code class="number">5U</code><code class="comment">                            &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> uint8_t <code class="operator">&#x29;</code><code class="number">5</code><code class="comment">                  &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    u8a <code class="operator">&#x3D;</code> u16a;<code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    u8a <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> uint8_t <code class="operator">&#x29;</code>u16a;<code class="comment">                  &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    u8a <code class="operator">&#x3D;</code> <code class="number">5UL</code>;<code class="comment">                              &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&#x2B;</code> <code class="number">10UL</code><code class="comment">                          &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    u8a <code class="operator">&#x3D;</code> <code class="number">5U</code>;<code class="comment">                               &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&#x2B;</code> <code class="number">3</code><code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">3</code><code class="comment">                            &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... u8a <code class="operator">&gt;</code><code class="operator">&gt;</code> <code class="number">3U</code><code class="comment">                           &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    pca <code class="operator">&#x3D;</code><code class="string"> "P"</code>;<code class="comment">                              &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... s32a <code class="operator">&#x2B;</code> <code class="number">80000</code><code class="comment">                        &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... s32a <code class="operator">&#x2B;</code> <code class="number">80000L</code><code class="comment">                       &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    u8a <code class="operator">&#x3D;</code> u8b <code class="operator">&#x2B;</code> u8c;<code class="comment">                        &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    s16a <code class="operator">&#x3D;</code> u8b <code class="operator">&#x2B;</code> u8b;<code class="comment">                       &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    s32a <code class="operator">&#x3D;</code> u8b <code class="operator">&#x2B;</code> u8c;<code class="comment">                       &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    u8a  <code class="operator">&#x3D;</code> f32a;<code class="comment">                            &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    s32a <code class="operator">&#x3D;</code> <code class="number">1.0</code>;<code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ...
+    <code class="keyword">return</code> s32a;<code class="comment">                            &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ...               
+    <code class="keyword">return</code> s16a;<code class="comment">                            &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ...               
+    <code class="keyword">return</code> <code class="number">20000</code>;<code class="comment">                           &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ...               
+    <code class="keyword">return</code> <code class="number">20000L</code>;<code class="comment">                          &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ...               
+    <code class="keyword">return</code> s8a;<code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ...               
+    <code class="keyword">return</code> u16a;<code class="comment">                            &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+<code class="operator">&#x7D;</code>
+
+int16_t foo2<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+    ...
+    ... <code class="operator">&#x28;</code> u16a <code class="operator">&#x2B;</code> u16b <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> u32a<code class="comment">              &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    ... s32a <code class="operator">&#x2B;</code> s8a <code class="operator">&#x2B;</code> s8b<code class="comment">                    &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ... s8a <code class="operator">&#x2B;</code> s8b <code class="operator">&#x2B;</code> s32a<code class="comment">                    &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    f64a <code class="operator">&#x3D;</code> s32a <code class="operator">&#x2F;</code> s32b;<code class="comment">                     &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    u32a <code class="operator">&#x3D;</code> u16a <code class="operator">&#x2B;</code> u16a;<code class="comment">                     &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    s16a <code class="operator">&#x3D;</code> s8a;<code class="comment">                             &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    s16a <code class="operator">&#x3D;</code> s16b <code class="operator">&#x2B;</code> <code class="number">20000</code>;<code class="comment">                    &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    s32a <code class="operator">&#x3D;</code> s16a <code class="operator">&#x2B;</code> <code class="number">20000</code>;<code class="comment">                    &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    s32a <code class="operator">&#x3D;</code> s16a <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> int32_t <code class="operator">&#x29;</code><code class="number">20000</code>;<code class="comment">         &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    u16a <code class="operator">&#x3D;</code> u16b <code class="operator">&#x2B;</code> u8a;<code class="comment">                      &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> u16a <code class="operator">&#x29;</code>;<code class="comment">                           &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+    foo1<code class="operator">&#x28;</code> u8a <code class="operator">&#x2B;</code> u8b <code class="operator">&#x29;</code>;<code class="comment">                      &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ...
+    <code class="keyword">return</code> s16a;<code class="comment">                            &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+    ...
+    <code class="keyword">return</code> s8a;<code class="comment">                             &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+<code class="operator">&#x7D;</code>
+
+</pre><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0570.html">0570</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> This switch case label of 'essential type' '%1s', is not consistent with a controlling expression of essential type '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0572.html">0572</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> This switch case label of 'essential type' '%1s' is not consistent with a controlling expression which has an essential type of lower rank (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1256.html">1256</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant suffixed with L is being converted to type signed or unsigned long long on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1257.html">1257</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant suffixed with L or LL is being converted to a type of lower rank on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1290.html">1290</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially signed' type is being converted to unsigned type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1291.html">1291</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially unsigned' type is being converted to signed type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1292.html">1292</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially signed' type is being converted to type char on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1293.html">1293</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially unsigned' type is being converted to type char on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1294.html">1294</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially signed' type is being converted to type _Bool on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1295.html">1295</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially unsigned' type is being converted to type _Bool on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1296.html">1296</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially signed' type is being converted to enum type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1297.html">1297</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially unsigned' type is being converted to enum type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1298.html">1298</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially signed' type is being converted to floating type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1299.html">1299</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An integer constant of 'essentially unsigned' type is being converted to floating type on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1317.html">1317</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Value of constant expression is not in the enum type to which it is being converted. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1461.html">1461</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Value of constant expression is not in the enum type to which it is being converted, but is bitwise OR of constants in the enum type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1800.html">1800</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand (essential type: '%2s') will be implicitly converted to a floating type, '%3s', in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1802.html">1802</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand (essential type: '%2s') will be implicitly converted to a floating type, '%3s', in this relational operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1803.html">1803</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand (essential type: '%2s') will be implicitly converted to a floating type, '%3s', in this equality operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1804.html">1804</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand (essential type: '%2s') will be implicitly converted to a floating type, '%3s', in this conditional operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1810.html">1810</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being added to another operand of 'essentially character' type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1811.html">1811</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being subtracted from an operand of 'essentially signed' type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1812.html">1812</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being subtracted from an operand of 'essentially unsigned' type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1813.html">1813</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An operand of 'essentially character' type is being balanced with an operand of 'essentially floating' type in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1820.html">1820</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is non-constant and 'essentially signed' (%2s) but will be implicitly converted to an unsigned type (%3s) in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1821.html">1821</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is non-constant and 'essentially signed' (%2s) but will be implicitly converted to an unsigned type (%3s) in this bitwise operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1822.html">1822</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is non-constant and 'essentially signed' (%2s) but will be implicitly converted to an unsigned type (%3s) in this relational operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1823.html">1823</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is non-constant and 'essentially signed' (%2s) but will be implicitly converted to an unsigned type (%3s) in this equality operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1824.html">1824</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is non-constant and 'essentially signed' (%2s) but will be implicitly converted to an unsigned type (%3s) in this conditional operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1830.html">1830</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and negative but will be implicitly converted to an unsigned type (%3s) in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1831.html">1831</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and negative but will be implicitly converted to an unsigned type (%3s) in this bitwise operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1832.html">1832</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and negative but will be implicitly converted to an unsigned type (%3s) in this relational operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1833.html">1833</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and negative but will be implicitly converted to an unsigned type (%3s) in this equality operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1834.html">1834</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and negative but will be implicitly converted to an unsigned type (%3s) in this conditional operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1840.html">1840</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and non-negative but will be implicitly converted to an unsigned type (%3s) in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1841.html">1841</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and non-negative but will be implicitly converted to an unsigned type (%3s) in this bitwise operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1842.html">1842</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and non-negative but will be implicitly converted to an unsigned type (%3s) in this relational operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1843.html">1843</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and non-negative but will be implicitly converted to an unsigned type (%3s) in this equality operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1844.html">1844</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is constant, 'essentially signed' (%2s) and non-negative but will be implicitly converted to an unsigned type (%3s) in this conditional operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1850.html">1850</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is 'essentially unsigned' (%2s) but will be implicitly converted to a signed type (%3s) in this arithmetic operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1851.html">1851</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is 'essentially unsigned' (%2s) but will be implicitly converted to a signed type (%3s) in this bitwise operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1852.html">1852</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is 'essentially unsigned' (%2s) but will be implicitly converted to a signed type (%3s) in this relational operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1853.html">1853</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is 'essentially unsigned' (%2s) but will be implicitly converted to a signed type (%3s) in this equality operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1854.html">1854</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The %1s operand is 'essentially unsigned' (%2s) but will be implicitly converted to a signed type (%3s) in this conditional operation. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1860.html">1860</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this arithmetic operator are of different 'essential signedness' but will generate a result of type 'signed int'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1861.html">1861</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this bitwise operator are of different 'essential signedness' but will generate a result of type 'signed int'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1862.html">1862</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this relational operator are of different 'essential signedness' but will both be promoted to 'signed int' for comparison. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1863.html">1863</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this equality operator are of different 'essential signedness' but will both be promoted to 'signed int' for comparison. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1864.html">1864</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The 2nd and 3rd operands of this conditional operator are of different 'essential signedness'. The result will be in the promoted type 'signed int'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1880.html">1880</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this relational operator are expressions of different 'essential type' categories (%1s and %2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1881.html">1881</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The operands of this equality operator are expressions of different 'essential type' categories (%1s and %2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1882.html">1882</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The 2nd and 3rd operands of this conditional operator are expressions of different 'essential type' categories (%1s and %2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1890.html">1890</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A composite expression of 'essentially signed' type (%1s) is being implicitly converted to a wider signed type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="1891.html">1891</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A composite expression of 'essentially unsigned' type (%1s) is being implicitly converted to a wider unsigned type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="2900.html">2900</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Constant: Positive integer value truncated by implicit conversion to a smaller unsigned type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4117.html">4117</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Result of integer division operation implicitly converted to a floating type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4401.html">4401</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4402.html">4402</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being converted to enum type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4403.html">4403</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4404.html">4404</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4405.html">4405</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being converted to floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4410.html">4410</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to Boolean type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4412.html">4412</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to enum type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4413.html">4413</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4414.html">4414</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4415.html">4415</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially character' type (%1s) is being converted to floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4420.html">4420</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to Boolean type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4421.html">4421</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4422.html">4422</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to a different enum type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4423.html">4423</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4424.html">4424</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4425.html">4425</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially enum' type (%1s) is being converted to floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4430.html">4430</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially signed' type (%1s) is being converted to Boolean type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4431.html">4431</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially signed' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4432.html">4432</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially signed' type (%1s) is being converted to enum type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4434.html">4434</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially signed' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4435.html">4435</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially signed' type (%1s) is being converted to floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4436.html">4436</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A constant expression of 'essentially signed' type (%1s) is being converted to unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4437.html">4437</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A constant expression of 'essentially signed' type (%1s) is being converted to floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4440.html">4440</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being converted to Boolean type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4441.html">4441</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4442.html">4442</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being converted to enum type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4443.html">4443</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially unsigned' type (%1s) is being converted to a wider signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4445.html">4445</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially unsigned' type (%1s) is being converted to floating type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4446.html">4446</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially unsigned' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4447.html">4447</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A constant expression of 'essentially unsigned' type (%1s) is being converted to signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4451.html">4451</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially floating' type (%1s) is being converted to character type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4460.html">4460</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially signed' type (%1s) is being converted to narrower signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4461.html">4461</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially unsigned' type (%1s) is being converted to narrower unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4463.html">4463</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A constant expression of 'essentially signed' type (%1s) is being converted to narrower signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4464.html">4464</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A constant expression of 'essentially unsigned' type (%1s) is being converted to narrower unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4470.html">4470</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially signed' type (%1s) is being passed to a function parameter of wider signed type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4471.html">4471</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially unsigned' type (%1s) is being passed to a function parameter of wider unsigned type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4480.html">4480</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially signed' type (%1s) is being returned from a function defined with a wider signed return type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4481.html">4481</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A non-constant expression of 'essentially unsigned' type (%1s) is being returned from a function defined with a wider unsigned return type, '%2s'. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4490.html">4490</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A composite expression of 'essentially signed' type (%1s) is being converted to wider signed type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4491.html">4491</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> A composite expression of 'essentially unsigned' type (%1s) is being converted to wider unsigned type, '%2s' on assignment. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4500.html">4500</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as an array subscript. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4501.html">4501</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as the %2s operand of this arithmetic operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4502.html">4502</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as the %2s operand of this bitwise operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4503.html">4503</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as the left-hand operand of this shift operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4504.html">4504</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as the right-hand operand of this shift operator (%2s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4505.html">4505</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as the %2s operand of this relational operator (%3s). </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="4507.html">4507</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> An expression of 'essentially Boolean' type (%1s) is being used as the operand of this increment/decrement operator (%2s). </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_6.1.html">Rule&nbsp;&nbsp;6.1</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> The plain char type shall be used only for the storage and use of character values.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_6.2.html">Rule&nbsp;&nbsp;6.2</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> Signed and unsigned char type shall be used only for the storage and use of numeric values.</TD>
+</TR>
+
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_10.2.html">Rule&nbsp;&nbsp;10.2</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> The value of an expression of floating type shall not be implicitly converted to a different type if:
+a)    it is not a conversion to a wider floating type, or
+b)    the expression is complex, or
+c)    the expression is a function argument, or
+d)    the expression is a return expression</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

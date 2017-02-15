@@ -1,0 +1,122 @@
+<!-- rule_17.4.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 17.4</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_17.3.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;17.4:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_17.5.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">Array indexing shall be the only allowed form of pointer arithmetic.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Array indexing is the only acceptable form of pointer arithmetic, because it is clearer and hence less error prone than pointer manipulation.  This rule bans the explicit calculation of pointer values.  Array indexing shall only be applied to objects defined as an array type.  Any explicitly calculated pointer value has the potential to access unintended or invalid memory addresses.  Pointers may go out of bounds of arrays or structures, or may even point to effectively arbitrary locations.
+<p><pre class="example">
+<code class="type">void</code> my_fn<code class="operator">&#x28;</code> uint8_t <code class="operator">&#x2A;</code> p1, uint8_t p2[] <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   uint8_t index <code class="operator">&#x3D;</code> <code class="number">0U</code>;
+   uint8_t <code class="operator">&#x2A;</code> p3;
+   uint8_t <code class="operator">&#x2A;</code> p4;
+
+   <code class="operator">&#x2A;</code>p1 <code class="operator">&#x3D;</code> <code class="number">0U</code>;
+   p1 <code class="operator">&#x2B;</code><code class="operator">&#x2B;</code>;<code class="comment">       &#x2F;&#x2A; not compliant &#x2D; pointer increment               &#x2A;&#x2F;</code>
+   p1 <code class="operator">&#x3D;</code> p1 <code class="operator">&#x2B;</code> <code class="number">5</code>;<code class="comment"> &#x2F;&#x2A; not compliant &#x2D; pointer increment               &#x2A;&#x2F;</code>
+   p1[<code class="number">5</code>] <code class="operator">&#x3D;</code> <code class="number">0U</code><code class="comment">   &#x2F;&#x2A; not compliant &#x2D; p1 was not declared as an array &#x2A;&#x2F;</code>
+   p3 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>p1[<code class="number">5</code>];<code class="comment"> &#x2F;&#x2A; not compliant &#x2D; p1 was not declared as an array &#x2A;&#x2F;</code>
+   p2[<code class="number">0</code>] <code class="operator">&#x3D;</code> <code class="number">0U</code>;
+   index <code class="operator">&#x2B;</code><code class="operator">&#x2B;</code>;
+   index <code class="operator">&#x3D;</code> index <code class="operator">&#x2B;</code> <code class="number">5U</code>;
+   p2[index] <code class="operator">&#x3D;</code> <code class="number">0U</code>;<code class="comment"> &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+   p4 <code class="operator">&#x3D;</code> <code class="operator">&amp;</code>p2[<code class="number">5</code>];<code class="comment">    &#x2F;&#x2A; compliant     &#x2A;&#x2F;</code>
+<code class="operator">&#x7D;</code>
+
+uint8_t a1[<code class="number">16</code>];
+uint8_t a2[<code class="number">16</code>];
+
+my_fn<code class="operator">&#x28;</code> a1, a2 <code class="operator">&#x29;</code>;
+
+my_fn<code class="operator">&#x28;</code> <code class="operator">&amp;</code>a1[<code class="number">4</code>], <code class="operator">&amp;</code>a2[<code class="number">4</code>] <code class="operator">&#x29;</code>;
+
+uint8_t a[<code class="number">10</code>];
+uint8_t <code class="operator">&#x2A;</code> p;
+p <code class="operator">&#x3D;</code> a;
+<code class="operator">&#x2A;</code><code class="operator">&#x28;</code> p<code class="operator">&#x2B;</code><code class="number">5</code> <code class="operator">&#x29;</code> <code class="operator">&#x3D;</code> <code class="number">0U</code>;<code class="comment"> &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+p[<code class="number">5</code>] <code class="operator">&#x3D;</code> <code class="number">0U</code>;<code class="comment">     &#x2F;&#x2A; not compliant &#x2A;&#x2F;</code>
+
+</pre><P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0488.html">0488</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Performing pointer arithmetic. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0489.html">0489</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> The integer value 1 is being added or subtracted from a pointer. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0491.html">0491</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Array subscripting applied to an object of pointer type. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0492.html">0492</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> Array subscripting applied to a function parameter declared as a pointer. </TD>
+</TR>
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>

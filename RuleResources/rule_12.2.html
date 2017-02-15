@@ -1,0 +1,231 @@
+<!-- rule_12.2.html
+copyright: &copy; 2013 Programming Research
+   module: M2CM-3.2-QAC-8.1.2
+  purpose: MISRA-C:2004 Rules explanation file
+  history: auto-created on 30-Jul-13
+-->
+<!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+-->
+<HTML><HEAD><TITLE>QA C Help - Rule 12.2</TITLE>
+         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+         <meta http-equiv="Content-Style-Type" content="text/css">
+         <link href="css/message.css" rel="stylesheet" type="text/css">
+</HEAD><BODY>
+<table class="heading">
+<tr class="heading">
+<td class="heading" rowspan=4 width="85px"><img src="QAC.png"></td>
+<td class="heading" align="right" width="11px">
+<a href="rule_12.1.html"><img src="left.png" alt="[previous]"></a>
+</td>
+<td class="heading_number"><span style="white-space:nowrap">MISRA-C:2004&nbsp;&nbsp;Rule&nbsp;&nbsp;12.2:&nbsp;&nbsp;(Required)</span></td>
+<td class="heading" align="left" width="11px">
+<a href="rule_12.3.html"><img src="right.png" alt="[next]"></a>
+</td>
+<td class="heading"/>
+<td class="heading_message">The value of an expression shall be the same under any order of evaluation that the standard permits.</td>
+<tr class="heading">
+<td class="heading" height="1px" colspan=7 background="prqa_sep.png"/><td class="heading" width="76px"><img src="prqa_right.png"/></td></tr>
+<tr class="heading">
+<td colspan=4  class="heading_category"></td>
+<td width="70%" class="heading_verbose"/>
+<td class="heading_message"/>
+</tr>
+</table>
+Apart from a few operators (notably the function call operator (), &&, ||, ?: and , (comma)) the order in which sub-expressions are evaluated is unspecified and can vary.  This means that no reliance can be placed on the order of evaluation of sub-expressions, and in particular no reliance can be placed on the order in which side effects occur.  Those points in the evaluation of an expression at which all previous side effects can be guaranteed to have taken place are called 'sequence points'.  Sequence points and side effects are described in sections 5.1.2.3, 6.3 and 6.6 of ISO/IEC 9899:1990 [2].
+<P>
+Note that the order of evaluation problem is not solved by the use of parentheses, as this is not a precedence issue.<P>
+<P><FONT SIZE=+1><B>Example Code:</B></FONT>
+<PRE>
+<code>
+<pre class="example"><code class="comment">&#x2F;&#x2A; PRQA S 2982&#x2D;2984,2996,3447 &#x2B;&#x2B; &#x2A;&#x2F;</code>
+
+<code class="preprocessor">#include</code><code class="string"> "misra.h"</code>
+<code class="preprocessor">#include</code><code class="string"> "m2cmex.h"</code>
+
+
+<code class="keyword">static</code> S16 test_1202a<code class="operator">&#x28;</code> S16 <code class="operator">&#x2A;</code>p <code class="operator">&#x29;</code>;
+<code class="keyword">static</code> S16 test_1202b<code class="operator">&#x28;</code> S16 <code class="operator">&#x2A;</code>p <code class="operator">&#x29;</code>;
+<code class="keyword">static</code> S16 test_1202c<code class="operator">&#x28;</code> <code class="keyword">const</code> S16 <code class="operator">&#x2A;</code>p <code class="operator">&#x29;</code>;
+
+
+<code class="preprocessor">#define MAX 15</code>
+
+<code class="keyword">extern</code> S16 test_1202<code class="operator">&#x28;</code> <code class="type">void</code> <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   <code class="keyword">const</code> S16 buf[<code class="number">20</code>] <code class="operator">&#x3D;</code> <code class="operator">&#x7B;</code><code class="number">0</code><code class="operator">&#x7D;</code>;
+   S16       x <code class="operator">&#x3D;</code> <code class="number">5</code>;
+   S16       y <code class="operator">&#x3D;</code> <code class="number">10</code>;
+
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A; 0400 '%s' is modified more than once between sequence points        &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;      &#x2D; evaluation order undefined.                                  &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+
+   x <code class="operator">&#x3D;</code> y <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> x<code class="operator">&#x2B;</code><code class="operator">&#x2B;</code> <code class="operator">&#x29;</code>;<code class="comment">                              &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+
+
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A; 0401 '%s' may be modified more than once between sequence points    &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;      &#x2D; evaluation order undefined.                                  &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+
+<code class="comment">   &#x2F;&#x2A; This message is generated in situations where it is not certain that
+      an object is modified more than once but the passing of a pointer to
+      that object suggests it may be &#x2A;&#x2F;</code>
+
+
+   y <code class="operator">&#x3D;</code> test_1202a<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> x<code class="operator">&#x2B;</code><code class="operator">&#x2B;</code> <code class="operator">&#x29;</code>;<code class="comment">               &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+   y <code class="operator">&#x3D;</code> test_1202a<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> test_1202b<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code>;<code class="comment">      &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+
+<code class="comment">   &#x2F;&#x2A; In this case the order of the increment and assignment ARE NOT defined &#x2A;&#x2F;</code>
+
+   x <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> x <code class="operator">&gt;</code> MAX <code class="operator">&#x29;</code> <code class="operator">&#x3F;</code> <code class="operator">&#x28;</code> <code class="operator">&#x2B;</code><code class="operator">&#x2B;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x3A;</code> <code class="number">0</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+
+<code class="comment">   &#x2F;&#x2A; In this case the order of the increment and assignment ARE NOT defined &#x2A;&#x2F;</code>
+
+   x <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> y <code class="operator">&gt;</code> MAX <code class="operator">&#x29;</code> <code class="operator">&#x3F;</code> <code class="operator">&#x28;</code> <code class="operator">&#x2B;</code><code class="operator">&#x2B;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x3A;</code> <code class="number">0</code>;<code class="comment">                &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+
+<code class="comment">   &#x2F;&#x2A; In the following statement, there is a sequence point after the
+      evaluation of the first operand of the ternary operator, so "x"
+      is known to be incremented before the assignment occurs. The
+      code may be silly, but it is not undefined &#x2A;&#x2F;</code>
+
+   x <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> <code class="operator">&#x28;</code> <code class="operator">&#x2B;</code><code class="operator">&#x2B;</code>x <code class="operator">&#x29;</code> <code class="operator">&gt;</code> MAX <code class="operator">&#x29;</code> <code class="operator">&#x3F;</code> <code class="number">0</code> <code class="operator">&#x3A;</code> <code class="number">1</code>;<code class="comment">                &#x2F;&#x2A; OK               &#x2A;&#x2F;</code>
+
+
+<code class="comment">   &#x2F;&#x2A; In these statements, any modification to the value of x by the function
+      test_1202a is known to occur before the assignment and therefore, although
+      "x" may be modified more than once, the order of evaluation is not undefined &#x2A;&#x2F;</code>
+
+   x <code class="operator">&#x3D;</code> test_1202a<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code>;<code class="comment">                         &#x2F;&#x2A; OK               &#x2A;&#x2F;</code>
+
+   x <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> y <code class="operator">&gt;</code> MAX <code class="operator">&#x29;</code> <code class="operator">&#x3F;</code> test_1202a<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x3A;</code> <code class="number">0</code>;<code class="comment">       &#x2F;&#x2A; OK               &#x2A;&#x2F;</code>
+
+<code class="comment">   &#x2F;&#x2A; The prototype of test_1202c declares a "pointer to const S16" parameter and
+      so there is no possibility of x being modified more than once &#x2A;&#x2F;</code>
+
+   y <code class="operator">&#x3D;</code> test_1202c<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> x<code class="operator">&#x2B;</code><code class="operator">&#x2B;</code> <code class="operator">&#x29;</code>;<code class="comment">               &#x2F;&#x2A; OK               &#x2A;&#x2F;</code>
+
+
+
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A; 0402 '%s' is modified and accessed between sequence points          &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;      &#x2D; evaluation order undefined.                                  &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+
+   y <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> x <code class="operator">&#x2B;</code> <code class="number">6</code> <code class="operator">&#x29;</code> <code class="operator">&#x2F;</code> <code class="operator">&#x28;</code> x<code class="operator">&#x2B;</code><code class="operator">&#x2B;</code> <code class="operator">&#x29;</code>;<code class="comment">                      &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+
+   y <code class="operator">&#x3D;</code> buf[ x ] <code class="operator">&#x2B;</code> <code class="operator">&#x28;</code> x<code class="operator">&#x2B;</code><code class="operator">&#x2B;</code> <code class="operator">&#x29;</code>;<code class="comment">                       &#x2F;&#x2A; MISRA Violation  &#x2A;&#x2F;</code>
+
+   y <code class="operator">&#x3D;</code> <code class="operator">&#x28;</code> x <code class="operator">&gt;</code> MAX <code class="operator">&#x29;</code> <code class="operator">&#x3F;</code> <code class="operator">&#x28;</code> x<code class="operator">&#x2B;</code><code class="operator">&#x2B;</code> <code class="operator">&#x29;</code> <code class="operator">&#x3A;</code> <code class="number">0</code>;<code class="comment">                &#x2F;&#x2A; OK               &#x2A;&#x2F;</code>
+
+
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A; 0403 '%s' may be modified and accessed between sequence points      &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;      &#x2D; evaluation order undefined.                                  &#x2A;&#x2F;</code>
+<code class="comment">   &#x2F;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2A;&#x2F;</code>
+
+   y <code class="operator">&#x3D;</code> test_1202a<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> x;<code class="comment">                     &#x2F;&#x2A; MISRA Violation   &#x2A;&#x2F;</code>
+   y <code class="operator">&#x3D;</code> buf[ x ] <code class="operator">&#x2B;</code> test_1202a<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code>;<code class="comment">              &#x2F;&#x2A; MISRA Violation   &#x2A;&#x2F;</code>
+
+<code class="comment">   &#x2F;&#x2A; The prototype of test_1202c declares a "pointer to const S16" parameter and
+      so there is no possibility of x being modified &#x2A;&#x2F;</code>
+
+   y <code class="operator">&#x3D;</code> test_1202c<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code> <code class="operator">&#x2B;</code> x;<code class="comment">                     &#x2F;&#x2A; OK                &#x2A;&#x2F;</code>
+   y <code class="operator">&#x3D;</code> buf[ x ] <code class="operator">&#x2B;</code> test_1202c<code class="operator">&#x28;</code> <code class="operator">&amp;</code>x <code class="operator">&#x29;</code>;<code class="comment">              &#x2F;&#x2A; OK                &#x2A;&#x2F;</code>
+
+   <code class="keyword">return</code> <code class="number">1</code>;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> S16 test_1202a<code class="operator">&#x28;</code> S16 <code class="operator">&#x2A;</code>p <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   <code class="operator">&#x2A;</code>p <code class="operator">&#x3D;</code> <code class="number">1</code>;
+
+   <code class="keyword">return</code> <code class="number">1</code>;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> S16 test_1202b<code class="operator">&#x28;</code> S16 <code class="operator">&#x2A;</code>p <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   <code class="operator">&#x2A;</code>p <code class="operator">&#x3D;</code> <code class="number">2</code>;
+
+   <code class="keyword">return</code> <code class="number">1</code>;
+<code class="operator">&#x7D;</code>
+
+<code class="keyword">static</code> S16 test_1202c<code class="operator">&#x28;</code> <code class="keyword">const</code> S16 <code class="operator">&#x2A;</code>p <code class="operator">&#x29;</code>
+<code class="operator">&#x7B;</code>
+   S16 r;
+
+   r <code class="operator">&#x3D;</code> <code class="operator">&#x2A;</code>p <code class="operator">&#x2A;</code> <code class="number">2</code>;
+
+   <code class="keyword">return</code> r;
+<code class="operator">&#x7D;</code>
+
+</pre>
+</code>
+</PRE>
+<P><HR><P>
+<B>QAC messages that encompass this guideline:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0400.html">0400</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] '%s' is modified more than once between sequence points - evaluation order unspecified. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0401.html">0401</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] '%s' may be modified more than once between sequence points - evaluation order unspecified. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0402.html">0402</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] '%s' is modified and accessed between sequence points - evaluation order unspecified. </TD>
+</TR>
+<TR>
+<TD VALIGN=TOP WIDTH="10%" ALIGN=CENTER> <A HREF="0403.html">0403</A></TD>
+<TD VALIGN=TOP WIDTH="90%"> [U] '%s' may be modified and accessed between sequence points - evaluation order unspecified. </TD>
+</TR>
+</TABLE>
+<P><HR><P>
+<B>Related rules:</B>
+<P>
+<TABLE WIDTH="90%" BORDER=1 CELLSPACING=0 >
+<TR>
+<TD VALIGN=TOP WIDTH="15%" ALIGN=CENTER> <A HREF="rule_1.2.html">Rule&nbsp;&nbsp;1.2</A></TD>
+<TD VALIGN=TOP WIDTH="85%"> No reliance shall be placed on undefined or unspecified behaviour.</TD>
+</TR>
+
+</TABLE>
+<P><HR>
+<TABLE WIDTH="100%">
+<TR>
+<TD WIDTH="355px">
+<IMG SRC="prqa_left.png"/>
+</TD>
+<TD COLSPAN=2 BACKGROUND="prqa_middle.png"/>
+</TR>
+</TABLE>
+<P>
+<BR><I><A HREF="misra.html">(c)  The Motor Industry Research Association, 2004</A></I>
+<TABLE WIDTH="100%">
+  <TR VALIGN="MIDDLE">
+    <TD WIDTH="30%">
+      <I><B>QA C Source Code Analyser 8.1.2</B></I>
+      <BR><I><B>MISRA-C:2004 Compliance Module 3.2</B></I>
+      <BR><I>&copy; 2013 Programming Research</I>
+      <BR><I>
+        www.programmingresearch.com
+      </I>
+    </TD>
+    <TD ALIGN="CENTER" WIDTH="60%">
+      <A HREF="PersonIndex.html">Personality Groups</A> | 
+      <A HREF="Glossary.html">Glossary</A> | 
+      <A HREF="MessageIndex.html">Message Index</A>
+      | <A HREF="MISRA-C_2004Index.html">MISRA-C:2004 Rule Index</A>
+    </TD>
+    <TD ALIGN="RIGHT" WIDTH="10%">
+      <A HREF="messages.htm">Contents</A>
+    </TD>
+  </TR>
+</TABLE>
+</BODY></HTML>
