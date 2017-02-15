@@ -73,9 +73,6 @@ public class Rule08_7_Req extends AbstractMisraCRule {
 				}
 			}
 		}
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println("list data" + i + " is  :: " + list.get(i));
-		}
 
 		for (IASTNode simple : unit.getChildren()) {
 			if (simple instanceof IASTSimpleDeclaration) {
@@ -87,8 +84,6 @@ public class Rule08_7_Req extends AbstractMisraCRule {
 								for (int i = 0; i < list.size(); i++) {
 									if (list.get(i).equals(name.toString())) {
 										count++;
-										System.out.println("data String is :: " + list.get(i) + "  simpleDecl is ::"
-												+ name.toString());
 									}
 								}
 							}

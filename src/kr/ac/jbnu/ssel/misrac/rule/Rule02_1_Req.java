@@ -37,24 +37,24 @@ public class Rule02_1_Req extends AbstractMisraCRule {
 		shouldVisitPreprocessor = true;
 	}
 
-	@Override
-	protected int visit(IASTPreprocessorObjectStyleMacroDefinition preMacroDef) {
-		IASTPreprocessorPragmaStatement
-
-		// Parser Preprocessor
-		String rawSignature = preMacroDef.getRawSignature();
-		String[] preMacroSt = rawSignature.split(" ");
-
-		if (preMacroSt[2].equals(Assembly)) {
-			if (preMacroSt[0] != define) {
-				isViolated = true;
-
-				String message = MessageFactory.getInstance().getMessage(3006);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message + "--" + preMacroDef , preMacroDef));
-
-			}
-		}
-		return super.visit(preMacroDef);
-	}
+//	@Override
+//	protected int visit(IASTPreprocessorObjectStyleMacroDefinition preMacroDef) {
+//		IASTPreprocessorPragmaStatement
+//
+//		// Parser Preprocessor
+//		String rawSignature = preMacroDef.getRawSignature();
+//		String[] preMacroSt = rawSignature.split(" ");
+//
+//		if (preMacroSt[2].equals(Assembly)) {
+//			if (preMacroSt[0] != define) {
+//				isViolated = true;
+//
+//				String message = MessageFactory.getInstance().getMessage(3006);
+//				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message + "--" + preMacroDef , preMacroDef));
+//
+//			}
+//		}
+//		return super.visit(preMacroDef);
+//	}
 
 }
