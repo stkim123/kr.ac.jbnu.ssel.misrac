@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.castparser.view;
+package kr.ac.jbnu.ssel.misrac.ui.view;
 
 public class Constant {
 

@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.castparser.view.TableViewColumns;
+package kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns;
 
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;

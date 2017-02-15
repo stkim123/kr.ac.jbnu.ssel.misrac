@@ -66,17 +66,17 @@
       </category>
       <view
             category="CASTParser"
-            class="kr.ac.jbnu.ssel.castparser.view.ViolationMessageView"
+            class="kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView"
             icon="icons/sample.gif"
-            id="kr.ac.jbnu.ssel.castparser.view.ViolationMessageView"
+            id="kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView"
             name="MISRA-C Rule Check View">
       </view>
        <view
             name="Misra-C Table View"
             icon="icons/Ggobok.gif"
             category="CASTParser"
-            class="kr.ac.jbnu.ssel.castparser.view.MisraTableView"
-            id="kr.ac.jbnu.ssel.castparser.view.MisraTableView">
+            class="kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView"
+            id="kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView">
       </view>
    </extension>
    <extension
@@ -84,7 +84,7 @@
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaPerspective">
          <view
-               id="kr.ac.jbnu.ssel.castparser.view.ViolationMessageView"
+               id="kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView"
                ratio="0.5"
                relationship="right"
                relative="org.eclipse.ui.views.ProblemView">

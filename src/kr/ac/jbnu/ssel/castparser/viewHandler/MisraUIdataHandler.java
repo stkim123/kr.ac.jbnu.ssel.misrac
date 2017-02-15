@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.Path;
 
 import kr.ac.jbnu.ssel.castparser.preference.Rule;
 import kr.ac.jbnu.ssel.castparser.preference.Rules;
-import kr.ac.jbnu.ssel.castparser.view.Constant;
 import kr.ac.jbnu.ssel.misrac.rule.R;
+import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
 import test.kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
 
 public class MisraUIdataHandler {

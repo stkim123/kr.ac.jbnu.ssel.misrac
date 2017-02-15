@@ -1,9 +1,8 @@
-package kr.ac.jbnu.ssel.castparser.view.TableViewColumns;
+package kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns;
 
-import kr.ac.jbnu.ssel.castparser.view.Constant;
+import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
 
-public class MisraTableViewErrorCodeColumn extends MisraTableViewColumn {
-
+public class MisraTableViewLineColumn extends MisraTableViewColumn {
 
 	@Override
 	public String getText(Object element) {
@@ -14,7 +13,7 @@ public class MisraTableViewErrorCodeColumn extends MisraTableViewColumn {
 	@Override
 	public String getTitle() {
 		// TODO Auto-generated method stub
-		return Constant.errorCode;
+		return Constant.line;
 	}
 
 	@Override

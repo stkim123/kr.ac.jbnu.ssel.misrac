@@ -30,11 +30,11 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import kr.ac.jbnu.ssel.castparser.view.ViolationMessageView;
 import kr.ac.jbnu.ssel.misrac.rule.R;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MiaraCRuleException;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
+import kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
