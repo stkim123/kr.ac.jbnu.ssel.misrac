@@ -96,15 +96,12 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 
 	private Rules rules;
 
-	private MisraUIdataHandler misraUIdataHandler;
-	
 	@Override
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 	}
 
 	@Override
 	protected Control createContents(Composite parent) {
-		misraUIdataHandler = new MisraUIdataHandler();
 			
 		noDefaultAndApplyButton();
 		noDefaultButton();
@@ -129,8 +126,11 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			public void handleEvent(Event event) {
 				if (event.detail == SWT.CHECK) {
 					int index = table.getSelectionIndex();
-					String ruleNumber = table.getItem(index).getText();
-					setChecked(ruleNumber, tableData);
+					if( index >= 0)
+					{
+						String ruleNumber = table.getItem(index).getText();
+						setChecked(ruleNumber, tableData);
+					}
 				}
 			}
 
@@ -155,7 +155,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				int index = table.getSelectionIndex();
 				String ruleNumber = table.getItem(index).getText();
-				misraUIdataHandler.getCode(ruleNumber);
+				// TODO
+//				misraUIdataHandler.getCode(ruleNumber);
+				
 				if (document != null) {
 					//put Code to use getCode Method
 					document.set(ruleNumber);
@@ -239,7 +241,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		if (document == null) {
 			CreateDefaultDocument();
 		}
-
+		
 		annotationModel = new AnnotationModel();
 		annotationModel.connect(document);
 
@@ -267,7 +269,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		}
 		ruleCategories.select(defaultIndex);
 		try {
-		tableData = misraUIdataHandler.allDataLoad().getRule();
+		tableData = MisraUIdataHandler.getInstance().loadAllRules();
 		} catch (JAXBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -278,12 +280,12 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				if(categoryWithCombo.contains(" "))
 					categoryWithCombo = manipulateWhiteSpace(categoryWithCombo);
 				try {
-					tableData = misraUIdataHandler.DataLoad(categoryWithCombo);
+					tableData = MisraUIdataHandler.getInstance().getRules(categoryWithCombo);
 					tableViewer.setInput(tableData);
 					tableViewer.refresh();
 					if(categoryWithCombo.equals("All"))
 					{
-						tableData = misraUIdataHandler.allDataLoad().getRule();
+						tableData = MisraUIdataHandler.getInstance().getRules();
 						tableViewer.setInput(tableData);
 						tableViewer.refresh();
 					}
