@@ -84,7 +84,7 @@ public class GeneratingRuleintoXML {
 		if(className!=null)
 			rule.setClassName(className);
 		else
-			rule.setClassName(minerNum+".C");
+			rule.setClassName("Rule"+minerNum+"(notImplement).class");
 		if(category!=null)
 			rule.setCategory(category);
 		// set Values in the rule object
@@ -97,14 +97,14 @@ public class GeneratingRuleintoXML {
 	private String getClassName(String minerNum) throws URISyntaxException, IOException {
 		String className = null;
 		ClassLoader loader = R.class.getClassLoader();
-		URL ruleCodeClassDictory = loader.getResource(CCode.class.getPackage().getName().replace('.', '/'));
+		URL ruleCodeClassDictory = loader.getResource( R.class.getPackage().getName().replace('.', '/'));
 		URL fileURL = FileLocator.toFileURL(ruleCodeClassDictory);
 
 		File ruleDicFile = new File(fileURL.toURI());
 
 		String[] ruleCodeFiles = ruleDicFile.list();
 		for (String ruleCodeClass : ruleCodeFiles) {
-			if(!ruleCodeClass.equals("CCode.class"))
+			if(!ruleCodeClass.equals("R.class"))
 			{
 				String classRuleNumber = getClassRuleNumber(ruleCodeClass);
 				if(minerNum.equals(classRuleNumber))
@@ -119,9 +119,9 @@ public class GeneratingRuleintoXML {
 
 	private String getClassRuleNumber(String ruleCodeClass) {
 		StringBuffer wholeRuleNumber = new StringBuffer();
-	 	String ruleNum = ruleCodeClass.substring(8);
-	 	String[] removedC = ruleNum.split(".C");
-	 	String[] subStrings = removedC[0].split("_");
+	 	String ruleNum = ruleCodeClass.substring(4);
+	 	String[] removedClass = ruleNum.split(".class");
+	 	String[] subStrings = removedClass[0].split("_");
 	 	String startOfNum= null;
 	 	if(subStrings[0].startsWith("0")){
 	 		startOfNum = subStrings[0].replace("0", "");
@@ -165,5 +165,6 @@ public class GeneratingRuleintoXML {
 	public static void main(String[] args) throws IOException, URISyntaxException, JAXBException {
 		GeneratingRuleintoXML generatingRuleintoXML = new GeneratingRuleintoXML();
 		generatingRuleintoXML.generateRuletoXML();
+		
 	}
 }

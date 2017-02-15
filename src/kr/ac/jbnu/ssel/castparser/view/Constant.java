@@ -8,4 +8,6 @@ public class Constant {
 	public static final String errorCode = "Error Code";
 	public static final String errorMessage = "Error Message";
 	
+	//Data Path
+	public static final String dataPath = "D:\\git\\kr.ac.jbnu.ssel.misrac\\Resource\\Rules.xml";
 }

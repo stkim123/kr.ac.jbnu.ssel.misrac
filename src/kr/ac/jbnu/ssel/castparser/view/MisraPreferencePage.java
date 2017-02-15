@@ -1,11 +1,20 @@
 package kr.ac.jbnu.ssel.castparser.view;
 
 import java.awt.Button;
+import java.io.File;
 import java.rmi.activation.Activator;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import org.w3c.dom.Element;
+
+import kr.ac.jbnu.ssel.castparser.preference.Rule;
+import kr.ac.jbnu.ssel.castparser.preference.Rules;
+import kr.ac.jbnu.ssel.castparser.viewHandler.MisraUIdataHandler;
 
 import org.eclipse.cdt.core.templateengine.TemplateEngineHelper;
 import org.eclipse.jface.preference.ComboFieldEditor;
@@ -44,6 +53,7 @@ import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -69,7 +79,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 
 	private static final String PageDescription = "misra page";
 	private Table table;
-	private List tableData;
+	private List<Rule> tableData;
 
 	private TableViewer tableViewer;
 	protected Object[] checkedElements;
@@ -82,25 +92,25 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	private AnnotationModel annotationModel;
 	private String defaultMessage = "please click the column above tihs viewer\n\n\n\n";
 
-	private String[] ruleCategoriesComboList = { "All", "Language Extention", "Documentation", "Character Sets",
-			"Identifiers", "Types", "Constants", "Declarations and Definitions", "Initialization",
-			"Arithmetic Type Conversion", "Pointer Type Conversion", "Expressions", "Control Statement Expressions",
-			"Control Flow", "Switch Statements", "Functions", "Pointers and Arrays", "Structures and Unions",
-			"Preprecessing Directives", "Standard Libraries", "Runtime Failures" };
+	private String[] ruleCategoriesComboList = { "All", "Language Extensions", "Documentation", "Character Sets",
+			"Identifiers", "Types", "Constants", "Declarations And Definitions", "Initialization",
+			"Arithmetic Type Conversion", "Pointer Type Conversion", "Exprssions", "Control Statement Expressions",
+			"Control Flow", "Switch Statements", "Functions", "Pointers And Arrays", "Structures And Unions",
+			"Preprocessing Directives", "Standard Libraries", "Runtime Failures" };
 	private int defaultIndex = 0;
 
+	private Rules rules;
+
+	private MisraUIdataHandler misraUIdataHandler;
+	
 	@Override
 	public void init(org.eclipse.ui.IWorkbench workbench) {
 	}
 
 	@Override
 	protected Control createContents(Composite parent) {
-		tableData = new ArrayList<>();
-		tableData.add("aaaaaa");
-		tableData.add("bbbbbbb");
-		tableData.add("ccccccccc");
-		tableData.add("DDDDDDDDDDDD");
-
+		misraUIdataHandler = new MisraUIdataHandler();
+			
 		noDefaultAndApplyButton();
 		noDefaultButton();
 		Composite composite = new Composite(parent, SWT.NULL);
@@ -116,14 +126,44 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	}
 
 	private void addTableLister() {
-		tableViewer.getTable().addSelectionListener(new SelectionListener() {
+		table = tableViewer.getTable();
+		// to do : need to implement handling when user checked checkbox
+		table.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				if (event.detail == SWT.CHECK) {
+					int index = table.getSelectionIndex();
+					String ruleNumber = table.getItem(index).getText();
+					setChecked(ruleNumber, tableData);
+				}
+			}
+
+			private void setChecked(String ruleNumber, List<Rule> tableData) {
+				String[] ruleNumArry = ruleNumber.split("Rule");
+				String minerNum = ruleNumArry[1];
+				for (Rule rule : tableData) 
+				{
+					if(minerNum.equals(rule.getMinerNum()))
+					{
+						rule.setShouldCheck(true);
+						break;
+					}
+				}
+				
+			}
+		});
+		
+		table.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetSelected(SelectionEvent selectionEvent) {
 				int index = table.getSelectionIndex();
-				String tableData = table.getItem(index).getText();
+				String ruleNumber = table.getItem(index).getText();
+				misraUIdataHandler.getCode(ruleNumber);
 				if (document != null) {
-					document.set(tableData);
+					//put Code to use getCode Method
+					document.set(ruleNumber);
 				} else {
 					CreateDefaultDocument();
 				}
@@ -134,43 +174,31 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			}
 
 		});
-		// to do : need to implement handling when user checked checkbox
-		table.addListener(SWT.Selection, new Listener() {
-
-			@Override
-			public void handleEvent(Event event) {
-				if (event.detail == SWT.CHECK) {
-
-				}
-			}
-		});
-
+		
 	}
 
 	private void createTable(Composite composite) {
 		Group tableCmp = new Group(composite, SWT.None);
 		tableCmp.setLayout(new GridLayout(1, false));
-		tableCmp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 2));
+		tableCmp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 2));
 		tableCmp.setText("Rule_Viewer");
-
 		// Initializes TableViewer
 		tableViewer = new TableViewer(tableCmp,
-				SWT.CHECK | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI | SWT.BORDER | SWT.FULL_SELECTION);
+				SWT.CHECK | SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL);
 		//
 		table = tableViewer.getTable();
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-
+		    
+		table.setLayoutData(new GridData(SWT.NONE, SWT.NONE, true, true));
 		TableViewerColumn colFirstName = new TableViewerColumn(tableViewer, SWT.NONE);
 		colFirstName.getColumn().setWidth(70);
 		colFirstName.getColumn().setText("Rule Num");
 		colFirstName.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				// Rule p = (Rule) element;
-				// return p.getFirstName();
-				return "aaaa";
+				 Rule rule = (Rule) element;
+				 return "Rule"+rule.getMinerNum();
 			}
 		});
 		TableViewerColumn colSecondName = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -179,9 +207,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		colSecondName.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				// Rule p = (Rule) element;
-				// return p.getFirstName();
-				return "bbbbb";
+				 Rule rule = (Rule) element;
+				 return rule.getType();
 			}
 		});
 		TableViewerColumn colThirdName = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -190,9 +217,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		colThirdName.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				// Rule p = (Rule) element;
-				// return p.getFirstName();
-				return "ccccc";
+				 Rule rule = (Rule) element;
+				 return rule.getDescription();
 			}
 		});
 		tableViewer.setContentProvider(new ArrayContentProvider());
@@ -245,9 +271,41 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			ruleCategories.add(ruleCategoriesComboList[i]);
 		}
 		ruleCategories.select(defaultIndex);
+		try {
+		tableData = misraUIdataHandler.allDataLoad().getRule();
+		} catch (JAXBException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		ruleCategories.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
-				System.out.println(((Combo) event.widget).getText());
+				String categoryWithCombo = ((Combo) event.widget).getText();
+				if(categoryWithCombo.contains(" "))
+					categoryWithCombo = manipulateWhiteSpace(categoryWithCombo);
+				try {
+					tableData = misraUIdataHandler.DataLoad(categoryWithCombo);
+					tableViewer.setInput(tableData);
+					tableViewer.refresh();
+					if(categoryWithCombo.equals("All"))
+					{
+						tableData = misraUIdataHandler.allDataLoad().getRule();
+						tableViewer.setInput(tableData);
+						tableViewer.refresh();
+					}
+				} catch (JAXBException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+
+			private String manipulateWhiteSpace(String categoryWithCombo) {
+				StringBuffer stringBuffer = new StringBuffer();
+				String[] categoryStrArry = categoryWithCombo.split(" ");
+				for (int i = 0; i < categoryStrArry.length; i++) {
+					stringBuffer.append(categoryStrArry[i]);
+				}
+				return stringBuffer.toString();
 			}
 		});
 
@@ -256,7 +314,17 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		setRuleButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				List<Rule> checkedRuleList = getCheckedRule(tableData);
+				//need to Manipulate to excute rules depend on the checked rule.
+			}
 
+			private List<Rule> getCheckedRule(List<Rule> tableData) {
+				List<Rule> checkedRuleList = new ArrayList<Rule>();
+				for (Rule rule : tableData) {
+					if(rule.isShouldCheck())
+						checkedRuleList.add(rule);
+				}
+				return checkedRuleList;
 			}
 		});
 
@@ -269,6 +337,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				{
 					TableItem item = table.getItem(i);
 					item.setChecked(true);
+					tableData.get(i).setShouldCheck(true);
+					
 				}
 			}
 		});
@@ -282,9 +352,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				{
 					TableItem item = table.getItem(i);
 					item.setChecked(false);
+					tableData.get(i).setShouldCheck(false);
 				}
 			}
 		});
 	}
-
 }
