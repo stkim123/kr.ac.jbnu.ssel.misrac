@@ -1,6 +1,6 @@
-package kr.ac.jbnu.ssel.castparser.view.TableViewColumns;
+package kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns;
 
-import kr.ac.jbnu.ssel.castparser.view.Constant;
+import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
 
 public class MisraTableViewErrorMSGColumn extends MisraTableViewColumn {
 

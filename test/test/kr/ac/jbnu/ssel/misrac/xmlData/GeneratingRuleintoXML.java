@@ -20,10 +20,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import kr.ac.jbnu.ssel.castparser.preference.ObjectFactory;
-import kr.ac.jbnu.ssel.castparser.preference.Rule;
-import kr.ac.jbnu.ssel.castparser.preference.Rules;
 import kr.ac.jbnu.ssel.misrac.rule.R;
+import kr.ac.jbnu.ssel.misrac.ui.preference.ObjectFactory;
+import kr.ac.jbnu.ssel.misrac.ui.preference.Rule;
+import kr.ac.jbnu.ssel.misrac.ui.preference.Rules;
 import test.kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
 
 public class GeneratingRuleintoXML {

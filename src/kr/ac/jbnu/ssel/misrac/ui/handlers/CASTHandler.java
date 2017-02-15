@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.castparser.handlers;
+package kr.ac.jbnu.ssel.misrac.ui.handlers;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.eclipse.cdt.core.CCorePlugin;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
@@ -23,18 +24,19 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import kr.ac.jbnu.ssel.castparser.view.ViolationMessageView;
 import kr.ac.jbnu.ssel.misrac.rule.R;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MiaraCRuleException;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
+import kr.ac.jbnu.ssel.misrac.ui.preference.MisraUIdataHandler;
+import kr.ac.jbnu.ssel.misrac.ui.preference.Rule;
+import kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -93,11 +95,20 @@ public class CASTHandler extends AbstractHandler {
 
 				String[] ruleFiles = ruleDicFile.list();
 ///////////////////////////
+				HashSet<Rule> shouldCheckRules = MisraUIdataHandler.getInstance().getShouldCheckRules();
+				for (Rule rule : shouldCheckRules) {
+					
+					System.out.println("should check:"+ rule.getClassName());
+				}
 				
 ///////////////////////////
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
-					callRule(ast, ruleClass, violationMessages);
+					if(shouldCheckRules.contains(ruleClass))
+					{
+						callRule(ast, ruleClass, violationMessages);	
+					}
+					
 				}
 
 				openMessageView(violationMessages);

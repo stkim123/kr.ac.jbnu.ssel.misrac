@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorFunctionStyleMacroDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTPreprocessorObjectStyleMacroDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;

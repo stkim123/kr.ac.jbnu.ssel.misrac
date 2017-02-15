@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.castparser.view;
+package kr.ac.jbnu.ssel.misrac.ui.view;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -63,7 +63,7 @@ public class ViolationMessageView extends ViewPart implements IPropertyChangeLis
     /**
      * The ID of the view as specified by the extension.
      */
-    public static final String ID = "kr.ac.jbnu.ssel.castparser.view.ViolationMessageView";
+    public static final String ID = "kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView";
 
     private TableViewer viewer;
     private Action action1;

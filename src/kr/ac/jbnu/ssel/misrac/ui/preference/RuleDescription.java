@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.castparser.preference;
+package kr.ac.jbnu.ssel.misrac.ui.preference;
 
 public class RuleDescription {
 	

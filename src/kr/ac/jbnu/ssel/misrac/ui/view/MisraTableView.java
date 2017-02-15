@@ -1,13 +1,13 @@
-package kr.ac.jbnu.ssel.castparser.view;
+package kr.ac.jbnu.ssel.misrac.ui.view;
 
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.*;
 
-import kr.ac.jbnu.ssel.castparser.view.TableViewColumns.MisraTableViewErrorCodeColumn;
-import kr.ac.jbnu.ssel.castparser.view.TableViewColumns.MisraTableViewErrorMSGColumn;
-import kr.ac.jbnu.ssel.castparser.view.TableViewColumns.MisraTableViewLineColumn;
-import kr.ac.jbnu.ssel.castparser.view.TableViewColumns.MisraTableViewRuleNumColumn;
+import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewErrorCodeColumn;
+import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewErrorMSGColumn;
+import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewLineColumn;
+import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewRuleNumColumn;
 
 import org.eclipse.jface.viewers.*;
 import org.eclipse.swt.graphics.Image;
