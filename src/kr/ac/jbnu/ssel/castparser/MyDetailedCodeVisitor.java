@@ -1,4 +1,4 @@
-package kr.ac.jbnu.ssel.castparser.test;
+package kr.ac.jbnu.ssel.castparser;
 
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
 import org.eclipse.cdt.core.dom.ast.IASTArrayDeclarator;
@@ -65,8 +65,6 @@ import org.eclipse.cdt.core.dom.ast.IASTTypeIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTTypeIdInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
-
-import kr.ac.jbnu.ssel.castparser.DetailedASTVisitor;
 
 public class MyDetailedCodeVisitor extends DetailedASTVisitor {
 	
