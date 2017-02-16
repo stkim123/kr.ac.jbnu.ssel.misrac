@@ -18,6 +18,7 @@ import javax.xml.bind.Marshaller;
 import org.eclipse.core.runtime.FileLocator;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import kr.ac.jbnu.ssel.misrac.rule.R;
@@ -58,17 +59,20 @@ public class GeneratingRuleintoXML {
 			Elements ruleNumAndType = document.getElementsByTag("span");
 			setNumAndTypeAndClassName(ruleNumAndType, rule);
 			Elements ruleName = document.getElementsByAttributeValue("class", "heading_message");
+			String sourceCode = getSourceCode(document);
 			String description = document.body().ownText();
 			//setting sub rule data
 			rule.setRuleName(ruleName.text());
 			rule.setDescription(description);
 			rule.setShouldCheck(false);
+			rule.setSourceCode(sourceCode);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+
 
 	private void setNumAndTypeAndClassName(Elements ruleNumAndType, Rule rule) throws URISyntaxException, IOException {
 		//manipulate String in the elements
@@ -162,6 +166,17 @@ public class GeneratingRuleintoXML {
 		return Category;
 	}
 
+	private String getSourceCode(Document document) { 
+	
+	Elements exampleCodes = document.getElementsByAttributeValue("class", "example");
+	StringBuffer sb = new StringBuffer();
+			for (Element element : exampleCodes) {
+				sb.append(element.text());
+				sb.append("\n");
+			}
+			return sb.toString();
+	}
+	
 	public static void main(String[] args) throws IOException, URISyntaxException, JAXBException {
 		GeneratingRuleintoXML generatingRuleintoXML = new GeneratingRuleintoXML();
 		generatingRuleintoXML.generateRuletoXML();

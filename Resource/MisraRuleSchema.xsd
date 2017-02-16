@@ -17,6 +17,7 @@
 				<xs:element ref="description"/>
 				<xs:element ref="RuleName"/>
 				<xs:element ref="ClassName"/>
+				<xs:element ref="SourceCode"/>
 			</xs:sequence>
 			<xs:attribute ref="shouldCheck"/>
 			<xs:attribute ref="type"/>
@@ -27,6 +28,7 @@
 	</xs:element>
 	<xs:element name="description" type="xs:string"/>
 	<xs:element name="RuleName" type="xs:string"/>
+	<xs:element name="SourceCode" type="xs:string"/>
 	<xs:element name="ClassName" type="xs:string"/>
 	<xs:attribute name="ruleNum" type="xs:string"/>
 	<xs:attribute name="category" type="xs:string"/>

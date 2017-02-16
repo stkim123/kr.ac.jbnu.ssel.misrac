@@ -92,68 +92,6 @@ public class MisraUIdataHandler {
 		return ruleList;
 	}
 
-	/**
-	 * TO BE DPRECATED!
-	 * 
-	 * @param ruleNumber
-	 * @return
-	 */
-	public String getCode(String ruleNumber) {
-		String code = null;
-		String[] ruleNumArry = ruleNumber.split("Rule");
-		String minerNum = ruleNumArry[1];
-		String ruleClassWithPackage = null;
-		// 1. Compare between ruleNumber of index in the table and ruleNumber in
-		// the C code
-		// 2. get code if the number match number of index of table
-		String[] cCodeFiles = getCodeList();
-
-		return code;
-	}
-
-	/**
-	 * TO BE DPRECATED!
-	 * 
-	 * @return
-	 */
-	private String[] getCodeList() {
-		String[] cCodeFiles = null;
-		ClassLoader loader = CCode.class.getClassLoader();
-		URL ruleCodeClassDictory = loader.getResource(CCode.class.getPackage().getName().replace('.', '/'));
-		try {
-			URL fileURL = FileLocator.toFileURL(ruleCodeClassDictory);
-			File codeDicFile = new File(fileURL.toURI());
-			cCodeFiles = codeDicFile.list();
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
-		return cCodeFiles;
-	}
-
-	/**
-	 * TO BE DPRECATED!
-	 * 
-	 * @param cCodeClass
-	 * @return
-	 */
-	private String getcClassRuleNumber(String cCodeClass) {
-		StringBuffer wholeRuleNumber = new StringBuffer();
-		String ruleNum = cCodeClass.substring(6);
-		String[] removedClass = ruleNum.split(".C");
-		String[] subStrings = removedClass[0].split("_");
-		String startOfNum = null;
-		if (subStrings[0].startsWith("0")) {
-			startOfNum = subStrings[0].replace("0", "");
-		} else {
-			startOfNum = subStrings[0];
-		}
-		if (startOfNum != null) {
-			String endOfNum = subStrings[1];
-			wholeRuleNumber.append(startOfNum);
-			wholeRuleNumber.append("." + endOfNum);
-		}
-		return wholeRuleNumber.toString();
-	}
 
 	public static void main(String[] args) throws JAXBException {
 		MisraUIdataHandler misraUIdataHandler = new MisraUIdataHandler();
@@ -163,19 +101,4 @@ public class MisraUIdataHandler {
 		}
 	}
 
-	public List<Rule> loadRules(String category) throws JAXBException {
-		List<Rule> subRules = new ArrayList<Rule>();
-		File file = new File(Constant.dataPath);
-		JAXBContext jc = JAXBContext.newInstance(Rules.class);
-		Unmarshaller unmarshaller = jc.createUnmarshaller();
-		Rules rules = (Rules) unmarshaller.unmarshal(file);
-		for (Rule rule : rules.getRule()) {
-			if (rule.getCategory() != null) {
-				if (rule.getCategory().equals(category)) {
-					subRules.add(rule);
-				}
-			}
-		}
-		return subRules;
-	}
 }

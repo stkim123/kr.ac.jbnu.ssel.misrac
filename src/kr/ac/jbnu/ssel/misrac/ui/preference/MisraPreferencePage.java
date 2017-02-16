@@ -127,16 +127,12 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				Object obj = selectionEvent.getSource();
 				table = tableViewer.getTable();
 				int index = table.getSelectionIndex();
-				
-				String ruleNumber = ""; 
-				if(index != -1)
-					ruleNumber = table.getItem(index).getText();
+				Object tableItem = table.getItem(index).getData();
 				// TODO
-//				misraUIdataHandler.getCode(ruleNumber);
-				
+				Rule rule = (Rule)tableItem;
 				if (document != null) {
 					//put Code to use getCode Method
-					document.set(ruleNumber);
+					document.set(rule.getSourceCode());
 				} else {
 					CreateDefaultDocument();
 				}
