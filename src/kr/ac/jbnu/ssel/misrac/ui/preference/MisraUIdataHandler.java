@@ -76,7 +76,7 @@ public class MisraUIdataHandler implements Cloneable {
 		Rules rules = (Rules) unmarshaller.unmarshal(file);
 		ruleList = rules.getRule();
 
-		for (Rule rule : ruleList) {
+		for (Rule rule : ruleList) {			
 			if (rule.getCategory() != null) {
 				String category = rule.getCategory();
 				List<Rule> ruleCate = rulesByCategory.get(category);

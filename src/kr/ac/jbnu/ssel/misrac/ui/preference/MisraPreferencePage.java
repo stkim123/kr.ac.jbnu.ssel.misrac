@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.File;
 import java.rmi.activation.Activator;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -89,7 +90,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	private AnnotationModel annotationModel;
 	private String defaultMessage = "please click the column above tihs viewer\n\n\n\n";
 
-	private String[] ruleCategoriesComboList = { "All", "Language Extensions", "Documentation", "Character Sets",
+	private String[] ruleCategoriesComboList = { "All","Enviroment", "Language Extensions", "Documentation", "Character Sets",
 			"Identifiers", "Types", "Constants", "Declarations And Definitions", "Initialization",
 			"Arithmetic Type Conversion", "Pointer Type Conversion", "Exprssions", "Control Statement Expressions",
 			"Control Flow", "Switch Statements", "Functions", "Pointers And Arrays", "Structures And Unions",
@@ -99,6 +100,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	private Rules rules;
 	private List<Rule> clonedData;
 	private MisraUIdataHandler misraUIdataHandler;
+	private Combo ruleCategories;
 
 	@Override
 	public void init(org.eclipse.ui.IWorkbench workbench) {
@@ -172,7 +174,10 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		tableViewer.setContentProvider(new ArrayContentProvider());
 
 		// must be input Data as Array<Rule>
+		tableData = misraUIdataHandler.getInstance().getRules();
+		ruleCategories.select(defaultIndex);
 		tableViewer.setInput(tableData);
+		setChecked(tableViewer);
 
 	}
 
@@ -219,16 +224,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		buttonsCmp.setLayout(new GridLayout(4, false));
 		buttonsCmp.setLayoutData(new GridData(SWT.HORIZONTAL));
 
-		Combo ruleCategories = new Combo(buttonsCmp, SWT.BORDER | SWT.READ_ONLY);
+		ruleCategories = new Combo(buttonsCmp, SWT.BORDER | SWT.READ_ONLY);
 		for (int i = 0; i < ruleCategoriesComboList.length; i++) {
 			ruleCategories.add(ruleCategoriesComboList[i]);
-		}
-		ruleCategories.select(defaultIndex);
-		try {
-		tableData = misraUIdataHandler.loadAllRules();
-		} catch (JAXBException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		ruleCategories.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
@@ -236,13 +234,17 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				if(categoryWithCombo.contains(" "))
 					categoryWithCombo = manipulateWhiteSpace(categoryWithCombo);
 				try {
+					//issue occured
 					tableData = misraUIdataHandler.getRules(categoryWithCombo);
 					tableViewer.setInput(tableData);
 					tableViewer.refresh();
+					setChecked(tableViewer);
+					setCheckIntoWholeData(tableViewer);
 					if(categoryWithCombo.equals("All"))
 					{
 						tableData = misraUIdataHandler.getRules();
 						tableViewer.setInput(tableData);
+						setChecked(tableViewer);
 						tableViewer.refresh();
 					}
 				} catch (JAXBException e) {
@@ -250,6 +252,20 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 					e.printStackTrace();
 				}
 				
+			}
+
+			private void setCheckIntoWholeData(CheckboxTableViewer tableViewer) {
+				// TODO Auto-generated method stub
+				TableItem[] tableItems = tableViewer.getTable().getItems();
+				List<Rule> wholeRule = misraUIdataHandler.getInstance().getRules();
+				for (int i = 0; i < tableItems.length; i++) {
+					Rule itemRule = (Rule)tableItems[i].getData();
+					for (Rule rule : wholeRule) {
+						if(rule.equals(itemRule)){
+							rule.setShouldCheck(true);
+						}
+					}
+				}
 			}
 
 			private String manipulateWhiteSpace(String categoryWithCombo) {
@@ -272,7 +288,6 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 					TableItem item = table.getItem(i);
 					item.setChecked(true);
 					tableData.get(i).setShouldCheck(true);
-					
 				}
 			}
 		});
@@ -363,6 +378,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			public void widgetSelected(SelectionEvent event) {
 				tableViewer.setInput(clonedData);
 				tableViewer.refresh();
+				setChecked(tableViewer);
+				ruleCategories.select(defaultIndex);
+				
 			}
 		});
 		org.eclipse.swt.widgets.Button applyButton = new org.eclipse.swt.widgets.Button(buttonBar, SWT.PUSH);
@@ -401,6 +419,21 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	private void setChecked(CheckboxTableViewer tableViewer){
+		List<Rule> rules = misraUIdataHandler.getRules();
+		table = tableViewer.getTable();
+		TableItem[] tableItems = table.getItems();
+		for (int i = 0; i < tableItems.length; i++) 
+		{
+			Object tableItem = tableItems[i].getData();
+			Rule itemRule = (Rule)tableItem;
+			for (Rule rule : rules) 
+			{
+				if(rule.equals(itemRule)&&itemRule.isShouldCheck())
+					table.getItem(i).setChecked(true);
+			}
 		}
 	}
 }
