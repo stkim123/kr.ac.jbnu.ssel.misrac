@@ -74,5 +74,9 @@ public class Rules {
         }
         return this.rule;
     }
+    
+    public void setRule(List<Rule> ruleList){
+    	this.rule = ruleList;
+    }
 
 }

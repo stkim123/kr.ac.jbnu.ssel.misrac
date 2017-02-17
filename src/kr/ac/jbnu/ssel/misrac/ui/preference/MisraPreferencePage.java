@@ -97,6 +97,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	private int defaultIndex = 0;
 
 	private Rules rules;
+	private List<Rule> clonedData;
+	private MisraUIdataHandler misraUIdataHandler;
 
 	@Override
 	public void init(org.eclipse.ui.IWorkbench workbench) {
@@ -104,7 +106,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 
 	@Override
 	protected Control createContents(Composite parent) {
+		misraUIdataHandler = MisraUIdataHandler.getInstance();
 		noDefaultAndApplyButton();
+		cloneTableData();
 		Composite composite = new Composite(parent, SWT.NULL);
 		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(GridData.GRAB_VERTICAL));
@@ -115,46 +119,6 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		createSourceViewer(composite);
 		this.contributeButtons(composite);
 		return composite;
-	}
-
-	private void addTableLister() {
-		table = tableViewer.getTable();
-		
-		table.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent selectionEvent) {
-				Object obj = selectionEvent.getSource();
-				table = tableViewer.getTable();
-				int index = table.getSelectionIndex();
-				Object tableItem = table.getItem(index).getData();
-				// TODO
-				Rule rule = (Rule)tableItem;
-				if (document != null) {
-					//put Code to use getCode Method
-					document.set(rule.getSourceCode());
-				} else {
-					CreateDefaultDocument();
-				}
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent selectionEvent) {
-			}
-
-		});
-		
-		// to do : need to implement handling when user checked checkbox
-		tableViewer.addCheckStateListener(new ICheckStateListener() {
-			
-			@Override
-			public void checkStateChanged(CheckStateChangedEvent event) {
-				Object element = event.getElement();
-				Rule rule = (Rule)element;
-				rule.setShouldCheck(true);
-			}
-		});
-		
 	}
 
 	private void createTable(Composite composite) {
@@ -261,7 +225,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		}
 		ruleCategories.select(defaultIndex);
 		try {
-		tableData = MisraUIdataHandler.getInstance().loadAllRules();
+		tableData = misraUIdataHandler.loadAllRules();
 		} catch (JAXBException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -272,12 +236,12 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				if(categoryWithCombo.contains(" "))
 					categoryWithCombo = manipulateWhiteSpace(categoryWithCombo);
 				try {
-					tableData = MisraUIdataHandler.getInstance().getRules(categoryWithCombo);
+					tableData = misraUIdataHandler.getRules(categoryWithCombo);
 					tableViewer.setInput(tableData);
 					tableViewer.refresh();
 					if(categoryWithCombo.equals("All"))
 					{
-						tableData = MisraUIdataHandler.getInstance().getRules();
+						tableData = misraUIdataHandler.getRules();
 						tableViewer.setInput(tableData);
 						tableViewer.refresh();
 					}
@@ -328,6 +292,46 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		});				
 	}
 	
+	private void addTableLister() {
+		table = tableViewer.getTable();
+		
+		table.addSelectionListener(new SelectionListener() {
+	
+			@Override
+			public void widgetSelected(SelectionEvent selectionEvent) {
+				Object obj = selectionEvent.getSource();
+				table = tableViewer.getTable();
+				int index = table.getSelectionIndex();
+				Object tableItem = table.getItem(index).getData();
+				// TODO
+				Rule rule = (Rule)tableItem;
+				if (document != null) {
+					//put Code to use getCode Method
+					document.set(rule.getSourceCode());
+				} else {
+					CreateDefaultDocument();
+				}
+			}
+	
+			@Override
+			public void widgetDefaultSelected(SelectionEvent selectionEvent) {
+			}
+	
+		});
+		
+		// to do : need to implement handling when user checked checkbox
+		tableViewer.addCheckStateListener(new ICheckStateListener() {
+			
+			@Override
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				Object element = event.getElement();
+				Rule rule = (Rule)element;
+				rule.setShouldCheck(true);
+			}
+		});
+		
+	}
+
 	@Override
 	protected void contributeButtons(Composite parent) {
 		GridData gd;
@@ -356,8 +360,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		defaultButton.addSelectionListener(new SelectionAdapter() {
 			
 			@Override
-			public void widgetSelected(SelectionEvent arg0) {
-				System.out.println("hehe");
+			public void widgetSelected(SelectionEvent event) {
+				tableViewer.setInput(clonedData);
+				tableViewer.refresh();
 			}
 		});
 		org.eclipse.swt.widgets.Button applyButton = new org.eclipse.swt.widgets.Button(buttonBar, SWT.PUSH);
@@ -372,10 +377,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			
 			public void widgetSelected(SelectionEvent e) {
 				List<Rule> checkedRuleList = getCheckedRule(tableData);
-				//need to Manipulate to excute rules depend on the checked rule.
-				for (Rule rule : checkedRuleList) {
-					System.out.println(rule.minerNum);
-				}
+				//need to store Data into xml
+				misraUIdataHandler.storeToXml();				
 			}
 
 			private List<Rule> getCheckedRule(List<Rule> tableData) {
@@ -388,5 +391,16 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			}
 		});
 		super.contributeButtons(parent);
+	}
+	
+	private void cloneTableData() {
+		try {
+			Object clonedObj = misraUIdataHandler.clone();
+			MisraUIdataHandler muh = (MisraUIdataHandler)clonedObj;
+			clonedData = muh.getInstance().getRules();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

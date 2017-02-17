@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -18,7 +19,7 @@ import org.eclipse.core.runtime.FileLocator;
 import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
 import test.kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
 
-public class MisraUIdataHandler {
+public class MisraUIdataHandler implements Cloneable {
 
 	private static MisraUIdataHandler instance;
 
@@ -92,7 +93,26 @@ public class MisraUIdataHandler {
 		return ruleList;
 	}
 
+	@Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
+	public void storeToXml(){
+		JAXBContext context;
+		try {
+			context = JAXBContext.newInstance(String.class, Rules.class);
+			Marshaller marshaller = context.createMarshaller();
+			File rulesFile = new File(Constant.dataPath);
+			Rules rules = new Rules();
+			rules.setRule(ruleList);
+			marshaller.marshal(rules, rulesFile);
+		} catch (JAXBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	public static void main(String[] args) throws JAXBException {
 		MisraUIdataHandler misraUIdataHandler = new MisraUIdataHandler();
 		List<Rule> ruleList = misraUIdataHandler.loadAllRules();
