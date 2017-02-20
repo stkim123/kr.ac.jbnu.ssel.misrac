@@ -9,7 +9,7 @@ public class Constant {
 	public static final String errorMessage = "Error Message";
 	
 	//Data Path
-	public static final String dataPath = "D:\\git\\kr.ac.jbnu.ssel.misrac\\Resource\\rules.xml";
+	public static final String dataPath = "C:\\Users\\presentation\\git\\kr.ac.jbnu.ssel.misrac\\Resource\\rules.xml";
 	
 	//
 	public static final String notImplement = "(notImplement)";

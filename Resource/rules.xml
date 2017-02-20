@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Rules><Rule shouldCheck="true" type="Required" majorNum="1" minerNum="1.1" category="Enviroment"><description>These guidelines are based on ISO/IEC 9899:1990 [2] amended and corrected by ISO/IEC 9899/COR1:1995 [4], ISO/IEC 9899/AMD1:1995 [5], and ISO/IEC 9899/COR2: 1996 [6]. No claim is made as to their suitability with respect to the ISO 9899:1999 [8] version of the standard. Any reference in this document to 'Standard C' refers to the older ISO/IEC 9899:1990 [2] standard.</description><RuleName>All code shall conform to ISO/IEC 9899:1990 C programming language, ISO 9899, amended and corrected by ISO/IEC 9899/COR1:1995, ISO/IEC 9899/AMD1:1995, and ISO/IEC 9899/COR2: 1996192 </RuleName><ClassName>Rule01_1_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Rules><Rule shouldCheck="false" type="Required" majorNum="1" minerNum="1.1" category="Enviroment"><description>These guidelines are based on ISO/IEC 9899:1990 [2] amended and corrected by ISO/IEC 9899/COR1:1995 [4], ISO/IEC 9899/AMD1:1995 [5], and ISO/IEC 9899/COR2: 1996 [6]. No claim is made as to their suitability with respect to the ISO 9899:1999 [8] version of the standard. Any reference in this document to 'Standard C' refers to the older ISO/IEC 9899:1990 [2] standard.</description><RuleName>All code shall conform to ISO/IEC 9899:1990 C programming language, ISO 9899, amended and corrected by ISO/IEC 9899/COR1:1995, ISO/IEC 9899/AMD1:1995, and ISO/IEC 9899/COR2: 1996192 </RuleName><ClassName>Rule01_1_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0101( void )&#xD;
@@ -212,14 +212,14 @@ void put_line( const PC *str )&#xD;
 {&#xD;
    ( void )printf( &quot;%s\n&quot;, str );&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="1" minerNum="1.2" category="Enviroment"><description>This rule requires that any reliance on undefined and unspecified behaviour, which is not specifically addressed by other rules, shall be avoided. Where a specific behaviour is explicitly covered in another rule, only that specific rule needs to be deviated if required. See ISO/IEC 9899:1990 Appendix G [2] for a complete list of these issues.</description><RuleName>No reliance shall be placed on undefined or unspecified behaviour. </RuleName><ClassName>Rule1.2(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="1" minerNum="1.2" category="Enviroment"><description>This rule requires that any reliance on undefined and unspecified behaviour, which is not specifically addressed by other rules, shall be avoided. Where a specific behaviour is explicitly covered in another rule, only that specific rule needs to be deviated if required. See ISO/IEC 9899:1990 Appendix G [2] for a complete list of these issues.</description><RuleName>No reliance shall be placed on undefined or unspecified behaviour. </RuleName><ClassName>Rule1.2(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0102( void )&#xD;
 {&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="1" minerNum="1.3" category="Enviroment"><description>If a module is to be implemented in a language other than C, or compiled on a different C compiler, then it is essential to ensure that the module will integrate correctly with other modules. Some aspects of the behaviour of the C language are dependent on the compiler, and therefore these must be understood for the compiler being used. Examples of issues that need to be understood are: stack usage, parameter passing and the way in which data values are stored (lengths, alignments, aliasing, overlays etc.)</description><RuleName>Multiple compilers and/or languages shall only be used if there is a common defined interface standard for object code to which the languages/compilers/assemblers conform. </RuleName><ClassName>Rule1.3(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="1" minerNum="1.3" category="Enviroment"><description>If a module is to be implemented in a language other than C, or compiled on a different C compiler, then it is essential to ensure that the module will integrate correctly with other modules. Some aspects of the behaviour of the C language are dependent on the compiler, and therefore these must be understood for the compiler being used. Examples of issues that need to be understood are: stack usage, parameter passing and the way in which data values are stored (lengths, alignments, aliasing, overlays etc.)</description><RuleName>Multiple compilers and/or languages shall only be used if there is a common defined interface standard for object code to which the languages/compilers/assemblers conform. </RuleName><ClassName>Rule1.3(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0103( void )&#xD;
@@ -1658,7 +1658,7 @@ extern S16 test_1804( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.1" category="PreprocessingDirectives"><description>All the #include statements in a particular code file should be grouped together near the head of the file. The rule states that the only items which may precede a #include in a file are other preprocessor directives or comments.</description><RuleName>#include statements in a file should only be preceded by other preprocessor directives or comments. </RuleName><ClassName>Rule19_1_Adv.class</ClassName><SourceCode>/*PRQA S 862 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.1" category="PreprocessingDirectives"><description>All the #include statements in a particular code file should be grouped together near the head of the file. The rule states that the only items which may precede a #include in a file are other preprocessor directives or comments.</description><RuleName>#include statements in a file should only be preceded by other preprocessor directives or comments. </RuleName><ClassName>Rule19_1_Adv.class</ClassName><SourceCode>/*PRQA S 862 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -1673,12 +1673,12 @@ extern S16 test_1901x( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.10" category="PreprocessingDirectives"><description>Within a definition of a function-like macro, the arguments shall be enclosed in parentheses. For example define an abs function using:</description><RuleName>In the definition of a function-like macro each instance of a parameter shall be enclosed in parentheses unless it is used as the operand of # or ##. </RuleName><ClassName>Rule19.10(notImplement).class</ClassName><SourceCode>#define abs( x ) ( ( ( x ) &gt;= 0 ) ? ( x ) : -( x ) )
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.10" category="PreprocessingDirectives"><description>Within a definition of a function-like macro, the arguments shall be enclosed in parentheses. For example define an abs function using:</description><RuleName>In the definition of a function-like macro each instance of a parameter shall be enclosed in parentheses unless it is used as the operand of # or ##. </RuleName><ClassName>Rule19.10(notImplement).class</ClassName><SourceCode>#define abs( x ) ( ( ( x ) &gt;= 0 ) ? ( x ) : -( x ) )
 #define abs( x ) ( ( x &gt;= 0 ) ? x : -x )
 z = abs( a - b );
 z = ( ( a - b &gt;=  ) ? a - b : -a - b );
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.11" category="PreprocessingDirectives"><description>If an attempt is made to use an identifier in a preprocessor directive, and that identifier has not been defined, the preprocessor will sometimes not give any warning but will assume the value zero. #ifdef, #ifndef and defined() are provided to test the existence of a macro, and are therefore excluded.</description><RuleName>All macro identifiers in preprocessor directives shall be defined before use, except in #ifdef and #ifndef preprocessor directives and the defined() operator. </RuleName><ClassName>Rule19.11(notImplement).class</ClassName><SourceCode>#if x &lt; 0           /* x assumed to be zero if not defined */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.12" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. To avoid this problem only one occurrence of either operator shall be used in any single macro definition (i.e. one #, or one ## or neither).</description><RuleName>There shall be at most one occurrence of the # or ## preprocessor operators in a single macro definition. </RuleName><ClassName>Rule19_12_Req.class</ClassName><SourceCode>/* PRQA S 3429 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.11" category="PreprocessingDirectives"><description>If an attempt is made to use an identifier in a preprocessor directive, and that identifier has not been defined, the preprocessor will sometimes not give any warning but will assume the value zero. #ifdef, #ifndef and defined() are provided to test the existence of a macro, and are therefore excluded.</description><RuleName>All macro identifiers in preprocessor directives shall be defined before use, except in #ifdef and #ifndef preprocessor directives and the defined() operator. </RuleName><ClassName>Rule19.11(notImplement).class</ClassName><SourceCode>#if x &lt; 0           /* x assumed to be zero if not defined */
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.12" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. To avoid this problem only one occurrence of either operator shall be used in any single macro definition (i.e. one #, or one ## or neither).</description><RuleName>There shall be at most one occurrence of the # or ## preprocessor operators in a single macro definition. </RuleName><ClassName>Rule19_12_Req.class</ClassName><SourceCode>/* PRQA S 3429 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1690,7 +1690,7 @@ extern S16 test_1912( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.13" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. Compilers have been inconsistent in the implementation of these operators. To avoid these problems do not use them.</description><RuleName>The # and ## preprocessor operators should not be used. </RuleName><ClassName>Rule19_13_Adv.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.13" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. Compilers have been inconsistent in the implementation of these operators. To avoid these problems do not use them.</description><RuleName>The # and ## preprocessor operators should not be used. </RuleName><ClassName>Rule19_13_Adv.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 &#xD;
 #include &quot;gen.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1707,12 +1707,12 @@ extern S16 test_1913( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.14" category="PreprocessingDirectives"><description>The only two permissible forms for the defined preprocessor operator are:</description><RuleName>The defined preprocessor operator shall only be used in one of the two standard forms. </RuleName><ClassName>Rule19.14(notImplement).class</ClassName><SourceCode>defined( identifier )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.14" category="PreprocessingDirectives"><description>The only two permissible forms for the defined preprocessor operator are:</description><RuleName>The defined preprocessor operator shall only be used in one of the two standard forms. </RuleName><ClassName>Rule19.14(notImplement).class</ClassName><SourceCode>defined( identifier )&#xD;
     defined identifier
 #if defined( X &gt; Y )          /* not compliant - undefined behaviour */
 #define DEFINED defined&#xD;
 #if DEFINED( X )              /* not compliant - undefined behaviour */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.15" category="PreprocessingDirectives"><description>When a translation unit contains a complex hierarchy of nested header files it can happen that a particular header file is included more than once. This can be, at best, a source of confusion. If it leads to multiple or conflicting definitions, the result can be undefined or erroneous behaviour.</description><RuleName>Precautions shall be taken in order to prevent the contents of a header file being included twice. </RuleName><ClassName>Rule19_15_Req.class</ClassName><SourceCode>#ifndef AHDR_H&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.15" category="PreprocessingDirectives"><description>When a translation unit contains a complex hierarchy of nested header files it can happen that a particular header file is included more than once. This can be, at best, a source of confusion. If it leads to multiple or conflicting definitions, the result can be undefined or erroneous behaviour.</description><RuleName>Precautions shall be taken in order to prevent the contents of a header file being included twice. </RuleName><ClassName>Rule19_15_Req.class</ClassName><SourceCode>#ifndef AHDR_H&#xD;
 #define AHDR_H&#xD;
 /* The following lines will be excluded by the&#xD;
    preprocessor if the file is included more&#xD;
@@ -1732,7 +1732,7 @@ extern S16 test_1913( void )&#xD;
 ...&#xD;
 &#xD;
 #endif
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.16" category="PreprocessingDirectives"><description>When a section of source code is excluded by preprocessor directives, the content of each excluded statement is ignored until a #else, #elif or #endif directive is encountered (depending on the context). If one of these excluded directives is badly formed, it may be ignored without warning by a compiler with unfortunate consequences.</description><RuleName>Preprocessing directives shall be syntactically meaningful even when excluded by the preprocessor. </RuleName><ClassName>Rule19.16(notImplement).class</ClassName><SourceCode>#define AAA 2&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.16" category="PreprocessingDirectives"><description>When a section of source code is excluded by preprocessor directives, the content of each excluded statement is ignored until a #else, #elif or #endif directive is encountered (depending on the context). If one of these excluded directives is badly formed, it may be ignored without warning by a compiler with unfortunate consequences.</description><RuleName>Preprocessing directives shall be syntactically meaningful even when excluded by the preprocessor. </RuleName><ClassName>Rule19.16(notImplement).class</ClassName><SourceCode>#define AAA 2&#xD;
 ...&#xD;
 int foo( void )&#xD;
 {&#xD;
@@ -1746,7 +1746,7 @@ int foo( void )&#xD;
     ...&#xD;
     return x;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.17" category="PreprocessingDirectives"><description>When the inclusion and exclusion of blocks of statements is controlled by a series of preprocessor directives, confusion can arise if all of the relevant directives do not occur within one file. This rule requires that all preprocessor directives in a sequence of the form #if / #ifdef ... #elif ... #else ... #endif shall reside in the same file. Observance of this rule preserves good code structure and avoids maintenance problems.</description><RuleName>All #else, #elif and #endif preprocessor directives shall reside in the same file as the #if or #ifdef directive to which they are related. </RuleName><ClassName>Rule19_17_Req.class</ClassName><SourceCode>#define A&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.17" category="PreprocessingDirectives"><description>When the inclusion and exclusion of blocks of statements is controlled by a series of preprocessor directives, confusion can arise if all of the relevant directives do not occur within one file. This rule requires that all preprocessor directives in a sequence of the form #if / #ifdef ... #elif ... #else ... #endif shall reside in the same file. Observance of this rule preserves good code structure and avoids maintenance problems.</description><RuleName>All #else, #elif and #endif preprocessor directives shall reside in the same file as the #if or #ifdef directive to which they are related. </RuleName><ClassName>Rule19_17_Req.class</ClassName><SourceCode>#define A&#xD;
 ...&#xD;
 #ifdef A&#xD;
 ...&#xD;
@@ -1764,7 +1764,7 @@ EOF
 EOF
 ...&#xD;
 #endif                        /* Not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.2" category="PreprocessingDirectives"><description>If the ', \, &quot;, or /* characters are used between &lt; and &gt; delimiters or the ', \, or /* characters are used between the &quot; delimiters in a header name preprocessing token, then the behaviour is undefined. Use of the \ character is permitted in filename paths without the need for a deviation if required by the host operating system of the development environment.</description><RuleName>Non-standard characters should not occur in header file names in #include directives. </RuleName><ClassName>Rule19_2_Adv.class</ClassName><SourceCode>/* Permit nested C-style comments: */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.2" category="PreprocessingDirectives"><description>If the ', \, &quot;, or /* characters are used between &lt; and &gt; delimiters or the ', \, or /* characters are used between the &quot; delimiters in a header name preprocessing token, then the behaviour is undefined. Use of the \ character is permitted in filename paths without the need for a deviation if required by the host operating system of the development environment.</description><RuleName>Non-standard characters should not occur in header file names in #include directives. </RuleName><ClassName>Rule19_2_Adv.class</ClassName><SourceCode>/* Permit nested C-style comments: */&#xD;
 /* PRQA S 3108 ++ */&#xD;
 &#xD;
 /* PRQA S 0883 ++ */&#xD;
@@ -1788,11 +1788,11 @@ extern S16 test_1902( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.3" category="PreprocessingDirectives"><description>For example, the following are allowed.</description><RuleName>The #include directive shall be followed by either a &lt;filename&gt; or &quot;filename&quot; sequence. </RuleName><ClassName>Rule19_3_Req.class</ClassName><SourceCode>#include &quot;filename.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.3" category="PreprocessingDirectives"><description>For example, the following are allowed.</description><RuleName>The #include directive shall be followed by either a &lt;filename&gt; or &quot;filename&quot; sequence. </RuleName><ClassName>Rule19_3_Req.class</ClassName><SourceCode>#include &quot;filename.h&quot;&#xD;
 #include &lt;filename.h&gt;&#xD;
 #define FILE_A &quot;filename.h&quot;&#xD;
 #include FILE_A
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.4" category="PreprocessingDirectives"><description>These are the only permitted uses of macros. Storage class specifiers and type qualifiers include keywords such as extern, static and const. Any other use of #define could lead to unexpected behaviour when substitution is made, or to very hard-to-read code.</description><RuleName>C macros shall only expand to a braced initialiser, a constant, a string literal, a parenthesised expression, a type qualifier, a storage class specifier, or a do-while-zero construct. </RuleName><ClassName>Rule19.4(notImplement).class</ClassName><SourceCode>/* The following are compliant */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.4" category="PreprocessingDirectives"><description>These are the only permitted uses of macros. Storage class specifiers and type qualifiers include keywords such as extern, static and const. Any other use of #define could lead to unexpected behaviour when substitution is made, or to very hard-to-read code.</description><RuleName>C macros shall only expand to a braced initialiser, a constant, a string literal, a parenthesised expression, a type qualifier, a storage class specifier, or a do-while-zero construct. </RuleName><ClassName>Rule19.4(notImplement).class</ClassName><SourceCode>/* The following are compliant */&#xD;
 #define PI 3.14159F                  /* Constant                      */&#xD;
 #define XSTAL 10000000               /* Constant                      */&#xD;
 #define CLOCK ( XSTAL/16 )           /* Constant expression           */&#xD;
@@ -1815,7 +1815,7 @@ extern S16 test_1902( void )&#xD;
 #define int32_t long       /* use typedef instead                     */&#xD;
 #define STARTIF if(        /* unbalanced () and language redefinition */&#xD;
 #define CAT PI             /* non-parenthesised expression            */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.5" category="PreprocessingDirectives"><description>While it is legal C to place #define or #undef directives anywhere in a code file, placing them inside blocks is misleading as it implies a scope restricted to that block, which is not the case.</description><RuleName>Macros shall not be #define'd or #undef'd within a block. </RuleName><ClassName>Rule19_5_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.5" category="PreprocessingDirectives"><description>While it is legal C to place #define or #undef directives anywhere in a code file, placing them inside blocks is misleading as it implies a scope restricted to that block, which is not the case.</description><RuleName>Macros shall not be #define'd or #undef'd within a block. </RuleName><ClassName>Rule19_5_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define  L      5&#xD;
@@ -1828,7 +1828,7 @@ extern S16 test_1905( void )&#xD;
                                           and Rule 19.6 */&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.6" category="PreprocessingDirectives"><description>#undef should not normally be needed. Its use can lead to confusion with respect to the existence or meaning of a macro when it is used in the code.</description><RuleName>#undef shall not be used. </RuleName><ClassName>Rule19_6_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.6" category="PreprocessingDirectives"><description>#undef should not normally be needed. Its use can lead to confusion with respect to the existence or meaning of a macro when it is used in the code.</description><RuleName>#undef shall not be used. </RuleName><ClassName>Rule19_6_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define  L      0&#xD;
@@ -1838,7 +1838,7 @@ extern S16 test_1906( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.7" category="PreprocessingDirectives"><description>While macros can provide a speed advantage over functions, functions provide a safer and more robust mechanism. This is particularly true with respect to the type checking of parameters, and the problem of function-like macros potentially evaluating parameters multiple times.</description><RuleName>A function should be used in preference to a function-like macro. </RuleName><ClassName>Rule19.7(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.7" category="PreprocessingDirectives"><description>While macros can provide a speed advantage over functions, functions provide a safer and more robust mechanism. This is particularly true with respect to the type checking of parameters, and the problem of function-like macros potentially evaluating parameters multiple times.</description><RuleName>A function should be used in preference to a function-like macro. </RuleName><ClassName>Rule19.7(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define  MAX( A, B )   ( ( ( A ) &gt; ( B ) ) ? ( A ) : ( B ) )    /* MISRA Violation */&#xD;
@@ -1849,7 +1849,7 @@ extern S16 test_1907( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.8" category="PreprocessingDirectives"><description>This is a constraint error, but preprocessors have been known to ignore this problem. Each argument in a function-like macro must consist of at least one preprocessing token otherwise the behaviour is undefined.</description><RuleName>A function-like macro shall not be invoked without all of its arguments. </RuleName><ClassName>Rule19.8(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.8" category="PreprocessingDirectives"><description>This is a constraint error, but preprocessors have been known to ignore this problem. Each argument in a function-like macro must consist of at least one preprocessing token otherwise the behaviour is undefined.</description><RuleName>A function-like macro shall not be invoked without all of its arguments. </RuleName><ClassName>Rule19.8(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define MAX( A, B )   ( ( ( A ) &gt; ( B ) ) ? ( A ) : ( B ) )&#xD;
@@ -1866,7 +1866,7 @@ extern S16 test_1908( void )&#xD;
 &#xD;
    return s16k + s16m;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.9" category="PreprocessingDirectives"><description>If any of the arguments act like preprocessor directives, the behaviour when macro substitution is made can be unpredictable.</description><RuleName>Arguments to a function-like macro shall not contain tokens that look like preprocessing directives. </RuleName><ClassName>Rule19.9(notImplement).class</ClassName><SourceCode>/* PRQA S 0434,0911,2214,3110,3417 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.9" category="PreprocessingDirectives"><description>If any of the arguments act like preprocessor directives, the behaviour when macro substitution is made can be unpredictable.</description><RuleName>Arguments to a function-like macro shall not contain tokens that look like preprocessing directives. </RuleName><ClassName>Rule19.9(notImplement).class</ClassName><SourceCode>/* PRQA S 0434,0911,2214,3110,3417 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
