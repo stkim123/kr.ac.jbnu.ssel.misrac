@@ -96,15 +96,16 @@ public class CASTHandler extends AbstractHandler {
 				String[] ruleFiles = ruleDicFile.list();
 ///////////////////////////
 				HashSet<Rule> shouldCheckRules = MisraUIdataHandler.getInstance().getShouldCheckRules();
+				HashSet<String> shouldCheckRulesAsString = new HashSet<String>();
+				
 				for (Rule rule : shouldCheckRules) {
-					
-					System.out.println("should check:"+ rule.getClassName());
+					shouldCheckRulesAsString.add(rule.getClassName());
 				}
 				
 ///////////////////////////
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
-					if(shouldCheckRules.contains(ruleClass))
+					if(shouldCheckRulesAsString.contains(ruleClass))
 					{
 						callRule(ast, ruleClass, violationMessages);	
 					}
