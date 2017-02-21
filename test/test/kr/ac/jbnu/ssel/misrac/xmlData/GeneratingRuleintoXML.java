@@ -49,7 +49,7 @@ public class GeneratingRuleintoXML {
 		Marshaller marshaller = context.createMarshaller();
 		File rulesFile = new File( "Resource/rules.xml" );
 		marshaller.marshal(rules, rulesFile);
-		System.out.println("done");
+		System.out.println("xml generated");
 	}
 
 	private void setRuleData(File ruleResource, Rule rule) throws URISyntaxException {

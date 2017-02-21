@@ -22,8 +22,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
  * structure type specifiers, or all uses should be in union type specifiers,
  * For example:
  * 
- * TODO : parameta�� ������ �� �ִ°� ex) 0�� int �ΰ� double�ΰ�
- * TODO : �������� �����ؼ� �̷��.
+ * TODO : parameta占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌍는곤옙 ex) 0占쏙옙 int 占싸곤옙 double占싸곤옙
+ * TODO : 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쌔쇽옙 占싱뤄옙占�.
  * 
  * @author sangjin
  *
@@ -43,7 +43,7 @@ public class Rule05_4_Req extends AbstractMisraCRule {
 		for(IASTNode node : simpleDeclaration.getChildren()){
 			if(node instanceof ICASTCompositeTypeSpecifier ){
 				String specifier = node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1];
-				System.out.println("test :: "+specifier);
+//				System.out.println("test :: "+specifier);
 				if(declarations.contains(node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1])){
 					isViolated = true;
 				}

@@ -303,6 +303,12 @@ public class MessageFactory {
 		case 2020:
 			msg = "	Final 'switch' clause does not end with an explicit 'jump' statement.";
 			break;
+		case 780:
+			msg = "Another identifier '%s' is already in scope in a different namespace.";
+			break;
+		case 781:
+			msg ="'%s' is being used as a structure/union member as well as being a label, tag or ordinary identifier.";
+			break;
 		}
 
 		return msg;

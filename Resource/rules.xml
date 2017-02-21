@@ -1173,7 +1173,7 @@ default:                /* default clause is required               */&#xD;
                            future modification turns this into a&#xD;
                            case clause                              */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.1" category="Functions"><description>There are a lot of potential problems with this feature. Users shall not write additional functions that use a variable number of arguments. This precludes the use of use of stdarg.h, va_arg, va_start and va_end.</description><RuleName>Functions shall not be defined with a variable number of arguments. </RuleName><ClassName>Rule16.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2984 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.1" category="Functions"><description>There are a lot of potential problems with this feature. Users shall not write additional functions that use a variable number of arguments. This precludes the use of use of stdarg.h, va_arg, va_start and va_end.</description><RuleName>Functions shall not be defined with a variable number of arguments. </RuleName><ClassName>Rule16.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2984 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2483,7 +2483,7 @@ static S16 test_0505a(void)&#xD;
 &#xD;
     return obj_0505a + obj_0505b;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="5" minerNum="5.6" category="Identifiers"><description>Name space and scope are different. This rule is not concerned with scope. For example, ISO C allows the same identifier (vector) for both a tag and a typedef at the same scope.</description><RuleName>No identifier in one name space should have the same spelling as an identifier in another name space, with the exception of structure member and union member names. </RuleName><ClassName>Rule5.6(notImplement).class</ClassName><SourceCode>typedef struct vector { uint16_t x ; uint16_t y; uint16_t z; } vector;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="5" minerNum="5.6" category="Identifiers"><description>Name space and scope are different. This rule is not concerned with scope. For example, ISO C allows the same identifier (vector) for both a tag and a typedef at the same scope.</description><RuleName>No identifier in one name space should have the same spelling as an identifier in another name space, with the exception of structure member and union member names. </RuleName><ClassName>Rule05_6_Adv.class</ClassName><SourceCode>typedef struct vector { uint16_t x ; uint16_t y; uint16_t z; } vector;&#xD;
 /* Rule violation ^^                                             ^^ */
 struct { int16_t key; int16_t value; } record;&#xD;
 &#xD;
