@@ -28,6 +28,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * @author sangjin
  *
  */
+
 public class Rule05_6_Adv extends AbstractMisraCRule {
 	
 	private static HashSet<String> typeSet = new HashSet<String>();

@@ -309,6 +309,15 @@ public class MessageFactory {
 		case 781:
 			msg ="'%s' is being used as a structure/union member as well as being a label, tag or ordinary identifier.";
 			break;
+		case 422:
+			msg = "Function call contains fewer arguments than prototype specifies.";
+			break;
+		case 423:
+			msg = "Function call contains more arguments than prototype specifies.";
+			break;
+		case 3319:
+			msg = "Function called with number of arguments which differs from number of parameters in definition.";
+			break;
 		}
 
 		return msg;
