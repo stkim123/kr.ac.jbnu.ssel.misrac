@@ -4,11 +4,11 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="C:/Users/User/Downloads/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="lib/jdom.jar"/>
-	<classpathentry kind="lib" path="lib/jsoup-1.6.0.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-api-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-impl-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/jaxb-xjc-2.2.jar"/>
+	<classpathentry kind="lib" path="Lib/jaxb-api-2.2.jar"/>
+	<classpathentry kind="lib" path="Lib/jaxb-impl-2.2.jar"/>
+	<classpathentry kind="lib" path="Lib/jaxb-xjc-2.2.jar"/>
+	<classpathentry kind="lib" path="Lib/jdom.jar"/>
+	<classpathentry kind="lib" path="Lib/jsoup-1.6.0.jar"/>
+	<classpathentry kind="lib" path="Lib/junit4_4.3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
