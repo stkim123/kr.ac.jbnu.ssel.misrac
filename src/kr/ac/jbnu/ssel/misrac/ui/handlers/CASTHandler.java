@@ -34,6 +34,7 @@ import kr.ac.jbnu.ssel.misrac.rule.R;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MiaraCRuleException;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
+import kr.ac.jbnu.ssel.misrac.ui.EclipseUtil;
 import kr.ac.jbnu.ssel.misrac.ui.preference.MisraUIdataHandler;
 import kr.ac.jbnu.ssel.misrac.ui.preference.Rule;
 import kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView;
@@ -94,7 +95,17 @@ public class CASTHandler extends AbstractHandler {
 				File ruleDicFile = new File(fileURL.toURI());
 
 				String[] ruleFiles = ruleDicFile.list();
-///////////////////////////
+				
+//				try
+//				{
+//					File rules = EclipseUtil.loadResource("Resource/rule.xml");
+//					System.out.println("rules:"+ rules);
+//				} catch (Exception e)
+//				{
+//					e.printStackTrace();
+//				}
+				
+				// filter out unselected rules.
 				HashSet<Rule> shouldCheckRules = MisraUIdataHandler.getInstance().getShouldCheckRules();
 				HashSet<String> shouldCheckRulesAsString = new HashSet<String>();
 				
@@ -102,7 +113,7 @@ public class CASTHandler extends AbstractHandler {
 					shouldCheckRulesAsString.add(rule.getClassName());
 				}
 				
-///////////////////////////
+				///////////////////////////
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
 					if(shouldCheckRulesAsString.contains(ruleClass))
