@@ -318,6 +318,21 @@ public class MessageFactory {
 		case 3319:
 			msg = "Function called with number of arguments which differs from number of parameters in definition.";
 			break;
+		case 745:
+			msg = " 'return;' found in '%s()', which has been defined with a non-'void' return type.";
+			break;
+		case 2887:
+			msg = " Function 'main' ends with an implicit 'return' statement.";
+			break;
+		case 2888:
+			msg = "	This function has been declared with a non-void 'return' type but ends with an implicit 'return ;' statement.";
+			break;
+		case 3113:
+			msg = " 'return' statement includes no expression but function '%s()' is implicitly of type 'int'.";
+			break;
+		case 3114:
+			msg = " Function '%s()' is implicitly of type 'int' but ends without returning a value.";
+			break;
 		}
 
 		return msg;

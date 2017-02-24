@@ -1332,7 +1332,7 @@ static S16 test_1604a(S16 aaa)                  /* MISRA Violation */&#xD;
     return aaa;&#xD;
 }
 </SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.5" category="Functions"><description>Functions shall be declared with a return type (see Rule ), that type being void if the function does not return any data. Similarly, if the function has no parameters, the parameter list shall be declared as void. Thus for example, a function, myfunc, which neither takes parameters nor returns a value would be declared as:</description><RuleName>Functions with no parameters shall be declared and defined with the parameter list void. </RuleName><ClassName>Rule16_5_Req.class</ClassName><SourceCode>void myfunc( void );
-</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.6" category="Functions"><description>This problem is completely avoided by the use of function prototypes - see Rule . This rule is retained since compilers may not flag this constraint error.</description><RuleName>The number of arguments passed to a function shall match the number of parameters. </RuleName><ClassName>Rule16_6_Req.class</ClassName><SourceCode>/* PRQA S 3206 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.6" category="Functions"><description>This problem is completely avoided by the use of function prototypes - see Rule . This rule is retained since compilers may not flag this constraint error.</description><RuleName>The number of arguments passed to a function shall match the number of parameters. </RuleName><ClassName>Rule16_6_Req.class</ClassName><SourceCode>/* PRQA S 3206 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1378,7 +1378,7 @@ static S16 test_1606b( S16 k )&#xD;
 }&#xD;
 /* data at address param3 has not been changed, &#xD;
    but this is not const therefore not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.8" category="Functions"><description>This expression gives the value that the function returns. The absence of a return with an expression leads to undefined behaviour (and the compiler may not give an error).</description><RuleName>All exit paths from a function with non-void return type shall have an explicit return statement with an expression. </RuleName><ClassName>Rule16.8(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.8" category="Functions"><description>This expression gives the value that the function returns. The absence of a return with an expression leads to undefined behaviour (and the compiler may not give an error).</description><RuleName>All exit paths from a function with non-void return type shall have an explicit return statement with an expression. </RuleName><ClassName>Rule16_8_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
