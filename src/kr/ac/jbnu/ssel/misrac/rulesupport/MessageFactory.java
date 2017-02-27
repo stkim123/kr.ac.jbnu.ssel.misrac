@@ -345,6 +345,12 @@ public class MessageFactory {
 		case 3263:
 			msg = "Function defined or declared with a return type which has more than 2 levels of indirection.";
 			break;
+		case 634:
+			msg = "Bit-fields in this struct/union have not been declared explicitly as unsigned or signed.";
+			break;
+		case 635:
+			msg = "Bit-fields in this struct/union have been declared with types other than int, signed int or unsigned int.";
+			break;
 		}
 
 		return msg;

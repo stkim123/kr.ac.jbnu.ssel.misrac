@@ -1539,7 +1539,7 @@ uint8_t * p;&#xD;
 p = a;&#xD;
 *( p+5 ) = 0U; /* not compliant */&#xD;
 p[5] = 0U;     /* not compliant */
-</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="17" minerNum="17.5" category="PointersAndArrays"><description>Use of more than 2 levels of indirection can seriously impair the ability to understand the behaviour of the code, and should therefore be avoided.</description><RuleName>The declaration of objects should contain no more than 2 levels of pointer indirection. </RuleName><ClassName>Rule17_5_Adv.class</ClassName><SourceCode>typedef int8_t * INTPTR;&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="17" minerNum="17.5" category="PointersAndArrays"><description>Use of more than 2 levels of indirection can seriously impair the ability to understand the behaviour of the code, and should therefore be avoided.</description><RuleName>The declaration of objects should contain no more than 2 levels of pointer indirection. </RuleName><ClassName>Rule17_5_Adv.class</ClassName><SourceCode>typedef int8_t * INTPTR;&#xD;
 &#xD;
 struct s &#xD;
 {&#xD;
@@ -2658,7 +2658,7 @@ typedef unsigned long   uint64_t;&#xD;
 typedef          float  float32_t;&#xD;
 typedef          double float64_t;&#xD;
 typedef long     double float128_t;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="6" minerNum="6.4" category="Types"><description>Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum, short or char types for bit fields is not allowed because the behaviour is undefined.</description><RuleName>Bit fields shall only be defined to be of type unsigned int or signed int. </RuleName><ClassName>Rule6.4(notImplement).class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="6" minerNum="6.4" category="Types"><description>Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum, short or char types for bit fields is not allowed because the behaviour is undefined.</description><RuleName>Bit fields shall only be defined to be of type unsigned int or signed int. </RuleName><ClassName>Rule06_4_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
