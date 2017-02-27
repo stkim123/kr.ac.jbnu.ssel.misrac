@@ -1378,7 +1378,7 @@ static S16 test_1606b( S16 k )&#xD;
 }&#xD;
 /* data at address param3 has not been changed, &#xD;
    but this is not const therefore not compliant */
-</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.8" category="Functions"><description>This expression gives the value that the function returns. The absence of a return with an expression leads to undefined behaviour (and the compiler may not give an error).</description><RuleName>All exit paths from a function with non-void return type shall have an explicit return statement with an expression. </RuleName><ClassName>Rule16_8_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.8" category="Functions"><description>This expression gives the value that the function returns. The absence of a return with an expression leads to undefined behaviour (and the compiler may not give an error).</description><RuleName>All exit paths from a function with non-void return type shall have an explicit return statement with an expression. </RuleName><ClassName>Rule16_8_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1539,7 +1539,7 @@ uint8_t * p;&#xD;
 p = a;&#xD;
 *( p+5 ) = 0U; /* not compliant */&#xD;
 p[5] = 0U;     /* not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="17" minerNum="17.5" category="PointersAndArrays"><description>Use of more than 2 levels of indirection can seriously impair the ability to understand the behaviour of the code, and should therefore be avoided.</description><RuleName>The declaration of objects should contain no more than 2 levels of pointer indirection. </RuleName><ClassName>Rule17.5(notImplement).class</ClassName><SourceCode>typedef int8_t * INTPTR;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="17" minerNum="17.5" category="PointersAndArrays"><description>Use of more than 2 levels of indirection can seriously impair the ability to understand the behaviour of the code, and should therefore be avoided.</description><RuleName>The declaration of objects should contain no more than 2 levels of pointer indirection. </RuleName><ClassName>Rule17_5_Adv.class</ClassName><SourceCode>typedef int8_t * INTPTR;&#xD;
 &#xD;
 struct s &#xD;
 {&#xD;

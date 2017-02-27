@@ -333,6 +333,18 @@ public class MessageFactory {
 		case 3114:
 			msg = " Function '%s()' is implicitly of type 'int' but ends without returning a value.";
 			break;
+		case 3260:
+			msg = "Typedef defined with more than 2 levels of indirection.";
+			break;
+		case 3261:
+			msg = "Member of struct/union defined with more than 2 levels of indirection.";
+			break;
+		case 3262:
+			msg = "Object defined or declared with more than 2 levels of indirection.";
+			break;
+		case 3263:
+			msg = "Function defined or declared with a return type which has more than 2 levels of indirection.";
+			break;
 		}
 
 		return msg;
