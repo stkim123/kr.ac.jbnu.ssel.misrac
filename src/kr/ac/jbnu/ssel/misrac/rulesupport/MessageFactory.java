@@ -351,6 +351,9 @@ public class MessageFactory {
 		case 635:
 			msg = "Bit-fields in this struct/union have been declared with types other than int, signed int or unsigned int.";
 			break;
+		case 3684:
+			msg = "Array declared with unknown size.";
+			break;
 		}
 
 		return msg;

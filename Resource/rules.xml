@@ -2658,7 +2658,7 @@ typedef unsigned long   uint64_t;&#xD;
 typedef          float  float32_t;&#xD;
 typedef          double float64_t;&#xD;
 typedef long     double float128_t;
-</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="6" minerNum="6.4" category="Types"><description>Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum, short or char types for bit fields is not allowed because the behaviour is undefined.</description><RuleName>Bit fields shall only be defined to be of type unsigned int or signed int. </RuleName><ClassName>Rule06_4_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="6" minerNum="6.4" category="Types"><description>Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum, short or char types for bit fields is not allowed because the behaviour is undefined.</description><RuleName>Bit fields shall only be defined to be of type unsigned int or signed int. </RuleName><ClassName>Rule06_4_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2822,7 +2822,7 @@ static S16 test_0811( void )           /* Internal linkage (1) * MISRA Violation
 &#xD;
     return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.12" category="DeclarationsAndDefinitions"><description></description><RuleName>When an array is declared with external linkage, its size shall be stated explicitly or defined implicitly by initialisation. </RuleName><ClassName>Rule8.12(notImplement).class</ClassName><SourceCode>int array1[ 10 ];                          /* Compliant     */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.12" category="DeclarationsAndDefinitions"><description></description><RuleName>When an array is declared with external linkage, its size shall be stated explicitly or defined implicitly by initialisation. </RuleName><ClassName>Rule08_12_Req.class</ClassName><SourceCode>int array1[ 10 ];                          /* Compliant     */&#xD;
 extern int array2[ ];                      /* Not compliant */&#xD;
 int array2[ ] = { , 10, 15 };             /* Compliant     */
 </SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.2" category="DeclarationsAndDefinitions"><description></description><RuleName>Whenever an object or function is declared or defined, its type shall be explicitly stated. </RuleName><ClassName>Rule08_2_req.class</ClassName><SourceCode>extern         x;           /* Non-compliant - implicit int type */&#xD;
