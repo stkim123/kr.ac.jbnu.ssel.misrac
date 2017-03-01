@@ -1,4 +1,4 @@
 # kr.ac.jbnu.ssel.misrac
-Open MRC: Open Source MISRA-C Rule Checker
+OpenMRC: Open Source MISRA-C Rule Checker based on Eclipse CDT(C/C++ Development Tooling).
 
 
