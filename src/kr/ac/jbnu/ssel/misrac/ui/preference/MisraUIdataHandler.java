@@ -65,7 +65,7 @@ public class MisraUIdataHandler implements Cloneable {
 	}
 
 	public List<Rule> loadAllRules() throws JAXBException {
-		File file = new File(Constant.dataPath);
+		File file = new File(Constant.rule_description_path);
 		// IWorkspace workspace= ResourcesPlugin.getWorkspace();
 		// IPath location= Path.fromOSString(file.getAbsolutePath());
 		// IFile ifile= workspace.getRoot().getFileForLocation(location);
@@ -103,7 +103,7 @@ public class MisraUIdataHandler implements Cloneable {
 		try {
 			context = JAXBContext.newInstance(String.class, Rules.class);
 			Marshaller marshaller = context.createMarshaller();
-			File rulesFile = new File(Constant.dataPath);
+			File rulesFile = new File(Constant.rule_description_path);
 			Rules rules = new Rules();
 			rules.setRule(ruleList);
 			marshaller.marshal(rules, rulesFile);
