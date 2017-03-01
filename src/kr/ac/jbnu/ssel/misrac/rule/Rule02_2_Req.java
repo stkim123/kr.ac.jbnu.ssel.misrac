@@ -23,8 +23,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * Example Code: TODO
  * 
- * [DONE]
- * 
+ * [STATUS: DONE]
  * @author STKim2
  *
  */

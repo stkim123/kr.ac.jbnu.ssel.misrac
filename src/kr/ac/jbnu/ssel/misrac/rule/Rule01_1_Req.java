@@ -53,8 +53,11 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.MisraCRuleGroup;
  *Rule  8.4	If objects or functions are declared more than once their types shall be compatible.
  *Rule  16.6	The number of arguments passed to a function shall match the number of parameters.
  *Rule  19.2	Non-standard characters should not occur in header file names in #include directives.
- *Rule  19.8	A function-like macro shall not be invoked without all of its arguments.
+ * *Rule  19.8	A function-like macro shall not be invoked without all of its arguments.
  *
+ *
+ * [STATUS: Not Implemented Yet, Use JavaCC later]
+ *  
  * @author STKim2
  *
  */

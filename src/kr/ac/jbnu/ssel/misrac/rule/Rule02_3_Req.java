@@ -15,7 +15,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * TODO
  * 
- * @author kang
+ * @author Seunghyeon Kang
  *
  */
 public class Rule02_3_Req extends AbstractMisraCRule{
