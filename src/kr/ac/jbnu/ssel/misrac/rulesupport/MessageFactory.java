@@ -365,6 +365,9 @@ public class MessageFactory {
 		case 547:
 			msg ="This declaration of tag '%s' conflicts with a previous declaration. ";
 			break;
+		case 10001:
+			msg = "No identifier name should be reused.";
+			break;
 		}
 
 		return msg;

@@ -95,7 +95,7 @@ public class CASTHandler extends AbstractHandler {
 					// for checking all rules regardless of preference setting	
 //					if(shouldCheckRulesAsString.contains(ruleClass))
 //					{
-						callRule(ast, ruleClass, violationMessages);	
+						callRule(ast, ruleClass, violationMessages);
 //					}
 					
 				}
@@ -164,6 +164,7 @@ public class CASTHandler extends AbstractHandler {
 					System.out.println("violationMessage:" + violationMessage);
 				}
 			}
+			rule.clean();
 		}
 	}
 }

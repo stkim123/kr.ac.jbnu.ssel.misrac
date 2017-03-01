@@ -15,7 +15,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum,
  *  short or char types for bit fields is not allowed because the behaviour is undefined.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

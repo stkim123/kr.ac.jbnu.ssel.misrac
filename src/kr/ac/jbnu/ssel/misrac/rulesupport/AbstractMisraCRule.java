@@ -67,5 +67,9 @@ public abstract class AbstractMisraCRule extends DetailedASTVisitor {
     public ViolationMessage[] getViolationMessages() {
 	return (ViolationMessage[]) violationMsgs.toArray(new ViolationMessage[0]);
     }
+    
+    public void clean()
+    {
+    }
 
 }

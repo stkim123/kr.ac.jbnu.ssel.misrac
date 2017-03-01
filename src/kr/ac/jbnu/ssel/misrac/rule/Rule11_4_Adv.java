@@ -23,7 +23,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * Conversions of this type may be invalid if the new pointer type requires a
  * stricter alignment.
  *
- * DONE!!
+ * [STATUS: DONE]
  *
  * @author sangjin
  *
@@ -81,19 +81,23 @@ public class Rule11_4_Adv extends AbstractMisraCRule {
 					
 					if(node instanceof IASTTypeId){
 						
-						//Casting to different object pointer type.
-						String message1 = MessageFactory.getInstance().getMessage(310);
-						violationMsgs.add(
-								new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + castExpression.getRawSignature(), castExpression));
-						//[I] Cast from a pointer to void to a pointer to object type.
-						String message2 = MessageFactory.getInstance().getMessage(316);
-						violationMsgs.add(
-								new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + castExpression.getRawSignature(), castExpression));
-						//[I] Implicit conversion from a pointer to void to a pointer to object type.
-						String message3 = MessageFactory.getInstance().getMessage(317);
-						violationMsgs.add(
-								new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + castExpression.getRawSignature(), castExpression));
-						isViolated = true;
+						String rawString = node.getRawSignature();
+						if(rawString.contains("*")){
+							//Casting to different object pointer type.
+							String message1 = MessageFactory.getInstance().getMessage(310);
+							violationMsgs.add(
+									new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + castExpression.getRawSignature(), castExpression));
+							//[I] Cast from a pointer to void to a pointer to object type.
+							String message2 = MessageFactory.getInstance().getMessage(316);
+							violationMsgs.add(
+									new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + castExpression.getRawSignature(), castExpression));
+							//[I] Implicit conversion from a pointer to void to a pointer to object type.
+							String message3 = MessageFactory.getInstance().getMessage(317);
+							violationMsgs.add(
+									new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + castExpression.getRawSignature(), castExpression));
+							isViolated = true;
+						}
+						
 					}
 				}
 			}

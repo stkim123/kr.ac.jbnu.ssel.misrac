@@ -1,17 +1,9 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.HashSet;
-
 import org.eclipse.cdt.core.dom.ast.IASTBinaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
-import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIncludeStatement;
-import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 
@@ -37,9 +29,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * shall be present with prior initialisation of the loop counter; All three
  * expressions shall be empty for a deliberate infinite loop.
  * 
- * TODO - The variable incremented in the third expression of this 'for'
- * statement is not the variable identified as the 'loop control variable' (%s).
- * 룰이해부족으로 두번째 메세지 violation잡는부분 수정필요
+ * [STATUS: DONE]
  * 
  *  
  * @author Seunghyeon Kang
@@ -60,26 +50,40 @@ public class Rule13_5_Req extends AbstractMisraCRule {
 
 	@Override
 	protected int visit(IASTForStatement forStatement) {
-		IASTNode[] forChild = forStatement.getChildren();
+		String firstExpVar ="";
+		org.eclipse.cdt.core.dom.ast.IASTNode[] forChild = forStatement.getChildren();
 
-		for (IASTNode node : forChild[0].getChildren()) {
-			if (node instanceof IASTUnaryExpression) {
-				isViolated = true;
+		for (IASTNode iastNode : forChild) {
 
-				String msg = MessageFactory.getInstance().getMessage(2462);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + forChild[0].getRawSignature(),
-						forChild[0]));
+			if( iastNode instanceof IASTExpressionStatement)
+			{
+				firstExpVar = ((IASTExpressionStatement)iastNode).getExpression().getRawSignature();
+				IASTExpressionStatement shouldBeAssignExp = (IASTExpressionStatement)iastNode;
+				if( !( shouldBeAssignExp.getExpression().getRawSignature().equals(IASTBinaryExpression.op_assign)) )
+				{
+					String msg = MessageFactory.getInstance().getMessage(2462);
+					violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + iastNode.getRawSignature(),
+							iastNode));
+					isViolated = true;
+				}
 			}
-		}
-
-		//Third Expression
-		for (IASTNode node : forChild[1].getChildren()) {
-			if (node instanceof IASTUnaryExpression) {
-				isViolated = true;
-
-				String msg = MessageFactory.getInstance().getMessage(2463);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + forChild[1].getRawSignature(),
-						forChild[1]));
+			else if(iastNode instanceof IASTBinaryExpression){
+				String secondExp = ((IASTBinaryExpression)iastNode).getOperand1().toString();
+				if(!secondExp.equals(firstExpVar)){
+					String msg = "The second expressions shall be present with prior initialisation of the loop counter;";
+					violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + iastNode.getRawSignature(),
+							iastNode));
+					isViolated = true;
+				}
+			}
+			else if(iastNode instanceof IASTUnaryExpression){
+				String thirdExp = ((IASTUnaryExpression) iastNode).getOperand().toString();
+				if(!thirdExp.equals(firstExpVar)){
+					String msg = MessageFactory.getInstance().getMessage(2463);
+					violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + ":" + iastNode.getRawSignature(),
+							iastNode));
+					isViolated = true;
+				}
 			}
 		}
 
