@@ -23,7 +23,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * This is more than a style issue, since different (pre C99) compilers may
  * behave differently.
  * 
- * 
+ * [STATUS: DONE]
  * @author Suntae Kim
  *
  */

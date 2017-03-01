@@ -362,6 +362,9 @@ public class MessageFactory {
 		case 0235:
 			msg = "[U] Unknown escape sequence.";
 			break;
+		case 547:
+			msg ="This declaration of tag '%s' conflicts with a previous declaration. ";
+			break;
 		}
 
 		return msg;
