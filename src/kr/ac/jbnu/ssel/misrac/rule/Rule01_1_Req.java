@@ -58,7 +58,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.MisraCRuleGroup;
  *
  * [STATUS: Not Implemented Yet, Use JavaCC later]
  *  
- * @author STKim2
+ * @author Suntae Kim
  *
  */
 public class Rule01_1_Req extends MisraCRuleGroup

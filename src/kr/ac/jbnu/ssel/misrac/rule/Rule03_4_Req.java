@@ -10,18 +10,12 @@
 //
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import java.text.MessageFormat;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-
-import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorPragmaStatement;
-import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationLevel;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
 /**
@@ -32,11 +26,12 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * of any pragmas they choose to use in an application. The meaning of each
  * pragma shall be documented. There shall be sufficient supporting description
  * to demonstrate that the behaviour of the pragma, and its implications for the
- * application, have been fully understood. Any use of pragmas should be
- * minimised, localised and encapsulated within dedicated functions wherever
+ * application, have been fully understood. 
+ * 
+ * Any use of pragmas should be minimised, localised and encapsulated within dedicated functions wherever
  * possible.
  * 
- * DONE
+ * [STATUS: not statically checkable, partially support]
  * 
  * @author Seunghyeon Kang
  */
@@ -51,7 +46,6 @@ public class Rule03_4_Req extends AbstractMisraCRule {
 	@Override
 	protected int visit(IASTPreprocessorPragmaStatement pragmaStatement) {
 
-		// Parser Preprocessor
 		String rawSignature = pragmaStatement.getRawSignature();
 		String[] proPragSt = rawSignature.split(" ");
 
@@ -59,7 +53,7 @@ public class Rule03_4_Req extends AbstractMisraCRule {
 
 		String message = MessageFactory.getInstance().getMessage(3116);
 		violationMsgs.add(new ViolationMessage(this,
-				getRuleID() + ":" + message + "--" + proPragSt[0] + "-" + pragmaStatement.hashCode(), pragmaStatement));
+				getRuleID() + ":" + message + "--" + proPragSt[0] + "-" + pragmaStatement.hashCode(), pragmaStatement, ViolationLevel.warning));
 
 		return super.visit(pragmaStatement);
 	}

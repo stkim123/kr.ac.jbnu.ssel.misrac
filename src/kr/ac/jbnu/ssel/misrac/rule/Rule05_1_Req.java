@@ -24,7 +24,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * behave differently.
  * 
  * 
- * @author STKim2
+ * @author Suntae Kim
  *
  */
 public class Rule05_1_Req extends AbstractMisraCRule {

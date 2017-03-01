@@ -359,6 +359,9 @@ public class MessageFactory {
 		case 3684:
 			msg = "Array declared with unknown size.";
 			break;
+		case 0235:
+			msg = "[U] Unknown escape sequence.";
+			break;
 		}
 
 		return msg;

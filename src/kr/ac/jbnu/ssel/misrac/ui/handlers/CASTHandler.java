@@ -92,10 +92,11 @@ public class CASTHandler extends AbstractHandler {
 				///////////////////////////
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
-					if(shouldCheckRulesAsString.contains(ruleClass))
-					{
+					// for checking all rules regardless of preference setting	
+//					if(shouldCheckRulesAsString.contains(ruleClass))
+//					{
 						callRule(ast, ruleClass, violationMessages);	
-					}
+//					}
 					
 				}
 

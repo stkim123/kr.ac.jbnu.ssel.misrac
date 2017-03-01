@@ -11,7 +11,7 @@ import org.eclipse.cdt.internal.core.model.ASTStringUtil;
 
 /**
  * 
- * @author STKim2
+ * @author Suntae Kim
  *
  */
 public class CASTUtil {

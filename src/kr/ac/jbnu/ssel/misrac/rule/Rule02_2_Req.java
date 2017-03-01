@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationLevel;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
 /**
@@ -21,37 +22,35 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * This is more than a style issue, since different (pre C99) compilers may
  * behave differently.
  * 
- * Example Code: TODO
- * 
  * [STATUS: DONE]
- * @author STKim2
+ * 
+ * @author Suntae Kim
  *
  */
 public class Rule02_2_Req extends AbstractMisraCRule {
 
-    private static final String C_STYLE_COMMENT_PREFIX = "/*";
-    private static final String CPP_STYLE_COMMENT_PREFIX = "//";
+	private static final String CPP_STYLE_COMMENT_PREFIX = "//";
 
-    public Rule02_2_Req(IASTTranslationUnit ast) {
-	super("Rule02_2_Req", false, ast);
-	shouldVisitComment = true;
-    }
-
-    @Override
-    protected int visit(IASTComment comment) {
-
-	if (comment.toString().startsWith(CPP_STYLE_COMMENT_PREFIX)) {
-	    
-	    String msg = MessageFactory.getInstance().getMessage(1011);
-
-	    if (violationMsgs == null) {
-		violationMsgs = new ArrayList<ViolationMessage>();
-	    }
-
-	    violationMsgs.add(new ViolationMessage(this, getRuleID() + ":"+ msg + "--" + comment.toString(), comment));
-	    isViolated = true;
+	public Rule02_2_Req(IASTTranslationUnit ast) {
+		super("Rule02_2_Req", false, ast);
+		shouldVisitComment = true;
 	}
-	return super.visit(comment);
-    }
+
+	@Override
+	protected int visit(IASTComment comment) {
+
+		if (comment.toString().startsWith(CPP_STYLE_COMMENT_PREFIX)) {
+
+			String msg = MessageFactory.getInstance().getMessage(1011);
+
+			if (violationMsgs == null) {
+				violationMsgs = new ArrayList<ViolationMessage>();
+			}
+
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + msg + "--" + comment.toString(), comment, ViolationLevel.warning));
+			isViolated = true;
+		}
+		return super.visit(comment);
+	}
 
 }

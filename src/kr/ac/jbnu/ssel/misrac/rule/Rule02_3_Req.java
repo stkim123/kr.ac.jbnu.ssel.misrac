@@ -13,7 +13,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * The character sequence /* shall not be used within a comment.
  * C does not support the nesting of comments even though some compilers support this as a language extension. 
  * 
- * TODO
+ * [STATUS: DONE]
  * 
  * @author Seunghyeon Kang
  *
