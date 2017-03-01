@@ -2,6 +2,8 @@ package kr.ac.jbnu.ssel.misrac.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -32,9 +34,21 @@ public class EclipseUtil {
 		return new File(FileLocator.resolve(fileURL).toURI());
 	}
 
-	public static URL getEclipsePackageDirOfClass(Class<?> cls) throws IOException{
-		ClassLoader loader = cls.getClassLoader();
-		URL ruleClassDictory = loader.getResource(cls.getPackage().getName().replace('.', '/'));
-		return FileLocator.toFileURL(ruleClassDictory);
+	public static String getEclipsePackageDirOfClass(Class<?> cls) {
+		String fileURLAsString = null;
+
+		try {
+			ClassLoader loader = cls.getClassLoader();
+			URL ruleClassDictory = loader.getResource(cls.getPackage().getName().replace('.', '/'));
+			URL fileURL = FileLocator.toFileURL(ruleClassDictory);
+			URI fileURLAsURI = fileURL.toURI();
+			fileURLAsString = new File(fileURLAsURI).getAbsolutePath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		return fileURLAsString;
 	}
 }

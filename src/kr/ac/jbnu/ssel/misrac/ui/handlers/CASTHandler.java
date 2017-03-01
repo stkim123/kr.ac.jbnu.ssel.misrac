@@ -77,8 +77,8 @@ public class CASTHandler extends AbstractHandler {
 
 				ast = tu.getAST(index, ITranslationUnit.AST_SKIP_INDEXED_HEADERS);
 
-				URL fileURL = EclipseUtil.getEclipsePackageDirOfClass(RuleLocation.class);
-				File ruleDicFile = new File(fileURL.toURI());
+				String fileURLAsString = EclipseUtil.getEclipsePackageDirOfClass(RuleLocation.class);
+				File ruleDicFile = new File(fileURLAsString);
 				String[] ruleFiles = ruleDicFile.list();
 				
 				// filter out unselected rules.
@@ -106,11 +106,6 @@ public class CASTHandler extends AbstractHandler {
 			}
 
 		} catch (MiaraCRuleException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CModelException e) {
 			e.printStackTrace();

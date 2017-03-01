@@ -11,7 +11,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
+import kr.ac.jbnu.ssel.misrac.ui.Constant;
 
 /**
  * 
