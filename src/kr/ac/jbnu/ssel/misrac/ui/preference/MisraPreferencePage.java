@@ -314,17 +314,22 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	
 			@Override
 			public void widgetSelected(SelectionEvent selectionEvent) {
-				Object obj = selectionEvent.getSource();
-				table = tableViewer.getTable();
-				int index = table.getSelectionIndex();
-				Object tableItem = table.getItem(index).getData();
-				// TODO
-				Rule rule = (Rule)tableItem;
-				if (document != null) {
-					//put Code to use getCode Method
-					document.set(rule.getSourceCode());
-				} else {
-					CreateDefaultDocument();
+				try{
+					Object obj = selectionEvent.getSource();
+					table = tableViewer.getTable();
+					int index = table.getSelectionIndex();
+					Object tableItem = table.getItem(index).getData();
+					// TODO
+					Rule rule = (Rule)tableItem;
+					if (document != null) {
+						//put Code to use getCode Method
+						document.set(rule.getSourceCode());
+					} else {
+						CreateDefaultDocument();
+					}
+				}
+				catch(IllegalArgumentException exp){
+					exp.printStackTrace();
 				}
 			}
 	
