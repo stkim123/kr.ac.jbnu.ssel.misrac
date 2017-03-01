@@ -40,10 +40,8 @@ import kr.ac.jbnu.ssel.misrac.ui.preference.Rule;
 import kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView;
 
 /**
- * Our sample handler extends AbstractHandler, an IHandler base class.
  * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
+ * @author "STKIM"
  */
 public class CASTHandler extends AbstractHandler {
 

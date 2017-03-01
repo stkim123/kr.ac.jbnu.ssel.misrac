@@ -11,7 +11,7 @@ import org.osgi.framework.Bundle;
 
 /**
  * 
- * @author stkim
+ * @author Suntae Kim
  *
  */
 public class EclipseUtil

@@ -2,6 +2,9 @@ package kr.ac.jbnu.ssel.misrac.rulesupport;
 
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
+/**
+ * @author "STKIM"
+ */
 public class ViolationMessage {
     private AbstractMisraCRule rule;
 

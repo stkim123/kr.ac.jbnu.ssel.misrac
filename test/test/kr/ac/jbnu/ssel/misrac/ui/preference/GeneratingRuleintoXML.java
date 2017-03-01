@@ -1,4 +1,4 @@
-package test.kr.ac.jbnu.ssel.misrac.xmlData;
+package test.kr.ac.jbnu.ssel.misrac.ui.preference;
 
 import java.io.File;
 import java.io.FileInputStream;

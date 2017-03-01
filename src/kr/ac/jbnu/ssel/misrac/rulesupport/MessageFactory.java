@@ -1,5 +1,10 @@
 package kr.ac.jbnu.ssel.misrac.rulesupport;
 
+/**
+ * 
+ * @author "STKIM"
+ *
+ */
 public class MessageFactory {
 
 	private static MessageFactory instance;
