@@ -19,6 +19,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * All "hexadecimal-escape-sequences" are prohibited.
  * The "octal-escape-sequences" other than \0 are also prohibited under Rule 7.1.
  * 
+ * [STATUS: DONE]
+ * 
  * @author Suntae Kim
  */
 public class Rule04_1_Req extends AbstractMisraCRule {
