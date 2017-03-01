@@ -30,7 +30,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import kr.ac.jbnu.ssel.misrac.rule.R;
+import kr.ac.jbnu.ssel.misrac.rule.RuleLocation;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MiaraCRuleException;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
@@ -77,31 +77,9 @@ public class CASTHandler extends AbstractHandler {
 
 				ast = tu.getAST(index, ITranslationUnit.AST_SKIP_INDEXED_HEADERS);
 
-				// load all rule files in the class path
-				ClassLoader loader = R.class.getClassLoader();
-				URL ruleClassDictory = loader.getResource(R.class.getPackage().getName().replace('.', '/'));
-
-				if (ruleClassDictory == null) {
-					System.out.println("ruleClassDictory == null");
-				}
-
-				// In Eclispe, class loader just return file location in
-				// bundle resource. Thus, it should be converted into the
-				// physical file location.
-				URL fileURL = FileLocator.toFileURL(ruleClassDictory);
-
+				URL fileURL = EclipseUtil.getEclipsePackageDirOfClass(RuleLocation.class);
 				File ruleDicFile = new File(fileURL.toURI());
-
 				String[] ruleFiles = ruleDicFile.list();
-				
-//				try
-//				{
-//					File rules = EclipseUtil.loadResource("Resource/rule.xml");
-//					System.out.println("rules:"+ rules);
-//				} catch (Exception e)
-//				{
-//					e.printStackTrace();
-//				}
 				
 				// filter out unselected rules.
 				HashSet<Rule> shouldCheckRules = MisraUIdataHandler.getInstance().getShouldCheckRules();
@@ -172,11 +150,11 @@ public class CASTHandler extends AbstractHandler {
 			ClassNotFoundException, MiaraCRuleException {
 
 		System.out.println("ruleClass:"+ ruleClass);
-		String ruleClassWithPackage = R.class.getPackage().getName() + "."
+		String ruleClassWithPackage = RuleLocation.class.getPackage().getName() + "."
 				+ ruleClass.substring(0, ruleClass.indexOf("."));
 
 		System.out.println("ruleClassWithPackage:" + ruleClassWithPackage);
-		if (!ruleClassWithPackage.equals(R.class.getName())) // except
+		if (!ruleClassWithPackage.equals(RuleLocation.class.getName())) // except
 		// R.class
 		{
 			AbstractMisraCRule rule = (AbstractMisraCRule) Class.forName(ruleClassWithPackage)
