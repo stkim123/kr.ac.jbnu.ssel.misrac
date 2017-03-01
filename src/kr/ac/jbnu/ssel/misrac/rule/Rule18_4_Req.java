@@ -48,7 +48,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * DONE!! - Ruled이해 부족
  * 
- * @author kang
+ * @author Seunghyeon Kang
  */
 
 public class Rule18_4_Req extends AbstractMisraCRule {

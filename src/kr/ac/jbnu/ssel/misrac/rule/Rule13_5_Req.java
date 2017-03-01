@@ -42,7 +42,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 룰이해부족으로 두번째 메세지 violation잡는부분 수정필요
  * 
  *  
- * @author kang
+ * @author Seunghyeon Kang
  */
 
 public class Rule13_5_Req extends AbstractMisraCRule {

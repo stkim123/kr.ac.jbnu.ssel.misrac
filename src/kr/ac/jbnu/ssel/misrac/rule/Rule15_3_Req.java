@@ -23,7 +23,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * DONE!!
  * 
- * @author kang
+ * @author Seunghyeon Kang
  *
  */
 
