@@ -23,7 +23,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * not give an error).
  * 
  * 
- * DONE!!
+ * [STATUS: not statically checkable, partially support]
  * 
  * @author sangjin
  *

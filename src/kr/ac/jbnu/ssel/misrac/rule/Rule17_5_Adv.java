@@ -20,7 +20,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * understand the behaviour of the code, and should therefore be avoided.
  * 
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

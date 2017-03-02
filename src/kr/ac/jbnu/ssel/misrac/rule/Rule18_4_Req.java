@@ -1,12 +1,5 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
-import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
-import org.eclipse.cdt.core.dom.ast.IASTIdExpression;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIncludeStatement;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
@@ -46,7 +39,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * in any situation.
  *
  * 
- * DONE!! - Ruled이해 부족
+ * [STATUS: DONE]
  * 
  * @author Seunghyeon Kang
  */
@@ -63,19 +56,19 @@ public class Rule18_4_Req extends AbstractMisraCRule {
 
 	protected int visit(IASTSimpleDeclaration declaration) {
 
-		String[] splitArray = declaration.getRawSignature().split(" ");
+		String splitArray = declaration.getRawSignature();
 
 				
-		if(UNION.equals(splitArray[0])){
+		if(splitArray.startsWith(UNION)){
 			isViolated = true;
 		
 			String message1 = MessageFactory.getInstance().getMessage(750);
-			violationMsgs.add(new ViolationMessage(this,getRuleID() + ":" + message1 + "-- " +declaration, declaration));
-			System.out.println("IASTSimpleDeclaration : " + splitArray[0]);	
+			violationMsgs.add(new ViolationMessage(this,getRuleID() + ":" + message1 + "-- " +splitArray, declaration));
+	
 			
 			String message2 = MessageFactory.getInstance().getMessage(759);
-			violationMsgs.add(new ViolationMessage(this,getRuleID() + ":" + message2 + "-- " +declaration, declaration));
-			System.out.println("IASTSimpleDeclaration : " + splitArray[0]);	
+			violationMsgs.add(new ViolationMessage(this,getRuleID() + ":" + message2 + "-- " +splitArray, declaration));
+
 			}
 		
 		

@@ -24,7 +24,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * Rule . This rule is retained since compilers may not flag this constraint
  * error.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

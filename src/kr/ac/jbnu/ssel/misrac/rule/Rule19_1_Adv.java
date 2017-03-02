@@ -1,6 +1,5 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIncludeStatement;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
@@ -17,7 +16,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * comments.
  * 
  * 
- * DONE!! but don't catch target.
+ * [STATUS: not statically checkable, parcially support]
  * 
  * @author sangjin
  *
@@ -28,27 +27,28 @@ public class Rule19_1_Adv extends AbstractMisraCRule {
 		super("Rule19_1_Adv", false, ast);
 		shouldVisitPreprocessor = true;
 		shouldVisitStatements = true;
-		shouldVisitTranslationUnit = true;
+		shouldVisitTranslationUnit = true;// 코드 전체를 불러와서 파싱 중
 	}
 
 	@Override
 	public int visit(IASTTranslationUnit translationUnit) {
-		
+
 		String[] allCode = translationUnit.getRawSignature().split("\\n+");
-		
-		for(int i=0; i<allCode.length; i++){
-			if(allCode[i].startsWith("#include")){
-				
-				if(allCode[i-1].startsWith("#")||allCode[i-1].startsWith("/*")){
-					
-				}else{
-					//#include statements in a file should only be preceded by other preprocessor directives or comments.
+
+		for (int i = 0; i < allCode.length; i++) {
+			if (allCode[i].startsWith("#include")) {
+
+				if (allCode[i - 1].startsWith("#") || allCode[i - 1].startsWith("/*")) {
+
+				} else {
+					// #include statements in a file should only be preceded by
+					// other preprocessor directives or comments.
 					String message1 = MessageFactory.getInstance().getMessage(5087);
 					violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + allCode[i],
 							translationUnit));
 					isViolated = true;
 				}
-				
+
 			}
 		}
 

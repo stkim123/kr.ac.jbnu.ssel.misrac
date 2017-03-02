@@ -20,7 +20,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * for a full description of incomplete types.
  * 
  * 
- * DONE!!
+ * [STATUS: TODO]
  * 
  * @author sangjin
  *

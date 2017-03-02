@@ -21,7 +21,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * example, a function, myfunc, which neither takes parameters nor returns a
  * value would be declared as
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
