@@ -14,7 +14,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * Names shall be given for all the parameters in the function declaration for
  * reasons of compatibility, clarity and maintainability.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
