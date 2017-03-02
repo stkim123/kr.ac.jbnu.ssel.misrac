@@ -14,8 +14,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * See 'Boolean expressions' in the glossary.
  * 
- * DONE!!
- * 
+ * [STATUS: TODO] switch statements must has a effectively Boolean value.
  * @author sangjin
  *
  */

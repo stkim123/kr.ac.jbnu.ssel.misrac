@@ -11,7 +11,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 /**
  * The continue statement shall not be used.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * @author stkim
  *
  */

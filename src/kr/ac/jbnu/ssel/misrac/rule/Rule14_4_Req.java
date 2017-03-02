@@ -13,7 +13,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 /**
  * The goto statement shall not be used.
  *
- * DONE!!
+ * [STATUS: DONE]
  * @author User
  *
  */

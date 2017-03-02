@@ -21,7 +21,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * to why no action is taken.
  * 
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author Seunghyeon Kang
  *

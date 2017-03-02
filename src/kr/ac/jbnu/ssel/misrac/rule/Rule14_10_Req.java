@@ -19,7 +19,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * as to why no action is taken. This is consistent with the requirement to have
  * a final default clause in a switch statement (15.3)
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

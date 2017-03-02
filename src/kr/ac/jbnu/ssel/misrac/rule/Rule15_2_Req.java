@@ -22,7 +22,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * compound statement shall be a break statement.
  * 
  * 
- * DONE!!
+ * [STATUS: TODO] too many garbage message
  * 
  * @author sangjin
  *
