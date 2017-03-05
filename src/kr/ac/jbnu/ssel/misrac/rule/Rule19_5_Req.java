@@ -17,8 +17,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * will be placed near the start of a file, before the first function
  * definition. Normally, #undef directives will not be needed. (see Rule )
  * 
- * 
- * DONE!!
+ * [STATUS: TODO]
+ * "룰을 잘못 이해하고 작성한 듯...--수정 ::  Macro가 compound안에 정의되면 안된다."
  * 
  * @author sangjin
  *

@@ -21,7 +21,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * located in one file.
  * 
  * 
- * DONE!! but don't catch target
+ * TODO : 룰에 대해서 정확히 파악해야할 필요가 있음.
  * 
  * @author sangjin
  *

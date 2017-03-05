@@ -20,7 +20,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * These functions have undefined behaviour associated with them when the string
  * cannot be converted.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author Seunghyeon Kang
  */

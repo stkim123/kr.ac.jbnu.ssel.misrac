@@ -17,7 +17,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * 
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author stkim
  *

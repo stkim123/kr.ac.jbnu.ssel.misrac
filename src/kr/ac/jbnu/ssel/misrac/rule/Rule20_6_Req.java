@@ -14,7 +14,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * Use of this macro can lead to undefined behaviour when the types of the operands are incompatible or when bit fields are used.
  * 
- * DONE!!
+ * [STATUS: TODO] "이상이 없다고 생각되는 코드인데.. 메세지가 안뜸. ASTViewer에서도 보이는 트리가 이상함."
  * 
  * @author kang
  */

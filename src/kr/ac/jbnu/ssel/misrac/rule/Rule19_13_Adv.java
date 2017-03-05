@@ -21,7 +21,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * one ## or neither).
  * 
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

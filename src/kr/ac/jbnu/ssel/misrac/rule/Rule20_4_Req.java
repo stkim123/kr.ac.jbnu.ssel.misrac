@@ -26,7 +26,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *If this is the case then these functions shall also be avoided.
  *
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author Seunghyeon Kang
  */
