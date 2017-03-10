@@ -342,13 +342,13 @@ int16_t foo2( void )&#xD;
 ... ( float32_t )( u16a + u16b )              /* not compliant */&#xD;
 ... ( float64_t )foo1( u16a + u16b )          /* compliant     */&#xD;
 ... ( int32_t )buf16a[ u16a + u16b ]          /* compliant     */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="10" minerNum="10.4" category="ArithmeticTypeConversion"><description>If a cast is to be used on any complex expression, the type of cast that may be applied is severely restricted. Conversions on complex expressions are often a source of confusion and it is therefore wise to be cautious. In order to comply with these rules, it may be necessary to use a temporary variable and introduce an extra statement.</description><RuleName>The value of a complex expression of floating type shall only be cast to a floating type that is narrower or of the same size. </RuleName><ClassName>Rule10.4(notImplement).class</ClassName><SourceCode>... ( float32_t )( f64a + f64b )              /* compliant     */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="10" minerNum="10.4" category="ArithmeticTypeConversion"><description>If a cast is to be used on any complex expression, the type of cast that may be applied is severely restricted. Conversions on complex expressions are often a source of confusion and it is therefore wise to be cautious. In order to comply with these rules, it may be necessary to use a temporary variable and introduce an extra statement.</description><RuleName>The value of a complex expression of floating type shall only be cast to a floating type that is narrower or of the same size. </RuleName><ClassName>Rule10.4(notImplement).class</ClassName><SourceCode>... ( float32_t )( f64a + f64b )              /* compliant     */&#xD;
 ... ( float64_t )( f32a + f32b )              /* not compliant */&#xD;
 ... ( float64_t )f32a                         /* compliant     */&#xD;
 ... ( float64_t )( s32a / s32b )              /* not compliant */&#xD;
 ... ( float64_t )( s32a &gt; s32b )              /* not compliant */&#xD;
 ... ( float64_t )s32a / ( float32_t )s32b     /* compliant     */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="10" minerNum="10.5" category="ArithmeticTypeConversion"><description>When these operators (~ and &lt;&lt;) are applied to small integer types (unsigned char or unsigned short), the operations are preceded by integral promotion, and the result may contain high order bits which have not been anticipated. For example:</description><RuleName>If the bitwise operators ~ and &lt;&lt; are applied to an operand of underlying type unsigned char or unsigned short, the result shall be immediately cast to the underlying type of the operand. </RuleName><ClassName>Rule10.5(notImplement).class</ClassName><SourceCode>uint8_t port = 0x5aU;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="10" minerNum="10.5" category="ArithmeticTypeConversion"><description>When these operators (~ and &lt;&lt;) are applied to small integer types (unsigned char or unsigned short), the operations are preceded by integral promotion, and the result may contain high order bits which have not been anticipated. For example:</description><RuleName>If the bitwise operators ~ and &lt;&lt; are applied to an operand of underlying type unsigned char or unsigned short, the result shall be immediately cast to the underlying type of the operand. </RuleName><ClassName>Rule10.5(notImplement).class</ClassName><SourceCode>uint8_t port = 0x5aU;&#xD;
 uint8_t result_8;&#xD;
 uint16_t result_16;&#xD;
 uint16_t mode;&#xD;
@@ -359,7 +359,7 @@ result_16 = ( ( uint16_t )( ~( uint16_t )port ) ) &gt;&gt; 4;  /* compliant */
 result_16 = ( ( port &lt;&lt; 4 ) &amp; mode ) &gt;&gt; 6;           /* not compliant */
 result_16 = ( ( uint16_t )( ( uint16_t )port &lt;&lt; 4 ) &amp; mode ) &gt;&gt; 6;&#xD;
                                                      /* compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="10" minerNum="10.6" category="ArithmeticTypeConversion"><description>The type of an integer constant is a potential source of confusion, because it is dependent on a complex combination of factors including:</description><RuleName>A &quot;U&quot; suffix shall be applied to all constants of unsigned type. </RuleName><ClassName>Rule10.6(notImplement).class</ClassName><SourceCode>/* PRQA S 0339,2982,3112,3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="10" minerNum="10.6" category="ArithmeticTypeConversion"><description>The type of an integer constant is a potential source of confusion, because it is dependent on a complex combination of factors including:</description><RuleName>A &quot;U&quot; suffix shall be applied to all constants of unsigned type. </RuleName><ClassName>Rule10.6(notImplement).class</ClassName><SourceCode>/* PRQA S 0339,2982,3112,3205 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -420,7 +420,7 @@ extern S16 test_1006( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="11" minerNum="11.1" category="PointerTypeConversion"><description>Conversion of a function pointer to a different type of pointer results in undefined behaviour. This means that a function pointer can be converted to or from an integral type. No other conversions involving function pointers are permitted.</description><RuleName>Conversions shall not be performed between a pointer to a function and any type other than an integral type. </RuleName><ClassName>Rule11.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2983 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="11" minerNum="11.1" category="PointerTypeConversion"><description>Conversion of a function pointer to a different type of pointer results in undefined behaviour. This means that a function pointer can be converted to or from an integral type. No other conversions involving function pointers are permitted.</description><RuleName>Conversions shall not be performed between a pointer to a function and any type other than an integral type. </RuleName><ClassName>Rule11.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2983 ++ */&#xD;
 &#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
@@ -446,7 +446,7 @@ extern S16 test_1101( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="11" minerNum="11.2" category="PointerTypeConversion"><description>Such conversions are undefined. This rule means that an object pointer can be converted to or from: No other conversions involving object pointers are permitted.</description><RuleName>Conversions shall not be performed between a pointer to object and any type other than an integral type, another pointer to object type or a pointer to void. </RuleName><ClassName>Rule11.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="11" minerNum="11.2" category="PointerTypeConversion"><description>Such conversions are undefined. This rule means that an object pointer can be converted to or from: No other conversions involving object pointers are permitted.</description><RuleName>Conversions shall not be performed between a pointer to object and any type other than an integral type, another pointer to object type or a pointer to void. </RuleName><ClassName>Rule11.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,3203 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -464,7 +464,7 @@ extern S16 test_1102( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="11" minerNum="11.3" category="PointerTypeConversion"><description>The size of integer that is required when a pointer is converted to an integer is implementation-defined. Casting between a pointer and an integer type should be avoided where possible, but may be unavoidable when addressing memory mapped registers or other hardware specific features.</description><RuleName>A cast should not be performed between a pointer type and an integral type. </RuleName><ClassName>Rule11.3(notImplement).class</ClassName><SourceCode>/* PRQA S 2961,2981,2982,2983,3112 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="11" minerNum="11.3" category="PointerTypeConversion"><description>The size of integer that is required when a pointer is converted to an integer is implementation-defined. Casting between a pointer and an integer type should be avoided where possible, but may be unavoidable when addressing memory mapped registers or other hardware specific features.</description><RuleName>A cast should not be performed between a pointer type and an integral type. </RuleName><ClassName>Rule11.3(notImplement).class</ClassName><SourceCode>/* PRQA S 2961,2981,2982,2983,3112 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -494,11 +494,11 @@ extern S16 test_1103( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="11" minerNum="11.4" category="PointerTypeConversion"><description>Conversions of this type may be invalid if the new pointer type requires a stricter alignment.</description><RuleName>A cast should not be performed between a pointer to object type and a different pointer to object type. </RuleName><ClassName>Rule11_4_Adv.class</ClassName><SourceCode>uint8_t  *p1;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="11" minerNum="11.4" category="PointerTypeConversion"><description>Conversions of this type may be invalid if the new pointer type requires a stricter alignment.</description><RuleName>A cast should not be performed between a pointer to object type and a different pointer to object type. </RuleName><ClassName>Rule11_4_Adv.class</ClassName><SourceCode>uint8_t  *p1;&#xD;
 uint32_t *p2;&#xD;
 &#xD;
 p2 = ( uint32_t * )p1;    /* Incompatible alignment ? */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="11" minerNum="11.5" category="PointerTypeConversion"><description>Any attempt to remove the qualification associated with the addressed type by using casting is a violation of the principle of type qualification. Notice that the qualification referred to here is not the same as any qualification that may be applied to the pointer itself.</description><RuleName>A cast shall not be performed that removes any const or volatile qualification from the type addressed by a pointer. </RuleName><ClassName>Rule11.5(notImplement).class</ClassName><SourceCode>uint16_t                 x;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="11" minerNum="11.5" category="PointerTypeConversion"><description>Any attempt to remove the qualification associated with the addressed type by using casting is a violation of the principle of type qualification. Notice that the qualification referred to here is not the same as any qualification that may be applied to the pointer itself.</description><RuleName>A cast shall not be performed that removes any const or volatile qualification from the type addressed by a pointer. </RuleName><ClassName>Rule11.5(notImplement).class</ClassName><SourceCode>uint16_t                 x;&#xD;
 uint16_t * const         cpi = &amp;x;     /* const pointer               */&#xD;
 uint16_t * const       * pcpi;         /* pointer to const pointer    */&#xD;
 const uint16_t *       * ppci;         /* pointer to pointer to const */&#xD;
@@ -513,7 +513,7 @@ pi  = ( uint16_t * )pci;               /* Not compliant               */&#xD;
 pi  = ( uint16_t * )pvi;               /* Not compliant               */&#xD;
 ppi = ( uint16_t * * )pcpi;            /* Not compliant               */&#xD;
 ppi = ( uint16_t * * )ppci;            /* Not compliant               */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="12" minerNum="12.1" category="Exprssions"><description>In addition to the use of parentheses to override default operator precedence, parentheses should also be used to emphasise it. It is easy to make a mistake with the rather complicated precedence rules of C, and this approach helps to avoid such errors, and helps to make the code easier to read. However, do not add too many parentheses so as to clutter the code and make it unreadable.</description><RuleName>Limited dependence should be placed on C's operator precedence rules in expressions. </RuleName><ClassName>Rule12.1(notImplement).class</ClassName><SourceCode>x = a + b;              /* acceptable      */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="12" minerNum="12.1" category="Exprssions"><description>In addition to the use of parentheses to override default operator precedence, parentheses should also be used to emphasise it. It is easy to make a mistake with the rather complicated precedence rules of C, and this approach helps to avoid such errors, and helps to make the code easier to read. However, do not add too many parentheses so as to clutter the code and make it unreadable.</description><RuleName>Limited dependence should be placed on C's operator precedence rules in expressions. </RuleName><ClassName>Rule12.1(notImplement).class</ClassName><SourceCode>x = a + b;              /* acceptable      */&#xD;
 x = ( a + b );          /* () not required */
 x = a * -1;             /* acceptable      */&#xD;
 x = a * ( -1 );         /* () not required */
@@ -532,7 +532,7 @@ uint32_t d;&#xD;
 d = ( a + b ) + c;   /* d is 9; a + b wraps modulo 65536 */&#xD;
 d = a + ( b + c );   /* d is 65545                       */&#xD;
 /* this example also deviates from several other rules */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.10" category="Exprssions"><description>Use of the comma operator is generally detrimental to the readability of code, and the same effect can be achieved by other means.</description><RuleName>The comma operator shall not be used. </RuleName><ClassName>Rule12_10_Req.class</ClassName><SourceCode>/* PRQA S 2984 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.10" category="Exprssions"><description>Use of the comma operator is generally detrimental to the readability of code, and the same effect can be achieved by other means.</description><RuleName>The comma operator shall not be used. </RuleName><ClassName>Rule12_10_Req.class</ClassName><SourceCode>/* PRQA S 2984 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -555,7 +555,7 @@ extern S16 test_1210( void )&#xD;
 &#xD;
    return y;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="12" minerNum="12.11" category="Exprssions"><description>Because unsigned integer expressions do not strictly overflow, but instead wrap around in a modular way, any constant unsigned integer expressions which in effect 'overflow' will not be detected by the compiler. Although there may be good reasons at run-time to rely on the modular arithmetic provided by unsigned integer types, the reasons for using it at compile-time to evaluate a constant expression are less obvious. Any instance of an unsigned integer constant expression wrapping around is therefore likely to indicate a programming error.</description><RuleName>Evaluation of constant unsigned integer expressions should not lead to wrap-around. </RuleName><ClassName>Rule12.11(notImplement).class</ClassName><SourceCode>#define START   0x8000&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="12" minerNum="12.11" category="Exprssions"><description>Because unsigned integer expressions do not strictly overflow, but instead wrap around in a modular way, any constant unsigned integer expressions which in effect 'overflow' will not be detected by the compiler. Although there may be good reasons at run-time to rely on the modular arithmetic provided by unsigned integer types, the reasons for using it at compile-time to evaluate a constant expression are less obvious. Any instance of an unsigned integer constant expression wrapping around is therefore likely to indicate a programming error.</description><RuleName>Evaluation of constant unsigned integer expressions should not lead to wrap-around. </RuleName><ClassName>Rule12.11(notImplement).class</ClassName><SourceCode>#define START   0x8000&#xD;
 #define END     0xFFFF&#xD;
 #define LEN     0x8000&#xD;
 &#xD;
@@ -575,7 +575,7 @@ if ( ( START + LEN ) &gt; END )&#xD;
       /* Not OK: START + LEN wraps around to 0x0000 due to unsigned&#xD;
                                                      int arithmetic */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.12" category="Exprssions"><description>The storage layout used for floating-point values may vary from one compiler to another, and therefore no floating-point manipulations shall be made which rely directly on the way the values are stored. The in-built operators and functions, which hide the storage details from the programmer, should be used.</description><RuleName>The underlying bit representations of floating-point values shall not be used. </RuleName><ClassName>Rule12.12(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.12" category="Exprssions"><description>The storage layout used for floating-point values may vary from one compiler to another, and therefore no floating-point manipulations shall be made which rely directly on the way the values are stored. The in-built operators and functions, which hide the storage details from the programmer, should be used.</description><RuleName>The underlying bit representations of floating-point values shall not be used. </RuleName><ClassName>Rule12.12(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define FC (5.0F)&#xD;
@@ -595,11 +595,11 @@ extern S16 test_1212( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="12" minerNum="12.13" category="Exprssions"><description>It is the intention of the rule that when the increment or decrement operator is used, it should be the only side effect in the statement. The use of increment and decrement operators in combination with other arithmetic operators is not recommended because:</description><RuleName>The increment (++) and decrement (--) operators should not be mixed with other operators in an expression. </RuleName><ClassName>Rule12_13_Adv.class</ClassName><SourceCode>u8a = ++u8b + u8c--;      /* Not compliant */
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="12" minerNum="12.13" category="Exprssions"><description>It is the intention of the rule that when the increment or decrement operator is used, it should be the only side effect in the statement. The use of increment and decrement operators in combination with other arithmetic operators is not recommended because:</description><RuleName>The increment (++) and decrement (--) operators should not be mixed with other operators in an expression. </RuleName><ClassName>Rule12_13_Adv.class</ClassName><SourceCode>u8a = ++u8b + u8c--;      /* Not compliant */
 ++u8b;&#xD;
 u8a = u8b + u8c;&#xD;
 u8c--;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.2" category="Exprssions"><description>Apart from a few operators (notably the function call operator (), &amp;&amp;, ||, ?: and , (comma)) the order in which sub-expressions are evaluated is unspecified and can vary. This means that no reliance can be placed on the order of evaluation of sub-expressions, and in particular no reliance can be placed on the order in which side effects occur. Those points in the evaluation of an expression at which all previous side effects can be guaranteed to have taken place are called 'sequence points'. Sequence points and side effects are described in sections 5.1.2.3, 6.3 and 6.6 of ISO/IEC 9899:1990 [2].</description><RuleName>The value of an expression shall be the same under any order of evaluation that the standard permits. </RuleName><ClassName>Rule12.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982-2984,2996,3447 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.2" category="Exprssions"><description>Apart from a few operators (notably the function call operator (), &amp;&amp;, ||, ?: and , (comma)) the order in which sub-expressions are evaluated is unspecified and can vary. This means that no reliance can be placed on the order of evaluation of sub-expressions, and in particular no reliance can be placed on the order in which side effects occur. Those points in the evaluation of an expression at which all previous side effects can be guaranteed to have taken place are called 'sequence points'. Sequence points and side effects are described in sections 5.1.2.3, 6.3 and 6.6 of ISO/IEC 9899:1990 [2].</description><RuleName>The value of an expression shall be the same under any order of evaluation that the standard permits. </RuleName><ClassName>Rule12.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982-2984,2996,3447 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -721,15 +721,15 @@ static S16 test_1202c( const S16 *p )&#xD;
 &#xD;
    return r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.3" category="Exprssions"><description>A possible programming error in C is to apply the sizeof operator to an expression and expect the expression to be evaluated. However the expression is not evaluated: sizeof only acts on the type of the expression. To avoid this error, sizeof shall not be used on expressions that contain side effects, as the side effects will not occur. sizeof() shall only be applied to an operand which is a type or an object. This may include volatile objects. For example:</description><RuleName>The sizeof operator shall not be used on expressions that contain side effects. </RuleName><ClassName>Rule12_3_Req.class</ClassName><SourceCode>int32_t i;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.3" category="Exprssions"><description>A possible programming error in C is to apply the sizeof operator to an expression and expect the expression to be evaluated. However the expression is not evaluated: sizeof only acts on the type of the expression. To avoid this error, sizeof shall not be used on expressions that contain side effects, as the side effects will not occur. sizeof() shall only be applied to an operand which is a type or an object. This may include volatile objects. For example:</description><RuleName>The sizeof operator shall not be used on expressions that contain side effects. </RuleName><ClassName>Rule12_3_Req.class</ClassName><SourceCode>int32_t i;&#xD;
 int32_t j;&#xD;
 j = sizeof( i = 1234 );&#xD;
      /* j is set to the sizeof the type of i which is an int */&#xD;
      /* i is not set to 1234.                                */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.4" category="Exprssions"><description>There are some situations in C code where certain parts of expressions may not be evaluated. If these sub-expressions contain side effects then those side effects may or may not occur, depending on the values of other sub-expressions.</description><RuleName>The right hand operand of a logical &amp;&amp; or || operator shall not contain side effects. </RuleName><ClassName>Rule12_4_Req.class</ClassName><SourceCode>if ( ishigh &amp;&amp; ( x == i++ ) )     /* Not compliant                 */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.4" category="Exprssions"><description>There are some situations in C code where certain parts of expressions may not be evaluated. If these sub-expressions contain side effects then those side effects may or may not occur, depending on the values of other sub-expressions.</description><RuleName>The right hand operand of a logical &amp;&amp; or || operator shall not contain side effects. </RuleName><ClassName>Rule12_4_Req.class</ClassName><SourceCode>if ( ishigh &amp;&amp; ( x == i++ ) )     /* Not compliant                 */&#xD;
 if ( ishigh &amp;&amp; ( x == f( x ) ) )  /* Only acceptable if f( x ) is&#xD;
                                      known to have no side effects */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.5" category="Exprssions"><description>'Primary expressions' are defined in ISO/IEC 9899:1990 [2], section 6.3.1. Essentially they are either a single identifier, or a constant, or a parenthesised expression. The effect of this rule is to require that if an operand is other than a single identifier or constant then it must be parenthesised. Parentheses are important in this situation both for readability of code and for ensuring that the behaviour is as the programmer intended. Where an expression consists of either a sequence of only logical &amp;&amp; or a sequence of only logical ||, extra parentheses are not required.</description><RuleName>The operands of a logical &amp;&amp; or || shall be primary-expressions. </RuleName><ClassName>Rule12_5_Req.class</ClassName><SourceCode>if ( ( x ==  ) &amp;&amp; ishigh )   /* make x == 0 primary                  */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.5" category="Exprssions"><description>'Primary expressions' are defined in ISO/IEC 9899:1990 [2], section 6.3.1. Essentially they are either a single identifier, or a constant, or a parenthesised expression. The effect of this rule is to require that if an operand is other than a single identifier or constant then it must be parenthesised. Parentheses are important in this situation both for readability of code and for ensuring that the behaviour is as the programmer intended. Where an expression consists of either a sequence of only logical &amp;&amp; or a sequence of only logical ||, extra parentheses are not required.</description><RuleName>The operands of a logical &amp;&amp; or || shall be primary-expressions. </RuleName><ClassName>Rule12_5_Req.class</ClassName><SourceCode>if ( ( x ==  ) &amp;&amp; ishigh )   /* make x == 0 primary                  */&#xD;
 if ( x || y || z )            /* exception allowed, if x, y and z are&#xD;
                                  Boolean                              */&#xD;
 if ( x || ( y &amp;&amp; z ) )        /* make y &amp;&amp; z primary                  */&#xD;
@@ -739,7 +739,7 @@ if ( ( x &gt; c1 ) &amp;&amp; ( y &gt; c2 ) &amp;&amp; ( z &gt; c3 ) )      /* C
 if ( ( x &gt; c1 ) &amp;&amp; ( y &gt; c2 ) || ( z &gt; c3 ) )      /* not compliant   */&#xD;
 if ( ( x &gt; c1 ) &amp;&amp; ( ( y &gt; c2 ) || ( z &gt; c3 ) ) )  /* Compliant&#xD;
                                                         extra () used */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="12" minerNum="12.6" category="Exprssions"><description>The logical operators &amp;&amp;, || and ! can be easily confused with the bitwise operators &amp;, | and ~. See 'Boolean expressions' in the glossary.</description><RuleName>The operands of logical operators (&amp;&amp;, || and !) should be effectively Boolean. Expressions that are effectively Boolean should not be used as operands to operators other than (&amp;&amp;, ||, !, =, ==, != and ?:). </RuleName><ClassName>Rule12_6_Adv.class</ClassName><SourceCode>/* PRQA S 2982 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="12" minerNum="12.6" category="Exprssions"><description>The logical operators &amp;&amp;, || and ! can be easily confused with the bitwise operators &amp;, | and ~. See 'Boolean expressions' in the glossary.</description><RuleName>The operands of logical operators (&amp;&amp;, || and !) should be effectively Boolean. Expressions that are effectively Boolean should not be used as operands to operators other than (&amp;&amp;, ||, !, =, ==, != and ?:). </RuleName><ClassName>Rule12_6_Adv.class</ClassName><SourceCode>/* PRQA S 2982 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -765,7 +765,7 @@ extern S16 test_1206( void )&#xD;
 &#xD;
    return s16r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.7" category="Exprssions"><description>Bitwise operations (~, &lt;&lt;, &lt;&lt;=, &gt;&gt;, &gt;&gt;=, &amp;, &amp;=, ^, ^=, | and |=) are not normally meaningful on signed integers. Problems can arise if, for example, a right shift moves the sign bit into the number, or a left shift moves a numeric bit into the sign bit.</description><RuleName>Bitwise operators shall not be applied to operands whose underlying type is signed. </RuleName><ClassName>Rule12.7(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.7" category="Exprssions"><description>Bitwise operations (~, &lt;&lt;, &lt;&lt;=, &gt;&gt;, &gt;&gt;=, &amp;, &amp;=, ^, ^=, | and |=) are not normally meaningful on signed integers. Problems can arise if, for example, a right shift moves the sign bit into the number, or a left shift moves a numeric bit into the sign bit.</description><RuleName>Bitwise operators shall not be applied to operands whose underlying type is signed. </RuleName><ClassName>Rule12.7(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 &#xD;
@@ -785,10 +785,10 @@ extern S16 test_1207( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.8" category="Exprssions"><description>If, for example, the left hand operand of a left-shift or right-shift is a 16-bit integer, then it is important to ensure that this is shifted only by a number between 0 and 15 inclusive.</description><RuleName>The right hand operand of a shift operator shall lie between zero and one less than the width in bits of the underlying type of the left hand operand. </RuleName><ClassName>Rule12.8(notImplement).class</ClassName><SourceCode>u8a  = ( uint8_t ) ( u8a &lt;&lt; 7 );                 /* compliant     */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.8" category="Exprssions"><description>If, for example, the left hand operand of a left-shift or right-shift is a 16-bit integer, then it is important to ensure that this is shifted only by a number between 0 and 15 inclusive.</description><RuleName>The right hand operand of a shift operator shall lie between zero and one less than the width in bits of the underlying type of the left hand operand. </RuleName><ClassName>Rule12.8(notImplement).class</ClassName><SourceCode>u8a  = ( uint8_t ) ( u8a &lt;&lt; 7 );                 /* compliant     */&#xD;
 u8a  = ( uint8_t ) ( u8a &lt;&lt; 9 );                 /* not compliant */&#xD;
 u16a = ( uint16_t )( ( uint16_t ) u8a &lt;&lt; 9 );    /* compliant     */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="12" minerNum="12.9" category="Exprssions"><description>Applying the unary minus operator to an expression of type unsigned int or unsigned long generates a result of type unsigned int or unsigned long respectively and is not a meaningful operation. Applying unary minus to an operand of smaller unsigned integer type may generate a meaningful signed result due to integral promotion, but this is not good practice.</description><RuleName>The unary minus operator shall not be applied to an expression whose underlying type is unsigned. </RuleName><ClassName>Rule12.9(notImplement).class</ClassName><SourceCode>/* PRQA S 3199,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="12" minerNum="12.9" category="Exprssions"><description>Applying the unary minus operator to an expression of type unsigned int or unsigned long generates a result of type unsigned int or unsigned long respectively and is not a meaningful operation. Applying unary minus to an operand of smaller unsigned integer type may generate a meaningful signed result due to integral promotion, but this is not good practice.</description><RuleName>The unary minus operator shall not be applied to an expression whose underlying type is unsigned. </RuleName><ClassName>Rule12.9(notImplement).class</ClassName><SourceCode>/* PRQA S 3199,3203 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -801,7 +801,7 @@ extern S16 test_1209( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="13" minerNum="13.1" category="ControlStatementExpressions"><description>No assignments are permitted in any expression which is considered to have a Boolean value. This precludes the use of both simple and compound assignment operators in the operands of a Boolean-valued expression. However, it does not preclude assigning a Boolean value to a variable.</description><RuleName>Assignment operators shall not be used in expressions that yield a Boolean value. </RuleName><ClassName>Rule13.1(notImplement).class</ClassName><SourceCode>x = y;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="13" minerNum="13.1" category="ControlStatementExpressions"><description>No assignments are permitted in any expression which is considered to have a Boolean value. This precludes the use of both simple and compound assignment operators in the operands of a Boolean-valued expression. However, it does not preclude assigning a Boolean value to a variable.</description><RuleName>Assignment operators shall not be used in expressions that yield a Boolean value. </RuleName><ClassName>Rule13.1(notImplement).class</ClassName><SourceCode>x = y;&#xD;
 if ( x !=  )&#xD;
 {&#xD;
     foo();&#xD;
@@ -814,10 +814,10 @@ if ( x = y )&#xD;
 {&#xD;
     foo();&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="13" minerNum="13.2" category="ControlStatementExpressions"><description>Where a data value is to be tested against zero then the test should be made explicit. The exception to this rule is when data represents a Boolean value, even though in C this will in practice be an integer. This rule is in the interests of clarity, and makes clear the distinction between integers and logical values.</description><RuleName>Tests of a value against zero should be made explicit, unless the operand is effectively Boolean. </RuleName><ClassName>Rule13.2(notImplement).class</ClassName><SourceCode>if ( x !=  )    /* Correct way of testing x is non-zero */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="13" minerNum="13.2" category="ControlStatementExpressions"><description>Where a data value is to be tested against zero then the test should be made explicit. The exception to this rule is when data represents a Boolean value, even though in C this will in practice be an integer. This rule is in the interests of clarity, and makes clear the distinction between integers and logical values.</description><RuleName>Tests of a value against zero should be made explicit, unless the operand is effectively Boolean. </RuleName><ClassName>Rule13.2(notImplement).class</ClassName><SourceCode>if ( x !=  )    /* Correct way of testing x is non-zero */&#xD;
 if ( y )         /* Not compliant, unless y is effectively &#xD;
                     Boolean data (e.g. a flag) */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="13" minerNum="13.3" category="ControlStatementExpressions"><description>The inherent nature of floating-point types is such that comparisons of equality will often not evaluate to true even when they are expected to. In addition the behaviour of such a comparison cannot be predicted before execution, and may well vary from one implementation to another. For example the result of the test in the following code is unpredictable:</description><RuleName>Floating-point expressions shall not be tested for equality or inequality. </RuleName><ClassName>Rule13.3(notImplement).class</ClassName><SourceCode>float32_t x, y;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="13" minerNum="13.3" category="ControlStatementExpressions"><description>The inherent nature of floating-point types is such that comparisons of equality will often not evaluate to true even when they are expected to. In addition the behaviour of such a comparison cannot be predicted before execution, and may well vary from one implementation to another. For example the result of the test in the following code is unpredictable:</description><RuleName>Floating-point expressions shall not be tested for equality or inequality. </RuleName><ClassName>Rule13.3(notImplement).class</ClassName><SourceCode>float32_t x, y;&#xD;
 /* some calculations here          */&#xD;
 if ( x == y )     /* not compliant */&#xD;
 { /* ... */ }&#xD;
@@ -825,7 +825,7 @@ if ( x == 0.0f )  /* not compliant */&#xD;
 { /* ... */ }
 if ( ( x &lt;= y ) &amp;&amp; ( x &gt;= y ) )&#xD;
 { /* ... */ }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="13" minerNum="13.4" category="ControlStatementExpressions"><description>The controlling expression may include a loop counter, whose value is tested to determine termination of the loop. Floating-point variables shall not be used for this purpose. Rounding and truncation errors can be propagated through the iterations of the loop, causing significant inaccuracies in the loop variable, and possibly giving unexpected results when the test is performed. For example the number of times the loop is performed may vary from one implementation to another, and may be unpredictable.</description><RuleName>The controlling expression of a for statement shall not contain any objects of floating type. </RuleName><ClassName>Rule13.4(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="13" minerNum="13.4" category="ControlStatementExpressions"><description>The controlling expression may include a loop counter, whose value is tested to determine termination of the loop. Floating-point variables shall not be used for this purpose. Rounding and truncation errors can be propagated through the iterations of the loop, causing significant inaccuracies in the loop variable, and possibly giving unexpected results when the test is performed. For example the number of times the loop is performed may vary from one implementation to another, and may be unpredictable.</description><RuleName>The controlling expression of a for statement shall not contain any objects of floating type. </RuleName><ClassName>Rule13.4(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1304( void )&#xD;
@@ -840,7 +840,7 @@ extern S16 test_1304( void )&#xD;
 &#xD;
    return s16x;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="13" minerNum="13.5" category="ControlStatementExpressions"><description>The three expressions of a for statement shall be used only for these purposes:</description><RuleName>The three expressions of a for statement shall be concerned only with loop control. </RuleName><ClassName>Rule13_5_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="13" minerNum="13.5" category="ControlStatementExpressions"><description>The three expressions of a for statement shall be used only for these purposes:</description><RuleName>The three expressions of a for statement shall be concerned only with loop control. </RuleName><ClassName>Rule13_5_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1305( void )&#xD;
@@ -861,13 +861,13 @@ extern S16 test_1305( void )&#xD;
 &#xD;
    return s16b;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="13" minerNum="13.6" category="ControlStatementExpressions"><description>Loop counters shall not be modified in the body of the loop. However other loop control variables representing logical values may be modified in the loop, for example a flag to indicate that something has been completed, which is then tested in the for statement.</description><RuleName>Numeric variables being used within a for loop for iteration counting shall not be modified in the body of the loop. </RuleName><ClassName>Rule13_6_Req.class</ClassName><SourceCode>flag = 1;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="13" minerNum="13.6" category="ControlStatementExpressions"><description>Loop counters shall not be modified in the body of the loop. However other loop control variables representing logical values may be modified in the loop, for example a flag to indicate that something has been completed, which is then tested in the for statement.</description><RuleName>Numeric variables being used within a for loop for iteration counting shall not be modified in the body of the loop. </RuleName><ClassName>Rule13_6_Req.class</ClassName><SourceCode>flag = 1;&#xD;
 for ( i = ; ( i &lt; 5 ) &amp;&amp; ( flag == 1 ); i++ )&#xD;
 {&#xD;
     flag = ;   /* Compliant - allows early termination of loop */&#xD;
     i = i + 3;  /* Not compliant - altering the loop counter    */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="13" minerNum="13.7" category="ControlStatementExpressions"><description>If a Boolean operator yields a result that can be proven to be always &quot;true&quot; or always &quot;false&quot;, it is highly likely that there is a programming error.</description><RuleName>Boolean operations whose results are invariant shall not be permitted. </RuleName><ClassName>Rule13.7(notImplement).class</ClassName><SourceCode>enum ec {RED, BLUE, GREEN} col;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="13" minerNum="13.7" category="ControlStatementExpressions"><description>If a Boolean operator yields a result that can be proven to be always &quot;true&quot; or always &quot;false&quot;, it is highly likely that there is a programming error.</description><RuleName>Boolean operations whose results are invariant shall not be permitted. </RuleName><ClassName>Rule13.7(notImplement).class</ClassName><SourceCode>enum ec {RED, BLUE, GREEN} col;&#xD;
 ...&#xD;
 if ( u16a &lt;  )             /* Not compliant - u16a is always &gt;= 0 */&#xD;
 ...&#xD;
@@ -887,7 +887,7 @@ if ( s8a &gt; 10 )&#xD;
     {&#xD;
     }&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.1" category="ControlFlow"><description>This rule refers to code which cannot under any circumstances be reached, and which can be identified as such at compile time. Code that can be reached but may never be executed is excluded from the rule (e.g. defensive programming code).</description><RuleName>There shall be no unreachable code. </RuleName><ClassName>Rule14.1(notImplement).class</ClassName><SourceCode>switch ( event )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.1" category="ControlFlow"><description>This rule refers to code which cannot under any circumstances be reached, and which can be identified as such at compile time. Code that can be reached but may never be executed is excluded from the rule (e.g. defensive programming code).</description><RuleName>There shall be no unreachable code. </RuleName><ClassName>Rule14.1(notImplement).class</ClassName><SourceCode>switch ( event )&#xD;
 {&#xD;
 case E_wakeup:&#xD;
     do_wakeup();&#xD;
@@ -898,7 +898,7 @@ default:&#xD;
     /* ... */&#xD;
     break;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.10" category="ControlFlow"><description>This rule applies whenever an if statement is followed by one or more else if statements; the final else if shall be followed by an else statement. In the case of a simple if statement then the else statement need not be included.</description><RuleName>All if ... else if constructs shall be terminated with an else clause. </RuleName><ClassName>Rule14_10_Req.class</ClassName><SourceCode>if ( x &lt;  )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.10" category="ControlFlow"><description>This rule applies whenever an if statement is followed by one or more else if statements; the final else if shall be followed by an else statement. In the case of a simple if statement then the else statement need not be included.</description><RuleName>All if ... else if constructs shall be terminated with an else clause. </RuleName><ClassName>Rule14_10_Req.class</ClassName><SourceCode>if ( x &lt;  )&#xD;
 {&#xD;
     log_error( 3 );&#xD;
      x = ;&#xD;
@@ -916,18 +916,18 @@ else   /* this else clause is required, even if the     */&#xD;
 {      /* programmer expects this will never be reached */&#xD;
        /* no change in value of x */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.2" category="ControlFlow"><description>Any statement (other than a null statement) which has no side effect and does not result in a change of control flow will normally indicate a programming error, and therefore a static check for such statements shall be performed. For example, the following statements do not necessarily have side effects when executed:</description><RuleName>All non-null statements shall either (i) have at least one side effect however executed, or (ii) cause control flow to change. </RuleName><ClassName>Rule14.2(notImplement).class</ClassName><SourceCode>/* assume uint16_t x;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.2" category="ControlFlow"><description>Any statement (other than a null statement) which has no side effect and does not result in a change of control flow will normally indicate a programming error, and therefore a static check for such statements shall be performed. For example, the following statements do not necessarily have side effects when executed:</description><RuleName>All non-null statements shall either (i) have at least one side effect however executed, or (ii) cause control flow to change. </RuleName><ClassName>Rule14.2(notImplement).class</ClassName><SourceCode>/* assume uint16_t x;&#xD;
    and    uint16_t i; */&#xD;
 ...&#xD;
 x &gt;= 3u;               /* not compliant: x is compared to 3,&#xD;
                           and the answer is discarded */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.3" category="ControlFlow"><description>Null statements should not normally be deliberately included, but where they are used they shall appear on a line by themselves. White-space characters may precede the null statement to preserve indentation. If a comment follows the null statement then at least one white-space character shall separate the null statement from the comment. The use of a white-space character to separate the null statement from any following comment is required on the grounds that it provides an important visual cue to reviewers. Following this rule enables a static checking tool to warn of null statements appearing on a line with other text, which would normally indicate a programming error. For example:</description><RuleName>Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment provided that the first character following the null statement is a white-space character. </RuleName><ClassName>Rule14.3(notImplement).class</ClassName><SourceCode>while ( ( port &amp; 0x80 ) ==  )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.3" category="ControlFlow"><description>Null statements should not normally be deliberately included, but where they are used they shall appear on a line by themselves. White-space characters may precede the null statement to preserve indentation. If a comment follows the null statement then at least one white-space character shall separate the null statement from the comment. The use of a white-space character to separate the null statement from any following comment is required on the grounds that it provides an important visual cue to reviewers. Following this rule enables a static checking tool to warn of null statements appearing on a line with other text, which would normally indicate a programming error. For example:</description><RuleName>Before preprocessing, a null statement shall only occur on a line by itself; it may be followed by a comment provided that the first character following the null statement is a white-space character. </RuleName><ClassName>Rule14.3(notImplement).class</ClassName><SourceCode>while ( ( port &amp; 0x80 ) ==  )&#xD;
 {&#xD;
     ; /* wait for pin - Compliant */&#xD;
     /* wait for pin */ ; /* Not compliant, comment before ; */&#xD;
     ;/* wait for pin - Not compliant, no white-space char after ; */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.4" category="ControlFlow"><description></description><RuleName>The goto statement shall not be used. </RuleName><ClassName>Rule14_4_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.4" category="ControlFlow"><description></description><RuleName>The goto statement shall not be used. </RuleName><ClassName>Rule14_4_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1404( void )&#xD;
@@ -938,7 +938,7 @@ mylabel:&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.5" category="ControlFlow"><description></description><RuleName>The continue statement shall not be used. </RuleName><ClassName>Rule14_5_Req.class</ClassName><SourceCode>/* PRQA S 2981 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.5" category="ControlFlow"><description></description><RuleName>The continue statement shall not be used. </RuleName><ClassName>Rule14_5_Req.class</ClassName><SourceCode>/* PRQA S 2981 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -962,7 +962,7 @@ extern S16 test_1405( void )&#xD;
 &#xD;
    return r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.6" category="ControlFlow"><description>These rules are in the interests of good structured programming. One break statement is allowed in a loop since this allows, for example, for dual outcome loops or for optimal coding.</description><RuleName>For any iteration statement there shall be at most one break statement used for loop termination. </RuleName><ClassName>Rule14_6_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.6" category="ControlFlow"><description>These rules are in the interests of good structured programming. One break statement is allowed in a loop since this allows, for example, for dual outcome loops or for optimal coding.</description><RuleName>For any iteration statement there shall be at most one break statement used for loop termination. </RuleName><ClassName>Rule14_6_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 &#xD;
@@ -1002,7 +1002,7 @@ extern S16 test_1406( void )&#xD;
 &#xD;
    return s16b;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.7" category="ControlFlow"><description>This is required by IEC 61508, under good programming style.</description><RuleName>A function shall have a single point of exit at the end of the function. </RuleName><ClassName>Rule14_7_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.7" category="ControlFlow"><description>This is required by IEC 61508, under good programming style.</description><RuleName>A function shall have a single point of exit at the end of the function. </RuleName><ClassName>Rule14_7_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1407( void )            /* MISRA Violation */&#xD;
@@ -1016,7 +1016,7 @@ extern S16 test_1407( void )            /* MISRA Violation */&#xD;
       return 1;&#xD;
    }&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.8" category="ControlFlow"><description>The statement that forms the body of a switch statement or a while, do ... while or for loop, shall be a compound statement (enclosed within braces), even if that compound statement contains a single statement.</description><RuleName>The statement forming the body of a switch, while, do ... while or for statement shall be a compound statement. </RuleName><ClassName>Rule14_8_Req.class</ClassName><SourceCode>for ( i = ; i &lt; N_ELEMENTS; ++i )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.8" category="ControlFlow"><description>The statement that forms the body of a switch statement or a while, do ... while or for loop, shall be a compound statement (enclosed within braces), even if that compound statement contains a single statement.</description><RuleName>The statement forming the body of a switch, while, do ... while or for statement shall be a compound statement. </RuleName><ClassName>Rule14_8_Req.class</ClassName><SourceCode>for ( i = ; i &lt; N_ELEMENTS; ++i )&#xD;
 {&#xD;
     buffer[i] = ;       /* Even a single statement must be in braces */&#xD;
 }&#xD;
@@ -1028,7 +1028,7 @@ while ( new_data_available )&#xD;
                              part of the body of the while statement,&#xD;
                              and is executed only after the loop has&#xD;
                              terminated */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="14" minerNum="14.9" category="ControlFlow"><description>For example: Note that the layout for compound statements and their enclosing braces should be determined from the style guidelines. The above is just an example.</description><RuleName>An if (expression) construct shall be followed by a compound statement. The else keyword shall be followed by either a compound statement, or another if statement. </RuleName><ClassName>Rule14_9_Req.class</ClassName><SourceCode>if ( test1 )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="14" minerNum="14.9" category="ControlFlow"><description>For example: Note that the layout for compound statements and their enclosing braces should be determined from the style guidelines. The above is just an example.</description><RuleName>An if (expression) construct shall be followed by a compound statement. The else keyword shall be followed by either a compound statement, or another if statement. </RuleName><ClassName>Rule14_9_Req.class</ClassName><SourceCode>if ( test1 )&#xD;
 {&#xD;
     x = 1;              /* Even a single statement must be in braces */&#xD;
 }                       &#xD;
@@ -1041,7 +1041,7 @@ else                    &#xD;
     y = 2; /* This line was added later but, despite the appearance&#xD;
               (from the indent) it is actually not part of the else, and&#xD;
                is executed unconditionally */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="15" minerNum="15.0" category="SwitchStatements"><description>The syntax for the switch in C is weak, allowing complex, unstructured behaviour. The following text describes the syntax for switch statements as defined by MISRA-C and is normative. This, and the associated rules, enforces a simple and consistent structure on the switch statement.</description><RuleName>The MISRA C switch syntax shall be used. </RuleName><ClassName>Rule15_0_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="15" minerNum="15.0" category="SwitchStatements"><description>The syntax for the switch in C is weak, allowing complex, unstructured behaviour. The following text describes the syntax for switch statements as defined by MISRA-C and is normative. This, and the associated rules, enforces a simple and consistent structure on the switch statement.</description><RuleName>The MISRA C switch syntax shall be used. </RuleName><ClassName>Rule15_0_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1500( void )&#xD;
@@ -1060,7 +1060,7 @@ extern S16 test_1500( void )&#xD;
    }&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="15" minerNum="15.1" category="SwitchStatements"><description>The scope of a case or default label shall be the compound statement, which is the body of a switch statement. All case clauses and the default clause shall be at the same scope.</description><RuleName>A switch label shall only be used when the most closely-enclosing compound statement is the body of a switch statement. </RuleName><ClassName>Rule15_1_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="15" minerNum="15.1" category="SwitchStatements"><description>The scope of a case or default label shall be the compound statement, which is the body of a switch statement. All case clauses and the default clause shall be at the same scope.</description><RuleName>A switch label shall only be used when the most closely-enclosing compound statement is the body of a switch statement. </RuleName><ClassName>Rule15_1_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1501( void )&#xD;
@@ -1087,7 +1087,7 @@ extern S16 test_1501( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="15" minerNum="15.2" category="SwitchStatements"><description>The last statement in every switch clause shall be a break statement, or if the switch clause is a compound statement, then the last statement in the compound statement shall be a break statement.</description><RuleName>An unconditional break statement shall terminate every non-empty switch clause. </RuleName><ClassName>Rule15_2_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="15" minerNum="15.2" category="SwitchStatements"><description>The last statement in every switch clause shall be a break statement, or if the switch clause is a compound statement, then the last statement in the compound statement shall be a break statement.</description><RuleName>An unconditional break statement shall terminate every non-empty switch clause. </RuleName><ClassName>Rule15_2_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 &#xD;
@@ -1113,7 +1113,7 @@ extern S16 test_1502( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="15" minerNum="15.3" category="SwitchStatements"><description>The requirement for a final default clause is defensive programming. This clause shall either take appropriate action or contain a suitable comment as to why no action is taken.</description><RuleName>The final clause of a switch statement shall be the default clause. </RuleName><ClassName>Rule15_3_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="15" minerNum="15.3" category="SwitchStatements"><description>The requirement for a final default clause is defensive programming. This clause shall either take appropriate action or contain a suitable comment as to why no action is taken.</description><RuleName>The final clause of a switch statement shall be the default clause. </RuleName><ClassName>Rule15_3_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1503( void )&#xD;
@@ -1145,10 +1145,10 @@ extern S16 test_1503( void )&#xD;
 &#xD;
    return x;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="15" minerNum="15.4" category="SwitchStatements"><description>See 'Boolean expressions' in the glossary.</description><RuleName>A switch expression shall not represent a value that is effectively Boolean. </RuleName><ClassName>Rule15_4_Req.class</ClassName><SourceCode>switch ( x ==  )          /* not compliant - effectively Boolean */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="15" minerNum="15.4" category="SwitchStatements"><description>See 'Boolean expressions' in the glossary.</description><RuleName>A switch expression shall not represent a value that is effectively Boolean. </RuleName><ClassName>Rule15_4_Req.class</ClassName><SourceCode>switch ( x ==  )          /* not compliant - effectively Boolean */&#xD;
 {&#xD;
    ...
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="15" minerNum="15.5" category="SwitchStatements"><description>For example:</description><RuleName>Every switch statement shall have at least one case clause. </RuleName><ClassName>Rule15_5_Req.class</ClassName><SourceCode>switch ( x )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="15" minerNum="15.5" category="SwitchStatements"><description>For example:</description><RuleName>Every switch statement shall have at least one case clause. </RuleName><ClassName>Rule15_5_Req.class</ClassName><SourceCode>switch ( x )&#xD;
 {&#xD;
     uint8_t var;        /* not compliant - decl before 1st case     */&#xD;
 case :&#xD;
@@ -1173,7 +1173,7 @@ default:                /* default clause is required               */&#xD;
                            future modification turns this into a&#xD;
                            case clause                              */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.1" category="Functions"><description>There are a lot of potential problems with this feature. Users shall not write additional functions that use a variable number of arguments. This precludes the use of use of stdarg.h, va_arg, va_start and va_end.</description><RuleName>Functions shall not be defined with a variable number of arguments. </RuleName><ClassName>Rule16.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2984 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.1" category="Functions"><description>There are a lot of potential problems with this feature. Users shall not write additional functions that use a variable number of arguments. This precludes the use of use of stdarg.h, va_arg, va_start and va_end.</description><RuleName>Functions shall not be defined with a variable number of arguments. </RuleName><ClassName>Rule16.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2984 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1193,7 +1193,7 @@ static S16 test_1601a( S16 n, ... )        /* MISRA Violation */&#xD;
 {&#xD;
    return n;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.10" category="Functions"><description>A function (whether it is part of the standard library, a third party library or a user defined function) may provide some means of indicating the occurrence of an error. This may be via an error flag, some special return value or some other means. Whenever such a mechanism is provided by a function the calling program shall check for the indication of an error as soon as the function returns.</description><RuleName>If a function returns error information, then that error information shall be tested. </RuleName><ClassName>Rule16.10(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.10" category="Functions"><description>A function (whether it is part of the standard library, a third party library or a user defined function) may provide some means of indicating the occurrence of an error. This may be via an error flag, some special return value or some other means. Whenever such a mechanism is provided by a function the calling program shall check for the indication of an error as soon as the function returns.</description><RuleName>If a function returns error information, then that error information shall be tested. </RuleName><ClassName>Rule16.10(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 static S16 test_1610a( void );&#xD;
@@ -1213,7 +1213,7 @@ static S16 test_1610a( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.2" category="Functions"><description>This means that recursive function calls cannot be used in safety-related systems. Recursion carries with it the danger of exceeding available stack space, which can be a serious error. Unless recursion is very tightly controlled, it is not possible to determine before execution what the worst-case stack usage could be.</description><RuleName>Functions shall not call themselves, either directly or indirectly. </RuleName><ClassName>Rule16_2_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.2" category="Functions"><description>This means that recursive function calls cannot be used in safety-related systems. Recursion carries with it the danger of exceeding available stack space, which can be a serious error. Unless recursion is very tightly controlled, it is not possible to determine before execution what the worst-case stack usage could be.</description><RuleName>Functions shall not call themselves, either directly or indirectly. </RuleName><ClassName>Rule16_2_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 static void test_1602a( S16 x );&#xD;
@@ -1274,7 +1274,7 @@ static void test_1602e( S16 x )&#xD;
       test_1602e( x );                /* MISRA Violation */&#xD;
    }&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.3" category="Functions"><description>Names shall be given for all the parameters in the function declaration for reasons of compatibility, clarity and maintainability.</description><RuleName>Identifiers shall be given for all of the parameters in a function prototype declaration. </RuleName><ClassName>Rule16_3_Req.class</ClassName><SourceCode>/* PRQA S 2982 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.3" category="Functions"><description>Names shall be given for all the parameters in the function declaration for reasons of compatibility, clarity and maintainability.</description><RuleName>Identifiers shall be given for all of the parameters in a function prototype declaration. </RuleName><ClassName>Rule16_3_Req.class</ClassName><SourceCode>/* PRQA S 2982 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1313,7 +1313,7 @@ static S16 test_1603c( const S16 *u, const S16 *v )&#xD;
 {&#xD;
    return *u - *v;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.4" category="Functions"><description></description><RuleName>The identifiers used in the declaration and definition of a function shall be identical. </RuleName><ClassName>Rule16_4_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.4" category="Functions"><description></description><RuleName>The identifiers used in the declaration and definition of a function shall be identical. </RuleName><ClassName>Rule16_4_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -1331,8 +1331,8 @@ static S16 test_1604a(S16 aaa)                  /* MISRA Violation */&#xD;
 {&#xD;
     return aaa;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.5" category="Functions"><description>Functions shall be declared with a return type (see Rule ), that type being void if the function does not return any data. Similarly, if the function has no parameters, the parameter list shall be declared as void. Thus for example, a function, myfunc, which neither takes parameters nor returns a value would be declared as:</description><RuleName>Functions with no parameters shall be declared and defined with the parameter list void. </RuleName><ClassName>Rule16_5_Req.class</ClassName><SourceCode>void myfunc( void );
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.6" category="Functions"><description>This problem is completely avoided by the use of function prototypes - see Rule . This rule is retained since compilers may not flag this constraint error.</description><RuleName>The number of arguments passed to a function shall match the number of parameters. </RuleName><ClassName>Rule16.6(notImplement).class</ClassName><SourceCode>/* PRQA S 3206 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.5" category="Functions"><description>Functions shall be declared with a return type (see Rule ), that type being void if the function does not return any data. Similarly, if the function has no parameters, the parameter list shall be declared as void. Thus for example, a function, myfunc, which neither takes parameters nor returns a value would be declared as:</description><RuleName>Functions with no parameters shall be declared and defined with the parameter list void. </RuleName><ClassName>Rule16_5_Req.class</ClassName><SourceCode>void myfunc( void );
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.6" category="Functions"><description>This problem is completely avoided by the use of function prototypes - see Rule . This rule is retained since compilers may not flag this constraint error.</description><RuleName>The number of arguments passed to a function shall match the number of parameters. </RuleName><ClassName>Rule16.6(notImplement).class</ClassName><SourceCode>/* PRQA S 3206 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1368,7 +1368,7 @@ static S16 test_1606b( S16 k )&#xD;
 {&#xD;
    return k;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="16" minerNum="16.7" category="Functions"><description>This rule leads to greater precision in the definition of the function interface. The const qualification should be applied to the object pointed to, not to the pointer, since it is the object itself that is being protected.</description><RuleName>A pointer parameter in a function prototype should be declared as pointer to const if the pointer is not used to modify the addressed object. </RuleName><ClassName>Rule16.7(notImplement).class</ClassName><SourceCode>void myfunc( int16_t * param1, const int16_t * param2, int16_t * param3 )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="16" minerNum="16.7" category="Functions"><description>This rule leads to greater precision in the definition of the function interface. The const qualification should be applied to the object pointed to, not to the pointer, since it is the object itself that is being protected.</description><RuleName>A pointer parameter in a function prototype should be declared as pointer to const if the pointer is not used to modify the addressed object. </RuleName><ClassName>Rule16.7(notImplement).class</ClassName><SourceCode>void myfunc( int16_t * param1, const int16_t * param2, int16_t * param3 )&#xD;
 /* param1: Addresses an object which is modified - no const&#xD;
    param2: Addresses an object which is not modified - const required&#xD;
    param3: Addresses an object which is not modified - const missing */&#xD;
@@ -1378,7 +1378,7 @@ static S16 test_1606b( S16 k )&#xD;
 }&#xD;
 /* data at address param3 has not been changed, &#xD;
    but this is not const therefore not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.8" category="Functions"><description>This expression gives the value that the function returns. The absence of a return with an expression leads to undefined behaviour (and the compiler may not give an error).</description><RuleName>All exit paths from a function with non-void return type shall have an explicit return statement with an expression. </RuleName><ClassName>Rule16.8(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.8" category="Functions"><description>This expression gives the value that the function returns. The absence of a return with an expression leads to undefined behaviour (and the compiler may not give an error).</description><RuleName>All exit paths from a function with non-void return type shall have an explicit return statement with an expression. </RuleName><ClassName>Rule16.8(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1412,11 +1412,11 @@ extern S16 test_1608( void )    /* MISRA Violation */&#xD;
        test_1608b()            +&#xD;
        test_1608c();&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="16" minerNum="16.9" category="Functions"><description>If the programmer writes:</description><RuleName>A function identifier shall only be used with either a preceding &amp;, or with a parenthesised parameter list, which may be empty. </RuleName><ClassName>Rule16.9(notImplement).class</ClassName><SourceCode>if ( f )    /* not compliant - gives a constant non-zero value which is&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="16" minerNum="16.9" category="Functions"><description>If the programmer writes:</description><RuleName>A function identifier shall only be used with either a preceding &amp;, or with a parenthesised parameter list, which may be empty. </RuleName><ClassName>Rule16.9(notImplement).class</ClassName><SourceCode>if ( f )    /* not compliant - gives a constant non-zero value which is&#xD;
   {            the address of f - use either f() or &amp;f                  */&#xD;
     /* ... */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="17" minerNum="17.1" category="PointersAndArrays"><description>Addition and subtraction of integers (including increment and decrement) from pointers that do not point to an array or array element results in undefined behaviour.</description><RuleName>Pointer arithmetic shall only be applied to pointers that address an array or array element. </RuleName><ClassName>Rule17.1(notImplement).class</ClassName><SourceCode>/* PRQA S 488,2982,2983,3447 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="17" minerNum="17.1" category="PointersAndArrays"><description>Addition and subtraction of integers (including increment and decrement) from pointers that do not point to an array or array element results in undefined behaviour.</description><RuleName>Pointer arithmetic shall only be applied to pointers that address an array or array element. </RuleName><ClassName>Rule17.1(notImplement).class</ClassName><SourceCode>/* PRQA S 488,2982,2983,3447 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1441,7 +1441,7 @@ extern S16 test_1701( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="17" minerNum="17.2" category="PointersAndArrays"><description>Subtraction of pointers only gives well-defined results if the two pointers point (or at least behave as if they point) into the same array object.</description><RuleName>Pointer subtraction shall only be applied to pointers that address elements of the same array. </RuleName><ClassName>Rule17.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982, 2984 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="17" minerNum="17.2" category="PointersAndArrays"><description>Subtraction of pointers only gives well-defined results if the two pointers point (or at least behave as if they point) into the same array object.</description><RuleName>Pointer subtraction shall only be applied to pointers that address elements of the same array. </RuleName><ClassName>Rule17.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982, 2984 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1481,7 +1481,7 @@ extern S16 test_1702( void )&#xD;
 &#xD;
    return nch;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="17" minerNum="17.3" category="PointersAndArrays"><description>Attempting to make comparisons between pointers will produce undefined behaviour if the two pointers do not point to the same object. Note: it is permissible to address the next element beyond the end of an array, but accessing this element is not allowed.</description><RuleName>&gt;, &gt;=, &lt;, &lt;= shall not be applied to pointer types except where they point to the same array. </RuleName><ClassName>Rule17.3(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="17" minerNum="17.3" category="PointersAndArrays"><description>Attempting to make comparisons between pointers will produce undefined behaviour if the two pointers do not point to the same object. Note: it is permissible to address the next element beyond the end of an array, but accessing this element is not allowed.</description><RuleName>&gt;, &gt;=, &lt;, &lt;= shall not be applied to pointer types except where they point to the same array. </RuleName><ClassName>Rule17.3(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_1703( void )&#xD;
@@ -1509,7 +1509,7 @@ extern S16 test_1703( void )&#xD;
 &#xD;
    return n;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="17" minerNum="17.4" category="PointersAndArrays"><description>Array indexing is the only acceptable form of pointer arithmetic, because it is clearer and hence less error prone than pointer manipulation. This rule bans the explicit calculation of pointer values. Array indexing shall only be applied to objects defined as an array type. Any explicitly calculated pointer value has the potential to access unintended or invalid memory addresses. Pointers may go out of bounds of arrays or structures, or may even point to effectively arbitrary locations.</description><RuleName>Array indexing shall be the only allowed form of pointer arithmetic. </RuleName><ClassName>Rule17.4(notImplement).class</ClassName><SourceCode>void my_fn( uint8_t * p1, uint8_t p2[] )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="17" minerNum="17.4" category="PointersAndArrays"><description>Array indexing is the only acceptable form of pointer arithmetic, because it is clearer and hence less error prone than pointer manipulation. This rule bans the explicit calculation of pointer values. Array indexing shall only be applied to objects defined as an array type. Any explicitly calculated pointer value has the potential to access unintended or invalid memory addresses. Pointers may go out of bounds of arrays or structures, or may even point to effectively arbitrary locations.</description><RuleName>Array indexing shall be the only allowed form of pointer arithmetic. </RuleName><ClassName>Rule17.4(notImplement).class</ClassName><SourceCode>void my_fn( uint8_t * p1, uint8_t p2[] )&#xD;
 {&#xD;
    uint8_t index = 0U;&#xD;
    uint8_t * p3;&#xD;
@@ -1539,7 +1539,7 @@ uint8_t * p;&#xD;
 p = a;&#xD;
 *( p+5 ) = 0U; /* not compliant */&#xD;
 p[5] = 0U;     /* not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="17" minerNum="17.5" category="PointersAndArrays"><description>Use of more than 2 levels of indirection can seriously impair the ability to understand the behaviour of the code, and should therefore be avoided.</description><RuleName>The declaration of objects should contain no more than 2 levels of pointer indirection. </RuleName><ClassName>Rule17.5(notImplement).class</ClassName><SourceCode>typedef int8_t * INTPTR;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="17" minerNum="17.5" category="PointersAndArrays"><description>Use of more than 2 levels of indirection can seriously impair the ability to understand the behaviour of the code, and should therefore be avoided.</description><RuleName>The declaration of objects should contain no more than 2 levels of pointer indirection. </RuleName><ClassName>Rule17.5(notImplement).class</ClassName><SourceCode>typedef int8_t * INTPTR;&#xD;
 &#xD;
 struct s &#xD;
 {&#xD;
@@ -1573,12 +1573,12 @@ void function( int8_t *   par1,&#xD;
    int8_t *   ptr6[10];&#xD;
    int8_t **  ptr7[10];&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="17" minerNum="17.6" category="PointersAndArrays"><description>If the address of an automatic object is assigned to another automatic object of larger scope, or to a static object, or returned from a function then the object containing the address may exist beyond the time when the original object ceases to exist (and its address becomes invalid).</description><RuleName>The address of an object with automatic storage shall not be assigned to another object that may persist after the first object has ceased to exist. </RuleName><ClassName>Rule17.6(notImplement).class</ClassName><SourceCode>int8_t * foobar( void )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="17" minerNum="17.6" category="PointersAndArrays"><description>If the address of an automatic object is assigned to another automatic object of larger scope, or to a static object, or returned from a function then the object containing the address may exist beyond the time when the original object ceases to exist (and its address becomes invalid).</description><RuleName>The address of an object with automatic storage shall not be assigned to another object that may persist after the first object has ceased to exist. </RuleName><ClassName>Rule17.6(notImplement).class</ClassName><SourceCode>int8_t * foobar( void )&#xD;
 {&#xD;
    int8_t local_auto;&#xD;
    return &amp;local_auto;      /* not compliant */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="18" minerNum="18.1" category="StructuresAndUnions"><description>A complete declaration of the structure or union shall be included within any translation unit that reads from or writes to that structure. A pointer to an incomplete type is itself complete and is permitted, and therefore the use of opaque pointers is permitted. See section 6.1.2.5 of ISO/IEC 9899:1990 [2] for a full description of incomplete types.</description><RuleName>All structure and union types shall be complete at the end of a translation unit. </RuleName><ClassName>Rule18_1_Req.class</ClassName><SourceCode>struct tnode * pt;        /* tnode is incomplete at this point */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="18" minerNum="18.1" category="StructuresAndUnions"><description>A complete declaration of the structure or union shall be included within any translation unit that reads from or writes to that structure. A pointer to an incomplete type is itself complete and is permitted, and therefore the use of opaque pointers is permitted. See section 6.1.2.5 of ISO/IEC 9899:1990 [2] for a full description of incomplete types.</description><RuleName>All structure and union types shall be complete at the end of a translation unit. </RuleName><ClassName>Rule18_1_Req.class</ClassName><SourceCode>struct tnode * pt;        /* tnode is incomplete at this point */&#xD;
 &#xD;
 struct tnode&#xD;
 {&#xD;
@@ -1586,7 +1586,7 @@ struct tnode&#xD;
    struct tnode *left;&#xD;
    struct tnode * right;&#xD;
 };                        /* type tnode is now complete */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="18" minerNum="18.2" category="StructuresAndUnions"><description>The behaviour is undefined when two objects are created which have some overlap in memory and one is copied to the other.</description><RuleName>An object shall not be assigned to an overlapping object. </RuleName><ClassName>Rule18.2(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="18" minerNum="18.2" category="StructuresAndUnions"><description>The behaviour is undefined when two objects are created which have some overlap in memory and one is copied to the other.</description><RuleName>An object shall not be assigned to an overlapping object. </RuleName><ClassName>Rule18.2(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 #include &quot;string.h&quot;&#xD;
 &#xD;
@@ -1608,7 +1608,7 @@ extern S16 test_1802( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="18" minerNum="18.3" category="StructuresAndUnions"><description>This rule refers to the technique of using memory to store some data, and then using the same memory to store unrelated data at some other time during the execution of the program. Clearly it relies on the two different pieces of data existing at disjoint periods of the program's execution, and never being required simultaneously.</description><RuleName>An area of memory shall not be reused for unrelated purposes. </RuleName><ClassName>Rule18.3(notImplement).class</ClassName><SourceCode>/* PRQA S 3206,3218 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="18" minerNum="18.3" category="StructuresAndUnions"><description>This rule refers to the technique of using memory to store some data, and then using the same memory to store unrelated data at some other time during the execution of the program. Clearly it relies on the two different pieces of data existing at disjoint periods of the program's execution, and never being required simultaneously.</description><RuleName>An area of memory shall not be reused for unrelated purposes. </RuleName><ClassName>Rule18.3(notImplement).class</ClassName><SourceCode>/* PRQA S 3206,3218 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1641,7 +1641,7 @@ static void process_report( PC *work )&#xD;
 {&#xD;
    /* Use work to process report */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="18" minerNum="18.4" category="StructuresAndUnions"><description>Rule prohibits the reuse of memory areas for unrelated purposes. However, even when memory is being reused for related purposes, there is still a risk that the data may be misinterpreted. Therefore, this rule prohibits the use of unions for any purpose.</description><RuleName>Unions shall not be used. </RuleName><ClassName>Rule18_4_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="18" minerNum="18.4" category="StructuresAndUnions"><description>Rule prohibits the reuse of memory areas for unrelated purposes. However, even when memory is being reused for related purposes, there is still a risk that the data may be misinterpreted. Therefore, this rule prohibits the use of unions for any purpose.</description><RuleName>Unions shall not be used. </RuleName><ClassName>Rule18_4_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1658,7 +1658,7 @@ extern S16 test_1804( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.1" category="PreprocessingDirectives"><description>All the #include statements in a particular code file should be grouped together near the head of the file. The rule states that the only items which may precede a #include in a file are other preprocessor directives or comments.</description><RuleName>#include statements in a file should only be preceded by other preprocessor directives or comments. </RuleName><ClassName>Rule19_1_Adv.class</ClassName><SourceCode>/*PRQA S 862 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.1" category="PreprocessingDirectives"><description>All the #include statements in a particular code file should be grouped together near the head of the file. The rule states that the only items which may precede a #include in a file are other preprocessor directives or comments.</description><RuleName>#include statements in a file should only be preceded by other preprocessor directives or comments. </RuleName><ClassName>Rule19_1_Adv.class</ClassName><SourceCode>/*PRQA S 862 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -1673,12 +1673,12 @@ extern S16 test_1901x( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.10" category="PreprocessingDirectives"><description>Within a definition of a function-like macro, the arguments shall be enclosed in parentheses. For example define an abs function using:</description><RuleName>In the definition of a function-like macro each instance of a parameter shall be enclosed in parentheses unless it is used as the operand of # or ##. </RuleName><ClassName>Rule19.10(notImplement).class</ClassName><SourceCode>#define abs( x ) ( ( ( x ) &gt;= 0 ) ? ( x ) : -( x ) )
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.10" category="PreprocessingDirectives"><description>Within a definition of a function-like macro, the arguments shall be enclosed in parentheses. For example define an abs function using:</description><RuleName>In the definition of a function-like macro each instance of a parameter shall be enclosed in parentheses unless it is used as the operand of # or ##. </RuleName><ClassName>Rule19.10(notImplement).class</ClassName><SourceCode>#define abs( x ) ( ( ( x ) &gt;= 0 ) ? ( x ) : -( x ) )
 #define abs( x ) ( ( x &gt;= 0 ) ? x : -x )
 z = abs( a - b );
 z = ( ( a - b &gt;=  ) ? a - b : -a - b );
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.11" category="PreprocessingDirectives"><description>If an attempt is made to use an identifier in a preprocessor directive, and that identifier has not been defined, the preprocessor will sometimes not give any warning but will assume the value zero. #ifdef, #ifndef and defined() are provided to test the existence of a macro, and are therefore excluded.</description><RuleName>All macro identifiers in preprocessor directives shall be defined before use, except in #ifdef and #ifndef preprocessor directives and the defined() operator. </RuleName><ClassName>Rule19.11(notImplement).class</ClassName><SourceCode>#if x &lt; 0           /* x assumed to be zero if not defined */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.12" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. To avoid this problem only one occurrence of either operator shall be used in any single macro definition (i.e. one #, or one ## or neither).</description><RuleName>There shall be at most one occurrence of the # or ## preprocessor operators in a single macro definition. </RuleName><ClassName>Rule19_12_Req.class</ClassName><SourceCode>/* PRQA S 3429 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.11" category="PreprocessingDirectives"><description>If an attempt is made to use an identifier in a preprocessor directive, and that identifier has not been defined, the preprocessor will sometimes not give any warning but will assume the value zero. #ifdef, #ifndef and defined() are provided to test the existence of a macro, and are therefore excluded.</description><RuleName>All macro identifiers in preprocessor directives shall be defined before use, except in #ifdef and #ifndef preprocessor directives and the defined() operator. </RuleName><ClassName>Rule19.11(notImplement).class</ClassName><SourceCode>#if x &lt; 0           /* x assumed to be zero if not defined */
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.12" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. To avoid this problem only one occurrence of either operator shall be used in any single macro definition (i.e. one #, or one ## or neither).</description><RuleName>There shall be at most one occurrence of the # or ## preprocessor operators in a single macro definition. </RuleName><ClassName>Rule19_12_Req.class</ClassName><SourceCode>/* PRQA S 3429 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1690,7 +1690,7 @@ extern S16 test_1912( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.13" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. Compilers have been inconsistent in the implementation of these operators. To avoid these problems do not use them.</description><RuleName>The # and ## preprocessor operators should not be used. </RuleName><ClassName>Rule19_13_Adv.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.13" category="PreprocessingDirectives"><description>There is an issue of unspecified order of evaluation associated with the # and ## preprocessor operators. Compilers have been inconsistent in the implementation of these operators. To avoid these problems do not use them.</description><RuleName>The # and ## preprocessor operators should not be used. </RuleName><ClassName>Rule19_13_Adv.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 &#xD;
 #include &quot;gen.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -1707,12 +1707,12 @@ extern S16 test_1913( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.14" category="PreprocessingDirectives"><description>The only two permissible forms for the defined preprocessor operator are:</description><RuleName>The defined preprocessor operator shall only be used in one of the two standard forms. </RuleName><ClassName>Rule19.14(notImplement).class</ClassName><SourceCode>defined( identifier )&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.14" category="PreprocessingDirectives"><description>The only two permissible forms for the defined preprocessor operator are:</description><RuleName>The defined preprocessor operator shall only be used in one of the two standard forms. </RuleName><ClassName>Rule19.14(notImplement).class</ClassName><SourceCode>defined( identifier )&#xD;
     defined identifier
 #if defined( X &gt; Y )          /* not compliant - undefined behaviour */
 #define DEFINED defined&#xD;
 #if DEFINED( X )              /* not compliant - undefined behaviour */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.15" category="PreprocessingDirectives"><description>When a translation unit contains a complex hierarchy of nested header files it can happen that a particular header file is included more than once. This can be, at best, a source of confusion. If it leads to multiple or conflicting definitions, the result can be undefined or erroneous behaviour.</description><RuleName>Precautions shall be taken in order to prevent the contents of a header file being included twice. </RuleName><ClassName>Rule19_15_Req.class</ClassName><SourceCode>#ifndef AHDR_H&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.15" category="PreprocessingDirectives"><description>When a translation unit contains a complex hierarchy of nested header files it can happen that a particular header file is included more than once. This can be, at best, a source of confusion. If it leads to multiple or conflicting definitions, the result can be undefined or erroneous behaviour.</description><RuleName>Precautions shall be taken in order to prevent the contents of a header file being included twice. </RuleName><ClassName>Rule19_15_Req.class</ClassName><SourceCode>#ifndef AHDR_H&#xD;
 #define AHDR_H&#xD;
 /* The following lines will be excluded by the&#xD;
    preprocessor if the file is included more&#xD;
@@ -1732,7 +1732,7 @@ extern S16 test_1913( void )&#xD;
 ...&#xD;
 &#xD;
 #endif
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.16" category="PreprocessingDirectives"><description>When a section of source code is excluded by preprocessor directives, the content of each excluded statement is ignored until a #else, #elif or #endif directive is encountered (depending on the context). If one of these excluded directives is badly formed, it may be ignored without warning by a compiler with unfortunate consequences.</description><RuleName>Preprocessing directives shall be syntactically meaningful even when excluded by the preprocessor. </RuleName><ClassName>Rule19.16(notImplement).class</ClassName><SourceCode>#define AAA 2&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.16" category="PreprocessingDirectives"><description>When a section of source code is excluded by preprocessor directives, the content of each excluded statement is ignored until a #else, #elif or #endif directive is encountered (depending on the context). If one of these excluded directives is badly formed, it may be ignored without warning by a compiler with unfortunate consequences.</description><RuleName>Preprocessing directives shall be syntactically meaningful even when excluded by the preprocessor. </RuleName><ClassName>Rule19.16(notImplement).class</ClassName><SourceCode>#define AAA 2&#xD;
 ...&#xD;
 int foo( void )&#xD;
 {&#xD;
@@ -1746,7 +1746,7 @@ int foo( void )&#xD;
     ...&#xD;
     return x;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.17" category="PreprocessingDirectives"><description>When the inclusion and exclusion of blocks of statements is controlled by a series of preprocessor directives, confusion can arise if all of the relevant directives do not occur within one file. This rule requires that all preprocessor directives in a sequence of the form #if / #ifdef ... #elif ... #else ... #endif shall reside in the same file. Observance of this rule preserves good code structure and avoids maintenance problems.</description><RuleName>All #else, #elif and #endif preprocessor directives shall reside in the same file as the #if or #ifdef directive to which they are related. </RuleName><ClassName>Rule19_17_Req.class</ClassName><SourceCode>#define A&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.17" category="PreprocessingDirectives"><description>When the inclusion and exclusion of blocks of statements is controlled by a series of preprocessor directives, confusion can arise if all of the relevant directives do not occur within one file. This rule requires that all preprocessor directives in a sequence of the form #if / #ifdef ... #elif ... #else ... #endif shall reside in the same file. Observance of this rule preserves good code structure and avoids maintenance problems.</description><RuleName>All #else, #elif and #endif preprocessor directives shall reside in the same file as the #if or #ifdef directive to which they are related. </RuleName><ClassName>Rule19_17_Req.class</ClassName><SourceCode>#define A&#xD;
 ...&#xD;
 #ifdef A&#xD;
 ...&#xD;
@@ -1764,7 +1764,7 @@ EOF
 EOF
 ...&#xD;
 #endif                        /* Not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.2" category="PreprocessingDirectives"><description>If the ', \, &quot;, or /* characters are used between &lt; and &gt; delimiters or the ', \, or /* characters are used between the &quot; delimiters in a header name preprocessing token, then the behaviour is undefined. Use of the \ character is permitted in filename paths without the need for a deviation if required by the host operating system of the development environment.</description><RuleName>Non-standard characters should not occur in header file names in #include directives. </RuleName><ClassName>Rule19_2_Adv.class</ClassName><SourceCode>/* Permit nested C-style comments: */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.2" category="PreprocessingDirectives"><description>If the ', \, &quot;, or /* characters are used between &lt; and &gt; delimiters or the ', \, or /* characters are used between the &quot; delimiters in a header name preprocessing token, then the behaviour is undefined. Use of the \ character is permitted in filename paths without the need for a deviation if required by the host operating system of the development environment.</description><RuleName>Non-standard characters should not occur in header file names in #include directives. </RuleName><ClassName>Rule19_2_Adv.class</ClassName><SourceCode>/* Permit nested C-style comments: */&#xD;
 /* PRQA S 3108 ++ */&#xD;
 &#xD;
 /* PRQA S 0883 ++ */&#xD;
@@ -1788,11 +1788,11 @@ extern S16 test_1902( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.3" category="PreprocessingDirectives"><description>For example, the following are allowed.</description><RuleName>The #include directive shall be followed by either a &lt;filename&gt; or &quot;filename&quot; sequence. </RuleName><ClassName>Rule19_3_Req.class</ClassName><SourceCode>#include &quot;filename.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.3" category="PreprocessingDirectives"><description>For example, the following are allowed.</description><RuleName>The #include directive shall be followed by either a &lt;filename&gt; or &quot;filename&quot; sequence. </RuleName><ClassName>Rule19_3_Req.class</ClassName><SourceCode>#include &quot;filename.h&quot;&#xD;
 #include &lt;filename.h&gt;&#xD;
 #define FILE_A &quot;filename.h&quot;&#xD;
 #include FILE_A
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.4" category="PreprocessingDirectives"><description>These are the only permitted uses of macros. Storage class specifiers and type qualifiers include keywords such as extern, static and const. Any other use of #define could lead to unexpected behaviour when substitution is made, or to very hard-to-read code.</description><RuleName>C macros shall only expand to a braced initialiser, a constant, a string literal, a parenthesised expression, a type qualifier, a storage class specifier, or a do-while-zero construct. </RuleName><ClassName>Rule19.4(notImplement).class</ClassName><SourceCode>/* The following are compliant */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.4" category="PreprocessingDirectives"><description>These are the only permitted uses of macros. Storage class specifiers and type qualifiers include keywords such as extern, static and const. Any other use of #define could lead to unexpected behaviour when substitution is made, or to very hard-to-read code.</description><RuleName>C macros shall only expand to a braced initialiser, a constant, a string literal, a parenthesised expression, a type qualifier, a storage class specifier, or a do-while-zero construct. </RuleName><ClassName>Rule19.4(notImplement).class</ClassName><SourceCode>/* The following are compliant */&#xD;
 #define PI 3.14159F                  /* Constant                      */&#xD;
 #define XSTAL 10000000               /* Constant                      */&#xD;
 #define CLOCK ( XSTAL/16 )           /* Constant expression           */&#xD;
@@ -1815,7 +1815,7 @@ extern S16 test_1902( void )&#xD;
 #define int32_t long       /* use typedef instead                     */&#xD;
 #define STARTIF if(        /* unbalanced () and language redefinition */&#xD;
 #define CAT PI             /* non-parenthesised expression            */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.5" category="PreprocessingDirectives"><description>While it is legal C to place #define or #undef directives anywhere in a code file, placing them inside blocks is misleading as it implies a scope restricted to that block, which is not the case.</description><RuleName>Macros shall not be #define'd or #undef'd within a block. </RuleName><ClassName>Rule19_5_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.5" category="PreprocessingDirectives"><description>While it is legal C to place #define or #undef directives anywhere in a code file, placing them inside blocks is misleading as it implies a scope restricted to that block, which is not the case.</description><RuleName>Macros shall not be #define'd or #undef'd within a block. </RuleName><ClassName>Rule19_5_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define  L      5&#xD;
@@ -1828,7 +1828,7 @@ extern S16 test_1905( void )&#xD;
                                           and Rule 19.6 */&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.6" category="PreprocessingDirectives"><description>#undef should not normally be needed. Its use can lead to confusion with respect to the existence or meaning of a macro when it is used in the code.</description><RuleName>#undef shall not be used. </RuleName><ClassName>Rule19_6_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.6" category="PreprocessingDirectives"><description>#undef should not normally be needed. Its use can lead to confusion with respect to the existence or meaning of a macro when it is used in the code.</description><RuleName>#undef shall not be used. </RuleName><ClassName>Rule19_6_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define  L      0&#xD;
@@ -1838,7 +1838,7 @@ extern S16 test_1906( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="19" minerNum="19.7" category="PreprocessingDirectives"><description>While macros can provide a speed advantage over functions, functions provide a safer and more robust mechanism. This is particularly true with respect to the type checking of parameters, and the problem of function-like macros potentially evaluating parameters multiple times.</description><RuleName>A function should be used in preference to a function-like macro. </RuleName><ClassName>Rule19.7(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="19" minerNum="19.7" category="PreprocessingDirectives"><description>While macros can provide a speed advantage over functions, functions provide a safer and more robust mechanism. This is particularly true with respect to the type checking of parameters, and the problem of function-like macros potentially evaluating parameters multiple times.</description><RuleName>A function should be used in preference to a function-like macro. </RuleName><ClassName>Rule19.7(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define  MAX( A, B )   ( ( ( A ) &gt; ( B ) ) ? ( A ) : ( B ) )    /* MISRA Violation */&#xD;
@@ -1849,7 +1849,7 @@ extern S16 test_1907( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.8" category="PreprocessingDirectives"><description>This is a constraint error, but preprocessors have been known to ignore this problem. Each argument in a function-like macro must consist of at least one preprocessing token otherwise the behaviour is undefined.</description><RuleName>A function-like macro shall not be invoked without all of its arguments. </RuleName><ClassName>Rule19.8(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.8" category="PreprocessingDirectives"><description>This is a constraint error, but preprocessors have been known to ignore this problem. Each argument in a function-like macro must consist of at least one preprocessing token otherwise the behaviour is undefined.</description><RuleName>A function-like macro shall not be invoked without all of its arguments. </RuleName><ClassName>Rule19.8(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #define MAX( A, B )   ( ( ( A ) &gt; ( B ) ) ? ( A ) : ( B ) )&#xD;
@@ -1866,7 +1866,7 @@ extern S16 test_1908( void )&#xD;
 &#xD;
    return s16k + s16m;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="19" minerNum="19.9" category="PreprocessingDirectives"><description>If any of the arguments act like preprocessor directives, the behaviour when macro substitution is made can be unpredictable.</description><RuleName>Arguments to a function-like macro shall not contain tokens that look like preprocessing directives. </RuleName><ClassName>Rule19.9(notImplement).class</ClassName><SourceCode>/* PRQA S 0434,0911,2214,3110,3417 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="19" minerNum="19.9" category="PreprocessingDirectives"><description>If any of the arguments act like preprocessor directives, the behaviour when macro substitution is made can be unpredictable.</description><RuleName>Arguments to a function-like macro shall not contain tokens that look like preprocessing directives. </RuleName><ClassName>Rule19.9(notImplement).class</ClassName><SourceCode>/* PRQA S 0434,0911,2214,3110,3417 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -1891,8 +1891,8 @@ extern S16 test_1909( void )&#xD;
 #endif&#xD;
     return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="2" minerNum="2.1" category="LanguageExtensions"><description>Where assembly language instructions are required it is recommended that they be encapsulated and isolated in either (a) assembler functions, (b) C functions or (c) macros. For reasons of efficiency it is sometimes necessary to embed simple assembly language instructions in-line, for example to enable and disable interrupts. If it is necessary to do this for any reason, then it is recommended that it be achieved by using macros.</description><RuleName>Assembly language shall be encapsulated and isolated. </RuleName><ClassName>Rule02_1_Req.class</ClassName><SourceCode>#define NOP asm( &quot;    NOP&quot; )
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="2" minerNum="2.2" category="LanguageExtensions"><description>This excludes the use of // C99 style comments and C++ style comments, since these are not permitted in C90. Many compilers support the // style of comments as an extension to c90. The use of // in preprocessor directives (e.g. #define) can vary. Also the mixing of /* ... */ and // is not consistent. This is more than a style issue, since different (pre C99) compilers may behave differently.</description><RuleName>Source code shall only use C-style comments. </RuleName><ClassName>Rule02_2_Req.class</ClassName><SourceCode>#include &quot;m2cmex.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="2" minerNum="2.1" category="LanguageExtensions"><description>Where assembly language instructions are required it is recommended that they be encapsulated and isolated in either (a) assembler functions, (b) C functions or (c) macros. For reasons of efficiency it is sometimes necessary to embed simple assembly language instructions in-line, for example to enable and disable interrupts. If it is necessary to do this for any reason, then it is recommended that it be achieved by using macros.</description><RuleName>Assembly language shall be encapsulated and isolated. </RuleName><ClassName>Rule02_1_Req.class</ClassName><SourceCode>#define NOP asm( &quot;    NOP&quot; )
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="2" minerNum="2.2" category="LanguageExtensions"><description>This excludes the use of // C99 style comments and C++ style comments, since these are not permitted in C90. Many compilers support the // style of comments as an extension to c90. The use of // in preprocessor directives (e.g. #define) can vary. Also the mixing of /* ... */ and // is not consistent. This is more than a style issue, since different (pre C99) compilers may behave differently.</description><RuleName>Source code shall only use C-style comments. </RuleName><ClassName>Rule02_2_Req.class</ClassName><SourceCode>#include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0202( void )&#xD;
 {&#xD;
@@ -1906,19 +1906,19 @@ extern S16 test_0202( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="2" minerNum="2.3" category="LanguageExtensions"><description>C does not support the nesting of comments even though some compilers support this as a language extension. A comment begins with /* and continues until the first */ is encountered. Any /* occurring inside a comment is a violation of this rule. Consider the following code fragment:</description><RuleName>The character sequence /* shall not be used within a comment. </RuleName><ClassName>Rule02_3_Req.class</ClassName><SourceCode>/* some comment, end comment marker accidentally omitted&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="2" minerNum="2.3" category="LanguageExtensions"><description>C does not support the nesting of comments even though some compilers support this as a language extension. A comment begins with /* and continues until the first */ is encountered. Any /* occurring inside a comment is a violation of this rule. Consider the following code fragment:</description><RuleName>The character sequence /* shall not be used within a comment. </RuleName><ClassName>Rule02_3_Req.class</ClassName><SourceCode>/* some comment, end comment marker accidentally omitted&#xD;
 &#xD;
 &lt;&lt;New Page&gt;&gt;&#xD;
 Perform_Critical_Safety_Function( X );&#xD;
 /* this comment is not compliant */
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="2" minerNum="2.4"><description>Where it is required for sections of source code not to be compiled then this should be achieved by use of conditional compilation (e.g. #if or #ifdef constructs with a comment). Using start and end comment markers for this purpose is dangerous because C does not support nested comments, and any comments already existing in the section of code would change the effect.</description><RuleName>Sections of code should not be 'commented out'. </RuleName><ClassName>Rule2.4(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="2" minerNum="2.4"><description>Where it is required for sections of source code not to be compiled then this should be achieved by use of conditional compilation (e.g. #if or #ifdef constructs with a comment). Using start and end comment markers for this purpose is dangerous because C does not support nested comments, and any comments already existing in the section of code would change the effect.</description><RuleName>Sections of code should not be 'commented out'. </RuleName><ClassName>Rule2.4(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0204( void )&#xD;
 {&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.1" category="StandardLibraries"><description>It is generally bad practice to #undef a macro which is defined in the standard library. It is also bad practice to #define a macro name which is a C reserved identifier, a C keyword or the name of any macro, object or function in the standard library. For example, there are some specific reserved words and function names which are known to give rise to undefined behaviour if they are redefined or undefined, including defined, _ _LINE_ _, _ _FILE_ _, _ _DATE_ _, _ _TIME_ _, _ _STDC_ _, errno and assert.</description><RuleName>Reserved identifiers, macros and functions in the standard library, shall not be defined, redefined or undefined. </RuleName><ClassName>Rule20.1(notImplement).class</ClassName><SourceCode>/*PRQA S 862 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.1" category="StandardLibraries"><description>It is generally bad practice to #undef a macro which is defined in the standard library. It is also bad practice to #define a macro name which is a C reserved identifier, a C keyword or the name of any macro, object or function in the standard library. For example, there are some specific reserved words and function names which are known to give rise to undefined behaviour if they are redefined or undefined, including defined, _ _LINE_ _, _ _FILE_ _, _ _DATE_ _, _ _TIME_ _, _ _STDC_ _, errno and assert.</description><RuleName>Reserved identifiers, macros and functions in the standard library, shall not be defined, redefined or undefined. </RuleName><ClassName>Rule20.1(notImplement).class</ClassName><SourceCode>/*PRQA S 862 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 #include &quot;gen.h&quot;&#xD;
@@ -1946,7 +1946,7 @@ extern S16 test_2001( void )&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.10" category="StandardLibraries"><description>These functions have undefined behaviour associated with them when the string cannot be converted.</description><RuleName>The library functions atof, atoi and atol from library &lt;stdlib.h&gt; shall not be used. </RuleName><ClassName>Rule20_10_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.10" category="StandardLibraries"><description>These functions have undefined behaviour associated with them when the string cannot be converted.</description><RuleName>The library functions atof, atoi and atol from library &lt;stdlib.h&gt; shall not be used. </RuleName><ClassName>Rule20_10_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &lt;stdlib.h&gt;&#xD;
 #include &quot;misra.h&quot;&#xD;
@@ -1964,7 +1964,7 @@ extern S16 test_2010( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.11" category="StandardLibraries"><description>These functions will not normally be required in an embedded system, which does not normally need to communicate with an environment. If the functions are found necessary in an application, then it is essential to check on the implementation-defined behaviour of the function in the environment in question.</description><RuleName>The library functions abort, exit, getenv and system from library &lt;stdlib.h&gt; shall not be used. </RuleName><ClassName>Rule20_11_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.11" category="StandardLibraries"><description>These functions will not normally be required in an embedded system, which does not normally need to communicate with an environment. If the functions are found necessary in an application, then it is essential to check on the implementation-defined behaviour of the function in the environment in question.</description><RuleName>The library functions abort, exit, getenv and system from library &lt;stdlib.h&gt; shall not be used. </RuleName><ClassName>Rule20_11_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &lt;stdlib.h&gt;&#xD;
 #include &quot;misra.h&quot;&#xD;
@@ -1991,7 +1991,7 @@ extern S16 test_2011( void )&#xD;
 &#xD;
    return ;                   /* MISRA Violation */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.12" category="StandardLibraries"><description>Includes time, strftime. This library is associated with clock times. Various aspects are implementation dependent or unspecified, such as the formats of times. If any of the facilities of time.h are used then the exact implementation for the compiler being used must be determined, and a deviation raised.</description><RuleName>The time handling functions of library &lt;time.h&gt; shall not be used. </RuleName><ClassName>Rule20_12_Req.class</ClassName><SourceCode>#include &lt;time.h&gt;                          /* MISRA Violation */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.12" category="StandardLibraries"><description>Includes time, strftime. This library is associated with clock times. Various aspects are implementation dependent or unspecified, such as the formats of times. If any of the facilities of time.h are used then the exact implementation for the compiler being used must be determined, and a deviation raised.</description><RuleName>The time handling functions of library &lt;time.h&gt; shall not be used. </RuleName><ClassName>Rule20_12_Req.class</ClassName><SourceCode>#include &lt;time.h&gt;                          /* MISRA Violation */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2008,7 +2008,7 @@ extern S16 test_2012( void )&#xD;
 &#xD;
   return r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.2" category="StandardLibraries"><description>Where new versions of standard library macros, objects or functions are used by the programmer (e.g. enhanced functionality or checks of input values) the modified macro, object or function shall have a new name. This is to avoid any confusion as to whether a standard macro, object or function is being used or whether a modified version of that function is being used. So, for example, if a new version of the sqrt function is written to check that the input is not negative, the new function shall not be named &quot;sqrt&quot;, but shall be given a new name.</description><RuleName>The names of standard library macros, objects and functions shall not be reused. </RuleName><ClassName>Rule20.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,2984,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.2" category="StandardLibraries"><description>Where new versions of standard library macros, objects or functions are used by the programmer (e.g. enhanced functionality or checks of input values) the modified macro, object or function shall have a new name. This is to avoid any confusion as to whether a standard macro, object or function is being used or whether a modified version of that function is being used. So, for example, if a new version of the sqrt function is written to check that the input is not negative, the new function shall not be named &quot;sqrt&quot;, but shall be given a new name.</description><RuleName>The names of standard library macros, objects and functions shall not be reused. </RuleName><ClassName>Rule20.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,2984,3203 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2046,7 +2046,7 @@ static S16 _test_2002a( void )        /* MISRA Violation */&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.3" category="StandardLibraries"><description>Many functions in the standard C libraries are not required by the ISO standard [2] to check the validity of parameters passed to them. Even where checking is required by the standard, or where compiler writers claim to check parameters, there is no guarantee that adequate checking will take place. Therefore the programmer shall provide appropriate checks of input values for all library functions which have a restricted input domain (standard libraries, other bought in libraries, and in-house libraries).</description><RuleName>The validity of values passed to library functions shall be checked. </RuleName><ClassName>Rule20.3(notImplement).class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.3" category="StandardLibraries"><description>Many functions in the standard C libraries are not required by the ISO standard [2] to check the validity of parameters passed to them. Even where checking is required by the standard, or where compiler writers claim to check parameters, there is no guarantee that adequate checking will take place. Therefore the programmer shall provide appropriate checks of input values for all library functions which have a restricted input domain (standard libraries, other bought in libraries, and in-house libraries).</description><RuleName>The validity of values passed to library functions shall be checked. </RuleName><ClassName>Rule20.3(notImplement).class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
 &#xD;
 #include &lt;stdio.h&gt;                      /* MISRA Violation */&#xD;
 #include &lt;string.h&gt;                     /* MISRA Violation */&#xD;
@@ -2065,7 +2065,7 @@ extern S16 test_2003( void )&#xD;
 &#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.4" category="StandardLibraries"><description>This precludes the use of the functions calloc, malloc, realloc and free.</description><RuleName>Dynamic heap memory allocation shall not be used. </RuleName><ClassName>Rule20_4_Req.class</ClassName><SourceCode>/* PRQA S 2983 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.4" category="StandardLibraries"><description>This precludes the use of the functions calloc, malloc, realloc and free.</description><RuleName>Dynamic heap memory allocation shall not be used. </RuleName><ClassName>Rule20_4_Req.class</ClassName><SourceCode>/* PRQA S 2983 ++ */&#xD;
 &#xD;
 #include &lt;stdlib.h&gt;&#xD;
 #include &quot;misra.h&quot;&#xD;
@@ -2085,7 +2085,7 @@ extern S16 test_2004( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.5" category="StandardLibraries"><description>errno is a facility of C, which in theory should be useful, but which in practice is poorly defined by the standard. A non zero value may or may not indicate that a problem has occurred; as a result it shall not be used. Even for those functions for which the behaviour of errno is well defined, it is preferable to check the values of inputs before calling the function rather than rely on using errno to trap errors.</description><RuleName>The error indicator errno shall not be used. </RuleName><ClassName>Rule20_5_Req.class</ClassName><SourceCode>#include &lt;errno.h&gt;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.5" category="StandardLibraries"><description>errno is a facility of C, which in theory should be useful, but which in practice is poorly defined by the standard. A non zero value may or may not indicate that a problem has occurred; as a result it shall not be used. Even for those functions for which the behaviour of errno is well defined, it is preferable to check the values of inputs before calling the function rather than rely on using errno to trap errors.</description><RuleName>The error indicator errno shall not be used. </RuleName><ClassName>Rule20_5_Req.class</ClassName><SourceCode>#include &lt;errno.h&gt;&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -2100,7 +2100,7 @@ extern S16 test_2005( void )&#xD;
 &#xD;
    return r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.6" category="StandardLibraries"><description>Use of this macro can lead to undefined behaviour when the types of the operands are incompatible or when bit fields are used.</description><RuleName>The macro offsetof, in library &lt;stddef.h&gt;, shall not be used. </RuleName><ClassName>Rule20_6_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.6" category="StandardLibraries"><description>Use of this macro can lead to undefined behaviour when the types of the operands are incompatible or when bit fields are used.</description><RuleName>The macro offsetof, in library &lt;stddef.h&gt;, shall not be used. </RuleName><ClassName>Rule20_6_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &lt;stddef.h&gt;&#xD;
 #include &quot;misra.h&quot;&#xD;
@@ -2124,7 +2124,7 @@ extern S16 test_2006( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.7" category="StandardLibraries"><description>setjmp and longjmp allow the normal function call mechanisms to be bypassed, and shall not be used.</description><RuleName>The setjmp macro and the longjmp function shall not be used. </RuleName><ClassName>Rule20_7_Req.class</ClassName><SourceCode>#include        &lt;setjmp.h&gt;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.7" category="StandardLibraries"><description>setjmp and longjmp allow the normal function call mechanisms to be bypassed, and shall not be used.</description><RuleName>The setjmp macro and the longjmp function shall not be used. </RuleName><ClassName>Rule20_7_Req.class</ClassName><SourceCode>#include        &lt;setjmp.h&gt;&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2140,7 +2140,7 @@ extern S16 test_2007( void )&#xD;
 &#xD;
    return istat;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.8" category="StandardLibraries"><description>Signal handling contains implementation-defined and undefined behaviour.</description><RuleName>The signal handling facilities of &lt;signal.h&gt; shall not be used. </RuleName><ClassName>Rule20_8_Req.class</ClassName><SourceCode>#include &lt;signal.h&gt;             /* MISRA Violation */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.8" category="StandardLibraries"><description>Signal handling contains implementation-defined and undefined behaviour.</description><RuleName>The signal handling facilities of &lt;signal.h&gt; shall not be used. </RuleName><ClassName>Rule20_8_Req.class</ClassName><SourceCode>#include &lt;signal.h&gt;             /* MISRA Violation */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -2150,7 +2150,7 @@ extern S16 test_2008( void )&#xD;
 &#xD;
    return i;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="20" minerNum="20.9" category="StandardLibraries"><description>This includes file and I/O functions fgetpos, fopen, ftell, gets, perror, remove, rename, and ungetc.</description><RuleName>The input/output library &lt;stdio.h&gt; shall not be used in production code. </RuleName><ClassName>Rule20_9_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="20" minerNum="20.9" category="StandardLibraries"><description>This includes file and I/O functions fgetpos, fopen, ftell, gets, perror, remove, rename, and ungetc.</description><RuleName>The input/output library &lt;stdio.h&gt; shall not be used in production code. </RuleName><ClassName>Rule20_9_Req.class</ClassName><SourceCode>/* PRQA S 2983,3203 ++ */&#xD;
 &#xD;
 #include &lt;stdio.h&gt;                      /* MISRA Violation */&#xD;
 #include &quot;misra.h&quot;&#xD;
@@ -2164,7 +2164,7 @@ extern S16 test_2009( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="21" minerNum="21.1" category="RuntimeFailures"><description>Run-time checking is an issue, which is not specific to C, but it is an issue which C programmers need to pay special attention to. This is because the C language is weak in its provision of any run-time checking. C implementations are not required to perform many of the dynamic checks that are necessary for robust software. It is therefore an issue that C programmers need to consider carefully, adding dynamic checks to code wherever there is potential for run-time errors to occur.</description><RuleName>Minimisation of run-time failures shall be ensured by the use of at least one of (a) static analysis tools/techniques; (b) dynamic analysis tools/techniques; (c) explicit coding of checks to handle run-time faults </RuleName><ClassName>Rule21.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,3203,3112 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="21" minerNum="21.1" category="RuntimeFailures"><description>Run-time checking is an issue, which is not specific to C, but it is an issue which C programmers need to pay special attention to. This is because the C language is weak in its provision of any run-time checking. C implementations are not required to perform many of the dynamic checks that are necessary for robust software. It is therefore an issue that C programmers need to consider carefully, adding dynamic checks to code wherever there is potential for run-time errors to occur.</description><RuleName>Minimisation of run-time failures shall be ensured by the use of at least one of (a) static analysis tools/techniques; (b) dynamic analysis tools/techniques; (c) explicit coding of checks to handle run-time faults </RuleName><ClassName>Rule21.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,3203,3112 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2284,7 +2284,7 @@ extern S16 test_2101( void )&#xD;
 &#xD;
     return s16r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="3" minerNum="3.1"><description>This rule requires that any reliance on implementation-defined behaviour, which is not specifically addressed by other rules, shall be documented, for example by reference to compiler documentation. Where a specific behaviour is explicitly covered in another rule, only that specific rule needs to be deviated if required. See ISO/IEC 9899:1990 Appendix G [2] for a complete list of these issues.</description><RuleName>All usage of implementation-defined behaviour shall be documented. </RuleName><ClassName>Rule3.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,3203,3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="3" minerNum="3.1"><description>This rule requires that any reliance on implementation-defined behaviour, which is not specifically addressed by other rules, shall be documented, for example by reference to compiler documentation. Where a specific behaviour is explicitly covered in another rule, only that specific rule needs to be deviated if required. See ISO/IEC 9899:1990 Appendix G [2] for a complete list of these issues.</description><RuleName>All usage of implementation-defined behaviour shall be documented. </RuleName><ClassName>Rule3.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2983,3203,3205 ++ */&#xD;
 #include &lt;stdlib.h&gt;&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2319,14 +2319,14 @@ extern S16 test_0301( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="3" minerNum="3.2"><description>For example, ISO 10646-1 [22] defines an international standard for mapping character sets to numeric values. For portability, &quot;character-constants&quot; and &quot;string-literals&quot; should only contain characters that map to a documented subset. The source code is written in one, or more character sets. Optionally, the program can execute in a second or multiple character sets. All the source and execution character sets shall be documented.</description><RuleName>The character set and the corresponding encoding shall be documented. </RuleName><ClassName>Rule3.2(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="3" minerNum="3.2"><description>For example, ISO 10646-1 [22] defines an international standard for mapping character sets to numeric values. For portability, &quot;character-constants&quot; and &quot;string-literals&quot; should only contain characters that map to a documented subset. The source code is written in one, or more character sets. Optionally, the program can execute in a second or multiple character sets. All the source and execution character sets shall be documented.</description><RuleName>The character set and the corresponding encoding shall be documented. </RuleName><ClassName>Rule3.2(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0302( void )&#xD;
 {&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="3" minerNum="3.3"><description>Potentially an ISO compliant compiler can do one of two things when dividing two signed integers, one of which is positive and one negative. Firstly it may round up, with a negative remainder (e.g. -5/3 = -1 remainder -2), or secondly it may round down with a positive remainder (e.g. -5/3 = -2 remainder +1). It is important to determine which of these is implemented by the compiler and to document it for programmers, especially if it is the second (perhaps less intuitive) implementation.</description><RuleName>The implementation of integer division in the chosen compiler should be determined, documented and taken into account. </RuleName><ClassName>Rule3.3(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="3" minerNum="3.3"><description>Potentially an ISO compliant compiler can do one of two things when dividing two signed integers, one of which is positive and one negative. Firstly it may round up, with a negative remainder (e.g. -5/3 = -1 remainder -2), or secondly it may round down with a positive remainder (e.g. -5/3 = -2 remainder +1). It is important to determine which of these is implemented by the compiler and to document it for programmers, especially if it is the second (perhaps less intuitive) implementation.</description><RuleName>The implementation of integer division in the chosen compiler should be determined, documented and taken into account. </RuleName><ClassName>Rule3.3(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 &#xD;
@@ -2334,7 +2334,7 @@ extern S16 test_0303( void )&#xD;
 {&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="3" minerNum="3.4" category="Documentation"><description>This rule places a requirement on the user of this standard to produce a list of any pragmas they choose to use in an application. The meaning of each pragma shall be documented. There shall be sufficient supporting description to demonstrate that the behaviour of the pragma, and its implications for the application, have been fully understood.</description><RuleName>All uses of the #pragma directive shall be documented and explained. </RuleName><ClassName>Rule03_4_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="3" minerNum="3.4" category="Documentation"><description>This rule places a requirement on the user of this standard to produce a list of any pragmas they choose to use in an application. The meaning of each pragma shall be documented. There shall be sufficient supporting description to demonstrate that the behaviour of the pragma, and its implications for the application, have been fully understood.</description><RuleName>All uses of the #pragma directive shall be documented and explained. </RuleName><ClassName>Rule03_4_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 #pragma push        /* MISRA Violation, unless configured in QAC */&#xD;
@@ -2345,13 +2345,13 @@ extern S16 test_0304( void )&#xD;
 {&#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="3" minerNum="3.5"><description>This is a particular problem where bit fields are used because of the poorly defined aspects of bit fields described under Rules and . The 'bit field' facility in C is one of the most poorly defined parts of the language. There are two main uses to which bit fields could be put: If using bit fields, be aware of the potential pitfalls and areas of implementation-defined (i.e. non-portable) behaviour. In particular the programmer should be aware of the following:</description><RuleName>If it is being relied upon, the implementation-defined behaviour and packing of bitfields shall be documented. </RuleName><ClassName>Rule3.5(notImplement).class</ClassName><SourceCode>struct message                /* Struct is for bit-fields only */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="3" minerNum="3.5"><description>This is a particular problem where bit fields are used because of the poorly defined aspects of bit fields described under Rules and . The 'bit field' facility in C is one of the most poorly defined parts of the language. There are two main uses to which bit fields could be put: If using bit fields, be aware of the potential pitfalls and areas of implementation-defined (i.e. non-portable) behaviour. In particular the programmer should be aware of the following:</description><RuleName>If it is being relied upon, the implementation-defined behaviour and packing of bitfields shall be documented. </RuleName><ClassName>Rule3.5(notImplement).class</ClassName><SourceCode>struct message                /* Struct is for bit-fields only */&#xD;
 {&#xD;
     signed   int  little: 4;  /* Note: use of basic types is required */&#xD;
     unsigned int  x_set:  1;&#xD;
     unsigned int  y_set:  1;&#xD;
 } message_chunk;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="3" minerNum="3.6"><description>This rule refers to any libraries used in the production code, which therefore may include standard libraries supplied with the compiler, other third-party libraries, or libraries designed in-house. This is recommended by IEC 61508 Part 3.</description><RuleName>All libraries used in production code shall be written to comply with the provisions of this document, and shall have been subject to appropriate validation. </RuleName><ClassName>Rule3.6(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="3" minerNum="3.6"><description>This rule refers to any libraries used in the production code, which therefore may include standard libraries supplied with the compiler, other third-party libraries, or libraries designed in-house. This is recommended by IEC 61508 Part 3.</description><RuleName>All libraries used in production code shall be written to comply with the provisions of this document, and shall have been subject to appropriate validation. </RuleName><ClassName>Rule3.6(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 extern S16 test_0306( void )&#xD;
@@ -2405,7 +2405,7 @@ extern S16 test_0401( void )&#xD;
 </SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="4" minerNum="4.2" category="CharacterSets"><description>Trigraphs are denoted by a sequence of 2 question marks followed by a specified third character (e.g. ??- represents a '~' (tilde) character and ??) represents a ']'). They can cause accidental confusion with other uses of two question marks. For example the string</description><RuleName>Trigraphs shall not be used. </RuleName><ClassName>Rule04_2_Req.class</ClassName><SourceCode>&quot;(Date should be in the form ??-??-??)&quot;
 - would not behave as expected, actually being interpreted by the compiler as&#xD;
 &quot;(Date should be in the form ~~]&quot;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="5" minerNum="5.1" category="Identifiers"><description>The ISO standard requires internal identifiers to be distinct in the first 31 characters to guarantee code portability. This limitation shall not be exceeded, even if the compiler supports it. This rule shall apply across all name spaces. Macro names are also included and the 31 character limit applies before and after substitution.</description><RuleName>Identifiers (internal and external) shall not rely on the significance of more than 31 characters. </RuleName><ClassName>Rule05_1_Req.class</ClassName><SourceCode>/* PRQA S 2985,3210, 3408, 3447 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="5" minerNum="5.1" category="Identifiers"><description>The ISO standard requires internal identifiers to be distinct in the first 31 characters to guarantee code portability. This limitation shall not be exceeded, even if the compiler supports it. This rule shall apply across all name spaces. Macro names are also included and the 31 character limit applies before and after substitution.</description><RuleName>Identifiers (internal and external) shall not rely on the significance of more than 31 characters. </RuleName><ClassName>Rule05_1_Req.class</ClassName><SourceCode>/* PRQA S 2985,3210, 3408, 3447 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2435,13 +2435,13 @@ extern S16 test_0501( void )&#xD;
 &#xD;
    return r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="5" minerNum="5.2" category="Identifiers"><description>The terms outer and inner scope are defined as follows. Identifiers that have file scope can be considered as having the outermost scope. Identifiers that have block scope have a more inner scope. Successive, nested blocks, introduce more inner scopes. This rule disallows the case where a second inner definition hides an outer definition. If the second definition does not hide the first definition, then this rule is not violated.</description><RuleName>Identifiers in an inner scope shall not use the same name as an identifier in an outer scope, and therefore hide that identifier. </RuleName><ClassName>Rule05_2_Req.class</ClassName><SourceCode>int16_t i;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="5" minerNum="5.2" category="Identifiers"><description>The terms outer and inner scope are defined as follows. Identifiers that have file scope can be considered as having the outermost scope. Identifiers that have block scope have a more inner scope. Successive, nested blocks, introduce more inner scopes. This rule disallows the case where a second inner definition hides an outer definition. If the second definition does not hide the first definition, then this rule is not violated.</description><RuleName>Identifiers in an inner scope shall not use the same name as an identifier in an outer scope, and therefore hide that identifier. </RuleName><ClassName>Rule05_2_Req.class</ClassName><SourceCode>int16_t i;&#xD;
 {&#xD;
     int16_t i;        /* This is a different variable                    */&#xD;
  		      /* This is not compliant                           */&#xD;
     i = 3;            /* It could be confusing as to which i this refers */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="5" minerNum="5.3" category="Identifiers"><description>No typedef name shall be reused either as a typedef name or for any other purpose.</description><RuleName>A typedef name shall be a unique identifier. </RuleName><ClassName>Rule05_3_Req.class</ClassName><SourceCode>{&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="5" minerNum="5.3" category="Identifiers"><description>No typedef name shall be reused either as a typedef name or for any other purpose.</description><RuleName>A typedef name shall be a unique identifier. </RuleName><ClassName>Rule05_3_Req.class</ClassName><SourceCode>{&#xD;
     typedef unsigned char uint8_t;&#xD;
 }&#xD;
 {&#xD;
@@ -2450,7 +2450,7 @@ extern S16 test_0501( void )&#xD;
 {&#xD;
     unsigned char uint8_t;           /* Not compliant - reuse of uint8_t */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="5" minerNum="5.4" category="Identifiers"><description>No tag name shall be reused either to define a different tag or for any other purpose within the program. ISO/IEC 9899:1990 [2] does not define the behaviour when an aggregate declaration uses a tag in different forms of type specifier (struct or union). Either all uses of the tag should be in structure type specifiers, or all uses should be in union type specifiers, For example:</description><RuleName>A tag name shall be a unique identifier. </RuleName><ClassName>Rule05_4_Req.class</ClassName><SourceCode>struct stag { uint16_t a; uint16_t b; };&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="5" minerNum="5.4" category="Identifiers"><description>No tag name shall be reused either to define a different tag or for any other purpose within the program. ISO/IEC 9899:1990 [2] does not define the behaviour when an aggregate declaration uses a tag in different forms of type specifier (struct or union). Either all uses of the tag should be in structure type specifiers, or all uses should be in union type specifiers, For example:</description><RuleName>A tag name shall be a unique identifier. </RuleName><ClassName>Rule05_4_Req.class</ClassName><SourceCode>struct stag { uint16_t a; uint16_t b; };&#xD;
 &#xD;
 struct stag a1 = { ,  };     /* Compliant - compatible with above   */&#xD;
 union stag  a2 = { ,  };     /* Not compliant - not compatible with&#xD;
@@ -2460,7 +2460,7 @@ void foo( void )&#xD;
 {&#xD;
     struct stag { uint16_t a; }; /* Not compliant - tag stag redefined  */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="5" minerNum="5.5" category="Identifiers"><description>Regardless of scope, no identifier with static storage duration should be re-used across any source files in the system. This includes objects or functions with external linkage and any objects or functions with the static storage class specifier.</description><RuleName>No object or function identifier with static storage duration should be reused. </RuleName><ClassName>Rule5.5(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="5" minerNum="5.5" category="Identifiers"><description>Regardless of scope, no identifier with static storage duration should be re-used across any source files in the system. This includes objects or functions with external linkage and any objects or functions with the static storage class specifier.</description><RuleName>No object or function identifier with static storage duration should be reused. </RuleName><ClassName>Rule5.5(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 static S16 obj_0505a = ;                               /* MISRA Violation - Declared with external linkage in main.c */&#xD;
@@ -2483,7 +2483,7 @@ static S16 test_0505a(void)&#xD;
 &#xD;
     return obj_0505a + obj_0505b;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="5" minerNum="5.6" category="Identifiers"><description>Name space and scope are different. This rule is not concerned with scope. For example, ISO C allows the same identifier (vector) for both a tag and a typedef at the same scope.</description><RuleName>No identifier in one name space should have the same spelling as an identifier in another name space, with the exception of structure member and union member names. </RuleName><ClassName>Rule5.6(notImplement).class</ClassName><SourceCode>typedef struct vector { uint16_t x ; uint16_t y; uint16_t z; } vector;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="5" minerNum="5.6" category="Identifiers"><description>Name space and scope are different. This rule is not concerned with scope. For example, ISO C allows the same identifier (vector) for both a tag and a typedef at the same scope.</description><RuleName>No identifier in one name space should have the same spelling as an identifier in another name space, with the exception of structure member and union member names. </RuleName><ClassName>Rule5.6(notImplement).class</ClassName><SourceCode>typedef struct vector { uint16_t x ; uint16_t y; uint16_t z; } vector;&#xD;
 /* Rule violation ^^                                             ^^ */
 struct { int16_t key; int16_t value; } record;&#xD;
 &#xD;
@@ -2497,7 +2497,7 @@ tasks[N_TASKS];&#xD;
 &#xD;
 devices[].next = &amp;devices[1];&#xD;
 tasks[].next   = &amp;tasks[1];
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="5" minerNum="5.7" category="Identifiers"><description>Regardless of scope, no identifier should be re-used across any files in the system. This rule incorporates the provisions of , , , , and .</description><RuleName>No identifier name should be reused. </RuleName><ClassName>Rule05_7_Adv.class</ClassName><SourceCode>struct air_speed&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="5" minerNum="5.7" category="Identifiers"><description>Regardless of scope, no identifier should be re-used across any files in the system. This rule incorporates the provisions of , , , , and .</description><RuleName>No identifier name should be reused. </RuleName><ClassName>Rule05_7_Adv.class</ClassName><SourceCode>struct air_speed&#xD;
 {&#xD;
     uint16_t speed; /* knots */&#xD;
 } * x;&#xD;
@@ -2507,7 +2507,7 @@ struct gnd_speed&#xD;
                     /* Not Compliant - speed is in different units */&#xD;
 } * y;&#xD;
 x-&gt;speed = y-&gt;speed;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="6" minerNum="6.1" category="Types"><description>There are three distinct char types, (plain) char, signed char and unsigned char. signed char and unsigned char shall be used for numeric data and plain char shall be used for character data. The signedness of the plain char type is implementation-defined and should not be relied upon.</description><RuleName>The plain char type shall be used only for the storage and use of character values. </RuleName><ClassName>Rule6.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,3112,3197,3203,3205,3206 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="6" minerNum="6.1" category="Types"><description>There are three distinct char types, (plain) char, signed char and unsigned char. signed char and unsigned char shall be used for numeric data and plain char shall be used for character data. The signedness of the plain char type is implementation-defined and should not be relied upon.</description><RuleName>The plain char type shall be used only for the storage and use of character values. </RuleName><ClassName>Rule6.1(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,3112,3197,3203,3205,3206 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -2611,7 +2611,7 @@ static PC test_0601b(void)&#xD;
     default: return('\0');&#xD;
     }&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="6" minerNum="6.2" category="Types"><description>There are three distinct char types, (plain) char, signed char and unsigned char. Signed char and unsigned char shall be used for numeric data and plain char shall be used for character data. The signedness of the plain char type is implementation-defined and should not be relied upon. Character values/data are character constants or string literals such as 'A', '5', '\n', &quot;a&quot;. Numeric values/data are numbers such as 0, 5, 23, \x10, -3. Character sets map text characters onto numeric values. Character values are the &quot;text&quot;. The permissible operators on plain char types are the simple assignment operator (=), equality operators (==, !=) and explicit casts to integral types. Additionally, the second and third operands of the ternary conditional operator may both be of plain char type.</description><RuleName>Signed and unsigned char type shall be used only for the storage and use of numeric values. </RuleName><ClassName>Rule6.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,2984,3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="6" minerNum="6.2" category="Types"><description>There are three distinct char types, (plain) char, signed char and unsigned char. Signed char and unsigned char shall be used for numeric data and plain char shall be used for character data. The signedness of the plain char type is implementation-defined and should not be relied upon. Character values/data are character constants or string literals such as 'A', '5', '\n', &quot;a&quot;. Numeric values/data are numbers such as 0, 5, 23, \x10, -3. Character sets map text characters onto numeric values. Character values are the &quot;text&quot;. The permissible operators on plain char types are the simple assignment operator (=), equality operators (==, !=) and explicit casts to integral types. Additionally, the second and third operands of the ternary conditional operator may both be of plain char type.</description><RuleName>Signed and unsigned char type shall be used only for the storage and use of numeric values. </RuleName><ClassName>Rule6.2(notImplement).class</ClassName><SourceCode>/* PRQA S 2982,2984,3205 ++ */&#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
@@ -2646,7 +2646,7 @@ static U8 test_0602b(void)&#xD;
 {&#xD;
     return pca;                /* MISRA Violation */&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Advisory" majorNum="6" minerNum="6.3" category="Types"><description>The basic numerical types of signed and unsigned variants of char, int, short, long, and float, double should not be used, but specific-length typedefs should be used. Rule helps to clarify the size of the storage, but does not guarantee portability because of the asymmetric behaviour of integral promotion. See discussion of integral promotion - section 6.10. It is still important to understand the integer size of the implementation.</description><RuleName>Typedefs that indicate size and signedness should be used in place of the basic numerical types. </RuleName><ClassName>Rule06_3_Adv.class</ClassName><SourceCode>typedef          char   char_t;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Advisory" majorNum="6" minerNum="6.3" category="Types"><description>The basic numerical types of signed and unsigned variants of char, int, short, long, and float, double should not be used, but specific-length typedefs should be used. Rule helps to clarify the size of the storage, but does not guarantee portability because of the asymmetric behaviour of integral promotion. See discussion of integral promotion - section 6.10. It is still important to understand the integer size of the implementation.</description><RuleName>Typedefs that indicate size and signedness should be used in place of the basic numerical types. </RuleName><ClassName>Rule06_3_Adv.class</ClassName><SourceCode>typedef          char   char_t;&#xD;
 typedef signed   char   int8_t;&#xD;
 typedef signed   short  int16_t;&#xD;
 typedef signed   int    int32_t;&#xD;
@@ -2658,7 +2658,7 @@ typedef unsigned long   uint64_t;&#xD;
 typedef          float  float32_t;&#xD;
 typedef          double float64_t;&#xD;
 typedef long     double float128_t;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="6" minerNum="6.4" category="Types"><description>Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum, short or char types for bit fields is not allowed because the behaviour is undefined.</description><RuleName>Bit fields shall only be defined to be of type unsigned int or signed int. </RuleName><ClassName>Rule6.4(notImplement).class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="6" minerNum="6.4" category="Types"><description>Using int is implementation-defined because bitfields of type int can be either signed or unsigned. The use of enum, short or char types for bit fields is not allowed because the behaviour is undefined.</description><RuleName>Bit fields shall only be defined to be of type unsigned int or signed int. </RuleName><ClassName>Rule6.4(notImplement).class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2684,7 +2684,7 @@ extern S16 test_0604( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="6" minerNum="6.5" category="Types"><description>A signed bit field of 1 bit length is not useful.</description><RuleName>Bit fields of signed type shall be at least 2 bits long. </RuleName><ClassName>Rule06_5_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="6" minerNum="6.5" category="Types"><description>A signed bit field of 1 bit length is not useful.</description><RuleName>Bit fields of signed type shall be at least 2 bits long. </RuleName><ClassName>Rule06_5_Req.class</ClassName><SourceCode>/* PRQA S 3205 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2705,13 +2705,13 @@ extern S16 test_0605( void )&#xD;
 &#xD;
    return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="7" minerNum="7.1" category="Constants"><description>Any integer constant beginning with a '0' (zero) is treated as octal. So there is a danger, for example, with writing fixed length constants. For example, the following array initialisation for 3-digit bus messages would not do as expected (052 is octal, i.e. 42 decimal):</description><RuleName>Octal constants (other than zero) and octal escape sequences shall not be used. </RuleName><ClassName>Rule7.1(notImplement).class</ClassName><SourceCode>code[1] = 109;      /* equivalent to decimal 109 */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="7" minerNum="7.1" category="Constants"><description>Any integer constant beginning with a '0' (zero) is treated as octal. So there is a danger, for example, with writing fixed length constants. For example, the following array initialisation for 3-digit bus messages would not do as expected (052 is octal, i.e. 42 decimal):</description><RuleName>Octal constants (other than zero) and octal escape sequences shall not be used. </RuleName><ClassName>Rule7.1(notImplement).class</ClassName><SourceCode>code[1] = 109;      /* equivalent to decimal 109 */&#xD;
 code[2] = 100;      /* equivalent to decimal 100 */&#xD;
 code[3] = 052;      /* equivalent to decimal 42 */&#xD;
 code[4] = 071;      /* equivalent to decimal 57 */
 code[5] = '\109';   /* implementation-defined, two character constant */&#xD;
 code[6] = '\100';   /* set to 64, or implementation-defined           */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.1" category="DeclarationsAndDefinitions"><description>The use of prototypes enables the compiler to check the integrity of function definitions and calls. Without prototypes the compiler is not obliged to pick up certain errors in function calls (e.g. different number of arguments from the function body, mismatch in types of arguments between call and definition). Function interfaces have been shown to be a cause of considerable problems, and therefore this rule is considered very important.</description><RuleName>Functions shall have prototype declarations and the prototype shall be visible at both the function definition and call. </RuleName><ClassName>Rule08_1_Req.class</ClassName><SourceCode>/* PRQA S 3210 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.1" category="DeclarationsAndDefinitions"><description>The use of prototypes enables the compiler to check the integrity of function definitions and calls. Without prototypes the compiler is not obliged to pick up certain errors in function calls (e.g. different number of arguments from the function body, mismatch in types of arguments between call and definition). Function interfaces have been shown to be a cause of considerable problems, and therefore this rule is considered very important.</description><RuleName>Functions shall have prototype declarations and the prototype shall be visible at both the function definition and call. </RuleName><ClassName>Rule08_1_Req.class</ClassName><SourceCode>/* PRQA S 3210 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2730,7 +2730,7 @@ extern S16 test_0801( void )&#xD;
    r = r + test_0801b( );          /* MISRA Violation Rule 8.1 */&#xD;
    return r;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.10" category="DeclarationsAndDefinitions"><description>If a variable is only to be used by functions within the same file then use static. Similarly if a function is only called from elsewhere within the same file, use static. Use of the static storage-class specifier will ensure that the identifier is only visible in the file in which it is declared and avoids any possibility of confusion with an identical identifier in another file or a library.</description><RuleName>All declarations and definitions of objects or functions at file scope shall have internal linkage unless external linkage is required. </RuleName><ClassName>Rule8.10(notImplement).class</ClassName><SourceCode>/* PRQA S 3408 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.10" category="DeclarationsAndDefinitions"><description>If a variable is only to be used by functions within the same file then use static. Similarly if a function is only called from elsewhere within the same file, use static. Use of the static storage-class specifier will ensure that the identifier is only visible in the file in which it is declared and avoids any possibility of confusion with an identical identifier in another file or a library.</description><RuleName>All declarations and definitions of objects or functions at file scope shall have internal linkage unless external linkage is required. </RuleName><ClassName>Rule8.10(notImplement).class</ClassName><SourceCode>/* PRQA S 3408 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2758,7 +2758,7 @@ static S16 test_0810b( void )&#xD;
 {&#xD;
     return obj_0810b;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.11" category="DeclarationsAndDefinitions"><description>The static and extern storage class specifiers can be a source of confusion. It is good practice to apply the static keyword consistently to all declarations of objects and functions with internal linkage.</description><RuleName>The static storage class specifier shall be used in definitions and declarations of objects and functions that have internal linkage. </RuleName><ClassName>Rule8.11(notImplement).class</ClassName><SourceCode>/*******************************************************************************&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.11" category="DeclarationsAndDefinitions"><description>The static and extern storage class specifiers can be a source of confusion. It is good practice to apply the static keyword consistently to all declarations of objects and functions with internal linkage.</description><RuleName>The static storage class specifier shall be used in definitions and declarations of objects and functions that have internal linkage. </RuleName><ClassName>Rule8.11(notImplement).class</ClassName><SourceCode>/*******************************************************************************&#xD;
 Note that the rules by which linkage are defined were modified in&#xD;
 Technical Corrigendum 1 of the ISO C standard,&#xD;
 &#xD;
@@ -2822,16 +2822,16 @@ static S16 test_0811( void )           /* Internal linkage (1) * MISRA Violation
 &#xD;
     return ;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.12" category="DeclarationsAndDefinitions"><description></description><RuleName>When an array is declared with external linkage, its size shall be stated explicitly or defined implicitly by initialisation. </RuleName><ClassName>Rule8.12(notImplement).class</ClassName><SourceCode>int array1[ 10 ];                          /* Compliant     */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.12" category="DeclarationsAndDefinitions"><description></description><RuleName>When an array is declared with external linkage, its size shall be stated explicitly or defined implicitly by initialisation. </RuleName><ClassName>Rule8.12(notImplement).class</ClassName><SourceCode>int array1[ 10 ];                          /* Compliant     */&#xD;
 extern int array2[ ];                      /* Not compliant */&#xD;
 int array2[ ] = { , 10, 15 };             /* Compliant     */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.2" category="DeclarationsAndDefinitions"><description></description><RuleName>Whenever an object or function is declared or defined, its type shall be explicitly stated. </RuleName><ClassName>Rule08_2_req.class</ClassName><SourceCode>extern         x;           /* Non-compliant - implicit int type */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.2" category="DeclarationsAndDefinitions"><description></description><RuleName>Whenever an object or function is declared or defined, its type shall be explicitly stated. </RuleName><ClassName>Rule08_2_req.class</ClassName><SourceCode>extern         x;           /* Non-compliant - implicit int type */&#xD;
 extern int16_t x;           /* Compliant - explicit type         */&#xD;
 const          y;           /* Non-compliant - implicit int type */&#xD;
 const  int16_t y;           /* Compliant - explicit type         */&#xD;
 static         foo( void ); /* Non-compliant - implicit type     */&#xD;
 static int16_t foo( void ); /* Compliant - explicit type         */
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.3" category="DeclarationsAndDefinitions"><description>The types of the parameters and return values in the prototype and the definition must match. This requires identical types including typedef names and qualifiers, and not just identical base types.</description><RuleName>For each function parameter the type given in the declaration and definition shall be identical, and the return types shall also be identical. </RuleName><ClassName>Rule08_3_req.class</ClassName><SourceCode>/* PRQA S 2982,3203,3447,3408 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.3" category="DeclarationsAndDefinitions"><description>The types of the parameters and return values in the prototype and the definition must match. This requires identical types including typedef names and qualifiers, and not just identical base types.</description><RuleName>For each function parameter the type given in the declaration and definition shall be identical, and the return types shall also be identical. </RuleName><ClassName>Rule08_3_req.class</ClassName><SourceCode>/* PRQA S 2982,3203,3447,3408 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2872,10 +2872,10 @@ static S16 test_0803e(void)                /* MISRA Violation */&#xD;
 {&#xD;
     return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.4" category="DeclarationsAndDefinitions"><description>The definition of compatible types is lengthy and complex (ISO/IEC 9899:1990 [2], sections 6.1.2.6, 6.5.2, 6.5.3 and 6.5.4 give full details). Two identical types are compatible but two compatible types need not be identical. For example, the following pairs of types are compatible:</description><RuleName>If objects or functions are declared more than once their types shall be compatible. </RuleName><ClassName>Rule8.4(notImplement).class</ClassName><SourceCode>signed int             int&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.4" category="DeclarationsAndDefinitions"><description>The definition of compatible types is lengthy and complex (ISO/IEC 9899:1990 [2], sections 6.1.2.6, 6.5.2, 6.5.3 and 6.5.4 give full details). Two identical types are compatible but two compatible types need not be identical. For example, the following pairs of types are compatible:</description><RuleName>If objects or functions are declared more than once their types shall be compatible. </RuleName><ClassName>Rule8.4(notImplement).class</ClassName><SourceCode>signed int             int&#xD;
 char [5]               char []&#xD;
 unsigned short int     unsigned short
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.5" category="DeclarationsAndDefinitions"><description>Header files should be used to declare objects, functions, typedefs, and macros. Header files shall not contain or produce definitions of objects or functions (or fragments of functions or objects) that occupy storage. This makes it clear that only C files contain executable source code and that header files only contain declarations. A &quot;header file&quot; is defined as any file that is included via the #include directive, regardless of name or suffix.</description><RuleName>There shall be no definitions of objects or functions in a header file. </RuleName><ClassName>Rule8.5(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.5" category="DeclarationsAndDefinitions"><description>Header files should be used to declare objects, functions, typedefs, and macros. Header files shall not contain or produce definitions of objects or functions (or fragments of functions or objects) that occupy storage. This makes it clear that only C files contain executable source code and that header files only contain declarations. A &quot;header file&quot; is defined as any file that is included via the #include directive, regardless of name or suffix.</description><RuleName>There shall be no definitions of objects or functions in a header file. </RuleName><ClassName>Rule8.5(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 #include &quot;rule_8.5.h&quot;&#xD;
 &#xD;
@@ -2883,7 +2883,7 @@ extern S16 test_0805( void )&#xD;
 {&#xD;
    return test_0805c();&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.6" category="DeclarationsAndDefinitions"><description>Declaring functions at block scope may be confusing, and can lead to undefined behaviour.</description><RuleName>Functions shall be declared at file scope. </RuleName><ClassName>Rule08_6_Req.class</ClassName><SourceCode>/* PRQA S 3408,3447 ++ */&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.6" category="DeclarationsAndDefinitions"><description>Declaring functions at block scope may be confusing, and can lead to undefined behaviour.</description><RuleName>Functions shall be declared at file scope. </RuleName><ClassName>Rule08_6_Req.class</ClassName><SourceCode>/* PRQA S 3408,3447 ++ */&#xD;
 &#xD;
 #include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
@@ -2902,7 +2902,7 @@ extern S16 test_0806a( void )            /* MISRA Violation - Rule 8.8 */&#xD;
 {&#xD;
    return 1;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.7" category="DeclarationsAndDefinitions"><description>The scope of objects shall be restricted to functions where possible. File scope shall only be used where objects need to have either internal or external linkage. Where objects are declared at file scope Rule applies. It is considered good practice to avoid making identifiers global except where necessary. Whether objects are declared at the outermost or innermost block is largely a matter of style. &quot;Accessing&quot; means using the identifier to read from, write to, or take the address of the object.</description><RuleName>Objects shall be defined at block scope if they are only accessed from within a single function. </RuleName><ClassName>Rule08_7_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.7" category="DeclarationsAndDefinitions"><description>The scope of objects shall be restricted to functions where possible. File scope shall only be used where objects need to have either internal or external linkage. Where objects are declared at file scope Rule applies. It is considered good practice to avoid making identifiers global except where necessary. Whether objects are declared at the outermost or innermost block is largely a matter of style. &quot;Accessing&quot; means using the identifier to read from, write to, or take the address of the object.</description><RuleName>Objects shall be defined at block scope if they are only accessed from within a single function. </RuleName><ClassName>Rule08_7_Req.class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 &#xD;
@@ -2924,10 +2924,10 @@ extern S16 test_0807b( void )&#xD;
 &#xD;
    return s0807b + obj_0807c;&#xD;
 }
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.8" category="DeclarationsAndDefinitions"><description>Normally this will mean declaring an external identifier in a header file, that will be included in any file where the identifier is defined or used. For example:</description><RuleName>An external object or function shall be declared in one and only one file. </RuleName><ClassName>Rule8.8(notImplement).class</ClassName><SourceCode>extern int16_t a;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.8" category="DeclarationsAndDefinitions"><description>Normally this will mean declaring an external identifier in a header file, that will be included in any file where the identifier is defined or used. For example:</description><RuleName>An external object or function shall be declared in one and only one file. </RuleName><ClassName>Rule8.8(notImplement).class</ClassName><SourceCode>extern int16_t a;
 #include &lt;featureX.h&gt;&#xD;
 int16_t a = ;
-</SourceCode></Rule><Rule shouldCheck="false" type="Required" majorNum="8" minerNum="8.9" category="DeclarationsAndDefinitions"><description>Behaviour is undefined if an identifier is used for which multiple definitions exist (in different files) or no definition exists at all. Multiple definitions in different files are not permitted even if the definitions are the same, and it is obviously serious if they are different, or initialise the identifier to different values.</description><RuleName>An identifier with external linkage shall have exactly one external definition. </RuleName><ClassName>Rule8.9(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
+</SourceCode></Rule><Rule shouldCheck="true" type="Required" majorNum="8" minerNum="8.9" category="DeclarationsAndDefinitions"><description>Behaviour is undefined if an identifier is used for which multiple definitions exist (in different files) or no definition exists at all. Multiple definitions in different files are not permitted even if the definitions are the same, and it is obviously serious if they are different, or initialise the identifier to different values.</description><RuleName>An identifier with external linkage shall have exactly one external definition. </RuleName><ClassName>Rule8.9(notImplement).class</ClassName><SourceCode>#include &quot;misra.h&quot;&#xD;
 #include &quot;m2cmex.h&quot;&#xD;
 &#xD;
 S16 obj_0809a = 3;&#xD;

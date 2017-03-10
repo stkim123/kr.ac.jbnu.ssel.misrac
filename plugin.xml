@@ -103,5 +103,11 @@
          <page name="Misra-C" class = "kr.ac.jbnu.ssel.misrac.ui.preference.MisraPreferencePage"
          id="kr.ac.jbnu.ssel.misrac.ui.preference.MisraPreferencePage"/>
    </extension>
-
+	<extension
+		point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory
+			extensions="*"
+			class="org.eclipse.ui.texteditor.ResourceMarkerAnnotationModelFactory">
+		</factory>
+	</extension>
 </plugin>
