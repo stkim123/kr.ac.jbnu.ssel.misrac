@@ -19,8 +19,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * either operator shall be used in any single macro definition (i.e. one #, or
  * one ## or neither).
  * 
+ * [STATUS: DONE]
  * 
- * DONE!!
  * 
  * @author sangjin
  *

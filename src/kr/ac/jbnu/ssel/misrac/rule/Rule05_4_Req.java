@@ -1,5 +1,6 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
@@ -8,9 +9,15 @@ import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.c.ICASTCompositeTypeSpecifier;
 import org.eclipse.cdt.core.dom.ast.c.ICASTElaboratedTypeSpecifier;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTCompositeTypeSpecifier;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTElaboratedTypeSpecifier;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTName;
 import org.eclipse.cdt.internal.core.dom.parser.c.CASTName;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
+import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationLevel;
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
 /**
  * A tag name shall be a unique identifier.
@@ -22,15 +29,14 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
  * structure type specifiers, or all uses should be in union type specifiers,
  * For example:
  * 
- * TODO : parameta�� ������ �� �ִ°� ex) 0�� int �ΰ� double�ΰ�
- * TODO : �������� �����ؼ� �̷��.
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
  */
 public class Rule05_4_Req extends AbstractMisraCRule {
 
-	private static HashSet<String> declarations = new HashSet<String>();
+	private static HashMap<String, String> declarations = new HashMap<>();
 
 	public Rule05_4_Req(IASTTranslationUnit ast) {
 		super("Rule05_4_Req", false, ast);
@@ -40,16 +46,38 @@ public class Rule05_4_Req extends AbstractMisraCRule {
 
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
-		for(IASTNode node : simpleDeclaration.getChildren()){
-			if(node instanceof ICASTCompositeTypeSpecifier ){
-				String specifier = node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1];
-				System.out.println("test :: "+specifier);
-				if(declarations.contains(node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1])){
+		for (IASTNode node : simpleDeclaration.getChildren()) {
+			if (node instanceof ICPPASTCompositeTypeSpecifier) {
+				String[] splitedStrIdentifier = node.getRawSignature().split(" ");
+				String compositeType = splitedStrIdentifier[0];
+				String tagName = splitedStrIdentifier[1];
+				if (declarations.containsKey(tagName)) {
+					//0547 [C] This declaration of tag '%s' conflicts with a previous declaration.  
+					String message = MessageFactory.getInstance().getMessage(547);
+					violationMsgs.add(new ViolationMessage(this,
+							getRuleID() + ":" + message + "--" + node.getRawSignature(), node, ViolationLevel.warning));
+
 					isViolated = true;
+					
+				} else {
+					declarations.put(tagName, compositeType);
 				}
-				else{
-					declarations.add(node.getRawSignature().split(" ")[0]+node.getRawSignature().split(" ")[1]);
+
+			}else if(node instanceof ICPPASTElaboratedTypeSpecifier){
+				String[] splitedStrIdentifier = node.getRawSignature().split(" ");
+				String compositeType = splitedStrIdentifier[0];
+				String tagName = splitedStrIdentifier[1];
+				if(declarations.containsKey(tagName)){
+					String target = declarations.get(tagName);
+					if(!compositeType.equals(target)){
+						//0547 [C] This declaration of tag '%s' conflicts with a previous declaration.  
+						String message = MessageFactory.getInstance().getMessage(547);
+						violationMsgs.add(new ViolationMessage(this,
+								getRuleID() + ":" + message + "--" + node.getRawSignature(), node, ViolationLevel.warning));
+						isViolated = true;
+					}
 				}
+				
 			}
 		}
 		return super.visit(simpleDeclaration);

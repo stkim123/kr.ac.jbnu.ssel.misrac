@@ -51,8 +51,8 @@
                id="CASTParser.toolbars.sampleToolbar">
             <command
                   commandId="CASTParser.commands.sampleCommand"
-                  icon="icons/sample.gif"
-                  tooltip="Say hello world"
+                  icon="icons/openMRC.gif"
+                  tooltip="Run OpenMRC!"
                   id="CASTParser.toolbars.sampleCommand">
             </command>
          </toolbar>

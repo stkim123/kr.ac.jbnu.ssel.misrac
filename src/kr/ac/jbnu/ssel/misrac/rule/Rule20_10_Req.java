@@ -20,9 +20,9 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * These functions have undefined behaviour associated with them when the string
  * cannot be converted.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
- * @author kang
+ * @author Seunghyeon Kang
  */
 
 public class Rule20_10_Req extends AbstractMisraCRule {

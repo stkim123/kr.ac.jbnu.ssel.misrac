@@ -32,7 +32,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * this standard that they will not normally be needed in production code in
  * embedded systems.
  *
- * [DONE]
+ * [STATUS: DONE]
  * 
  * @author stkim
  *

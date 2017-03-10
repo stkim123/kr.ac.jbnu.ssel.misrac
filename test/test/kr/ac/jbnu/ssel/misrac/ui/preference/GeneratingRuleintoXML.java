@@ -1,10 +1,8 @@
-package test.kr.ac.jbnu.ssel.misrac.xmlData;
+package test.kr.ac.jbnu.ssel.misrac.ui.preference;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
@@ -21,11 +19,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import kr.ac.jbnu.ssel.misrac.rule.R;
+import kr.ac.jbnu.ssel.misrac.rule.RuleLocation;
 import kr.ac.jbnu.ssel.misrac.ui.preference.ObjectFactory;
 import kr.ac.jbnu.ssel.misrac.ui.preference.Rule;
 import kr.ac.jbnu.ssel.misrac.ui.preference.Rules;
-import test.kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
 
 public class GeneratingRuleintoXML {
 
@@ -45,11 +42,11 @@ public class GeneratingRuleintoXML {
 			setRuleData(ruleResource, rule);
 			ruleList.add(rule);
 		}
-		JAXBContext context = JAXBContext.newInstance(String.class, Rules.class);
+		JAXBContext context = JAXBContext.newInstance(String.class, RuleLocation.class);
 		Marshaller marshaller = context.createMarshaller();
 		File rulesFile = new File( "Resource/rules.xml" );
 		marshaller.marshal(rules, rulesFile);
-		System.out.println("done");
+		System.out.println("xml generated");
 	}
 
 	private void setRuleData(File ruleResource, Rule rule) throws URISyntaxException {
@@ -100,8 +97,8 @@ public class GeneratingRuleintoXML {
 
 	private String getClassName(String minerNum) throws URISyntaxException, IOException {
 		String className = null;
-		ClassLoader loader = R.class.getClassLoader();
-		URL ruleCodeClassDictory = loader.getResource( R.class.getPackage().getName().replace('.', '/'));
+		ClassLoader loader = RuleLocation.class.getClassLoader();
+		URL ruleCodeClassDictory = loader.getResource( RuleLocation.class.getPackage().getName().replace('.', '/'));
 		URL fileURL = FileLocator.toFileURL(ruleCodeClassDictory);
 
 		File ruleDicFile = new File(fileURL.toURI());

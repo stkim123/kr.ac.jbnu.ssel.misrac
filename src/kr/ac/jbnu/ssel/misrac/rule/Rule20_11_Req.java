@@ -30,7 +30,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * If the functions are found necessary in an application, 
  * then it is essential to check on the implementation-defined behaviour of the function in the environment in question.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * @author stkim
  *
  */

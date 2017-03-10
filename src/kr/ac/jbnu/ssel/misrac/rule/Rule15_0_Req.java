@@ -55,7 +55,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * label and the end of the switch statement. switch clause Either a case clause
  * or a default clause.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
@@ -66,11 +66,10 @@ public class Rule15_0_Req extends AbstractMisraCRule {
 		super("Rule15_0_Req", false, ast);
 		shouldVisitStatements = true;
 	}
-
-	// switch안의 모든 요소는 case 혹은 default 구문 안에 있어야한다.
-	// switch안의 default 구문은 마지막에 위치해야 한다.
-	// case 구문은 마지막에 break를 갖는다.
-
+	//All of elements in switch statement must be in case or default
+	//default statement in switch statement must be last position of switch statement
+	//case statement has break at the last
+	
 	@Override
 	protected int visit(IASTSwitchStatement statement) {
 

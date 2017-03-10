@@ -15,7 +15,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  * No typedef name shall be reused either as a typedef name or for any other purpose.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
@@ -31,26 +31,35 @@ public class Rule05_3_Req extends AbstractMisraCRule {
 
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
+		
+		String rawString= simpleDeclaration.getRawSignature();
+		String typedefString = rawString.split(" ")[0];
+		
+		
+		
 		for (IASTNode node : simpleDeclaration.getDeclarators()) {
-			String temp = node.getRawSignature();
+			String identifier = node.getRawSignature();
 
-			if (declarations.contains(temp)) {
+			if (declarations.contains(identifier)) {
 //				The identifier '%1s' is declared as a typedef and is used elsewhere for a different kind of declaration.
 				String message1 = MessageFactory.getInstance().getMessage(1506);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + temp, node));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message1 + "--" + simpleDeclaration.getRawSignature(), node));
 //				'%1s' is used as a typedef for different types.
 				String message2 = MessageFactory.getInstance().getMessage(1507);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + temp, node));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + simpleDeclaration.getRawSignature(), node));
 //				The typedef '%1s' is declared in more than one location.
 				String message3 = MessageFactory.getInstance().getMessage(1508);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + temp, node));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message3 + "--" + simpleDeclaration.getRawSignature(), node));
 //				Declaration of typedef '%s' is not in a header file although it is used in a definition or declaration with external linkage.
 				String message4 = MessageFactory.getInstance().getMessage(3448);
-				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message4 + "--" + temp, node));
+				violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message4 + "--" + simpleDeclaration.getRawSignature(), node));
 
 				isViolated = true;
 			} else {
-				declarations.add(temp);
+				if(typedefString.equals("typedef")){
+					declarations.add(identifier);
+				}
+				
 			}
 		}
 		return super.visit(simpleDeclaration);

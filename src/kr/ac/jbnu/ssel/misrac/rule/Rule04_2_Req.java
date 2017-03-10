@@ -31,7 +31,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * 
  * Issue: Visitor를 통해서 전달 받는 것이 이미 replace된 토큰이 전달 되기 때문에, 우리는 ??x가 들어오는지 알수가 없음
  * 꺼구로 우리가 replacement가 들어오면 ??x이것이 들어온것으로 간주하고, 이 룰을 violation되게 체크함.
- * 
+ * [STATUS: DONE]
  * @author stkim
  *
  */
@@ -49,7 +49,8 @@ public class Rule04_2_Req extends AbstractMisraCRule {
 		// String trigraphPrefix = "??";
 		// String trigraphPostfix = "=()/'<!>-";
 
-		String trigraphPostfix = "[]#\\ˆ|{}˜";
+//		String trigraphPostfix = "[]#\\ˆ|{}˜";
+		String trigraphPostfix = "[]#ˆ|{}˜";
 		char[] trigraphClueChar = trigraphPostfix.toCharArray();
 
 		String literalExpression = expression.toString();

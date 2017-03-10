@@ -6,6 +6,11 @@ import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.castparser.DetailedASTVisitor;
 
+/**
+ * 
+ * @author "STKIM"
+ *
+ */
 public abstract class AbstractMisraCRule extends DetailedASTVisitor {
 
     /**
@@ -61,6 +66,10 @@ public abstract class AbstractMisraCRule extends DetailedASTVisitor {
 
     public ViolationMessage[] getViolationMessages() {
 	return (ViolationMessage[]) violationMsgs.toArray(new ViolationMessage[0]);
+    }
+    
+    public void clean()
+    {
     }
 
 }

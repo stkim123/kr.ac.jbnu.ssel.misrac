@@ -3,8 +3,10 @@ package kr.ac.jbnu.ssel.misrac.rule;
 import java.util.HashSet;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTDeclarator;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
@@ -40,28 +42,15 @@ public class Rule05_2_Req extends AbstractMisraCRule {
 		innerDeclaration.clear();
 		outerDeclaration.clear();
 	}
-	
-	private void init(IASTSimpleDeclaration simpleDeclaration){
-		
-		if(simpleDeclaration.getParent() instanceof IASTDeclarationStatement){
-			if(!innerDeclaration.contains(simpleDeclaration.getRawSignature())){
-				innerDeclaration.add(simpleDeclaration.getRawSignature());
-			}
-		}
-		else{
-			if(!outerDeclaration.contains(simpleDeclaration.getRawSignature())){
-				outerDeclaration.add(simpleDeclaration.getRawSignature());
-			}
-		}
-	}
 
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
+		addIndentifierIntoHash(simpleDeclaration);
 		
-		init(simpleDeclaration);
+		String identifier = getIdentifier(simpleDeclaration);
 		
 		if(simpleDeclaration.getParent() instanceof IASTDeclarationStatement){
-			if(outerDeclaration.contains(simpleDeclaration.getRawSignature())){
+			if(outerDeclaration.contains(identifier)){
 				
 				//This declaration of tag '%s' hides a more global declaration.
 				String message1 = MessageFactory.getInstance().getMessage(2547);
@@ -74,7 +63,7 @@ public class Rule05_2_Req extends AbstractMisraCRule {
 			}
 		}
 		else{
-			if(innerDeclaration.contains(simpleDeclaration.getRawSignature())){
+			if(innerDeclaration.contains(identifier)){
 				
 				//This declaration of tag '%s' hides a more global declaration.
 				String message1 = MessageFactory.getInstance().getMessage(2547);
@@ -90,4 +79,28 @@ public class Rule05_2_Req extends AbstractMisraCRule {
 		return super.visit(simpleDeclaration);
 	}
 
+	private String getIdentifier(IASTSimpleDeclaration simpleDeclaration) {
+		String identifier = null;
+		for(IASTNode decl : simpleDeclaration.getChildren()){
+			if(decl instanceof ICPPASTDeclarator){
+				ICPPASTDeclarator ccpDecl = (ICPPASTDeclarator)decl;
+				identifier = ccpDecl.getName().toString();
+			}
+		}
+		return identifier;
+	}
+	private void addIndentifierIntoHash(IASTSimpleDeclaration simpleDeclaration){
+		String identifier = null;
+		if(simpleDeclaration.getParent() instanceof IASTDeclarationStatement){
+			identifier = getIdentifier(simpleDeclaration);
+			if(!innerDeclaration.contains(identifier)){
+				innerDeclaration.add(identifier);
+			}
+		}
+		else{
+			if(!outerDeclaration.contains(identifier)){
+				outerDeclaration.add(identifier);
+			}
+		}
+	}
 }

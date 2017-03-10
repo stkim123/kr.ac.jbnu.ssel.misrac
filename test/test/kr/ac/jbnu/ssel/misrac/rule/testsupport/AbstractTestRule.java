@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
-import kr.ac.jbnu.ssel.misrac.rule.R;
+import kr.ac.jbnu.ssel.misrac.rule.RuleLocation;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
@@ -54,7 +54,7 @@ public class AbstractTestRule
 
 	private AbstractMisraCRule createMisraCRule(String ruleClsName, IASTTranslationUnit astT)
 	{
-		String ruleClassWithPackage = R.class.getPackage().getName() + "." + ruleClsName;
+		String ruleClassWithPackage = RuleLocation.class.getPackage().getName() + "." + ruleClsName;
 
 		System.out.println("ruleClassWithPackage:" + ruleClassWithPackage);
 		

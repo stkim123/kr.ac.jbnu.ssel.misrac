@@ -1,78 +1,44 @@
 package kr.ac.jbnu.ssel.misrac.ui.preference;
 
-import java.awt.Button;
-import java.awt.Point;
-import java.io.File;
-import java.rmi.activation.Activator;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
-import org.w3c.dom.Element;
-import org.eclipse.cdt.core.templateengine.TemplateEngineHelper;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.preference.ComboFieldEditor;
-import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.CompositeRuler;
-import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
-import org.eclipse.jface.text.templates.Template;
-import org.eclipse.jface.text.templates.persistence.TemplatePersistenceData;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.ColumnLayoutData;
-import org.eclipse.jface.viewers.ColumnWeightData;
-import org.eclipse.jface.viewers.DoubleClickEvent;
-import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ICheckStateListener;
-import org.eclipse.jface.viewers.IContentProvider;
-import org.eclipse.jface.viewers.IDoubleClickListener;
-import org.eclipse.jface.viewers.ILabelProviderListener;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.jface.viewers.TableLayout;
-import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.eclipse.ui.internal.ViewSite;
 
+
+/**
+ * 
+ * @author Taeyoung Kim
+ */
 public class MisraPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 
 	private static final String PageDescription = "misra page";
@@ -314,17 +280,22 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	
 			@Override
 			public void widgetSelected(SelectionEvent selectionEvent) {
-				Object obj = selectionEvent.getSource();
-				table = tableViewer.getTable();
-				int index = table.getSelectionIndex();
-				Object tableItem = table.getItem(index).getData();
-				// TODO
-				Rule rule = (Rule)tableItem;
-				if (document != null) {
-					//put Code to use getCode Method
-					document.set(rule.getSourceCode());
-				} else {
-					CreateDefaultDocument();
+				try{
+					Object obj = selectionEvent.getSource();
+					table = tableViewer.getTable();
+					int index = table.getSelectionIndex();
+					Object tableItem = table.getItem(index).getData();
+					// TODO
+					Rule rule = (Rule)tableItem;
+					if (document != null) {
+						//put Code to use getCode Method
+						document.set(rule.getSourceCode());
+					} else {
+						CreateDefaultDocument();
+					}
+				}
+				catch(IllegalArgumentException exp){
+					exp.printStackTrace();
 				}
 			}
 	

@@ -22,7 +22,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * loop, for example a flag to indicate that something has been completed, which
  * is then tested in the for statement.
  * 
- * 
+ * [STATUS: DONE]
  * 
  * @author sangjin
  */

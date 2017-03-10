@@ -21,6 +21,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * while or for loop, shall be a compound statement (enclosed within braces),
  * even if that compound statement contains a single statement.
  * 
+ * [STATUS: DONE]
  * 
  * @author stkim
  *

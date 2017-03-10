@@ -8,9 +8,10 @@ import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTypeId;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTConstructorInitializer;
 import org.eclipse.cdt.internal.core.model.ASTStringUtil;
+
 /**
  * 
- * @author STKim2
+ * @author Suntae Kim
  *
  */
 public class CASTUtil {
@@ -44,22 +45,17 @@ public class CASTUtil {
 		}
 		return "";
 	}
-	
-	public static boolean containsASTNode(IASTNode parent, Class<?> cls)
-	{
+
+	public static boolean containsASTNode(IASTNode parent, Class<?> cls) {
 		IASTNode[] children = parent.getChildren();
-		if( children == null || children.length == 0)
-		{
+		if (children == null || children.length == 0) {
 			return false;
 		}
-		
+
 		for (IASTNode iastNode : children) {
-			if( iastNode.getClass() == cls)
-			{
+			if (iastNode.getClass() == cls) {
 				return true;
-			}
-			else
-			{
+			} else {
 				containsASTNode(iastNode, cls);
 			}
 		}

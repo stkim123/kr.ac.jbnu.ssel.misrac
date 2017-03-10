@@ -1,5 +1,11 @@
-package kr.ac.jbnu.ssel.misrac.ui.view;
+package kr.ac.jbnu.ssel.misrac.ui;
 
+import kr.ac.jbnu.ssel.resources.Resources;
+
+/**
+ * 
+ * @author Taeyoung Kim
+ */
 public class Constant {
 
 	//MISRA-C Table View Column Name
@@ -9,7 +15,7 @@ public class Constant {
 	public static final String errorMessage = "Error Message";
 	
 	//Data Path
-	public static final String dataPath = "D:\\git\\kr.ac.jbnu.ssel.misrac\\Resource\\rules.xml";
+	public static final String rule_description_path = EclipseUtil.getEclipsePackageDirOfClass(Resources.class)+ "\\rule_description.xml"; 
 	
 	//
 	public static final String notImplement = "(notImplement)";

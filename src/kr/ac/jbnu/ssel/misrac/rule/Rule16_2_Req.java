@@ -19,7 +19,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * controlled, it is not possible to determine before execution what the
  * worst-case stack usage could be.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

@@ -20,6 +20,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * setjmp and longjmp allow the normal function call mechanisms to be bypassed,
  * and shall not be used.
  * 
+ * [STATUS: DONE]
  * 
  * @author stkim
  *

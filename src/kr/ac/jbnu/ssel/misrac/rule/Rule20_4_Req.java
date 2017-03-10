@@ -26,9 +26,9 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *If this is the case then these functions shall also be avoided.
  *
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
- * @author kang
+ * @author Seunghyeon Kang
  */
 
 public class Rule20_4_Req extends AbstractMisraCRule

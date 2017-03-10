@@ -18,7 +18,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  * Use of the comma operator is generally detrimental to the readability of code, and the same effect can be achieved by other means.
  *
- * DONE!!
+ * [STATUS: DONE]
  * @author sangjin
  *
  */

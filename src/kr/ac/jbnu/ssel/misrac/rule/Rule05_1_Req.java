@@ -23,8 +23,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * This is more than a style issue, since different (pre C99) compilers may
  * behave differently.
  * 
- * 
- * @author STKim2
+ * [STATUS: DONE]
+ * @author Suntae Kim
  *
  */
 public class Rule05_1_Req extends AbstractMisraCRule {

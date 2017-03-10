@@ -1,5 +1,10 @@
 package kr.ac.jbnu.ssel.misrac.rulesupport;
 
+/**
+ * 
+ * @author "STKIM"
+ *
+ */
 public class MessageFactory {
 
 	private static MessageFactory instance;
@@ -302,6 +307,66 @@ public class MessageFactory {
 			break;
 		case 2020:
 			msg = "	Final 'switch' clause does not end with an explicit 'jump' statement.";
+			break;
+		case 780:
+			msg = "Another identifier '%s' is already in scope in a different namespace.";
+			break;
+		case 781:
+			msg ="'%s' is being used as a structure/union member as well as being a label, tag or ordinary identifier.";
+			break;
+		case 422:
+			msg = "Function call contains fewer arguments than prototype specifies.";
+			break;
+		case 423:
+			msg = "Function call contains more arguments than prototype specifies.";
+			break;
+		case 3319:
+			msg = "Function called with number of arguments which differs from number of parameters in definition.";
+			break;
+		case 745:
+			msg = " 'return;' found in '%s()', which has been defined with a non-'void' return type.";
+			break;
+		case 2887:
+			msg = " Function 'main' ends with an implicit 'return' statement.";
+			break;
+		case 2888:
+			msg = "	This function has been declared with a non-void 'return' type but ends with an implicit 'return ;' statement.";
+			break;
+		case 3113:
+			msg = " 'return' statement includes no expression but function '%s()' is implicitly of type 'int'.";
+			break;
+		case 3114:
+			msg = " Function '%s()' is implicitly of type 'int' but ends without returning a value.";
+			break;
+		case 3260:
+			msg = "Typedef defined with more than 2 levels of indirection.";
+			break;
+		case 3261:
+			msg = "Member of struct/union defined with more than 2 levels of indirection.";
+			break;
+		case 3262:
+			msg = "Object defined or declared with more than 2 levels of indirection.";
+			break;
+		case 3263:
+			msg = "Function defined or declared with a return type which has more than 2 levels of indirection.";
+			break;
+		case 634:
+			msg = "Bit-fields in this struct/union have not been declared explicitly as unsigned or signed.";
+			break;
+		case 635:
+			msg = "Bit-fields in this struct/union have been declared with types other than int, signed int or unsigned int.";
+			break;
+		case 3684:
+			msg = "Array declared with unknown size.";
+			break;
+		case 0235:
+			msg = "[U] Unknown escape sequence.";
+			break;
+		case 547:
+			msg ="This declaration of tag '%s' conflicts with a previous declaration. ";
+			break;
+		case 10001:
+			msg = "No identifier name should be reused.";
 			break;
 		}
 

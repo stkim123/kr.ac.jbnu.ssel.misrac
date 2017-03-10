@@ -18,7 +18,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * shall be at the same scope.
  * 
  * 
- * DONE!! 
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
@@ -39,7 +39,7 @@ public class Rule15_1_Req extends AbstractMisraCRule {
 		if (!(grandNode instanceof IASTSwitchStatement)) {
 			// 'Switch' label is located within a nested code block.
 			String msg1 = MessageFactory.getInstance().getMessage(2019);
-			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + statement.getRawSignature(), statement));
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":"+ msg1 + "--"+ statement.getRawSignature(), statement));
 			isViolated = true;
 		}
 		return super.visit(statement);

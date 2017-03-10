@@ -1,9 +1,6 @@
 package kr.ac.jbnu.ssel.misrac.ui.preference;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,11 +11,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.eclipse.core.runtime.FileLocator;
+import kr.ac.jbnu.ssel.misrac.ui.Constant;
 
-import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
-import test.kr.ac.jbnu.ssel.misrac.rule.testC.CCode;
-
+/**
+ * 
+ * @author Taeyoung Kim
+ */
 public class MisraUIdataHandler implements Cloneable {
 
 	private static MisraUIdataHandler instance;
@@ -43,13 +41,11 @@ public class MisraUIdataHandler implements Cloneable {
 
 		return instance;
 	}
-	
-	public HashSet<Rule> getShouldCheckRules()
-	{
+
+	public HashSet<Rule> getShouldCheckRules() {
 		HashSet<Rule> shouldCheckRules = new HashSet<Rule>();
 		for (Rule rule : ruleList) {
-			if( rule.isShouldCheck())
-			{
+			if (rule.isShouldCheck()) {
 				shouldCheckRules.add(rule);
 			}
 		}
@@ -65,7 +61,7 @@ public class MisraUIdataHandler implements Cloneable {
 	}
 
 	public List<Rule> loadAllRules() throws JAXBException {
-		File file = new File(Constant.dataPath);
+		File file = new File(Constant.rule_description_path);
 		// IWorkspace workspace= ResourcesPlugin.getWorkspace();
 		// IPath location= Path.fromOSString(file.getAbsolutePath());
 		// IFile ifile= workspace.getRoot().getFileForLocation(location);
@@ -76,7 +72,7 @@ public class MisraUIdataHandler implements Cloneable {
 		Rules rules = (Rules) unmarshaller.unmarshal(file);
 		ruleList = rules.getRule();
 
-		for (Rule rule : ruleList) {			
+		for (Rule rule : ruleList) {
 			if (rule.getCategory() != null) {
 				String category = rule.getCategory();
 				List<Rule> ruleCate = rulesByCategory.get(category);
@@ -94,16 +90,16 @@ public class MisraUIdataHandler implements Cloneable {
 	}
 
 	@Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
 
-	public void storeToXml(){
+	public void storeToXml() {
 		JAXBContext context;
 		try {
 			context = JAXBContext.newInstance(String.class, Rules.class);
 			Marshaller marshaller = context.createMarshaller();
-			File rulesFile = new File(Constant.dataPath);
+			File rulesFile = new File(Constant.rule_description_path);
 			Rules rules = new Rules();
 			rules.setRule(ruleList);
 			marshaller.marshal(rules, rulesFile);
@@ -111,8 +107,9 @@ public class MisraUIdataHandler implements Cloneable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
+
 	public static void main(String[] args) throws JAXBException {
 		MisraUIdataHandler misraUIdataHandler = new MisraUIdataHandler();
 		List<Rule> ruleList = misraUIdataHandler.loadAllRules();
