@@ -1,6 +1,9 @@
 package kr.ac.jbnu.ssel.misrac.ui.preference;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +14,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.eclipse.core.runtime.FileLocator;
+
+import kr.ac.jbnu.ssel.misrac.rule.RuleLocation;
 import kr.ac.jbnu.ssel.misrac.ui.Constant;
 
 /**
@@ -62,11 +68,6 @@ public class MisraUIdataHandler implements Cloneable {
 
 	public List<Rule> loadAllRules() throws JAXBException {
 		File file = new File(Constant.rule_description_path);
-		// IWorkspace workspace= ResourcesPlugin.getWorkspace();
-		// IPath location= Path.fromOSString(file.getAbsolutePath());
-		// IFile ifile= workspace.getRoot().getFileForLocation(location);
-		// file = ifile.getRawLocation().makeAbsolute().toFile();
-
 		JAXBContext jc = JAXBContext.newInstance(Rules.class);
 		Unmarshaller unmarshaller = jc.createUnmarshaller();
 		Rules rules = (Rules) unmarshaller.unmarshal(file);
@@ -101,6 +102,7 @@ public class MisraUIdataHandler implements Cloneable {
 			Marshaller marshaller = context.createMarshaller();
 			File rulesFile = new File(Constant.rule_description_path);
 			Rules rules = new Rules();
+			setClassNames();
 			rules.setRule(ruleList);
 			marshaller.marshal(rules, rulesFile);
 		} catch (JAXBException e) {
@@ -110,6 +112,71 @@ public class MisraUIdataHandler implements Cloneable {
 
 	}
 
+	
+	private void setClassNames() {
+		for (Rule rule : ruleList) {
+			if(rule.className.contains(Constant.notImplement)){
+				try {
+					String className = getClassName(rule.minerNum);
+					if(className==null){
+						continue;
+					}else{
+						rule.setClassName(className);
+					}
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+
+	private String getClassName(String minerNum) throws URISyntaxException, IOException {
+		String className = null;
+		ClassLoader loader = RuleLocation.class.getClassLoader();
+		URL ruleCodeClassDictory = loader.getResource( RuleLocation.class.getPackage().getName().replace('.', '/'));
+		URL fileURL = FileLocator.toFileURL(ruleCodeClassDictory);
+
+		File ruleDicFile = new File(fileURL.toURI());
+
+		String[] ruleCodeFiles = ruleDicFile.list();
+		for (String ruleCodeClass : ruleCodeFiles) {
+			if(!ruleCodeClass.equals("RuleLocation.class"))
+			{
+				String classRuleNumber = getClassRuleNumber(ruleCodeClass);
+				if(minerNum.equals(classRuleNumber))
+				{
+					className = ruleCodeClass;
+					break;
+				}
+			}
+		}
+		return className;
+	}
+
+	private String getClassRuleNumber(String ruleCodeClass) {
+		StringBuffer wholeRuleNumber = new StringBuffer();
+	 	String ruleNum = ruleCodeClass.substring(4);
+	 	String[] removedClass = ruleNum.split(".class");
+	 	String[] subStrings = removedClass[0].split("_");
+	 	String startOfNum= null;
+	 	if(subStrings[0].startsWith("0")){
+	 		startOfNum = subStrings[0].replace("0", "");
+	 	}else{
+	 		startOfNum = subStrings[0];
+	 	}
+	 	if(startOfNum!=null){
+	 		String endOfNum = subStrings[1];
+	 		wholeRuleNumber.append(startOfNum);
+	 		wholeRuleNumber.append("."+endOfNum);
+	 	}
+		return wholeRuleNumber.toString();
+	}
+	
 	public static void main(String[] args) throws JAXBException {
 		MisraUIdataHandler misraUIdataHandler = new MisraUIdataHandler();
 		List<Rule> ruleList = misraUIdataHandler.loadAllRules();
