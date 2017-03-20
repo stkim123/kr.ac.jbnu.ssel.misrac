@@ -50,8 +50,8 @@ public class CASTHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
-//		processMisraRuleChecking();
-		openMisraTableView();
+		processMisraRuleChecking();
+//		openMisraTableView(vi);
 
 		MessageDialog.openInformation(window.getShell(), "MISRA-C Rule Checker", "Checking MISRA-C Rules .. Done!!");
 
@@ -95,15 +95,15 @@ public class CASTHandler extends AbstractHandler {
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
 					// for checking all rules regardless of preference setting	
-//					if(shouldCheckRulesAsString.contains(ruleClass))
-//					{
+					if(shouldCheckRulesAsString.contains(ruleClass))
+					{
 						callRule(ast, ruleClass, violationMessages);
-//					}
+					}
 					
 				}
 
-				openMessageView(violationMessages);
-//				openMisraTableView(violationMessages);
+//				openMessageView(violationMessages);
+				openMisraTableView(violationMessages);
 			} finally {
 				index.releaseReadLock();
 				ast = null; // don't use the ast after releasing the read-lock
@@ -134,10 +134,11 @@ public class CASTHandler extends AbstractHandler {
 		}
 	}
 
-	private void openMisraTableView() {
+	private void openMisraTableView(ArrayList<ViolationMessage> violationMessages) {
 		try {
 			MisraTableView mtv = (MisraTableView) PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 					.getActivePage().showView(MisraTableView.ID);
+			mtv.setViolationMessage(violationMessages);
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
@@ -179,80 +180,5 @@ public class CASTHandler extends AbstractHandler {
 			rule.clean();
 		}
 	}
-	
-	// need to discuss
-	public ArrayList<ViolationMessage> processMisraRuleChecking0() {
-		ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
-		try {
-			IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			if (!(editor instanceof ITextEditor))
-				return null;
 
-			// Access translation unit of the editor.
-			ITranslationUnit tu = (ITranslationUnit) CDTUITools.getEditorInputCElement(editor.getEditorInput());
-
-			ICProject[] allProjects = CoreModel.getDefault().getCModel().getCProjects();
-			IIndex index = CCorePlugin.getIndexManager().getIndex(allProjects);
-
-			// Index-based AST: IASTTranslationUnit for a workspace file
-			IASTTranslationUnit ast = null;
-
-			try {
-
-				index.acquireReadLock(); // we need a read-lock on the index
-
-				ast = tu.getAST(index, ITranslationUnit.AST_SKIP_INDEXED_HEADERS);
-
-				String fileURLAsString = EclipseUtil.getEclipsePackageDirOfClass(RuleLocation.class);
-				File ruleDicFile = new File(fileURLAsString);
-				String[] ruleFiles = ruleDicFile.list();
-				
-				// filter out unselected rules.
-				HashSet<Rule> shouldCheckRules = MisraUIdataHandler.getInstance().getShouldCheckRules();
-				HashSet<String> shouldCheckRulesAsString = new HashSet<String>();
-				
-				for (Rule rule : shouldCheckRules) {
-					shouldCheckRulesAsString.add(rule.getClassName());
-				}
-				
-				///////////////////////////
-				for (String ruleClass : ruleFiles) {
-					// for checking all rules regardless of preference setting	
-//					if(shouldCheckRulesAsString.contains(ruleClass))
-//					{
-						callRule(ast, ruleClass, violationMessages);
-//					}
-					
-				}
-
-			} finally {
-				index.releaseReadLock();
-				ast = null; // don't use the ast after releasing the read-lock
-			}
-
-		} catch (MiaraCRuleException e) {
-			e.printStackTrace();
-		} catch (CModelException e) {
-			e.printStackTrace();
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return violationMessages;
-	}
 }

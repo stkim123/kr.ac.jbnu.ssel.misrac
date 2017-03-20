@@ -91,8 +91,6 @@ public class MisraTableView extends ViewPart implements IPropertyChangeListener 
 	 * it.
 	 */
 	public void createPartControl(Composite parent) {
-		CASTHandler castHandler = new CASTHandler();
-		violationMsgs = castHandler.processMisraRuleChecking0();
 		
 		this.parent = parent;
 		tableViewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
@@ -101,6 +99,8 @@ public class MisraTableView extends ViewPart implements IPropertyChangeListener 
 		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
 		tableViewer.setLabelProvider(new ViewLabelProvider());
 		// should make arrayType data;
+		
+		this.addPartPropertyListener(this);
 
 		// should add some ColumInstance at here
 		new MisraTableViewRuleNumColumn().addColumnTo(tableViewer);
@@ -108,7 +108,10 @@ public class MisraTableView extends ViewPart implements IPropertyChangeListener 
 		new MisraTableViewRuleTypeColumn().addColumnTo(tableViewer);
 		new MisraTableViewErrorMSGColumn().addColumnTo(tableViewer);
 		
-		tableViewer.setInput(violationMsgs);
+		if( violationMsgs != null)
+		{
+			tableViewer.setInput(violationMsgs);
+		}
 
 		 tableViewer.addDoubleClickListener(new IDoubleClickListener() {
 		
@@ -224,9 +227,16 @@ public class MisraTableView extends ViewPart implements IPropertyChangeListener 
 		this.violationMsgs = violationMsgs;
 
 		// the parameters are dummy
-		firePartPropertyChanged("", "", "");
+//		firePartPropertyChanged("", "", "");
+		firePartPropertyChanged("key", "oldValue", "newValue");
 	}
 
+//	@Override
+//	public void propertyChange(PropertyChangeEvent arg0) {
+//		if (tableViewer != null) {
+//			tableViewer.setInput(violationMsgs);
+//		}
+//	}
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
 		if (tableViewer != null) {
@@ -244,4 +254,5 @@ public class MisraTableView extends ViewPart implements IPropertyChangeListener 
 		}
 		return null;
 	}
+
 }
