@@ -14,6 +14,10 @@ public class Constant {
 	public static final String errorCode = "Error Code";
 	public static final String errorMessage = "Error Message";
 	
+	public static final String requiredType = "Req";
+	public static final String advisoryType = "Adv";
+	public static final String REQUIRED ="Required";
+	public static final String ADVISORY = "Advisory";
 	//Data Path
 	public static final String rule_description_path = EclipseUtil.getEclipsePackageDirOfClass(Resources.class)+ "\\rule_description.xml"; 
 	

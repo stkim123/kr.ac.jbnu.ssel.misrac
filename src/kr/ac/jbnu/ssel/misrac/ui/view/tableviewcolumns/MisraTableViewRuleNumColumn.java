@@ -7,6 +7,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 import kr.ac.jbnu.ssel.misrac.ui.Constant;
 
 
@@ -16,9 +17,12 @@ public class MisraTableViewRuleNumColumn extends MisraTableViewColumn {
 	
 	@Override
 	public String getText(Object element) {
-		if(element instanceof TimeZone)
+		if(element instanceof ViolationMessage)
 		{
-			return ((TimeZone) element).getID();
+			String ruleID = ((ViolationMessage) element).getRule().getRuleID();
+			String[] splitedRuleID = ruleID.split("_");
+			ruleID = splitedRuleID[0]+"_"+splitedRuleID[1];
+			return ruleID;
 		}
 		// TODO Auto-generated method stub
 		return null;
