@@ -20,8 +20,11 @@ import org.eclipse.cdt.ui.CDTUITools;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -66,10 +69,14 @@ public class CASTHandler extends AbstractHandler {
 
 			// Access translation unit of the editor.
 			ITranslationUnit tu = (ITranslationUnit) CDTUITools.getEditorInputCElement(editor.getEditorInput());
-
+			String cFilePath = tu.getResource().getFullPath().toString();
 			ICProject[] allProjects = CoreModel.getDefault().getCModel().getCProjects();
 			IIndex index = CCorePlugin.getIndexManager().getIndex(allProjects);
-
+			
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();  
+			String workspaceDirectory = workspace.getRoot().getLocation().toFile().toString();
+			String cFilePathWithWorkspaceDir = workspaceDirectory+cFilePath;
+			cFilePathWithWorkspaceDir = cFilePathWithWorkspaceDir.replace("/", "\\");
 			// Index-based AST: IASTTranslationUnit for a workspace file
 			IASTTranslationUnit ast = null;
 
@@ -81,6 +88,7 @@ public class CASTHandler extends AbstractHandler {
 
 				String fileURLAsString = EclipseUtil.getEclipsePackageDirOfClass(RuleLocation.class);
 				File ruleDicFile = new File(fileURLAsString);
+				String rulePath = ruleDicFile.getAbsolutePath();
 				String[] ruleFiles = ruleDicFile.list();
 				
 				// filter out unselected rules.
@@ -98,11 +106,11 @@ public class CASTHandler extends AbstractHandler {
 					if(shouldCheckRulesAsString.contains(ruleClass))
 					{
 						callRule(ast, ruleClass, violationMessages);
+						setClassFilePath(violationMessages, cFilePathWithWorkspaceDir);
 					}
 					
 				}
 
-//				openMessageView(violationMessages);
 				openMisraTableView(violationMessages);
 			} finally {
 				index.releaseReadLock();
@@ -157,7 +165,6 @@ public class CASTHandler extends AbstractHandler {
 	private void callRule(IASTTranslationUnit ast, String ruleClass, ArrayList<ViolationMessage> violationMessages)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException,
 			ClassNotFoundException, MiaraCRuleException {
-
 		System.out.println("ruleClass:"+ ruleClass);
 		String ruleClassWithPackage = RuleLocation.class.getPackage().getName() + "."
 				+ ruleClass.substring(0, ruleClass.indexOf("."));
@@ -179,6 +186,12 @@ public class CASTHandler extends AbstractHandler {
 			}
 			rule.clean();
 		}
+	}
+	private void setClassFilePath(ArrayList<ViolationMessage> violationMessages, String CFilesWithFullPath) {
+		for (ViolationMessage violationMessage : violationMessages) {
+			violationMessage.setCFilePath(CFilesWithFullPath);
+		}
+		
 	}
 
 }

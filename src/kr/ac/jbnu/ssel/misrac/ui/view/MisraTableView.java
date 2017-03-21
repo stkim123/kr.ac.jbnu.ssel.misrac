@@ -5,10 +5,11 @@ import org.eclipse.ui.part.*;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
-import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewRuleTypeColumn;
+import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewRuleErrorCodeColumn;
 import kr.ac.jbnu.ssel.misrac.ui.handlers.CASTHandler;
 import kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView.ViewLabelProvider;
 import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewErrorMSGColumn;
+import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewFilePathColumn;
 import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewLineColumn;
 import kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns.MisraTableViewRuleNumColumn;
 
@@ -103,9 +104,10 @@ public class MisraTableView extends ViewPart implements IPropertyChangeListener 
 		this.addPartPropertyListener(this);
 
 		// should add some ColumInstance at here
+		new MisraTableViewRuleErrorCodeColumn().addColumnTo(tableViewer);
+		new MisraTableViewFilePathColumn().addColumnTo(tableViewer);
 		new MisraTableViewRuleNumColumn().addColumnTo(tableViewer);
 		// new MisraTableViewLineColumn().addColumnTo(tableViewer);
-		new MisraTableViewRuleTypeColumn().addColumnTo(tableViewer);
 		new MisraTableViewErrorMSGColumn().addColumnTo(tableViewer);
 		
 		if( violationMsgs != null)

@@ -10,6 +10,7 @@ public class ViolationMessage {
 
 	private String message;
 	private IASTNode node;
+	private String cFilePath;
 
 	private ViolationLevel violationLevel;
 
@@ -46,6 +47,14 @@ public class ViolationMessage {
 
 	public void setViolationLevel(ViolationLevel violationLevel) {
 		this.violationLevel = violationLevel;
+	}
+
+	public String getCFilePath() {
+		return cFilePath;
+	}
+
+	public void setCFilePath(String classFilePath) {
+		this.cFilePath = classFilePath;
 	}
 
 	@Override

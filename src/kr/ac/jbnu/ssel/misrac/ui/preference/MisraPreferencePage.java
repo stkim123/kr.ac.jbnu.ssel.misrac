@@ -312,7 +312,11 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				Object element = event.getElement();
 				Rule rule = (Rule)element;
-				rule.setShouldCheck(true);
+				if(rule.shouldCheck==false){
+					rule.setShouldCheck(true);
+				}else{
+					rule.setShouldCheck(false);
+				}
 			}
 		});
 		
@@ -367,7 +371,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			public void widgetSelected(SelectionEvent e) {
 				List<Rule> checkedRuleList = getCheckedRule(tableData);
 				//need to store Data into xml
-				misraUIdataHandler.storeToXml();				
+				misraUIdataHandler.storeToXml();
 			}
 
 			private List<Rule> getCheckedRule(List<Rule> tableData) {

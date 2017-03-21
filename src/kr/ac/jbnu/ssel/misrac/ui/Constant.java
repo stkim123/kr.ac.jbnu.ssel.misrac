@@ -13,6 +13,7 @@ public class Constant {
 	public static final String line = "Line";
 	public static final String errorCode = "Error Code";
 	public static final String errorMessage = "Error Message";
+	public static final String filePath = "File Path";
 	
 	public static final String requiredType = "Req";
 	public static final String advisoryType = "Adv";

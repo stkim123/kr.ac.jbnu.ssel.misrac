@@ -37,7 +37,7 @@ public class MisraTableViewRuleNumColumn extends MisraTableViewColumn {
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return 100;
+		return 80;
 	}
 	
 
