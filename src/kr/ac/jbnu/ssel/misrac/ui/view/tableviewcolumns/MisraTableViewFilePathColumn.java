@@ -24,7 +24,7 @@ public class MisraTableViewFilePathColumn extends MisraTableViewColumn {
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return 255;
+		return 90;
 	}
 
 }

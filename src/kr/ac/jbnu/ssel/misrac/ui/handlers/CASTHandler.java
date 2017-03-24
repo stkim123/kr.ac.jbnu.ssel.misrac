@@ -73,10 +73,11 @@ public class CASTHandler extends AbstractHandler {
 			ICProject[] allProjects = CoreModel.getDefault().getCModel().getCProjects();
 			IIndex index = CCorePlugin.getIndexManager().getIndex(allProjects);
 			
-			IWorkspace workspace = ResourcesPlugin.getWorkspace();  
-			String workspaceDirectory = workspace.getRoot().getLocation().toFile().toString();
-			String cFilePathWithWorkspaceDir = workspaceDirectory+cFilePath;
-			cFilePathWithWorkspaceDir = cFilePathWithWorkspaceDir.replace("/", "\\");
+//			IWorkspace workspace = ResourcesPlugin.getWorkspace();  
+//			String workspaceDirectory = workspace.getRoot().getLocation().toFile().toString();
+//			String cFilePathWithWorkspaceDir = workspaceDirectory+cFilePath;
+			cFilePath = cFilePath.substring(1).replace("/", "\\");
+			
 			// Index-based AST: IASTTranslationUnit for a workspace file
 			IASTTranslationUnit ast = null;
 
@@ -106,7 +107,7 @@ public class CASTHandler extends AbstractHandler {
 					if(shouldCheckRulesAsString.contains(ruleClass))
 					{
 						callRule(ast, ruleClass, violationMessages);
-						setClassFilePath(violationMessages, cFilePathWithWorkspaceDir);
+						setClassFilePath(violationMessages, cFilePath);
 					}
 					
 				}
