@@ -73,7 +73,7 @@
       </view>
        <view
             name="Misra-C Table View"
-            icon="icons/Ggobok.gif"
+            icon="icons/tableIcon.gif"
             category="CASTParser"
             class="kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView"
             id="kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView">
