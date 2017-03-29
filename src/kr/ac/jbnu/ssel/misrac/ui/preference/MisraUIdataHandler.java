@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.eclipse.cdt.core.settings.model.util.Comparator;
 import org.eclipse.core.runtime.FileLocator;
 
 import kr.ac.jbnu.ssel.misrac.rule.RuleLocation;
@@ -60,6 +62,16 @@ public class MisraUIdataHandler implements Cloneable {
 	}
 
 	public List<Rule> getRules() {
+		Collections.sort(ruleList, new java.util.Comparator<Rule>() {
+			
+			@Override
+			public int compare(Rule rule1, Rule rule2) {
+				// TODO Auto-generated method stub
+				double rule1MinerNum = Double.valueOf(rule1.minerNum);
+				double rule2MinerNum = Double.valueOf(rule2.minerNum);
+				return Double.compare(rule1MinerNum, rule2MinerNum);
+			}
+		});
 		return ruleList;
 	}
 
