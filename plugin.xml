@@ -51,8 +51,8 @@
                id="CASTParser.toolbars.sampleToolbar">
             <command
                   commandId="CASTParser.commands.sampleCommand"
-                  icon="icons/sample.gif"
-                  tooltip="Say hello world"
+                  icon="icons/openMRC.gif"
+                  tooltip="Run OpenMRC!"
                   id="CASTParser.toolbars.sampleCommand">
             </command>
          </toolbar>
@@ -73,7 +73,7 @@
       </view>
        <view
             name="Misra-C Table View"
-            icon="icons/Ggobok.gif"
+            icon="icons/tableIcon.gif"
             category="CASTParser"
             class="kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView"
             id="kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView">
@@ -103,5 +103,11 @@
          <page name="Misra-C" class = "kr.ac.jbnu.ssel.misrac.ui.preference.MisraPreferencePage"
          id="kr.ac.jbnu.ssel.misrac.ui.preference.MisraPreferencePage"/>
    </extension>
-
+	<extension
+		point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory
+			extensions="*"
+			class="org.eclipse.ui.texteditor.ResourceMarkerAnnotationModelFactory">
+		</factory>
+	</extension>
 </plugin>

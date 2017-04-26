@@ -1,12 +1,21 @@
 package kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns;
 
-import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
+
+import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
+import kr.ac.jbnu.ssel.misrac.ui.Constant;
 
 public class MisraTableViewErrorMSGColumn extends MisraTableViewColumn {
 
 	@Override
 	public String getText(Object element) {
-		// TODO Auto-generated method stub
+		if(element instanceof ViolationMessage)
+		{
+			ViolationMessage vmsg = (ViolationMessage) element;
+			return vmsg.getMessage();
+		}
 		return null;
 	}
 
@@ -19,7 +28,7 @@ public class MisraTableViewErrorMSGColumn extends MisraTableViewColumn {
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return 450;
+		return 580;
 	}
 
 }

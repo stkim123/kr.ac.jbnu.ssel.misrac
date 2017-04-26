@@ -18,7 +18,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * by the host operating system of the development environment.
  * 
  * 
- * DONE!!
+ * [STATUS: not statically checkable, parcially support] "이거 문자별로 메세지를 구분시켜야 됩니다. 얼마 안걸릴듯."
+ * 
  * 
  * @author sangjin
  *

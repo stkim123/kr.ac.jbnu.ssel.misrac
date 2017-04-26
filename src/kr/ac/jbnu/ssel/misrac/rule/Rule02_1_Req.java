@@ -1,12 +1,9 @@
 package kr.ac.jbnu.ssel.misrac.rule;
 
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorObjectStyleMacroDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorPragmaStatement;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionCallExpression;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
-import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
-import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
 /**
  * MISRA-C:2004 Rule 02.1: (Required) Assembly language shall be encapsulated
@@ -22,21 +19,30 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * in-line assembly language is an extension to standard C, and therefore also
  * requires a deviation against Rule .
  * 
- * TODO
+ * [STATUS: TODO]
  * 
- * @author kang
+ * @author Seunghyeon Kang
  */
 
 public class Rule02_1_Req extends AbstractMisraCRule {
-	private static final String define = "#define";
 	private static final String Assembly = "asm";
-	// private static final String[] Assembly_lang = { "setjmp", "_setjmp", "longjmp" };
 
 	public Rule02_1_Req(IASTTranslationUnit ast) {
 		super("Rule02_1_Req", false, ast);
 		shouldVisitPreprocessor = true;
 	}
 
+	
+	/**
+	 * Check if the function name starts with "asm"
+	 * 
+	 */
+	@Override
+	protected int visit(IASTFunctionCallExpression expression) {
+		
+		return super.visit(expression);
+	}
+	
 //	@Override
 //	protected int visit(IASTPreprocessorObjectStyleMacroDefinition preMacroDef) {
 //		IASTPreprocessorPragmaStatement

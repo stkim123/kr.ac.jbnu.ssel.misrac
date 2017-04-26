@@ -17,7 +17,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * The identifiers used in the declaration and definition of a function shall be
  * identical.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

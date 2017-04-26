@@ -20,8 +20,11 @@ import org.eclipse.cdt.ui.CDTUITools;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -30,20 +33,19 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-import kr.ac.jbnu.ssel.misrac.rule.R;
+import kr.ac.jbnu.ssel.misrac.rule.RuleLocation;
 import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MiaraCRuleException;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 import kr.ac.jbnu.ssel.misrac.ui.EclipseUtil;
 import kr.ac.jbnu.ssel.misrac.ui.preference.MisraUIdataHandler;
 import kr.ac.jbnu.ssel.misrac.ui.preference.Rule;
+import kr.ac.jbnu.ssel.misrac.ui.view.MisraTableView;
 import kr.ac.jbnu.ssel.misrac.ui.view.ViolationMessageView;
 
 /**
- * Our sample handler extends AbstractHandler, an IHandler base class.
  * 
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
+ * @author "STKIM"
  */
 public class CASTHandler extends AbstractHandler {
 
@@ -52,6 +54,7 @@ public class CASTHandler extends AbstractHandler {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
 		processMisraRuleChecking();
+//		openMisraTableView(vi);
 
 		MessageDialog.openInformation(window.getShell(), "MISRA-C Rule Checker", "Checking MISRA-C Rules .. Done!!");
 
@@ -66,10 +69,15 @@ public class CASTHandler extends AbstractHandler {
 
 			// Access translation unit of the editor.
 			ITranslationUnit tu = (ITranslationUnit) CDTUITools.getEditorInputCElement(editor.getEditorInput());
-
+			String cFilePath = tu.getResource().getFullPath().toString();
 			ICProject[] allProjects = CoreModel.getDefault().getCModel().getCProjects();
 			IIndex index = CCorePlugin.getIndexManager().getIndex(allProjects);
-
+			
+//			IWorkspace workspace = ResourcesPlugin.getWorkspace();  
+//			String workspaceDirectory = workspace.getRoot().getLocation().toFile().toString();
+//			String cFilePathWithWorkspaceDir = workspaceDirectory+cFilePath;
+			cFilePath = cFilePath.substring(1).replace("/", "\\");
+			
 			// Index-based AST: IASTTranslationUnit for a workspace file
 			IASTTranslationUnit ast = null;
 
@@ -79,31 +87,10 @@ public class CASTHandler extends AbstractHandler {
 
 				ast = tu.getAST(index, ITranslationUnit.AST_SKIP_INDEXED_HEADERS);
 
-				// load all rule files in the class path
-				ClassLoader loader = R.class.getClassLoader();
-				URL ruleClassDictory = loader.getResource(R.class.getPackage().getName().replace('.', '/'));
-
-				if (ruleClassDictory == null) {
-					System.out.println("ruleClassDictory == null");
-				}
-
-				// In Eclispe, class loader just return file location in
-				// bundle resource. Thus, it should be converted into the
-				// physical file location.
-				URL fileURL = FileLocator.toFileURL(ruleClassDictory);
-
-				File ruleDicFile = new File(fileURL.toURI());
-
+				String fileURLAsString = EclipseUtil.getEclipsePackageDirOfClass(RuleLocation.class);
+				File ruleDicFile = new File(fileURLAsString);
+				String rulePath = ruleDicFile.getAbsolutePath();
 				String[] ruleFiles = ruleDicFile.list();
-				
-//				try
-//				{
-//					File rules = EclipseUtil.loadResource("Resource/rule.xml");
-//					System.out.println("rules:"+ rules);
-//				} catch (Exception e)
-//				{
-//					e.printStackTrace();
-//				}
 				
 				// filter out unselected rules.
 				HashSet<Rule> shouldCheckRules = MisraUIdataHandler.getInstance().getShouldCheckRules();
@@ -116,25 +103,22 @@ public class CASTHandler extends AbstractHandler {
 				///////////////////////////
 				ArrayList<ViolationMessage> violationMessages = new ArrayList<ViolationMessage>();
 				for (String ruleClass : ruleFiles) {
+					// for checking all rules regardless of preference setting	
 					if(shouldCheckRulesAsString.contains(ruleClass))
 					{
-						callRule(ast, ruleClass, violationMessages);	
+						callRule(ast, ruleClass, violationMessages);
+						setClassFilePath(violationMessages, cFilePath);
 					}
 					
 				}
 
-				openMessageView(violationMessages);
+				openMisraTableView(violationMessages);
 			} finally {
 				index.releaseReadLock();
 				ast = null; // don't use the ast after releasing the read-lock
 			}
 
 		} catch (MiaraCRuleException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (CModelException e) {
 			e.printStackTrace();
@@ -159,6 +143,16 @@ public class CASTHandler extends AbstractHandler {
 		}
 	}
 
+	private void openMisraTableView(ArrayList<ViolationMessage> violationMessages) {
+		try {
+			MisraTableView mtv = (MisraTableView) PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().showView(MisraTableView.ID);
+			mtv.setViolationMessage(violationMessages);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void openMessageView(ArrayList<ViolationMessage> violationMessages) {
 		try {
 			ViolationMessageView vmv = (ViolationMessageView) PlatformUI.getWorkbench().getActiveWorkbenchWindow()
@@ -172,13 +166,12 @@ public class CASTHandler extends AbstractHandler {
 	private void callRule(IASTTranslationUnit ast, String ruleClass, ArrayList<ViolationMessage> violationMessages)
 			throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException,
 			ClassNotFoundException, MiaraCRuleException {
-
 		System.out.println("ruleClass:"+ ruleClass);
-		String ruleClassWithPackage = R.class.getPackage().getName() + "."
+		String ruleClassWithPackage = RuleLocation.class.getPackage().getName() + "."
 				+ ruleClass.substring(0, ruleClass.indexOf("."));
 
 		System.out.println("ruleClassWithPackage:" + ruleClassWithPackage);
-		if (!ruleClassWithPackage.equals(R.class.getName())) // except
+		if (!ruleClassWithPackage.equals(RuleLocation.class.getName())) // except
 		// R.class
 		{
 			AbstractMisraCRule rule = (AbstractMisraCRule) Class.forName(ruleClassWithPackage)
@@ -192,6 +185,14 @@ public class CASTHandler extends AbstractHandler {
 					System.out.println("violationMessage:" + violationMessage);
 				}
 			}
+			rule.clean();
 		}
 	}
+	private void setClassFilePath(ArrayList<ViolationMessage> violationMessages, String CFilesWithFullPath) {
+		for (ViolationMessage violationMessage : violationMessages) {
+			violationMessage.setCFilePath(CFilesWithFullPath);
+		}
+		
+	}
+
 }

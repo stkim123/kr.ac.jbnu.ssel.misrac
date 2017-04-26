@@ -20,7 +20,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * statement is allowed in a loop since this allows, for example, for dual
  * outcome loops or for optimal coding.
  * 
- * TODO: 현재, 구현은 loop내에 break 구문이 두개 이상 있는지 확인하는 코드로 구현됨,
+ * [STATUS: TODO]: 현재, 구현은 loop내에 break 구문이 두개 이상 있는지 확인하는 코드로 구현됨,
  * 그런데, rule설명은 loop내의 여러 statement에 있는 것까지 확인하라고 하는것 같음. 
  * 
  * @author stkim

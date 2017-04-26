@@ -2,39 +2,63 @@ package kr.ac.jbnu.ssel.misrac.rulesupport;
 
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 
+/**
+ * @author "STKIM"
+ */
 public class ViolationMessage {
-    private AbstractMisraCRule rule;
+	private AbstractMisraCRule rule;
 
-    private String message;
-    private IASTNode node;
+	private String message;
+	private IASTNode node;
+	private String cFilePath;
 
-    public ViolationMessage(AbstractMisraCRule rule, String message, IASTNode node) {
-	this.rule = rule;
-	this.message = message;
-	this.node = node;
-	// this.violationPart = violationPart;
-    }
-    
-    public AbstractMisraCRule getRule()
-    {
-	return rule;
-    }
+	private ViolationLevel violationLevel;
 
-    public String getMessage() {
-	return message;
-    }
-    
-    public IASTNode getNode()
-    {
-	return node;
-    }
+	public ViolationMessage(AbstractMisraCRule rule, String message, IASTNode node, ViolationLevel violationLevel) {
+		this.rule = rule;
+		this.message = message;
+		this.node = node;
+		this.violationLevel = violationLevel;
+	}
 
-    public void setMessage(String message) {
-	this.message = message;
-    }
+	public ViolationMessage(AbstractMisraCRule rule, String message, IASTNode node) {
+		this(rule,message,node,ViolationLevel.severe);
+	}
 
-    @Override
-    public String toString() {
-	return rule.getRuleID() + " - violation - " + message + ", node:" + node.toString();
-    }
+	public AbstractMisraCRule getRule() {
+		return rule;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public IASTNode getNode() {
+		return node;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public ViolationLevel getViolationLevel() {
+		return violationLevel;
+	}
+
+	public void setViolationLevel(ViolationLevel violationLevel) {
+		this.violationLevel = violationLevel;
+	}
+
+	public String getCFilePath() {
+		return cFilePath;
+	}
+
+	public void setCFilePath(String classFilePath) {
+		this.cFilePath = classFilePath;
+	}
+
+	@Override
+	public String toString() {
+		return rule.getRuleID() + " - violation - " + message + ", node:" + node.toString();
+	}
 }

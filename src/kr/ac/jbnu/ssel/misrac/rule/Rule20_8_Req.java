@@ -14,7 +14,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  * Signal handling contains implementation-defined and undefined behaviour.
  *
- * DONE!!
+ * [STATUS: DONE]
  * @author stkim
  *
  */

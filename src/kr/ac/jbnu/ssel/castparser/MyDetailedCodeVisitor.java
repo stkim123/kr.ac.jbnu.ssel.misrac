@@ -49,7 +49,6 @@ import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIfdefStatement;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIfndefStatement;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorIncludeStatement;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorStatement;
 import org.eclipse.cdt.core.dom.ast.IASTProblem;
 import org.eclipse.cdt.core.dom.ast.IASTProblemExpression;
 import org.eclipse.cdt.core.dom.ast.IASTProblemStatement;
@@ -66,6 +65,10 @@ import org.eclipse.cdt.core.dom.ast.IASTTypeIdInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
+/**
+ * 
+ * @author "STKIM"
+ */
 public class MyDetailedCodeVisitor extends DetailedASTVisitor {
 	
 	public MyDetailedCodeVisitor() {

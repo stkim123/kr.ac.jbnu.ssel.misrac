@@ -15,7 +15,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * else keyword shall be followed by either a compound statement, or another if
  * statement.
  * 
- * DONE!!
+ * [STATUS: not statically checkable, partially support]
  * 
  * @author sangjin
  *
@@ -36,6 +36,7 @@ public class Rule14_9_Req extends AbstractMisraCRule {
 				count++;
 			}
 		}
+		
 		if (count == 0) {
 			// Body of control statement is not enclosed within braces.
 			String message1 = MessageFactory.getInstance().getMessage(2212);

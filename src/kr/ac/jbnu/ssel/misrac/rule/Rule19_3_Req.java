@@ -18,7 +18,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * For example, the following are allowed.
  * 
  * 
- * DONE!!
+ * [STATUS: not statically checkable, parcially support] "define으로 filename이 정해진 경우 또한 검증해야한다. "
  * 
  * @author sangjin
  *

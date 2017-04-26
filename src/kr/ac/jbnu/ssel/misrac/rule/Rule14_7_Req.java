@@ -17,7 +17,8 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  * This is required by IEC 61508, under good programming style.
  * 
- * DONE!!
+ *[STATUS: DONE]
+ *
  * @author sangjin
  *
  */

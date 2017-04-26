@@ -15,7 +15,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 /**
  * Every switch statement shall have at least one case clause.
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *

@@ -1,6 +1,6 @@
 package kr.ac.jbnu.ssel.misrac.ui.view.tableviewcolumns;
 
-import kr.ac.jbnu.ssel.misrac.ui.view.Constant;
+import kr.ac.jbnu.ssel.misrac.ui.Constant;
 
 public class MisraTableViewLineColumn extends MisraTableViewColumn {
 

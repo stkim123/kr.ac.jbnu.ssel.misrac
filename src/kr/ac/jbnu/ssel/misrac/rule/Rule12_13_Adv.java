@@ -39,7 +39,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * u8a = ++u8b + u8c--; /* Not compliant The following sequence is clearer and
  * therefore safer: ++u8b; u8a = u8b + u8c; u8c--;
  * 
- * [DONE]
+ * [STATUS: DONE]
  * 
  * @author Suntae Kim
  *
@@ -62,11 +62,7 @@ public class Rule12_13_Adv extends AbstractMisraCRule {
 	boolean violatedThisRuleSession = false;
 
 	for (String seff : SIDE_EFFECT_OPS) {
-	    if (op1.getRawSignature().indexOf(seff) != -1) {
-		violatedThisRuleSession = true;
-	    }
-
-	    if (op2.getRawSignature().indexOf(seff) != -1) {
+	    if ((op1.getRawSignature().indexOf(seff) != -1)&&(op2.getRawSignature().indexOf(seff) != -1)) {
 		violatedThisRuleSession = true;
 	    }
 	}

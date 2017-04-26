@@ -15,7 +15,7 @@ import test.kr.ac.jbnu.ssel.misrac.rule.testsupport.AbstractTestRule;
  * 
  * DONE!!
  * 
- * @author kang
+ * @author Seunghyeon Kang
  *
  */
 public class TestRule13_5 extends AbstractTestRule {

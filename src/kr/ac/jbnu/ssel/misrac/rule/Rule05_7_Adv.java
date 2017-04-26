@@ -10,14 +10,13 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.AbstractMisraCRule;
 import kr.ac.jbnu.ssel.misrac.rulesupport.MessageFactory;
 import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
 
-
 /**
  * No identifier name should be reused.
  *
- * Regardless of scope, no identifier should be re-used across any files in the system. 
- * This rule incorporates the provisions of , , , , and .
+ * Regardless of scope, no identifier should be re-used across any files in the
+ * system. This rule incorporates the provisions of , , , , and .
  * 
- * DONE!!
+ * [STATUS: DONE]
  * 
  * @author sangjin
  *
@@ -33,15 +32,16 @@ public class Rule05_7_Adv extends AbstractMisraCRule {
 
 	@Override
 	protected int visit(IASTSimpleDeclaration simpleDeclaration) {
-		
-		for(IASTNode node: simpleDeclaration.getDeclarators()){
-			String temp= node.getRawSignature();
-			if(declarations.contains(temp)){					
-				isViolated = true;
-			} else {
-				declarations.add(temp);
-			}
+
+		String id = simpleDeclaration.getDeclarators()[0].getName().toString();
+		if (declarations.contains(id)) {
+			String message2 = MessageFactory.getInstance().getMessage(10001);
+			violationMsgs.add(new ViolationMessage(this, getRuleID() + ":" + message2 + "--" + simpleDeclaration.getRawSignature(), simpleDeclaration));
+			isViolated = true;
+		} else {
+			declarations.add(id);
 		}
+
 		return super.visit(simpleDeclaration);
 	}
 }

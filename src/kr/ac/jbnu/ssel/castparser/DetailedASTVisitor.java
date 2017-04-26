@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2005, 2010 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+
 package kr.ac.jbnu.ssel.castparser;
 
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
@@ -73,6 +81,11 @@ import org.eclipse.cdt.core.dom.ast.IASTTypeIdInitializerExpression;
 import org.eclipse.cdt.core.dom.ast.IASTUnaryExpression;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
 
+/**
+ * 
+ * @author "STKIM"
+ *
+ */
 public class DetailedASTVisitor extends ASTVisitor {
 
 	protected boolean shouldVisitPreprocessor = false;
@@ -86,22 +99,15 @@ public class DetailedASTVisitor extends ASTVisitor {
 	public DetailedASTVisitor(boolean visitNodes, IASTTranslationUnit ast) {
 		super(visitNodes);
 		this.ast = ast;
-		// the following two methods should be called manually from the
-		// outside(e.g., AbstractMisraCRule).
-		// extractPreprocessorNodes(ast);
-		// extractComments(ast);
 	}
 
 	protected void extractComments() {
-		// if( !shouldVisitComment) return;
-
 		IASTComment[] comments = ast.getComments();
 		if (comments != null && comments.length != 0) {
 			for (IASTComment comment : comments) {
 				visit(comment);
 			}
 		}
-
 	}
 
 	protected void extractPreprocessorNodes() {

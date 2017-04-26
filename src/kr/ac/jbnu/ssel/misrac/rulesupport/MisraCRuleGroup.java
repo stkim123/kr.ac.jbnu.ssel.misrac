@@ -7,6 +7,10 @@ import java.util.List;
 
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
+/**
+ * 
+ * @author "STKIM"
+ */
 public class MisraCRuleGroup extends AbstractMisraCRule {
 
     private List<AbstractMisraCRule> rules = Collections.synchronizedList(new ArrayList<AbstractMisraCRule>());

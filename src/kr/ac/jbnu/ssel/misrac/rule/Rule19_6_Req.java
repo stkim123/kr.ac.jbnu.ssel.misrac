@@ -22,7 +22,7 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  *
  *
  * 
- * DONE!!
+ * [STATUS: not statically checkable, parcially support] "메세지는 정상으로 띄워지나, 포커싱 문제를 해결해야한다." 
  * 
  * @author sangjin
  *
