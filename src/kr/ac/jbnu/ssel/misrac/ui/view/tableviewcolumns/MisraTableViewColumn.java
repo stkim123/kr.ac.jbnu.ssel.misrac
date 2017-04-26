@@ -19,7 +19,7 @@ public abstract class MisraTableViewColumn extends ColumnLabelProvider  {
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn column = tableViewerColumn.getColumn();
 		column.setMoveable(false);
-		column.setResizable(false);
+		column.setResizable(true);
 		column.setText(getTitle());
 		column.setWidth(getWidth());
 		tableViewerColumn.setLabelProvider(this);
