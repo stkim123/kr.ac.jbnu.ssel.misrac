@@ -14,3 +14,4 @@ Also I said it at the previous sentence To show the result of Checking rules We 
 And our plugin is also composed two page(preferencePage tableViewer)
 
 In the Preference Page, you can check what kind of rules are you going to use it and also you can see the samples and description about each of rules
+![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2.PNG)
