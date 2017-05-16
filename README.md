@@ -14,7 +14,7 @@ Also I said it at the previous sentence, OpenMRC shows the result of Checking ru
 And our plugin is also composed two pages(preferencePage tableViewer)
 
 ## the Preference Page
-- In the Preference Page, you can check what kind of rules are you going to use it and also you can see the samples and description of each of these rules.
+- In the Preference Page, you can check what kind of rules are you going to use it depends on the MISRA-C Rules category and also you can see the samples and description of each of these rules.
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2%20.PNG)
 
