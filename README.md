@@ -6,5 +6,6 @@ that's our program's architecture at below this sentence
 As we can see our OpenMRC is composed two step (Parsing AST in the C code, Checking Rule depends on the Misra-C:2004 Rules)
 
 In the first step you input the C code for Vehicle SW and then, we build the ast tree based on the C-AST.
+
 Second step we check the source code that was built by C-AST depends on the MISRA-C: 2004 Guide Line Rules
 And we show the result of Checking rules with EClipse plugin
