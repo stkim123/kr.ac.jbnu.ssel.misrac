@@ -17,4 +17,5 @@ In the Preference Page, you can check what kind of rules are you going to use it
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2%20.PNG)
 
-In the tableViewer, OpenMRC show you what kind of rules does it violate in the C code for vehicle SW, which part in the sourceCode is violated If you click the each raw of the table and If you want run checkingRules you just push the button of pin shape at above the picture
+In the tableViewer, OpenMRC show you what kind of rules does it violate in the C code for vehicle SW, which part in the sourceCode is violated If you click the each raw of the table and If you want run checkingRules you just push the button of pin shape in above the picture
+![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot3.PNG)
