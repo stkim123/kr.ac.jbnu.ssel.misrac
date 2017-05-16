@@ -1,5 +1,5 @@
 # kr.ac.jbnu.ssel.misrac
-OpenMRC: Open Source MISRA-C Rule Checker based on Eclipse CDT(C/C++ Development Tooling).
+## OpenMRC: Open Source MISRA-C Rule Checker based on Eclipse CDT(C/C++ Development Tooling).
 that's our program's architecture at below this sentence
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot1.PNG)
 
@@ -13,9 +13,12 @@ And we show the result of Checking rules with EClipse plugin
 Also I said it at the previous sentence To show the result of Checking rules We implemented with eclipse plugin
 And our plugin is also composed two page(preferencePage tableViewer)
 
+## the Preference Page
 In the Preference Page, you can check what kind of rules are you going to use it and also you can see the samples and description about each of rules.
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2%20.PNG)
 
+## the tableViewer Page
 In the tableViewer, OpenMRC show you what kind of rules does it violate in the C code for vehicle SW, which part in the sourceCode is violated If you click the each raw of the table and If you want run checkingRules you just push the button of pin shape in above the picture
+
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot3.PNG)
