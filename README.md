@@ -13,4 +13,4 @@ And we show the result of Checking rules with EClipse plugin
 Also I said it at the previous sentence To show the result of Checking rules We implemented with eclipse plugin
 And our plugin is also composed two page(preferencePage tableViewer)
 
-In the Preference Page, you can check what kind of rules are you going to use it and you can see the samples and description about each of rules
+In the Preference Page, you can check what kind of rules are you going to use it and also you can see the samples and description about each of rules
