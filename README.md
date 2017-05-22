@@ -20,12 +20,12 @@ Based on the violation messages, a vehicle software developer continuously updat
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2%20.PNG)
 
-## Developers and Sponsor(Supporter)
-# Developers
+# Developers and Sponsor(Supporter)
+## Developers
  - Tae-young Kim   (Chonbuk National University, Master Student, rlaxodud1200@gmail.com)
  - Seunghyeon Kang (Chonbuk National University, Undergraduate Student, cat1817@jbnu.ac.kr)
  - Sangjin Nam     (Chonbuk National University, Undergraduate Student, potter930@jbnu.ac.kr)
  - Suntae Kim      (Chonbuk National University, Advisor Professor, stkim@jbnu.ac.kr) - please contact here !
  
-# Sponsor(Supporter)
+## Sponsor(Supporter)
 This research was supported by the MSIP(Ministry of Science, ICT and Future Planning), Korea, under the ITRC(Information Technology Research Center) support program (IITP-2017-2016-0-00313) supervised by the IITP(Ins! titute for Information & communications Technology Promotion)
