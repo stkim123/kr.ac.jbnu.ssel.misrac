@@ -1,24 +1,23 @@
 # kr.ac.jbnu.ssel.misrac
-## OpenMRC: Open Source MISRA-C Rule Checker based on Eclipse CDT(C/C++ Development Tooling).
-that's our program's architecture of below this sentence
+## OpenMRC: Open Source MISRA-C Rule Checker based on Eclipse CDT(C/C++ Development Tooling)
+OpenMRC is an open source MISRA(Motor Industry Software Reliability Association)-C rule checker, developed as an Eclipse CDT plugin. 
+The following is an overall steps to use OpenMRC. 
+
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot1.PNG)
 
-As we can see, our OpenMRC is composed two steps (Parsing AST in the C code, Checking Rule depends on the Misra-C:2004 Rules)
+OpenMRC has a two-step usage:
+- At the first step, OpenMRC obtains the C source code for for Vehicle SW, and then it builds the AST(Abstract Syntax Tree) by using C-AST parser bundled in Eclipse CDT.
+- At the second step, OpenMRC traverses all of the AST elements in order to check violations of MISRA-C: 2004 Guideline Rules, and produces violation messages. The messages are shown in the Eclipse CDT views (see the tableViewer page).
 
-- In the first step, we input the C code for Vehicle SW and then, we build the ast tree based on the C-AST.
+Based on the violation messages, a vehicle software developer can update their source continuously to achieve the vehicle software's functional safety. 
 
-- Second step, we check the source code that was built by C-AST depends on the MISRA-C: 2004 Guide Line Rules
-And we show the result of Checking rules with EClipse plugin
+## the tableViewer Page
+- In the tableViewer, OpenMRC shows which rules has been violated in the C source code. When the developer selects one of the violation messages, OpenMRC automatically hightlights the violation part in the source code as shown below: 
 
-Also I said it at the previous sentence, OpenMRC shows the result of Checking rules that We implemented with eclipse plugin
-And our plugin is also composed two pages(preferencePage tableViewer)
+![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot3.PNG)
 
 ## the Preference Page
-- In the Preference Page, you can check what kind of rules are you going to use it depends on the MISRA-C Rules category and also you can see the samples and description of each of these rules.
+- OpenMRC provides the Preference Page that can selectively check the MISRA-C Rules. In the Preference page, all rules are categorized and a developer can select/deselect the rules. 
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2%20.PNG)
 
-## the tableViewer Page
-- In the tableViewer, OpenMRC shows you what kind of rules does it violate in the C code for vehicle SW, which part in the sourceCode is violated When you click the each raw of the table and If you want run checkingRules you just push the button of pin shape in above the picture.
-
-![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot3.PNG)
