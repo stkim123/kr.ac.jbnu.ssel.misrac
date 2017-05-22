@@ -7,7 +7,12 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller.Listener;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.Document;
@@ -372,10 +377,23 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		
 		applyButton.addSelectionListener(new SelectionAdapter() {
 			
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e) {;
 				List<Rule> checkedRuleList = getCheckedRule(tableData);
 				//need to store Data into xml
 				misraUIdataHandler.storeToXml();
+				String nil = buildNotImplementedList(checkedRuleList);
+				MessageDialog.openInformation(parent.getShell(), "Open MRC preference", nil);
+			}
+			
+			private String buildNotImplementedList(List<Rule> checkedRuleList) {
+				StringBuilder sb = new StringBuilder();
+				for (Rule rule : checkedRuleList) {
+					if(rule.getClassName().contains("notImplement")){
+						sb.append("Rule:"+rule.minerNum +", ");
+					}
+				}
+				sb.append(".. are not Implemented yet");
+				return sb.toString();
 			}
 
 			private List<Rule> getCheckedRule(List<Rule> tableData) {

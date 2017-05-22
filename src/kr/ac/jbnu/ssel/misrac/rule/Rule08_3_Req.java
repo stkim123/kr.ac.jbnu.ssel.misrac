@@ -25,17 +25,17 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * definition must match. This requires identical types including typedef names
  * and qualifiers, and not just identical base types.
  * 
- * ÀÌ°Í ±¸ÇöÀÌ Rule8.1°ú µ¿ÀÏÇÒ ¼ö ¹Û¿¡ ¾øÀ½. ÀÌ°ÍÀº ±¸Çö ¿Ï·áµÊ Rule8.1ÀÌ Á»´õ ±¤¹üÀ§ÇÔ
+ * ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Rule8.1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½. ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ Rule8.1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author stkim
  *
  */
-public class Rule08_3_req extends AbstractMisraCRule
+public class Rule08_3_Req extends AbstractMisraCRule
 {
 
 	private static HashSet<IASTSimpleDeclaration> prototypes = new HashSet<IASTSimpleDeclaration>();
 
-	public Rule08_3_req(IASTTranslationUnit ast)
+	public Rule08_3_Req(IASTTranslationUnit ast)
 	{
 		super("Rule08_3_req", false, ast);
 		shouldVisitDeclarations = true;
@@ -113,7 +113,7 @@ public class Rule08_3_req extends AbstractMisraCRule
 	}
 
 	/**
-	 * function definition°ú prototypeÀÌ µ¿ÀÏÇÑÁö ÆÇ´Ü
+	 * function definitionï¿½ï¿½ prototypeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
 	 * 
 	 * @param functionDefinition
 	 * @return

@@ -17,11 +17,11 @@ import kr.ac.jbnu.ssel.misrac.rulesupport.ViolationMessage;
  * @author sangjin
  *
  */
-public class Rule08_2_req extends AbstractMisraCRule {
+public class Rule08_2_Req extends AbstractMisraCRule {
 
 	private static ArrayList<String> list = new ArrayList<String>();
 	
-	public Rule08_2_req(IASTTranslationUnit ast) {
+	public Rule08_2_Req(IASTTranslationUnit ast) {
 		super("Rule08_2_req", false, ast);
 		shouldVisitDeclarations = true;
 		shouldVisitDeclarators = true;
