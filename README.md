@@ -7,16 +7,16 @@ The following is an overall steps to use OpenMRC.
 
 OpenMRC has a two-step usage:
 - At the first step, OpenMRC obtains the C source code for for Vehicle SW, and then it builds the AST(Abstract Syntax Tree) by using C-AST parser bundled in Eclipse CDT.
-- At the second step, OpenMRC traverses all of the AST elements in order to check violations of MISRA-C: 2004 Guideline Rules, and produces violation messages. The messages are shown in the Eclipse CDT views (see the tableViewer page).
+- At the second step, OpenMRC traverses all of the AST elements in order to check violations of MISRA-C: 2004 Guideline Rules, and produces violation messages. The messages are shown in the Eclipse CDT views (see the TableViewer page).
 
 Based on the violation messages, a vehicle software developer can update their source continuously to achieve the vehicle software's functional safety. 
 
-## the tableViewer Page
+## TableViewer for Showing Violation Messages
 - In the tableViewer, OpenMRC shows which rules has been violated in the C source code. When the developer selects one of the violation messages, OpenMRC automatically hightlights the violation part in the source code as shown below: 
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot3.PNG)
 
-## the Preference Page
+## Preference Setting for (De)Selecting MISRA-C Rules
 - OpenMRC provides the Preference Page that can selectively check the MISRA-C Rules. In the Preference page, all rules are categorized and a developer can select/deselect the rules. 
 
 ![alt text](https://github.com/stkim123/kr.ac.jbnu.ssel.misrac/blob/master/ScreenShot2%20.PNG)
