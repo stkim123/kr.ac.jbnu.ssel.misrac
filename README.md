@@ -28,4 +28,5 @@ Based on the violation messages, a vehicle software developer continuously updat
  - Suntae Kim      (Chonbuk National University, Advisor Professor, stkim@jbnu.ac.kr) - please contact here !
  
 ## Sponsor(Supporter)
-This research was supported by the MSIP(Ministry of Science, ICT and Future Planning), Korea, under the ITRC(Information Technology Research Center) support program (IITP-2017-2016-0-00313) supervised by the IITP(Ins! titute for Information & communications Technology Promotion)
+- Youngnamg University - Vehehicle Funcional Safety Research Center
+- This research was supported by the MSIP(Ministry of Science, ICT and Future Planning), Korea, under the ITRC(Information Technology Research Center) support program (IITP-2017-2016-0-00313) supervised by the IITP(Ins! titute for Information & communications Technology Promotion)
