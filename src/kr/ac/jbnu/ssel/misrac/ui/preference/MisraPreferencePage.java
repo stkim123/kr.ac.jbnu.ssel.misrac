@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller.Listener;
-
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
@@ -44,8 +41,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-
-
 /**
  * 
  * @author Taeyoung Kim
@@ -67,14 +62,14 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 	private AnnotationModel annotationModel;
 	private String defaultMessage = "please click the column above tihs viewer\n\n\n\n";
 
-	private String[] ruleCategoriesComboList = { "All","Enviroment", "Language Extensions", "Documentation", "Character Sets",
-			"Identifiers", "Types", "Constants", "Declarations And Definitions", "Initialization",
+	private String[] ruleCategoriesComboList = { "All", "Enviroment", "Language Extensions", "Documentation",
+			"Character Sets", "Identifiers", "Types", "Constants", "Declarations And Definitions", "Initialization",
 			"Arithmetic Type Conversion", "Pointer Type Conversion", "Exprssions", "Control Statement Expressions",
 			"Control Flow", "Switch Statements", "Functions", "Pointers And Arrays", "Structures And Unions",
 			"Preprocessing Directives", "Standard Libraries", "Runtime Failures" };
 	private int defaultIndex = 0;
 
-	private Rules rules;
+	private RuleList rules;
 	private List<Rule> clonedData;
 	private MisraUIdataHandler misraUIdataHandler;
 	private Combo ruleCategories;
@@ -106,26 +101,26 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		tableCmp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 2));
 		tableCmp.setText("Rule_Viewer");
 		// Initializes TableViewer
-  
-		Table table = new Table(tableCmp,SWT.CHECK | styles);
+
+		Table table = new Table(tableCmp, SWT.CHECK | styles);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setRedraw(true);
-			
+
 		GridData tableGridData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		tableGridData.heightHint =270;
-		tableGridData.widthHint =180;
-		
+		tableGridData.heightHint = 270;
+		tableGridData.widthHint = 180;
+
 		table.setLayoutData(tableGridData);
 		tableViewer = new CheckboxTableViewer(table);
 		TableViewerColumn colFirstName = new TableViewerColumn(tableViewer, SWT.NONE);
 		colFirstName.getColumn().setWidth(80);
 		colFirstName.getColumn().setText("Rule Num");
 		colFirstName.setLabelProvider(new ColumnLabelProvider() {
-			@Override 
+			@Override
 			public String getText(Object element) {
-				 Rule rule = (Rule) element;
-				 return "Rule"+rule.getMinerNum();
+				Rule rule = (Rule) element;
+				return "Rule" + rule.getMinerNum();
 			}
 		});
 		TableViewerColumn colSecondName = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -134,8 +129,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		colSecondName.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				 Rule rule = (Rule) element;
-				 return rule.getType();
+				Rule rule = (Rule) element;
+				return rule.getType();
 			}
 		});
 		TableViewerColumn colThirdName = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -144,8 +139,8 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		colThirdName.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
-				 Rule rule = (Rule) element;
-				 return rule.getDescription();
+				Rule rule = (Rule) element;
+				return rule.getDescription();
 			}
 		});
 		tableViewer.setContentProvider(new ArrayContentProvider());
@@ -162,7 +157,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 
 		Group sourceViewCmp = new Group(composite, SWT.None);
 		sourceViewCmp.setLayout(new GridLayout(1, false));
-		sourceViewCmp.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true,3,3));
+		sourceViewCmp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 3));
 		sourceViewCmp.setText("Rule_CodeViewer");
 
 		CompositeRuler ruler = new CompositeRuler(VERTICAL_RULER_WIDTH);
@@ -172,14 +167,14 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 
 //		GridData sourceViewerGridData = new GridData(360, 180);
 		GridData sourceViewerGridData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		sourceViewerGridData.heightHint =220;
-		sourceViewerGridData.widthHint =180;
-		
+		sourceViewerGridData.heightHint = 220;
+		sourceViewerGridData.widthHint = 180;
+
 		// We need to handle how to show the source Code to use tableColumn
 		if (document == null) {
 			CreateDefaultDocument();
 		}
-		
+
 		annotationModel = new AnnotationModel();
 		annotationModel.connect(document);
 
@@ -187,7 +182,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		sourceViewer.getTextWidget().setFont(JFaceResources.getFont(JFaceResources.TEXT_FONT));
 		sourceViewer.getControl().setLayoutData(sourceViewerGridData);
 		sourceViewer.setEditable(false);
-		
+
 	}
 
 	private void CreateDefaultDocument() {
@@ -208,27 +203,21 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		ruleCategories.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent event) {
 				String categoryWithCombo = ((Combo) event.widget).getText();
-				if(categoryWithCombo.contains(" "))
+				if (categoryWithCombo.contains(" "))
 					categoryWithCombo = manipulateWhiteSpace(categoryWithCombo);
-				try {
-					//issue occured
-					tableData = misraUIdataHandler.getRules(categoryWithCombo);
+				// issue occured
+				tableData = misraUIdataHandler.getRules(categoryWithCombo);
+				tableViewer.setInput(tableData);
+				tableViewer.refresh();
+				setChecked(tableViewer);
+				setCheckIntoWholeData(tableViewer);
+				if (categoryWithCombo.equals("All")) {
+					tableData = misraUIdataHandler.getRules();
 					tableViewer.setInput(tableData);
-					tableViewer.refresh();
 					setChecked(tableViewer);
-					setCheckIntoWholeData(tableViewer);
-					if(categoryWithCombo.equals("All"))
-					{
-						tableData = misraUIdataHandler.getRules();
-						tableViewer.setInput(tableData);
-						setChecked(tableViewer);
-						tableViewer.refresh();
-					}
-				} catch (JAXBException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					tableViewer.refresh();
 				}
-				
+
 			}
 
 			private void setCheckIntoWholeData(CheckboxTableViewer tableViewer) {
@@ -236,9 +225,9 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 				TableItem[] tableItems = tableViewer.getTable().getItems();
 				List<Rule> wholeRule = misraUIdataHandler.getInstance().getRules();
 				for (int i = 0; i < tableItems.length; i++) {
-					Rule itemRule = (Rule)tableItems[i].getData();
+					Rule itemRule = (Rule) tableItems[i].getData();
 					for (Rule rule : wholeRule) {
-						if(rule.equals(itemRule)){
+						if (rule.equals(itemRule)) {
 							rule.setShouldCheck(true);
 						}
 					}
@@ -260,75 +249,73 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		allCheckButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				for (int i = 0; i < table.getItemCount(); i++) 
-				{
+				for (int i = 0; i < table.getItemCount(); i++) {
 					TableItem item = table.getItem(i);
 					item.setChecked(true);
 					tableData.get(i).setShouldCheck(true);
 				}
 			}
 		});
-		
+
 		org.eclipse.swt.widgets.Button allUnCheckButton = new org.eclipse.swt.widgets.Button(buttonsCmp, SWT.PUSH);
 		allUnCheckButton.setText("None");
 		allUnCheckButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				for (int i = 0; i < table.getItemCount(); i++) 
-				{
+				for (int i = 0; i < table.getItemCount(); i++) {
 					TableItem item = table.getItem(i);
 					item.setChecked(false);
 					tableData.get(i).setShouldCheck(false);
 				}
 			}
-		});				
+		});
 	}
+
 	private void addTableLister() {
-		table = tableViewer.getTable();		
+		table = tableViewer.getTable();
 		table.addSelectionListener(new SelectionListener() {
-	
+
 			@Override
 			public void widgetSelected(SelectionEvent selectionEvent) {
-				try{
+				try {
 					Object obj = selectionEvent.getSource();
 					table = tableViewer.getTable();
 					int index = table.getSelectionIndex();
 					Object tableItem = table.getItem(index).getData();
 					// TODO
-					Rule rule = (Rule)tableItem;
+					Rule rule = (Rule) tableItem;
 					if (document != null) {
-						//put Code to use getCode Method
+						// put Code to use getCode Method
 						document.set(rule.getSourceCode());
 					} else {
 						CreateDefaultDocument();
 					}
-				}
-				catch(IllegalArgumentException exp){
+				} catch (IllegalArgumentException exp) {
 					exp.printStackTrace();
 				}
 			}
-	
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent selectionEvent) {
 			}
-	
+
 		});
-		
+
 		// to do : need to implement handling when user checked checkbox
 		tableViewer.addCheckStateListener(new ICheckStateListener() {
-			
+
 			@Override
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				Object element = event.getElement();
-				Rule rule = (Rule)element;
-				if(rule.shouldCheck==false){
+				Rule rule = (Rule) element;
+				if (rule.shouldCheck == false) {
 					rule.setShouldCheck(true);
-				}else{
+				} else {
 					rule.setShouldCheck(false);
 				}
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -336,60 +323,58 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		GridData gd;
 		Composite buttonBar = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout();
-        layout.numColumns = 2;
-        layout.marginHeight = 0;
-        layout.marginWidth = 0;
-        layout.makeColumnsEqualWidth = false;
-        buttonBar.setLayout(layout);
-        
-        gd = new GridData(GridData.HORIZONTAL_ALIGN_END);
-        
-        buttonBar.setLayoutData(gd);
-		
-		
+		layout.numColumns = 2;
+		layout.marginHeight = 0;
+		layout.marginWidth = 0;
+		layout.makeColumnsEqualWidth = false;
+		buttonBar.setLayout(layout);
+
+		gd = new GridData(GridData.HORIZONTAL_ALIGN_END);
+
+		buttonBar.setLayoutData(gd);
+
 		org.eclipse.swt.widgets.Button defaultButton = new org.eclipse.swt.widgets.Button(buttonBar, SWT.PUSH);
 		defaultButton.setText("Resotre");
 		int widthHint = convertHorizontalDLUsToPixels(IDialogConstants.BUTTON_WIDTH);
 		GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
-		org.eclipse.swt.graphics.Point minButtonSize = defaultButton.computeSize(SWT.DEFAULT,
-				SWT.DEFAULT, true);
+		org.eclipse.swt.graphics.Point minButtonSize = defaultButton.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
 		data.widthHint = Math.max(widthHint, minButtonSize.x);
 		defaultButton.setLayoutData(data);
-		
+
 		defaultButton.addSelectionListener(new SelectionAdapter() {
-			
+
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				tableViewer.setInput(clonedData);
 				tableViewer.refresh();
 				setChecked(tableViewer);
 				ruleCategories.select(defaultIndex);
-				
+
 			}
 		});
 		org.eclipse.swt.widgets.Button applyButton = new org.eclipse.swt.widgets.Button(buttonBar, SWT.PUSH);
 		applyButton.setText("Apply");
 		data = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
-		minButtonSize = applyButton.computeSize(SWT.DEFAULT, SWT.DEFAULT,
-				true);
+		minButtonSize = applyButton.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
 		data.widthHint = Math.max(widthHint, minButtonSize.x);
 		applyButton.setLayoutData(data);
-		
+
 		applyButton.addSelectionListener(new SelectionAdapter() {
-			
-			public void widgetSelected(SelectionEvent e) {;
+
+			public void widgetSelected(SelectionEvent e) {
+				;
 				List<Rule> checkedRuleList = getCheckedRule(tableData);
-				//need to store Data into xml
+				// need to store Data into xml
 				misraUIdataHandler.storeToXml();
 				String nil = buildNotImplementedList(checkedRuleList);
 				MessageDialog.openInformation(parent.getShell(), "Open MRC preference", nil);
 			}
-			
+
 			private String buildNotImplementedList(List<Rule> checkedRuleList) {
 				StringBuilder sb = new StringBuilder();
 				for (Rule rule : checkedRuleList) {
-					if(rule.getClassName().contains("notImplement")){
-						sb.append("Rule:"+rule.minerNum +", ");
+					if (rule.getClassName().contains("notImplement")) {
+						sb.append("Rule:" + rule.minerNum + ", ");
 					}
 				}
 				sb.append(".. are not Implemented yet");
@@ -399,7 +384,7 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 			private List<Rule> getCheckedRule(List<Rule> tableData) {
 				List<Rule> checkedRuleList = new ArrayList<Rule>();
 				for (Rule rule : tableData) {
-					if(rule.isShouldCheck())
+					if (rule.isShouldCheck())
 						checkedRuleList.add(rule);
 				}
 				return checkedRuleList;
@@ -407,28 +392,27 @@ public class MisraPreferencePage extends PreferencePage implements IWorkbenchPre
 		});
 		super.contributeButtons(parent);
 	}
-	
+
 	private void cloneTableData() {
 		try {
 			Object clonedObj = misraUIdataHandler.clone();
-			MisraUIdataHandler muh = (MisraUIdataHandler)clonedObj;
+			MisraUIdataHandler muh = (MisraUIdataHandler) clonedObj;
 			clonedData = muh.getInstance().getRules();
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	private void setChecked(CheckboxTableViewer tableViewer){
+
+	private void setChecked(CheckboxTableViewer tableViewer) {
 		List<Rule> rules = misraUIdataHandler.getRules();
 		table = tableViewer.getTable();
 		TableItem[] tableItems = table.getItems();
-		for (int i = 0; i < tableItems.length; i++) 
-		{
+		for (int i = 0; i < tableItems.length; i++) {
 			Object tableItem = tableItems[i].getData();
-			Rule itemRule = (Rule)tableItem;
-			for (Rule rule : rules) 
-			{
-				if(rule.equals(itemRule)&&itemRule.isShouldCheck())
+			Rule itemRule = (Rule) tableItem;
+			for (Rule rule : rules) {
+				if (rule.equals(itemRule) && itemRule.isShouldCheck())
 					table.getItem(i).setChecked(true);
 			}
 		}

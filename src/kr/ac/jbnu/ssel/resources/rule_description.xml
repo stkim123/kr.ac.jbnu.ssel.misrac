@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- edited with XMLSpy v2011 rel. 2 (http://www.altova.com) by TeaM DJiNN (TeaM DJiNN) -->
+<RuleList name="RuleList">
 <Rules>
 	<Rule shouldCheck="false" type="Required" majorNum="1" minerNum="1.1" category="Enviroment">
 		<description>These guidelines are based on ISO/IEC 9899:1990 [2] amended and corrected by ISO/IEC 9899/COR1:1995 [4], ISO/IEC 9899/AMD1:1995 [5], and ISO/IEC 9899/COR2: 1996 [6]. No claim is made as to their suitability with respect to the ISO 9899:1999 [8] version of the standard. Any reference in this document to 'Standard C' refers to the older ISO/IEC 9899:1990 [2] standard.</description>
@@ -3850,3 +3851,4 @@ enum colour { red=3, blue=4, green=5, yellow=5 };     /* compliant */&#xD;
 </SourceCode>
 	</Rule>
 </Rules>
+</RuleList>
